@@ -6,18 +6,18 @@
 //  Copyright © 2016年 com.demo.lxc. All rights reserved.
 //
 
-import SwiftyDB
+//import SwiftyDB
 
-extension LoginKey : PrimaryKeys {
-    
-    class func primaryKeys() -> Set<String> {
-        return ["keyId", "keyUsername"]
-    }
-}
-
-extension LoginKey : IgnoredProperties {
-    
-    class func ignoredProperties() -> Set<String> {
-        return []
-    }
-}
+//extension LoginKey : PrimaryKeys {
+//    
+//    class func primaryKeys() -> Set<String> {
+//        return ["keyId", "keyUsername"]
+//    }
+//}
+//
+//extension LoginKey : IgnoredProperties {
+//    
+//    class func ignoredProperties() -> Set<String> {
+//        return []
+//    }
+//}

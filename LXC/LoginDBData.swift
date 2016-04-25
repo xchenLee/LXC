@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftyDB
+//import SwiftyDB
 
 /**
  
