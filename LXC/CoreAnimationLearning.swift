@@ -20,10 +20,6 @@ class CoreAnimationLearning: UIViewController {
         return alertC;
     }();
     
-
-    @IBOutlet weak var viewOne: UIView!
-
-    @IBOutlet weak var viewTwo: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        makeViewsManually()

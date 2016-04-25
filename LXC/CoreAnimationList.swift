@@ -12,10 +12,16 @@ let cellIdentifier = "coreAnimationCell"
 
 class CoreAnimationList: UITableViewController {
     
-    lazy var datas : [(title : String , className : String)] = {
+    /**
+     
+     self.storyboard 自己的controller所在的UIStoryboard
+     
+     */
+    
+    lazy var datas : [(title : String , storyboardID : String)] = {
         return [
-            ("Layer Tree", "CALayerTree"),
-            ("Backing Image","CABackingImage")
+            ("Layer Tree", "caLayerTree"),
+            ("Backing Image","caBackingImage")
         ]
     }()
 
@@ -52,14 +58,17 @@ class CoreAnimationList: UITableViewController {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let index = indexPath.row
+        let storyboardID = self.datas[index].storyboardID
         
-        if index == 0 {
-//            let layerTree =
-//            self.showViewController(<#T##vc: UIViewController##UIViewController#>, sender: <#T##AnyObject?#>)
-        }
+        let sb = self.storyboard!
+        
+        let subController = sb.instantiateViewControllerWithIdentifier(storyboardID)
+        self.showViewController(subController, sender: nil)
+        return;
+        
     }
     
 
