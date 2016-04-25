@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRCodeGenerator" customModule="LXC" customModuleProvider="target">
+            <connections>
+                <outlet property="generalButton" destination="edf-2o-1HZ" id="u1z-VL-sV0"/>
+                <outlet property="qrImageView" destination="xcN-44-KHk" id="Agt-Rs-eoW"/>
+                <outlet property="sourceInputField" destination="AXq-E2-gQw" id="C69-GP-AJL"/>
+                <outlet property="view" destination="iN0-l3-epB" id="sHa-9p-zWN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXq-E2-gQw">
+                    <rect key="frame" x="20" y="84" width="335" height="80"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="eId-yD-ntz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="geT-mP-HhY"/>
+                    </connections>
+                </textView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xcN-44-KHk">
+                    <rect key="frame" x="30" y="244" width="315" height="315"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="xcN-44-KHk" secondAttribute="height" multiplier="1:1" id="1kL-zH-7r5"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edf-2o-1HZ">
+                    <rect key="frame" x="275" y="179" width="80" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="KcQ-wH-gNw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                    <state key="normal" title="General">
+                        <color key="titleColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="generalBtnClicked:" destination="-1" eventType="touchUpInside" id="BVn-8P-nC9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="AXq-E2-gQw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="9jB-sp-Bvs"/>
+                <constraint firstItem="edf-2o-1HZ" firstAttribute="top" secondItem="AXq-E2-gQw" secondAttribute="bottom" constant="15" id="BWr-tw-nk0"/>
+                <constraint firstItem="AXq-E2-gQw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="84" id="mKv-15-mru"/>
+                <constraint firstAttribute="trailing" secondItem="AXq-E2-gQw" secondAttribute="trailing" constant="20" id="o0g-nI-5Hv"/>
+                <constraint firstAttribute="trailing" secondItem="edf-2o-1HZ" secondAttribute="trailing" constant="20" id="qUh-lD-6cW"/>
+                <constraint firstAttribute="trailing" secondItem="xcN-44-KHk" secondAttribute="trailing" constant="30" id="r15-st-sif"/>
+                <constraint firstItem="xcN-44-KHk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="soN-XT-9Vz"/>
+                <constraint firstItem="xcN-44-KHk" firstAttribute="top" secondItem="AXq-E2-gQw" secondAttribute="bottom" constant="80" id="wNe-Cj-HXp"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="228.5" y="128.5"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vGb-Un-bsZ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Core Animation-->
+        <scene sceneID="hXj-Sk-tN8">
+            <objects>
+                <tableViewController id="vGb-Un-bsZ" customClass="CoreAnimationList" customModule="LXC" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="5zU-wY-KX1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coreAnimationCell" id="RPB-BR-CLq">
+                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RPB-BR-CLq" id="DyC-0N-v3s">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vGb-Un-bsZ" id="RZ5-45-Rag"/>
+                            <outlet property="delegate" destination="vGb-Un-bsZ" id="i9p-J3-EyM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Core Animation" id="rKd-JS-hR3"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Tj-SJ-Mmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-378.5" y="345.5"/>
+        </scene>
+        <!--Core Animation Learning-->
+        <scene sceneID="2wj-1t-Glf">
+            <objects>
+                <viewController id="yPO-ji-AFS" customClass="CoreAnimationLearning" customModule="LXC" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qcz-Hm-DyN"/>
+                        <viewControllerLayoutGuide type="bottom" id="haG-Qd-od8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6I0-ZL-0q5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Fmb-9t-yjZ">
+                                <rect key="frame" x="2" y="22" width="371" height="643"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSQ-E7-ZVs">
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="321"/>
+                                        <color key="backgroundColor" red="0.1843137255" green="0.60392156860000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kg4-uI-9Qr">
+                                        <rect key="frame" x="0.0" y="323" width="371" height="321"/>
+                                        <color key="backgroundColor" red="1" green="0.22170538649999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <variation key="heightClass=compact" axis="horizontal"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Fmb-9t-yjZ" firstAttribute="top" secondItem="qcz-Hm-DyN" secondAttribute="bottom" constant="2" id="HOn-e3-Dd6"/>
+                            <constraint firstItem="Fmb-9t-yjZ" firstAttribute="leading" secondItem="6I0-ZL-0q5" secondAttribute="leading" constant="2" id="KaX-v6-zr8"/>
+                            <constraint firstItem="haG-Qd-od8" firstAttribute="top" secondItem="Fmb-9t-yjZ" secondAttribute="bottom" constant="2" id="UxV-7b-Eai"/>
+                            <constraint firstAttribute="trailing" secondItem="Fmb-9t-yjZ" secondAttribute="trailing" constant="2" id="gXr-ef-7oH"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="viewOne" destination="jSQ-E7-ZVs" id="KVF-Wz-SCp"/>
+                        <outlet property="viewTwo" destination="kg4-uI-9Qr" id="8hs-Ga-BER"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mpJ-iq-vWD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="170.5" y="345.5"/>
+        </scene>
+    </scenes>
+</document>

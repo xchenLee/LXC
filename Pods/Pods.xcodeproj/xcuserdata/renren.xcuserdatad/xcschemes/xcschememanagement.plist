@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TinySQLite-TinySQLite.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TinySQLite.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>sqlite3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>01EF02A227177A7F9CB377858EB4F2E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>076D1AFC0748E5DCD5542DDD988D97AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5ACA8C01CA489C7FE6A3B9E736D0B7EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CCFC34C1C1F754973CDC30AE79A61D0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED43BF82965ADE0C0121191B7BF961C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

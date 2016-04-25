@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="feJ-Ev-GH4">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Image Filters-->
+        <scene sceneID="sbf-ee-lWU">
+            <objects>
+                <viewController storyboardIdentifier="filters" useStoryboardIdentifierAsRestorationIdentifier="YES" id="feJ-Ev-GH4" customClass="ImageFilters" customModule="LXC" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hC8-mr-2Mx"/>
+                        <viewControllerLayoutGuide type="bottom" id="WVv-4l-zMl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zN9-YZ-xVO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <glkView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="QB1-Pn-df2" customClass="ImageFilterView" customModule="LXC" customModuleProvider="target">
+                                <rect key="frame" x="36" y="40" width="303" height="363.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QB1-Pn-df2" secondAttribute="height" multiplier="5:6" id="LBu-7S-OLC"/>
+                                </constraints>
+                            </glkView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8VU-bH-it3">
+                                <rect key="frame" x="0.0" y="423" width="375" height="223.5"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="2" id="QfO-Vw-bj2">
+                                    <size key="itemSize" width="104" height="140"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="filterCell" id="trb-kN-fqM" customClass="ImageFilterCell" customModule="LXC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="42" width="95" height="140"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="95" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <glkView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="xd1-xH-xfb" customClass="ImageFilterView" customModule="LXC" customModuleProvider="target">
+                                                    <rect key="frame" x="12" y="12" width="68" height="81.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="xd1-xH-xfb" secondAttribute="height" multiplier="5:6" id="Kbr-RA-cOb"/>
+                                                    </constraints>
+                                                </glkView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g9-gH-Czc">
+                                                    <rect key="frame" x="6" y="98.5" width="83" height="37.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="3g9-gH-Czc" firstAttribute="leading" secondItem="trb-kN-fqM" secondAttribute="leading" constant="6" id="5c4-yS-vS1"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="xd1-xH-xfb" secondAttribute="trailing" constant="7" id="Hxn-RV-5Ny"/>
+                                            <constraint firstItem="3g9-gH-Czc" firstAttribute="top" secondItem="xd1-xH-xfb" secondAttribute="bottom" constant="5" id="aXW-MR-AlF"/>
+                                            <constraint firstItem="xd1-xH-xfb" firstAttribute="leading" secondItem="trb-kN-fqM" secondAttribute="leadingMargin" constant="4" id="eVv-o6-3ZB"/>
+                                            <constraint firstAttribute="trailing" secondItem="3g9-gH-Czc" secondAttribute="trailing" constant="6" id="gPk-1y-SAQ"/>
+                                            <constraint firstItem="xd1-xH-xfb" firstAttribute="top" secondItem="trb-kN-fqM" secondAttribute="topMargin" constant="4" id="lgK-23-QHe"/>
+                                            <constraint firstAttribute="bottom" secondItem="3g9-gH-Czc" secondAttribute="bottom" constant="4" id="r4A-LF-f2G"/>
+                                        </constraints>
+                                        <size key="customSize" width="95" height="140"/>
+                                        <connections>
+                                            <outlet property="filterImageView" destination="xd1-xH-xfb" id="qh5-PG-vT0"/>
+                                            <outlet property="filterNameView" destination="3g9-gH-Czc" id="t1Q-sX-BHQ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="feJ-Ev-GH4" id="453-rI-Pua"/>
+                                    <outlet property="delegate" destination="feJ-Ev-GH4" id="dOW-p7-gq9"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QB1-Pn-df2" firstAttribute="leading" secondItem="zN9-YZ-xVO" secondAttribute="leadingMargin" constant="20" id="0ZL-0G-fxY"/>
+                            <constraint firstItem="QB1-Pn-df2" firstAttribute="top" secondItem="hC8-mr-2Mx" secondAttribute="bottom" constant="20" id="4cZ-LX-mpe"/>
+                            <constraint firstItem="8VU-bH-it3" firstAttribute="leading" secondItem="zN9-YZ-xVO" secondAttribute="leading" id="SeY-KC-chL"/>
+                            <constraint firstAttribute="trailing" secondItem="8VU-bH-it3" secondAttribute="trailing" id="UF8-mx-8xd"/>
+                            <constraint firstItem="WVv-4l-zMl" firstAttribute="top" secondItem="8VU-bH-it3" secondAttribute="bottom" constant="20" id="fHW-LR-mnq"/>
+                            <constraint firstItem="8VU-bH-it3" firstAttribute="top" secondItem="QB1-Pn-df2" secondAttribute="bottom" constant="20" id="hiC-oM-r1t"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QB1-Pn-df2" secondAttribute="trailing" constant="20" id="vR3-zw-97A"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="filteredImageView" destination="QB1-Pn-df2" id="DL1-3l-ocs"/>
+                        <outlet property="filtersCollectionView" destination="8VU-bH-it3" id="2FS-wx-SZM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7y-IQ-2HB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534.5" y="291.5"/>
+        </scene>
+    </scenes>
+</document>

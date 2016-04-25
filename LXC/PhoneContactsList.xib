@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneContactsList" customModule="LXC" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="2fR-DC-0rO" id="p3V-YZ-k52"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="2fR-DC-0rO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2fR-DC-0rO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="74G-cd-Jeh"/>
+                <constraint firstItem="2fR-DC-0rO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CCT-OE-aZm"/>
+                <constraint firstAttribute="trailing" secondItem="2fR-DC-0rO" secondAttribute="trailing" id="MfE-p7-xgt"/>
+                <constraint firstAttribute="bottom" secondItem="2fR-DC-0rO" secondAttribute="bottom" id="hGO-SB-G9g"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="398.5" y="126.5"/>
+        </view>
+    </objects>
+</document>
