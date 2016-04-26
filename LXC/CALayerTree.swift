@@ -26,6 +26,12 @@ class CALayerTree: UIViewController {
         newLayer.position = sonView.center
         sonView.layer.addSublayer(newLayer)
         
+        // visual effects
+        sonView.layer.shadowOpacity = 1
+        sonView.layer.shadowColor = UIColor.blackColor().CGColor
+        sonView.layer.shadowRadius = 2
+        sonView.layer.shadowOffset = CGSizeMake(0, -10)
+        
     }
     
     override func viewDidLoad() {
