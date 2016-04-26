@@ -10,10 +10,45 @@ import UIKit
 
 class CALayerTree: UIViewController {
 
+    @IBOutlet weak var fatherView: UIView!
+    
+    @IBOutlet weak var sonView: UIView!
+    
+    @IBOutlet weak var resultLabel: UILabel!
+    
+    @IBAction func addLayer(sender: UIButton) {
+        
+        sender.enabled = false
+        
+        let newLayer = CALayer()
+        newLayer.backgroundColor = fatherView.backgroundColor?.CGColor
+        newLayer.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        newLayer.position = sonView.center
+        sonView.layer.addSublayer(newLayer)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        var subViews = fatherView.subviews
+        
+        var subLayers = fatherView.layer.sublayers
+        
+        var subLayer = subLayers![0]
+        var sonLayer = sonView.layer
+        
+        if subLayer == sonLayer {
+            resultLabel.text?.appendContentsOf("\n")
+            resultLabel.text?.appendContentsOf("RedView's layer's subLayer is\n \(subLayer)\n")
+            resultLabel.text?.appendContentsOf("WhiteView's layer is\n \(sonLayer)\n")
+
+            resultLabel.text?.appendContentsOf("They are the same\n")
+        }
+        
+
+        
     }
 
     override func didReceiveMemoryWarning() {
