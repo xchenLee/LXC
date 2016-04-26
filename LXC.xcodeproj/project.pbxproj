@@ -24,6 +24,7 @@
 		772409641CCE131900CAD6C1 /* coreAnimation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772409631CCE131900CAD6C1 /* coreAnimation.storyboard */; };
 		772409661CCE146C00CAD6C1 /* CALayerTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772409651CCE146C00CAD6C1 /* CALayerTree.swift */; };
 		772409681CCE36AC00CAD6C1 /* CABackingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772409671CCE36AC00CAD6C1 /* CABackingImage.swift */; };
+		772409721CCF4DAC00CAD6C1 /* ParentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772409711CCF4DAC00CAD6C1 /* ParentController.swift */; };
 		772592161C7DEEF300000FBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772592151C7DEEF300000FBA /* AppDelegate.swift */; };
 		772592181C7DEEF300000FBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772592171C7DEEF300000FBA /* ViewController.swift */; };
 		7725921B1C7DEEF300000FBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772592191C7DEEF300000FBA /* Main.storyboard */; };
@@ -79,6 +80,7 @@
 		772409631CCE131900CAD6C1 /* coreAnimation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = coreAnimation.storyboard; sourceTree = "<group>"; };
 		772409651CCE146C00CAD6C1 /* CALayerTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerTree.swift; sourceTree = "<group>"; };
 		772409671CCE36AC00CAD6C1 /* CABackingImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CABackingImage.swift; sourceTree = "<group>"; };
+		772409711CCF4DAC00CAD6C1 /* ParentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentController.swift; sourceTree = "<group>"; };
 		772592121C7DEEF300000FBA /* LXC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		772592151C7DEEF300000FBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		772592171C7DEEF300000FBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,14 @@
 			name = coreAnimation;
 			sourceTree = "<group>";
 		};
+		772409701CCF4D9500CAD6C1 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				772409711CCF4DAC00CAD6C1 /* ParentController.swift */,
+			);
+			name = Container;
+			sourceTree = "<group>";
+		};
 		772592091C7DEEF300000FBA = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +212,7 @@
 		772592141C7DEEF300000FBA /* LXC */ = {
 			isa = PBXGroup;
 			children = (
+				772409701CCF4D9500CAD6C1 /* Container */,
 				7724095A1CCDF5E900CAD6C1 /* coreAnimation */,
 				771F25AD1CC738B100E88260 /* Tool */,
 				771F25981CC4D8D500E88260 /* Effect */,
@@ -481,6 +492,7 @@
 				770089991C9BB4ED00E6BCB9 /* GoodyList.swift in Sources */,
 				771AE0F21C8048AE00AAF16F /* VideoPlaybackView.swift in Sources */,
 				772773B21C9D3F7B00A6ED72 /* SignInWithGoogle.swift in Sources */,
+				772409721CCF4DAC00CAD6C1 /* ParentController.swift in Sources */,
 				772409621CCE117500CAD6C1 /* CoreAnimationList.swift in Sources */,
 				77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */,
 			);

@@ -21,7 +21,9 @@ class CoreAnimationList: UITableViewController {
     lazy var datas : [(title : String , storyboardID : String)] = {
         return [
             ("Layer Tree", "caLayerTree"),
-            ("Backing Image","caBackingImage")
+            ("Backing Image","caBackingImage"),
+            ("Layer Geometry", "caLayerGeomtry"),
+            ("Visual Effects", "caLayerGeomtry")
         ]
     }()
 
