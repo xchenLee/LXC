@@ -32,6 +32,10 @@ class CABackingImage: UIViewController {
         super.viewDidLoad()
         let w = viewTwo.bounds.size.width
         let h = viewTwo.bounds.size.height
+        
+        imageView.layer.shadowColor = UIColor.blackColor().CGColor
+        imageView.layer.shadowOpacity = 0.8
+        
         imageLayer.frame = CGRect(x: (w - 100) / 2.0, y: (h - 100) / 2.0, width: 100, height: 100)
         imageLayer.backgroundColor = UIColor.whiteColor().CGColor
         viewTwo.layer.addSublayer(imageLayer)

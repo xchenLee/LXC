@@ -60,6 +60,7 @@
 		77FB249B1CBCD32C0035DE3F /* LoginDBData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB249A1CBCD32C0035DE3F /* LoginDBData.swift */; };
 		77FB249D1CBCD3E20035DE3F /* LoginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB249C1CBCD3E20035DE3F /* LoginKey.swift */; };
 		77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB24A31CBCDC7B0035DE3F /* Extensions.swift */; };
+		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		77FB249A1CBCD32C0035DE3F /* LoginDBData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDBData.swift; sourceTree = "<group>"; };
 		77FB249C1CBCD3E20035DE3F /* LoginKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginKey.swift; sourceTree = "<group>"; };
 		77FB24A31CBCDC7B0035DE3F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				772409611CCE117500CAD6C1 /* CoreAnimationList.swift */,
 				772409651CCE146C00CAD6C1 /* CALayerTree.swift */,
 				772409671CCE36AC00CAD6C1 /* CABackingImage.swift */,
+				A135BFDF1CCFB30100680D1F /* CAEffect.swift */,
 			);
 			name = coreAnimation;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */,
 				77FB24911CBBC5E80035DE3F /* PinLocation.swift in Sources */,
 				772773CC1CA03A7A00A6ED72 /* ImageFilterCell.swift in Sources */,
+				A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */,
 				771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */,
 				772409661CCE146C00CAD6C1 /* CALayerTree.swift in Sources */,
 				7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */,

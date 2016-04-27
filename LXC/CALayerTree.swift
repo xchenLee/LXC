@@ -24,13 +24,42 @@ class CALayerTree: UIViewController {
         newLayer.backgroundColor = fatherView.backgroundColor?.CGColor
         newLayer.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         newLayer.position = sonView.center
+        
+        
+        // visual effects
+//        newLayer.shadowOpacity = 0.5
+//        newLayer.shadowColor = UIColor.blackColor().CGColor
+//        newLayer.shadowRadius = 3
+//        newLayer.shadowOffset = CGSizeMake(0, 3)
+
+        
         sonView.layer.addSublayer(newLayer)
         
+        // 如果想要 shadow view.layer.masksToBounds = false 或者 view.clipsToBounds = false
+        // 这里并不要用可能是因为是storyboard写的
+        // 需要在storyboard 里边设置
         // visual effects
         sonView.layer.shadowOpacity = 1
         sonView.layer.shadowColor = UIColor.blackColor().CGColor
         sonView.layer.shadowRadius = 2
-        sonView.layer.shadowOffset = CGSizeMake(0, -10)
+        sonView.layer.shadowOffset = CGSizeMake(0, 3)
+        
+        
+//        let newView = UIView()
+//        newView.backgroundColor = fatherView.backgroundColor
+//        newView.frame = CGRect(x: 10, y: 10, width: 20, height: 20)
+//        
+//        
+//        // visual effects
+//        newView.layer.shadowOpacity = 0.5
+//        newView.layer.shadowColor = UIColor.blackColor().CGColor
+//        newView.layer.shadowRadius = 3
+//        newView.layer.shadowOffset = CGSizeMake(0, 3)
+//        sonView.addSubview(newView)
+        // shadow并不总是方形的，多根据内容区域的形状来决定，比如demo中的秃林
+        //但是实时计算很耗费资源，特别是有多个子 alpha-masked 的layer
+        //如果提前知道想要的投影的形状，可以通过食用shadowPath来提升性能,它是CGPathRef,
+
         
     }
     
