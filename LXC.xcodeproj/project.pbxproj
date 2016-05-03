@@ -61,6 +61,7 @@
 		77FB249D1CBCD3E20035DE3F /* LoginKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB249C1CBCD3E20035DE3F /* LoginKey.swift */; };
 		77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB24A31CBCDC7B0035DE3F /* Extensions.swift */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
+		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		77FB249C1CBCD3E20035DE3F /* LoginKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginKey.swift; sourceTree = "<group>"; };
 		77FB24A31CBCDC7B0035DE3F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
+		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				772409651CCE146C00CAD6C1 /* CALayerTree.swift */,
 				772409671CCE36AC00CAD6C1 /* CABackingImage.swift */,
 				A135BFDF1CCFB30100680D1F /* CAEffect.swift */,
+				A135BFE11CD0FD8B00680D1F /* CATransform.swift */,
 			);
 			name = coreAnimation;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				772773B91C9EACDA00A6ED72 /* QRCodeReader.swift in Sources */,
 				77E312EF1CA988E800867373 /* IImageAlbumAssetCell.swift in Sources */,
 				77FB0EE21CB50B81003DD7B6 /* IImagePickerAssetPop.swift in Sources */,
+				A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
 				77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */,
 				77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */,

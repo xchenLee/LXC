@@ -23,7 +23,8 @@ class CoreAnimationList: UITableViewController {
             ("Layer Tree", "caLayerTree"),
             ("Backing Image","caBackingImage"),
             ("Layer Geometry", "caLayerGeomtry"),
-            ("Visual Effects", "caLayerGeomtry")
+            ("Visual Effects", "caLayerGeomtry"),
+            ("Transform", "caTransform")
         ]
     }()
 

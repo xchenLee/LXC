@@ -37,5 +37,38 @@ class ToolBox: NSObject {
         viewOne.alpha = 1
     }
     
+    class func radiansToDegrees(degree : UInt) -> CGFloat {
+        return CGFloat(Double(degree) / M_PI * 180.0)
+    }
+    
+    class func degreesToRadians(radian : UInt) -> CGFloat {
+        return CGFloat( Double(radian) / 180.0 * M_PI)
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
