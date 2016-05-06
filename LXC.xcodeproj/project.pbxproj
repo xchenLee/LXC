@@ -55,6 +55,7 @@
 		77F4730B1CA1A5C700654530 /* webexplorer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77F4730A1CA1A5C700654530 /* webexplorer.storyboard */; };
 		77F7238C1CA1217200ABDADA /* ImageFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7238B1CA1217200ABDADA /* ImageFilterView.swift */; };
 		77F723931CA18EF300ABDADA /* WebExplorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F723921CA18EF300ABDADA /* WebExplorer.swift */; };
+		77F8B10F1CDCA8FB0094ADA3 /* CACubic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F8B10E1CDCA8FB0094ADA3 /* CACubic.swift */; };
 		77FB0EE21CB50B81003DD7B6 /* IImagePickerAssetPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB0EE11CB50B81003DD7B6 /* IImagePickerAssetPop.swift */; };
 		77FB24911CBBC5E80035DE3F /* PinLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB24901CBBC5E80035DE3F /* PinLocation.swift */; };
 		77FB249B1CBCD32C0035DE3F /* LoginDBData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB249A1CBCD32C0035DE3F /* LoginDBData.swift */; };
@@ -115,6 +116,7 @@
 		77F4730A1CA1A5C700654530 /* webexplorer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = webexplorer.storyboard; sourceTree = "<group>"; };
 		77F7238B1CA1217200ABDADA /* ImageFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFilterView.swift; sourceTree = "<group>"; };
 		77F723921CA18EF300ABDADA /* WebExplorer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebExplorer.swift; sourceTree = "<group>"; };
+		77F8B10E1CDCA8FB0094ADA3 /* CACubic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CACubic.swift; sourceTree = "<group>"; };
 		77FB0EE11CB50B81003DD7B6 /* IImagePickerAssetPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePickerAssetPop.swift; sourceTree = "<group>"; };
 		77FB24901CBBC5E80035DE3F /* PinLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLocation.swift; sourceTree = "<group>"; };
 		77FB249A1CBCD32C0035DE3F /* LoginDBData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDBData.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				772409671CCE36AC00CAD6C1 /* CABackingImage.swift */,
 				A135BFDF1CCFB30100680D1F /* CAEffect.swift */,
 				A135BFE11CD0FD8B00680D1F /* CATransform.swift */,
+				77F8B10E1CDCA8FB0094ADA3 /* CACubic.swift */,
 			);
 			name = coreAnimation;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				772773B51C9D452800A6ED72 /* QRCodeGenerator.swift in Sources */,
 				772592181C7DEEF300000FBA /* ViewController.swift in Sources */,
 				77F473091CA1A02C00654530 /* UIColor+ARGB.swift in Sources */,
+				77F8B10F1CDCA8FB0094ADA3 /* CACubic.swift in Sources */,
 				77E312ED1CA9889300867373 /* IImagePickerAlbumAssets.swift in Sources */,
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
 				771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */,

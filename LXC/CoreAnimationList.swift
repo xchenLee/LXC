@@ -24,7 +24,8 @@ class CoreAnimationList: UITableViewController {
             ("Backing Image","caBackingImage"),
             ("Layer Geometry", "caLayerGeomtry"),
             ("Visual Effects", "caLayerGeomtry"),
-            ("Transform", "caTransform")
+            ("Transform", "caTransform"),
+            ("Cubic", "caCubic")
         ]
     }()
 

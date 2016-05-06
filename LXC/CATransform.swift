@@ -56,8 +56,19 @@ class CATransform: UIViewController {
         
         self.view.layer.addSublayer(imageLayer)
         
+        /**
+         
+         UIKit － y轴向下
+         Core Graphics(Quartz) － y轴向上
+         OpenGL ES － y轴向上
+         
+         */
+        
         //make transform
         //注意我们使用的旋转常量是M_PI_4，而不是你想象的45，因为iOS的变换函数使用弧度而不是角度作为单位。弧度用数学常量pi的倍数表示，一个pi代表180度，所以四分之一的pi就是45度
+        //周长 2 Pi r = 360度 = 2 Pi 弧度
+        //1 弧度 ＝ 180 ／ Pi
+        //180 度 ＝ Pi 弧度
         let rotateTransform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
         
         //imageView.transform = rotateTransform
@@ -156,8 +167,8 @@ class CATransform: UIViewController {
         //http://www.cnblogs.com/xiaobaizhu/p/3994356.html
         var tdRotate : CATransform3D = CATransform3DIdentity
         //m34（透视效果，要操作的这个对象要有旋转的角度，否则没有效果。当然,z方向上得有变化才会有透视效果
-        tdRotate.m34 = -1.0 / 500
-        tdRotate = CATransform3DRotate(tdRotate, 40, 0, 1, 0)
+        //tdRotate.m34 = -1.0 / 500
+//        tdRotate = CATransform3DRotate(tdRotate, CGFloat(M_PI), 0, 1, 0)
         imageViewLast.layer.transform = tdRotate
         
 
