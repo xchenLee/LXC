@@ -25,7 +25,8 @@ class CoreAnimationList: UITableViewController {
             ("Layer Geometry", "caLayerGeomtry"),
             ("Visual Effects", "caLayerGeomtry"),
             ("Transform", "caTransform"),
-            ("Cubic", "caCubic")
+            ("Cubic", "caCubic"),
+            ("CASpecialLayer", "caSpecialLayer")
         ]
     }()
 

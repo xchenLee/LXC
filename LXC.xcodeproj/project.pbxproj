@@ -45,6 +45,9 @@
 		776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776054A71CA4EF4C00EF3618 /* IImagePicker.swift */; };
 		776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776054A91CA5237C00EF3618 /* imagepicker.storyboard */; };
 		777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777048811C9AA22D00A15A5B /* DigitalScale.swift */; };
+		7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC271CE0934300DE3132 /* CASpecialLayer.swift */; };
+		7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */; };
+		7791CC421CE1C4DF00DE3132 /* input.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7791CC411CE1C4DF00DE3132 /* input.jpg */; };
 		77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D277731CA2EE8000899043 /* LocalAuthentication.framework */; };
 		77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D277761CA2EF8600899043 /* TouchIdTest.swift */; };
 		77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312E81CA683FA00867373 /* IImageAlbumCell.swift */; };
@@ -106,6 +109,9 @@
 		776054A71CA4EF4C00EF3618 /* IImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePicker.swift; sourceTree = "<group>"; };
 		776054A91CA5237C00EF3618 /* imagepicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = imagepicker.storyboard; sourceTree = "<group>"; };
 		777048811C9AA22D00A15A5B /* DigitalScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalScale.swift; sourceTree = "<group>"; };
+		7791CC271CE0934300DE3132 /* CASpecialLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASpecialLayer.swift; sourceTree = "<group>"; };
+		7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressImage.swift; sourceTree = "<group>"; };
+		7791CC411CE1C4DF00DE3132 /* input.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = input.jpg; path = ../../../../Desktop/input.jpg; sourceTree = "<group>"; };
 		77D277731CA2EE8000899043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		77D277761CA2EF8600899043 /* TouchIdTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdTest.swift; sourceTree = "<group>"; };
 		77E312E81CA683FA00867373 /* IImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageAlbumCell.swift; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 				A135BFDF1CCFB30100680D1F /* CAEffect.swift */,
 				A135BFE11CD0FD8B00680D1F /* CATransform.swift */,
 				77F8B10E1CDCA8FB0094ADA3 /* CACubic.swift */,
+				7791CC271CE0934300DE3132 /* CASpecialLayer.swift */,
 			);
 			name = coreAnimation;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 		772592141C7DEEF300000FBA /* LXC */ = {
 			isa = PBXGroup;
 			children = (
+				7791CC3E1CE1C49100DE3132 /* Image */,
 				772409701CCF4D9500CAD6C1 /* Container */,
 				7724095A1CCDF5E900CAD6C1 /* coreAnimation */,
 				771F25AD1CC738B100E88260 /* Tool */,
@@ -326,6 +334,15 @@
 				77FB0EE11CB50B81003DD7B6 /* IImagePickerAssetPop.swift */,
 			);
 			name = Photo;
+			sourceTree = "<group>";
+		};
+		7791CC3E1CE1C49100DE3132 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				7791CC411CE1C4DF00DE3132 /* input.jpg */,
+				7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 		77D277751CA2EE9500899043 /* TouchId */ = {
@@ -456,6 +473,7 @@
 				772592351C7EF90300000FBA /* welcome_video.mp4 in Resources */,
 				7725921B1C7DEEF300000FBA /* Main.storyboard in Resources */,
 				771A53881C9BF68D00598BEE /* PhoneContactsList.xib in Resources */,
+				7791CC421CE1C4DF00DE3132 /* input.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +515,7 @@
 				771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */,
 				772409661CCE146C00CAD6C1 /* CALayerTree.swift in Sources */,
 				7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */,
+				7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */,
 				77FB249B1CBCD32C0035DE3F /* LoginDBData.swift in Sources */,
 				772592161C7DEEF300000FBA /* AppDelegate.swift in Sources */,
 				7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */,
@@ -504,6 +523,7 @@
 				770089991C9BB4ED00E6BCB9 /* GoodyList.swift in Sources */,
 				771AE0F21C8048AE00AAF16F /* VideoPlaybackView.swift in Sources */,
 				772773B21C9D3F7B00A6ED72 /* SignInWithGoogle.swift in Sources */,
+				7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */,
 				772409721CCF4DAC00CAD6C1 /* ParentController.swift in Sources */,
 				772409621CCE117500CAD6C1 /* CoreAnimationList.swift in Sources */,
 				77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */,

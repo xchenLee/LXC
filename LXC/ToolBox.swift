@@ -55,6 +55,51 @@ class ToolBox: NSObject {
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0);
     }
     
+    
+    // MARK: - Tool for image
+    class func printImage(input : UIImage) {
+        
+        let w = input.size.width
+        let h = input.size.height
+        
+        NSLog("image resolution : \(w) * \(h)")
+        
+        let data = UIImageJPEGRepresentation(input, 1.0)
+        
+        NSLog("image length aflter UIImageJPEGRepresentation 1.0 : \(CGFloat((data?.length)! / 1024)) kb")
+    }
+    
+    class func imageCompressResolution(input : UIImage, max : CGFloat) -> UIImage {
+        
+        let scale = input.scale
+        let originalW = input.size.width
+        let originalH = input.size.height
+        
+        if originalW <= max && originalH <= max {
+            return input
+        }
+        
+        var newW = max
+        var newH = max
+        
+        if originalW > originalH {
+            newH = newW * originalH / originalW
+        } else {
+            newW = newH * originalW / originalH
+        }
+        
+        let newSize = CGSizeMake(newW, newH)
+        UIGraphicsBeginImageContext(newSize)
+        
+        let newRect = CGRectMake(0, 0, newW, newH)
+        input.drawInRect(newRect)
+        
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImg
+    }
+    
 }
 
 

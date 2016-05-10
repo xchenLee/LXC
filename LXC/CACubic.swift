@@ -23,7 +23,7 @@ class CACubic: UIViewController {
             view.backgroundColor = ToolBox.randomColor()
             view.text = "\(i)"
             view.textColor = UIColor.whiteColor()
-            view.font = UIFont.systemFontOfSize(24, weight: UIFontWeightLight)
+            view.font = UIFont.systemFontOfSize(36, weight: UIFontWeightBold)
             view.textAlignment = .Center
             faces.append(view)
         }
@@ -43,14 +43,17 @@ class CACubic: UIViewController {
         self.view.addSubview(container)
         
         var transform : CATransform3D = CATransform3DIdentity
+
         transform.m34 = -1 / 500.0
+        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 4), 1, 0, 0);
+        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 4), 0, 1, 0);
         container.layer.sublayerTransform = transform
         
         let translation = containerSize / 2
         
         let one = faceArray[0]
         transform = CATransform3DMakeTranslation(0, 0, translation)
-//        addFace(one, transform: transform)
+        addFace(one, transform: transform)
         
         let two = faceArray[1]
         transform = CATransform3DMakeTranslation(translation, 0, 0)
@@ -67,7 +70,14 @@ class CACubic: UIViewController {
         transform = CATransform3DRotate(transform, CGFloat(-M_PI / 2), 1, 0, 0)
         addFace(four, transform: transform)
         
+        let five = faceArray[4];
+        transform = CATransform3DMakeTranslation(-translation, 0, 0)
+        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 2), 0, 1, 0);
+        addFace(five, transform: transform)
         
+        let six = faceArray[5]
+        transform = CATransform3DMakeTranslation(0, 0, -translation)
+        addFace(six, transform: transform)
         
     }
     
