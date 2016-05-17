@@ -11,6 +11,7 @@
 		7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */; };
 		7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */; };
 		7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899E1C9BDA4900E6BCB9 /* GoodyItem.swift */; };
+		7712E3BC1CE9FABB002FBC1A /* ScratchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712E3BB1CE9FABB002FBC1A /* ScratchView.swift */; };
 		771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A53851C9BF68D00598BEE /* PhoneContactsList.swift */; };
 		771A53881C9BF68D00598BEE /* PhoneContactsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771A53861C9BF68D00598BEE /* PhoneContactsList.xib */; };
 		771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A53891C9BFDCA00598BEE /* PhoneContactsCell.swift */; };
@@ -42,12 +43,12 @@
 		772773C41C9FE13600A6ED72 /* filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772773C31C9FE13600A6ED72 /* filters.storyboard */; };
 		772773CA1C9FE9CA00A6ED72 /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772773C91C9FE9CA00A6ED72 /* UIImage+Orientation.swift */; };
 		772773CC1CA03A7A00A6ED72 /* ImageFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772773CB1CA03A7A00A6ED72 /* ImageFilterCell.swift */; };
+		773E16811CEB1ED100D11762 /* ScratchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E16801CEB1ED100D11762 /* ScratchImage.swift */; };
 		776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776054A71CA4EF4C00EF3618 /* IImagePicker.swift */; };
 		776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776054A91CA5237C00EF3618 /* imagepicker.storyboard */; };
 		777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777048811C9AA22D00A15A5B /* DigitalScale.swift */; };
 		7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC271CE0934300DE3132 /* CASpecialLayer.swift */; };
 		7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */; };
-		7791CC421CE1C4DF00DE3132 /* input.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7791CC411CE1C4DF00DE3132 /* input.jpg */; };
 		77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D277731CA2EE8000899043 /* LocalAuthentication.framework */; };
 		77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D277761CA2EF8600899043 /* TouchIdTest.swift */; };
 		77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312E81CA683FA00867373 /* IImageAlbumCell.swift */; };
@@ -73,6 +74,7 @@
 		7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyListCell.swift; sourceTree = "<group>"; };
 		7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodyListCell.xib; sourceTree = "<group>"; };
 		7700899E1C9BDA4900E6BCB9 /* GoodyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyItem.swift; sourceTree = "<group>"; };
+		7712E3BB1CE9FABB002FBC1A /* ScratchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchView.swift; sourceTree = "<group>"; };
 		771A53851C9BF68D00598BEE /* PhoneContactsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneContactsList.swift; sourceTree = "<group>"; };
 		771A53861C9BF68D00598BEE /* PhoneContactsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneContactsList.xib; sourceTree = "<group>"; };
 		771A53891C9BFDCA00598BEE /* PhoneContactsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneContactsCell.swift; sourceTree = "<group>"; };
@@ -106,12 +108,12 @@
 		772773C31C9FE13600A6ED72 /* filters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = filters.storyboard; sourceTree = "<group>"; };
 		772773C91C9FE9CA00A6ED72 /* UIImage+Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		772773CB1CA03A7A00A6ED72 /* ImageFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFilterCell.swift; sourceTree = "<group>"; };
+		773E16801CEB1ED100D11762 /* ScratchImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchImage.swift; sourceTree = "<group>"; };
 		776054A71CA4EF4C00EF3618 /* IImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePicker.swift; sourceTree = "<group>"; };
 		776054A91CA5237C00EF3618 /* imagepicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = imagepicker.storyboard; sourceTree = "<group>"; };
 		777048811C9AA22D00A15A5B /* DigitalScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalScale.swift; sourceTree = "<group>"; };
 		7791CC271CE0934300DE3132 /* CASpecialLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASpecialLayer.swift; sourceTree = "<group>"; };
 		7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressImage.swift; sourceTree = "<group>"; };
-		7791CC411CE1C4DF00DE3132 /* input.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = input.jpg; path = ../../../../Desktop/input.jpg; sourceTree = "<group>"; };
 		77D277731CA2EE8000899043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		77D277761CA2EF8600899043 /* TouchIdTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdTest.swift; sourceTree = "<group>"; };
 		77E312E81CA683FA00867373 /* IImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageAlbumCell.swift; sourceTree = "<group>"; };
@@ -170,7 +172,9 @@
 			isa = PBXGroup;
 			children = (
 				771F25991CC4D91200E88260 /* SnowView.swift */,
+				7712E3BB1CE9FABB002FBC1A /* ScratchView.swift */,
 				771F25AB1CC731C700E88260 /* NavBarAndTable.swift */,
+				773E16801CEB1ED100D11762 /* ScratchImage.swift */,
 			);
 			name = Effect;
 			sourceTree = "<group>";
@@ -339,7 +343,6 @@
 		7791CC3E1CE1C49100DE3132 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				7791CC411CE1C4DF00DE3132 /* input.jpg */,
 				7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */,
 			);
 			name = Image;
@@ -473,7 +476,6 @@
 				772592351C7EF90300000FBA /* welcome_video.mp4 in Resources */,
 				7725921B1C7DEEF300000FBA /* Main.storyboard in Resources */,
 				771A53881C9BF68D00598BEE /* PhoneContactsList.xib in Resources */,
-				7791CC421CE1C4DF00DE3132 /* input.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +489,7 @@
 				771F259A1CC4D91200E88260 /* SnowView.swift in Sources */,
 				77FB249D1CBCD3E20035DE3F /* LoginKey.swift in Sources */,
 				777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */,
+				7712E3BC1CE9FABB002FBC1A /* ScratchView.swift in Sources */,
 				772773C01C9FD3B000A6ED72 /* ImageFilters.swift in Sources */,
 				771F25AC1CC731C700E88260 /* NavBarAndTable.swift in Sources */,
 				7724095C1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift in Sources */,
@@ -514,6 +517,7 @@
 				A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */,
 				771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */,
 				772409661CCE146C00CAD6C1 /* CALayerTree.swift in Sources */,
+				773E16811CEB1ED100D11762 /* ScratchImage.swift in Sources */,
 				7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */,
 				7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */,
 				77FB249B1CBCD32C0035DE3F /* LoginDBData.swift in Sources */,
@@ -642,7 +646,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = LXC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lee.goody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,7 +664,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = LXC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lee.goody;
 				PRODUCT_NAME = "$(TARGET_NAME)";

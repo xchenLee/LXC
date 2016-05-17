@@ -31,6 +31,9 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
     
     func generalGoodyArray () {
         
+        let scratch = GoodyItem(name: "ScratchImage", goodyClassName: NSStringFromClass(ScratchImage))
+        goodiesArray.addObject(scratch)
+        
         let compress = GoodyItem(name: "Compress", goodyClassName: NSStringFromClass(CompressImage))
         goodiesArray.addObject(compress)
         

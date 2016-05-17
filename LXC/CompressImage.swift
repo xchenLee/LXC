@@ -22,6 +22,10 @@ class CompressImage: UIViewController {
         
         let inputImg = UIImage(named: "input.jpg")
         
+        if inputImg == nil {
+            return;
+        }
+        
         display.image = inputImg
         
         ToolBox.printImage(inputImg!)
