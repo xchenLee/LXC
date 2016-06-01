@@ -71,6 +71,8 @@
 		77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
+		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
+		A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835021CFEEBF8007F75EC /* paint01-01blur.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +142,8 @@
 		77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchView.swift; sourceTree = "<group>"; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
+		A18835011CFEEBF8007F75EC /* paint01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01.png"; sourceTree = "<group>"; };
+		A18835021CFEEBF8007F75EC /* paint01-01blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01blur.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +383,8 @@
 		77DD74CF1CF4538C00A99565 /* Scratch */ = {
 			isa = PBXGroup;
 			children = (
+				A18835011CFEEBF8007F75EC /* paint01-01.png */,
+				A18835021CFEEBF8007F75EC /* paint01-01blur.png */,
 				77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */,
 				7710CFA31CF5A86400DD2440 /* ScratchViewOne.swift */,
 			);
@@ -500,8 +506,10 @@
 				7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */,
 				772773BE1C9FA3DE00A6ED72 /* beep.mp3 in Resources */,
 				776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */,
+				A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */,
 				772773C41C9FE13600A6ED72 /* filters.storyboard in Resources */,
 				773E169A1CEC1BAD00D11762 /* quartz.storyboard in Resources */,
+				A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */,
 				772592351C7EF90300000FBA /* welcome_video.mp4 in Resources */,
 				7725921B1C7DEEF300000FBA /* Main.storyboard in Resources */,
 				771A53881C9BF68D00598BEE /* PhoneContactsList.xib in Resources */,

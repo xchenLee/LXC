@@ -87,6 +87,22 @@ class QuartzBase: UIViewController {
         scratchView.addMaskView(imageView)
 
         self.view.addSubview(scratchView)
+        
+        
+        let s1img = UIImage(named: "paint01-01")
+        
+        let s1imgview = UIImageView()
+        s1imgview.frame = CGRectMake(40, 100, 200, 600)
+        s1imgview.image = s1img
+        
+        self.view.addSubview(s1imgview)
+        
+        let scratch = ScratchViewOne()
+        let s1imgs = UIImage(named: "paint01-01blur")
+
+        scratch.frame = CGRectMake(40, 100, 200, 600)
+        scratch.fuck(s1imgs!, radius: 20)
+        self.view.addSubview(scratch)
 
     }
 

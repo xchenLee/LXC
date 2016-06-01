@@ -117,6 +117,17 @@ class ToolBox: NSObject {
         return newImg
     }
     
+    // MARK: -Tool for Quartz
+    class func convertUIPointToQuartz(point : CGPoint, frameSize : CGSize) -> CGPoint {
+        let convertY = frameSize.height - point.y
+        return CGPointMake(point.x, convertY)
+    }
+    
+    class func scalePoint(point : CGPoint, previousSize : CGSize, currentSize : CGSize) -> CGPoint {
+        let factor = currentSize.width / previousSize.width
+        return CGPointMake(factor * point.x, factor * point.y)
+    }
+    
 }
 
 
