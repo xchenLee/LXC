@@ -31,9 +31,17 @@ class ScratchView: UIView {
         self.opaque = false
     }
     
+    func addMask(image : UIImage) {
+        
+        let w = self.bounds.width
+        let h = self.bounds.height
+        bonusImage = ToolBox.fitImageToSize(image, w: w, h: h).CGImage
+        
+        buildResources()
+    }
+    
     func addMaskView(mask : UIView) {
         
-        let colorSpace = CGColorSpaceCreateDeviceGray()
         let scale = UIScreen.mainScreen().scale
         
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0)
@@ -42,8 +50,15 @@ class ScratchView: UIView {
         mask.layer.contentsScale = scale
         
         bonusImage = UIGraphicsGetImageFromCurrentImageContext().CGImage
-        
         UIGraphicsEndImageContext()
+        
+        buildResources()
+    }
+    
+    private func buildResources() {
+        let scale = UIScreen.mainScreen().scale
+
+        let colorSpace = CGColorSpaceCreateDeviceGray()
         
         let imageW = CGImageGetWidth(bonusImage)
         let imageH = CGImageGetHeight(bonusImage)
@@ -63,7 +78,7 @@ class ScratchView: UIView {
         
         let mask = CGImageMaskCreate(imageW, imageH, 8, 8, imageW, dataProvider, nil, false);
         scratchImage = CGImageCreateWithMask(bonusImage, mask);
-        
+
     }
     
     

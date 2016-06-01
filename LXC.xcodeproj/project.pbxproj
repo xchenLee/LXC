@@ -11,6 +11,7 @@
 		7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */; };
 		7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */; };
 		7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899E1C9BDA4900E6BCB9 /* GoodyItem.swift */; };
+		7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7710CFA31CF5A86400DD2440 /* ScratchViewOne.swift */; };
 		771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A53851C9BF68D00598BEE /* PhoneContactsList.swift */; };
 		771A53881C9BF68D00598BEE /* PhoneContactsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771A53861C9BF68D00598BEE /* PhoneContactsList.xib */; };
 		771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A53891C9BFDCA00598BEE /* PhoneContactsCell.swift */; };
@@ -77,6 +78,7 @@
 		7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyListCell.swift; sourceTree = "<group>"; };
 		7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodyListCell.xib; sourceTree = "<group>"; };
 		7700899E1C9BDA4900E6BCB9 /* GoodyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyItem.swift; sourceTree = "<group>"; };
+		7710CFA31CF5A86400DD2440 /* ScratchViewOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchViewOne.swift; sourceTree = "<group>"; };
 		771A53851C9BF68D00598BEE /* PhoneContactsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneContactsList.swift; sourceTree = "<group>"; };
 		771A53861C9BF68D00598BEE /* PhoneContactsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneContactsList.xib; sourceTree = "<group>"; };
 		771A53891C9BFDCA00598BEE /* PhoneContactsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneContactsCell.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 		772592141C7DEEF300000FBA /* LXC */ = {
 			isa = PBXGroup;
 			children = (
+				77DD74CF1CF4538C00A99565 /* Scratch */,
 				773E16961CEC1B3500D11762 /* quartz */,
 				7791CC3E1CE1C49100DE3132 /* Image */,
 				772409701CCF4D9500CAD6C1 /* Container */,
@@ -330,7 +333,6 @@
 				773E16991CEC1BAD00D11762 /* quartz.storyboard */,
 				773E16A21CEC499A00D11762 /* QuartzBase.swift */,
 				77FB2C4D1CF2A697009660C3 /* CanvasView.swift */,
-				77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */,
 			);
 			name = quartz;
 			sourceTree = "<group>";
@@ -372,6 +374,15 @@
 				77D277761CA2EF8600899043 /* TouchIdTest.swift */,
 			);
 			name = TouchId;
+			sourceTree = "<group>";
+		};
+		77DD74CF1CF4538C00A99565 /* Scratch */ = {
+			isa = PBXGroup;
+			children = (
+				77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */,
+				7710CFA31CF5A86400DD2440 /* ScratchViewOne.swift */,
+			);
+			name = Scratch;
 			sourceTree = "<group>";
 		};
 		77F7238D1CA18E8C00ABDADA /* WebView */ = {
@@ -529,6 +540,7 @@
 				77E312EF1CA988E800867373 /* IImageAlbumAssetCell.swift in Sources */,
 				77FB0EE21CB50B81003DD7B6 /* IImagePickerAssetPop.swift in Sources */,
 				A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */,
+				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
 				77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */,
 				77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */,

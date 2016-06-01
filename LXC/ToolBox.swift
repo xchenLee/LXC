@@ -100,6 +100,23 @@ class ToolBox: NSObject {
         return newImg
     }
     
+    class func fitImageToSize(input : UIImage, w : CGFloat, h : CGFloat) -> UIImage {
+        
+        if w <= 0 || h >= 0 {
+            return input
+        }
+        let newSize = CGSizeMake(w, h)
+        UIGraphicsBeginImageContext(newSize)
+        
+        let newRect = CGRectMake(0, 0, w, h)
+        input.drawInRect(newRect)
+        
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImg
+    }
+    
 }
 
 

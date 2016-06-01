@@ -77,7 +77,7 @@ class CanvasView: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
+//        let context = UIGraphicsGetCurrentContext()
         
         for path : UIBezierPath in self.movingPaths {
             kBrushColor.setStroke()
