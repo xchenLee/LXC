@@ -33,6 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var isLaunchedFromQuickAction = false
         
+        ControllerJumper.afterLaunch(nil)
+        
+        
         guard let options = launchOptions, _ = options[UIApplicationLaunchOptionsShortcutItemKey] as?
             UIApplicationShortcutItem  else {
             return true

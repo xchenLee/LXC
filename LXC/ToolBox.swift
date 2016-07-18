@@ -47,8 +47,7 @@ class ToolBox: NSObject {
     }
     
     class func randomBool() -> Bool {
-//        return arc4random() % 2
-        return true
+        return arc4random() % 2 == 1
     }
     
     

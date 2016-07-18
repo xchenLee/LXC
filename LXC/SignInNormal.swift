@@ -10,6 +10,9 @@ import UIKit
 
 class SignInNormal: UIViewController {
 
+    @IBOutlet weak var loginBtn: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +24,10 @@ class SignInNormal: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func loginBtnClicked(sender: AnyObject) {
+        
+        ControllerJumper.login(nil)
+    }
 
     /*
     // MARK: - Navigation

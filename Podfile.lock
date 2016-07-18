@@ -1,24 +1,19 @@
 PODS:
   - Alamofire (3.4.1)
-  - GPUImage@siuying (0.0.2)
-  - Kingfisher (2.4.1)
+  - Kingfisher (2.4.2)
   - RxSwift (2.5.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4.0)
-  - GPUImage@siuying (~> 0.0.2)
+  - Alamofire (~> 3.4.1)
   - Kingfisher (~> 2.4.1)
   - RxSwift (~> 2.5.0)
   - SwiftyJSON (~> 2.3.2)
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  GPUImage@siuying: a55f9513013d2e457ac31a47481d078860002d05
-  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
   RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 0af55a3f226352cd3b0168b0c945f6bf9122e533
-
-COCOAPODS: 1.0.1
+COCOAPODS: 0.39.0
