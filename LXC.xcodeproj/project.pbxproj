@@ -20,6 +20,9 @@
 		771F259A1CC4D91200E88260 /* SnowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771F25991CC4D91200E88260 /* SnowView.swift */; };
 		771F25AC1CC731C700E88260 /* NavBarAndTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771F25AB1CC731C700E88260 /* NavBarAndTable.swift */; };
 		771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771F25AE1CC738D100E88260 /* ToolBox.swift */; };
+		772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772316111D3CD24B004D06F1 /* SignInNormal.swift */; };
+		772316141D3CD441004D06F1 /* ControllerJumper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772316131D3CD441004D06F1 /* ControllerJumper.swift */; };
+		772316161D3CD53D004D06F1 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772316151D3CD53D004D06F1 /* SignIn.storyboard */; };
 		7724095C1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724095B1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift */; };
 		772409621CCE117500CAD6C1 /* CoreAnimationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772409611CCE117500CAD6C1 /* CoreAnimationList.swift */; };
 		772409641CCE131900CAD6C1 /* coreAnimation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772409631CCE131900CAD6C1 /* coreAnimation.storyboard */; };
@@ -92,6 +95,9 @@
 		771F25991CC4D91200E88260 /* SnowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowView.swift; sourceTree = "<group>"; };
 		771F25AB1CC731C700E88260 /* NavBarAndTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarAndTable.swift; sourceTree = "<group>"; };
 		771F25AE1CC738D100E88260 /* ToolBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBox.swift; sourceTree = "<group>"; };
+		772316111D3CD24B004D06F1 /* SignInNormal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInNormal.swift; sourceTree = "<group>"; };
+		772316131D3CD441004D06F1 /* ControllerJumper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerJumper.swift; sourceTree = "<group>"; };
+		772316151D3CD53D004D06F1 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		7724095B1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreAnimationLearning.swift; sourceTree = "<group>"; };
 		772409611CCE117500CAD6C1 /* CoreAnimationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreAnimationList.swift; sourceTree = "<group>"; };
 		772409631CCE131900CAD6C1 /* coreAnimation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = coreAnimation.storyboard; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
+				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -304,6 +311,8 @@
 			isa = PBXGroup;
 			children = (
 				772773B11C9D3F7B00A6ED72 /* SignInWithGoogle.swift */,
+				772316111D3CD24B004D06F1 /* SignInNormal.swift */,
+				772316151D3CD53D004D06F1 /* SignIn.storyboard */,
 			);
 			name = "Sign-in";
 			sourceTree = "<group>";
@@ -530,6 +539,7 @@
 				77F4730B1CA1A5C700654530 /* webexplorer.storyboard in Resources */,
 				772592201C7DEEF300000FBA /* LaunchScreen.storyboard in Resources */,
 				772773BB1C9EAD5900A6ED72 /* qrStoryboard.storyboard in Resources */,
+				772316161D3CD53D004D06F1 /* SignIn.storyboard in Resources */,
 				772773B71C9D4DB000A6ED72 /* QRCodeGenerator.xib in Resources */,
 				771A538C1C9BFDCA00598BEE /* PhoneContactsCell.xib in Resources */,
 				7725921D1C7DEEF300000FBA /* Assets.xcassets in Resources */,
@@ -629,12 +639,14 @@
 				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
 				77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
+				772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */,
 				77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */,
 				77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */,
 				77FB24911CBBC5E80035DE3F /* PinLocation.swift in Sources */,
 				772773CC1CA03A7A00A6ED72 /* ImageFilterCell.swift in Sources */,
 				A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */,
 				771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */,
+				772316141D3CD441004D06F1 /* ControllerJumper.swift in Sources */,
 				772409661CCE146C00CAD6C1 /* CALayerTree.swift in Sources */,
 				7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */,
 				7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */,

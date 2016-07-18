@@ -8,5 +8,7 @@ use_frameworks!
 pod 'Alamofire', '~> 3.4.0'
 pod 'Kingfisher', '~> 2.4.1'
 pod 'SwiftyJSON', '~> 2.3.2'
+pod 'RxSwift', '~> 2.5.0'
+pod 'GPUImage@siuying', '~> 0.0.2'
 
 end

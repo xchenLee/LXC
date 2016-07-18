@@ -33,13 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var isLaunchedFromQuickAction = false
         
-        if let shortcutItem = launchOptions? [UIApplicationLaunchOptionsShortcutItemKey] as?
-            UIApplicationShortcutItem {
-             
-            isLaunchedFromQuickAction = true
-            //handleQuickAction(shortcutItem)
+        guard let options = launchOptions, _ = options[UIApplicationLaunchOptionsShortcutItemKey] as?
+            UIApplicationShortcutItem  else {
+            return true
         }
         
+        isLaunchedFromQuickAction = true
+
         return true
     }
     
@@ -125,6 +125,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler()
     }
     
+    
+    
+    // MARK: - Custom Methods
+    
+    // MARK: - 决定加载主页面
+
+    // MARK: -
     class func getAppDelegate() -> AppDelegate {
         return UIApplication.sharedApplication().delegate as! AppDelegate
     }
@@ -200,7 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    //获取自定义系统相册
+    // MARK: -获取自定义相册
     func obtainSystemAssetCollection(completionHandler: (assetCollection:PHAssetCollection) -> Void){
         
         let albumTitle = "LXC"
@@ -233,24 +240,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

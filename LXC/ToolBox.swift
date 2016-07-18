@@ -46,6 +46,11 @@ class ToolBox: NSObject {
         return CGFloat( Double(radian) / 180.0 * M_PI)
     }
     
+    class func randomBool() -> Bool {
+//        return arc4random() % 2
+        return true
+    }
+    
     
     class func randomColor() -> UIColor {
         
