@@ -10,8 +10,13 @@ import UIKit
 import Contacts
 import Photos
 
+let kWeiboAppKey = "2721785301"
+let kWeiboAppSecret = "8b70ac89dfaa01cf68a9654639cf6750"
+let kWeiboRedirectURL = "https://api.weibo.com/oauth2/default.html"
+
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
 
     var window: UIWindow?
     
@@ -30,8 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //注册本地通知
         registerLocationNotification()
+        WeiboSDK.registerApp(kWeiboAppKey)
         
         var isLaunchedFromQuickAction = false
+        
         
         ControllerJumper.afterLaunch(nil)
         
@@ -128,9 +135,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler()
     }
     
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        return WeiboSDK.handleOpenURL(url, delegate: self)
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return WeiboSDK.handleOpenURL(url, delegate: self)
+    }
+    
     
     
     // MARK: - Custom Methods
+    
+    // MARK: - WeiboSDKDelegate
+    func didReceiveWeiboResponse(response: WBBaseResponse!) {
+        
+    }
+    
+    func didReceiveWeiboRequest(request: WBBaseRequest!) {
+        
+    }
     
     // MARK: - 决定加载主页面
 

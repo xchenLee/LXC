@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71DB418C080B3219B1D72474 /* Pods_LXC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D35BAF3983A3452CE219AD8 /* Pods_LXC.framework */; };
 		770089991C9BB4ED00E6BCB9 /* GoodyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770089981C9BB4ED00E6BCB9 /* GoodyList.swift */; };
 		7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */; };
 		7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */; };
@@ -73,7 +74,6 @@
 		77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB24A31CBCDC7B0035DE3F /* Extensions.swift */; };
 		77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4D1CF2A697009660C3 /* CanvasView.swift */; };
 		77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */; };
-		9557EE59655E08E875333ABB /* Pods_LXC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D7FA811639A0C70E1FD3A0 /* Pods_LXC.framework */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
@@ -81,7 +81,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		72B0A482FB0F20064491B9BC /* Pods-LXC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.debug.xcconfig"; sourceTree = "<group>"; };
+		305C895388FDC6969B29CFE4 /* Pods-LXC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.debug.xcconfig"; sourceTree = "<group>"; };
+		7375A9615F66D56F7898F37A /* Pods-LXC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.release.xcconfig"; sourceTree = "<group>"; };
 		770089981C9BB4ED00E6BCB9 /* GoodyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyList.swift; sourceTree = "<group>"; };
 		7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyListCell.swift; sourceTree = "<group>"; };
 		7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodyListCell.xib; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		773E16971CEC1B7900D11762 /* QuartzLearning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuartzLearning.swift; sourceTree = "<group>"; };
 		773E16991CEC1BAD00D11762 /* quartz.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = quartz.storyboard; sourceTree = "<group>"; };
 		773E16A21CEC499A00D11762 /* QuartzBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuartzBase.swift; sourceTree = "<group>"; };
+		774F03D11D3E273F005FA275 /* LXC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LXC-Bridging-Header.h"; sourceTree = "<group>"; };
 		776054A71CA4EF4C00EF3618 /* IImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePicker.swift; sourceTree = "<group>"; };
 		776054A91CA5237C00EF3618 /* imagepicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = imagepicker.storyboard; sourceTree = "<group>"; };
 		777048811C9AA22D00A15A5B /* DigitalScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalScale.swift; sourceTree = "<group>"; };
@@ -150,12 +152,11 @@
 		77FB24A31CBCDC7B0035DE3F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		77FB2C4D1CF2A697009660C3 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchView.swift; sourceTree = "<group>"; };
-		9CC10213597C3A80614684FD /* Pods-LXC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.release.xcconfig"; sourceTree = "<group>"; };
+		8D35BAF3983A3452CE219AD8 /* Pods_LXC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
 		A18835011CFEEBF8007F75EC /* paint01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01.png"; sourceTree = "<group>"; };
 		A18835021CFEEBF8007F75EC /* paint01-01blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01blur.png"; sourceTree = "<group>"; };
-		C3D7FA811639A0C70E1FD3A0 /* Pods_LXC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,13 +165,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */,
-				9557EE59655E08E875333ABB /* Pods_LXC.framework in Frameworks */,
+				71DB418C080B3219B1D72474 /* Pods_LXC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4379D1D6849CDDF2DDDF1B1D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				305C895388FDC6969B29CFE4 /* Pods-LXC.debug.xcconfig */,
+				7375A9615F66D56F7898F37A /* Pods-LXC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5851120C04154529C5AB122A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D35BAF3983A3452CE219AD8 /* Pods_LXC.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		770089971C9BB4AB00E6BCB9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,8 +259,8 @@
 				776054A51CA4EA6A00EF3618 /* framework */,
 				772592141C7DEEF300000FBA /* LXC */,
 				772592131C7DEEF300000FBA /* Products */,
-				7F652D8535269B6CB1EDFB68 /* Frameworks */,
-				B043B4E438653D24DEF5B989 /* Pods */,
+				4379D1D6849CDDF2DDDF1B1D /* Pods */,
+				5851120C04154529C5AB122A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -313,6 +331,7 @@
 				772773B11C9D3F7B00A6ED72 /* SignInWithGoogle.swift */,
 				772316111D3CD24B004D06F1 /* SignInNormal.swift */,
 				772316151D3CD53D004D06F1 /* SignIn.storyboard */,
+				774F03D11D3E273F005FA275 /* LXC-Bridging-Header.h */,
 			);
 			name = "Sign-in";
 			sourceTree = "<group>";
@@ -451,23 +470,6 @@
 			name = extensions;
 			sourceTree = "<group>";
 		};
-		7F652D8535269B6CB1EDFB68 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C3D7FA811639A0C70E1FD3A0 /* Pods_LXC.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B043B4E438653D24DEF5B989 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				72B0A482FB0F20064491B9BC /* Pods-LXC.debug.xcconfig */,
-				9CC10213597C3A80614684FD /* Pods-LXC.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -481,7 +483,6 @@
 				772592101C7DEEF300000FBA /* Resources */,
 				DD1E083C9077423A495B563C /* [CP] Embed Pods Frameworks */,
 				4D4BD76B058DD226C25129B2 /* [CP] Copy Pods Resources */,
-				48CDDDFD25091BF39D0B517E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -498,7 +499,7 @@
 		7725920A1C7DEEF300000FBA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = com.demo.lxc;
 				TargetAttributes = {
@@ -560,21 +561,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		48CDDDFD25091BF39D0B517E /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LXC/Pods-LXC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		49392DB15389D37E90451ADD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -786,7 +772,7 @@
 		};
 		772592251C7DEEF300000FBA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72B0A482FB0F20064491B9BC /* Pods-LXC.debug.xcconfig */;
+			baseConfigurationReference = 305C895388FDC6969B29CFE4 /* Pods-LXC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -799,13 +785,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lee.goody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LXC/LXC-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		772592261C7DEEF300000FBA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CC10213597C3A80614684FD /* Pods-LXC.release.xcconfig */;
+			baseConfigurationReference = 7375A9615F66D56F7898F37A /* Pods-LXC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -818,6 +805,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lee.goody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LXC/LXC-Bridging-Header.h";
 			};
 			name = Release;
 		};

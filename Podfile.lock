@@ -1,19 +1,33 @@
 PODS:
   - Alamofire (3.4.1)
-  - Kingfisher (2.4.2)
+  - Kingfisher (2.4.1)
   - RxSwift (2.5.0)
   - SwiftyJSON (2.3.2)
+  - WeiboSDK (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4.1)
   - Kingfisher (~> 2.4.1)
   - RxSwift (~> 2.5.0)
   - SwiftyJSON (~> 2.3.2)
+  - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
+
+EXTERNAL SOURCES:
+  WeiboSDK:
+    :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
+
+CHECKOUT OPTIONS:
+  WeiboSDK:
+    :commit: 6031a8da4ce17867ff5887b8dfc59ea45930274e
+    :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
+  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: b0900babfc2d90343d7bb16d7845f8a71b48f403
+
+COCOAPODS: 1.0.1

@@ -26,7 +26,15 @@ class SignInNormal: UIViewController {
     
     @IBAction func loginBtnClicked(sender: AnyObject) {
         
-        ControllerJumper.login(nil)
+        guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
+            return
+        }
+        
+        authRequest.redirectURI = kWeiboRedirectURL
+        authRequest.scope = "all"
+        WeiboSDK.sendRequest(authRequest)
+        
+//        ControllerJumper.login(nil)
     }
 
     /*
