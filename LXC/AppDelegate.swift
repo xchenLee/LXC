@@ -150,6 +150,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
     // MARK: - WeiboSDKDelegate
     func didReceiveWeiboResponse(response: WBBaseResponse!) {
         
+        if let authResponse  = response as? WBAuthorizeResponse {
+            
+            let sinaUser = SinaUser.constructFromResponse(authResponse)
+            
+        }
+        
     }
     
     func didReceiveWeiboRequest(request: WBBaseRequest!) {

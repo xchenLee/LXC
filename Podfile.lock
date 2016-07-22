@@ -1,6 +1,11 @@
 PODS:
   - Alamofire (3.4.1)
   - Kingfisher (2.4.1)
+  - Realm (1.0.1):
+    - Realm/Headers (= 1.0.1)
+  - Realm/Headers (1.0.1)
+  - RealmSwift (1.0.1):
+    - Realm (= 1.0.1)
   - RxSwift (2.5.0)
   - SwiftyJSON (2.3.2)
   - WeiboSDK (3.1.4)
@@ -8,6 +13,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.4.1)
   - Kingfisher (~> 2.4.1)
+  - RealmSwift
   - RxSwift (~> 2.5.0)
   - SwiftyJSON (~> 2.3.2)
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
@@ -24,10 +30,12 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
+  RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
   RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
-PODFILE CHECKSUM: b0900babfc2d90343d7bb16d7845f8a71b48f403
+PODFILE CHECKSUM: 39ac02f44420ba70e569deac3be3d4ba485bdbd8
 
 COCOAPODS: 1.0.1

@@ -53,10 +53,12 @@
 		776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776054A71CA4EF4C00EF3618 /* IImagePicker.swift */; };
 		776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776054A91CA5237C00EF3618 /* imagepicker.storyboard */; };
 		777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777048811C9AA22D00A15A5B /* DigitalScale.swift */; };
+		778A52411D4206A4001236B4 /* SinalTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778A52401D4206A4001236B4 /* SinalTool.swift */; };
 		7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC271CE0934300DE3132 /* CASpecialLayer.swift */; };
 		7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */; };
 		77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D277731CA2EE8000899043 /* LocalAuthentication.framework */; };
 		77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D277761CA2EF8600899043 /* TouchIdTest.swift */; };
+		77D54AB61D42022F008B0A02 /* SinaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D54AB51D42022F008B0A02 /* SinaUser.swift */; };
 		77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */; };
 		77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312E81CA683FA00867373 /* IImageAlbumCell.swift */; };
 		77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312EA1CA6891000867373 /* IImagePickerAlbum.swift */; };
@@ -131,10 +133,12 @@
 		776054A71CA4EF4C00EF3618 /* IImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePicker.swift; sourceTree = "<group>"; };
 		776054A91CA5237C00EF3618 /* imagepicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = imagepicker.storyboard; sourceTree = "<group>"; };
 		777048811C9AA22D00A15A5B /* DigitalScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalScale.swift; sourceTree = "<group>"; };
+		778A52401D4206A4001236B4 /* SinalTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinalTool.swift; sourceTree = "<group>"; };
 		7791CC271CE0934300DE3132 /* CASpecialLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASpecialLayer.swift; sourceTree = "<group>"; };
 		7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressImage.swift; sourceTree = "<group>"; };
 		77D277731CA2EE8000899043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		77D277761CA2EF8600899043 /* TouchIdTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdTest.swift; sourceTree = "<group>"; };
+		77D54AB51D42022F008B0A02 /* SinaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaUser.swift; sourceTree = "<group>"; };
 		77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadVideoList.swift; sourceTree = "<group>"; };
 		77E312E81CA683FA00867373 /* IImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageAlbumCell.swift; sourceTree = "<group>"; };
 		77E312EA1CA6891000867373 /* IImagePickerAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePickerAlbum.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 			children = (
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
+				778A52401D4206A4001236B4 /* SinalTool.swift */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 		772592141C7DEEF300000FBA /* LXC */ = {
 			isa = PBXGroup;
 			children = (
+				77D54AB11D42012D008B0A02 /* sina */,
 				77E11B691D34F7FE005F42F5 /* video */,
 				77DD74CF1CF4538C00A99565 /* Scratch */,
 				773E16961CEC1B3500D11762 /* quartz */,
@@ -415,6 +421,22 @@
 				77D277761CA2EF8600899043 /* TouchIdTest.swift */,
 			);
 			name = TouchId;
+			sourceTree = "<group>";
+		};
+		77D54AB11D42012D008B0A02 /* sina */ = {
+			isa = PBXGroup;
+			children = (
+				77D54AB21D420135008B0A02 /* model */,
+			);
+			name = sina;
+			sourceTree = "<group>";
+		};
+		77D54AB21D420135008B0A02 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				77D54AB51D42022F008B0A02 /* SinaUser.swift */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		77DD74CF1CF4538C00A99565 /* Scratch */ = {
@@ -628,8 +650,10 @@
 				77E312ED1CA9889300867373 /* IImagePickerAlbumAssets.swift in Sources */,
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
 				771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */,
+				77D54AB61D42022F008B0A02 /* SinaUser.swift in Sources */,
 				773E16981CEC1B7900D11762 /* QuartzLearning.swift in Sources */,
 				776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */,
+				778A52411D4206A4001236B4 /* SinalTool.swift in Sources */,
 				77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */,
 				77F723931CA18EF300ABDADA /* WebExplorer.swift in Sources */,
 				77F7238C1CA1217200ABDADA /* ImageFilterView.swift in Sources */,
