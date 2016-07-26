@@ -25,7 +25,7 @@ class SignInNormal: UIViewController {
     }
     
     @IBAction func authBtnClicked(sender: AnyObject) {
-        
+                
         guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
             return
         }

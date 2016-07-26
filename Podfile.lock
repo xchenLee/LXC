@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.4.1)
+  - JXHTTP (3.0.2)
   - Kingfisher (2.4.1)
   - Realm (1.0.1):
     - Realm/Headers (= 1.0.1)
@@ -7,7 +8,24 @@ PODS:
   - RealmSwift (1.0.1):
     - Realm (= 1.0.1)
   - RxSwift (2.5.0)
+  - Spectacles (1.0.1)
   - SwiftyJSON (2.3.2)
+  - TMTumblrSDK (4.0.3):
+    - TMTumblrSDK/Activity (= 4.0.3)
+    - TMTumblrSDK/APIClient (= 4.0.3)
+    - TMTumblrSDK/AppClient (= 4.0.3)
+    - TMTumblrSDK/Core (= 4.0.3)
+  - TMTumblrSDK/Activity (4.0.3)
+  - TMTumblrSDK/APIClient (4.0.3):
+    - JXHTTP
+    - TMTumblrSDK/APIClient/Authentication (= 4.0.3)
+  - TMTumblrSDK/APIClient/Authentication (4.0.3):
+    - JXHTTP
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/AppClient (4.0.3):
+    - TMTumblrSDK/Core
+  - TMTumblrSDK/Core (4.0.3):
+    - Spectacles (~> 1.0)
   - WeiboSDK (3.1.4)
 
 DEPENDENCIES:
@@ -16,6 +34,7 @@ DEPENDENCIES:
   - RealmSwift
   - RxSwift (~> 2.5.0)
   - SwiftyJSON (~> 2.3.2)
+  - TMTumblrSDK (~> 4.0.3)
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
 
 EXTERNAL SOURCES:
@@ -29,13 +48,16 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  JXHTTP: c37120f210cd2dfcb3470d70239f5253335e2f1a
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
   RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
   RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
+  Spectacles: 8dc60711140320653724560e2d6bbb8a8f0940e4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  TMTumblrSDK: a9ba0761d098cf6389cfbbe8d915736f01758609
   WeiboSDK: bceab625ec59b7039ba721cc4ba9f5868804f63e
 
-PODFILE CHECKSUM: 2db2195c950f95a0cd85fc7217ab7419918155ba
+PODFILE CHECKSUM: 77e86b18ea077ef55975a72a58aae039f079b520
 
 COCOAPODS: 1.0.1

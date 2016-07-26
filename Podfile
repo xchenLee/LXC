@@ -14,5 +14,6 @@ pod 'RxSwift', '~> 2.5.0'
 pod 'RealmSwift'
 #https://github.com/sinaweibosdk/weibo_ios_sdk
 pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git" 
+pod 'TMTumblrSDK', '~> 4.0.3'
 
 end

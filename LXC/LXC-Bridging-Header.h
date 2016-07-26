@@ -3,3 +3,4 @@
 //
 
 #import "WeiboSDK.h"
+#import <TMTumblrSDK/TMAPIClient.h>
