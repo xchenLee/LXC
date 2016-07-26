@@ -53,7 +53,12 @@
 		776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776054A71CA4EF4C00EF3618 /* IImagePicker.swift */; };
 		776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776054A91CA5237C00EF3618 /* imagepicker.storyboard */; };
 		777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777048811C9AA22D00A15A5B /* DigitalScale.swift */; };
-		778A52411D4206A4001236B4 /* SinalTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778A52401D4206A4001236B4 /* SinalTool.swift */; };
+		777D57FE1D473D3B007274BB /* sinaboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777D57FD1D473D3B007274BB /* sinaboard.storyboard */; };
+		777D58021D474A30007274BB /* SinaContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D58011D474A30007274BB /* SinaContext.swift */; };
+		777D58041D475744007274BB /* SinaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D58031D475744007274BB /* SinaAPI.swift */; };
+		777D58061D475F9F007274BB /* SinaTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D58051D475F9F007274BB /* SinaTimeLine.swift */; };
+		777D58081D476378007274BB /* SinaStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D58071D476378007274BB /* SinaStatus.swift */; };
+		778A524A1D45F843001236B4 /* Alamofire+SiwftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778A52491D45F843001236B4 /* Alamofire+SiwftyJSON.swift */; };
 		7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC271CE0934300DE3132 /* CASpecialLayer.swift */; };
 		7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */; };
 		77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D277731CA2EE8000899043 /* LocalAuthentication.framework */; };
@@ -133,7 +138,12 @@
 		776054A71CA4EF4C00EF3618 /* IImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePicker.swift; sourceTree = "<group>"; };
 		776054A91CA5237C00EF3618 /* imagepicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = imagepicker.storyboard; sourceTree = "<group>"; };
 		777048811C9AA22D00A15A5B /* DigitalScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalScale.swift; sourceTree = "<group>"; };
-		778A52401D4206A4001236B4 /* SinalTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinalTool.swift; sourceTree = "<group>"; };
+		777D57FD1D473D3B007274BB /* sinaboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = sinaboard.storyboard; sourceTree = "<group>"; };
+		777D58011D474A30007274BB /* SinaContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaContext.swift; sourceTree = "<group>"; };
+		777D58031D475744007274BB /* SinaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaAPI.swift; sourceTree = "<group>"; };
+		777D58051D475F9F007274BB /* SinaTimeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaTimeLine.swift; sourceTree = "<group>"; };
+		777D58071D476378007274BB /* SinaStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaStatus.swift; sourceTree = "<group>"; };
+		778A52491D45F843001236B4 /* Alamofire+SiwftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+SiwftyJSON.swift"; sourceTree = "<group>"; };
 		7791CC271CE0934300DE3132 /* CASpecialLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASpecialLayer.swift; sourceTree = "<group>"; };
 		7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressImage.swift; sourceTree = "<group>"; };
 		77D277731CA2EE8000899043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -229,7 +239,7 @@
 			children = (
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
-				778A52401D4206A4001236B4 /* SinalTool.swift */,
+				778A52491D45F843001236B4 /* Alamofire+SiwftyJSON.swift */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -406,6 +416,14 @@
 			name = Photo;
 			sourceTree = "<group>";
 		};
+		777D57FC1D473D17007274BB /* page */ = {
+			isa = PBXGroup;
+			children = (
+				777D57FD1D473D3B007274BB /* sinaboard.storyboard */,
+			);
+			name = page;
+			sourceTree = "<group>";
+		};
 		7791CC3E1CE1C49100DE3132 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,7 +444,11 @@
 		77D54AB11D42012D008B0A02 /* sina */ = {
 			isa = PBXGroup;
 			children = (
+				777D57FC1D473D17007274BB /* page */,
 				77D54AB21D420135008B0A02 /* model */,
+				777D58011D474A30007274BB /* SinaContext.swift */,
+				777D58051D475F9F007274BB /* SinaTimeLine.swift */,
+				777D58031D475744007274BB /* SinaAPI.swift */,
 			);
 			name = sina;
 			sourceTree = "<group>";
@@ -435,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				77D54AB51D42022F008B0A02 /* SinaUser.swift */,
+				777D58071D476378007274BB /* SinaStatus.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -573,6 +596,7 @@
 				A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */,
 				772773C41C9FE13600A6ED72 /* filters.storyboard in Resources */,
 				773E169A1CEC1BAD00D11762 /* quartz.storyboard in Resources */,
+				777D57FE1D473D3B007274BB /* sinaboard.storyboard in Resources */,
 				A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */,
 				772592351C7EF90300000FBA /* welcome_video.mp4 in Resources */,
 				7725921B1C7DEEF300000FBA /* Main.storyboard in Resources */,
@@ -640,7 +664,9 @@
 				777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */,
 				77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */,
 				772773C01C9FD3B000A6ED72 /* ImageFilters.swift in Sources */,
+				777D58041D475744007274BB /* SinaAPI.swift in Sources */,
 				771F25AC1CC731C700E88260 /* NavBarAndTable.swift in Sources */,
+				777D58061D475F9F007274BB /* SinaTimeLine.swift in Sources */,
 				7724095C1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift in Sources */,
 				772773CA1C9FE9CA00A6ED72 /* UIImage+Orientation.swift in Sources */,
 				772773B51C9D452800A6ED72 /* QRCodeGenerator.swift in Sources */,
@@ -651,9 +677,9 @@
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
 				771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */,
 				77D54AB61D42022F008B0A02 /* SinaUser.swift in Sources */,
+				778A524A1D45F843001236B4 /* Alamofire+SiwftyJSON.swift in Sources */,
 				773E16981CEC1B7900D11762 /* QuartzLearning.swift in Sources */,
 				776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */,
-				778A52411D4206A4001236B4 /* SinalTool.swift in Sources */,
 				77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */,
 				77F723931CA18EF300ABDADA /* WebExplorer.swift in Sources */,
 				77F7238C1CA1217200ABDADA /* ImageFilterView.swift in Sources */,
@@ -664,6 +690,7 @@
 				A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */,
 				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
 				77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */,
+				777D58021D474A30007274BB /* SinaContext.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
 				772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */,
 				77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */,
@@ -679,6 +706,7 @@
 				77FB249B1CBCD32C0035DE3F /* LoginDBData.swift in Sources */,
 				772592161C7DEEF300000FBA /* AppDelegate.swift in Sources */,
 				7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */,
+				777D58081D476378007274BB /* SinaStatus.swift in Sources */,
 				773E16A31CEC499A00D11762 /* QuartzBase.swift in Sources */,
 				77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */,
 				770089991C9BB4ED00E6BCB9 /* GoodyList.swift in Sources */,

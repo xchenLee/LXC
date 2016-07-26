@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kStoryboardNameMain = "Main"
+let kStoryboardNameMain = "sinaboard"
 let kStoryboardNameLogin = "SignIn"
 
 class ControllerJumper: NSObject {
@@ -19,25 +19,14 @@ class ControllerJumper: NSObject {
      */
     class func afterLaunch(params :Dictionary<String, AnyObject>?) {
         
-//        let jumpToMain = ToolBox.randomBool()
-        let jumpToMain = false;
-        
-        let kRootStoryboardName = jumpToMain ? kStoryboardNameMain : kStoryboardNameLogin
-        
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.backgroundColor = UIColor.whiteColor()
-        
-        AppDelegate.getAppDelegate().window = window
-        
-        let storyboard = UIStoryboard(name: kRootStoryboardName, bundle: NSBundle.mainBundle())
-        
-        guard let rootController = storyboard.instantiateInitialViewController(), keyWindow = AppDelegate.getAppDelegate().window else {
-                return
+        let user = SinaContext.sharedInstance.user()
+
+        guard let _ = user else {
+            //传递过来的User为空
+            loadController(kStoryboardNameLogin, initWindow: true)
+            return
         }
-        
-        keyWindow.rootViewController = rootController
-        keyWindow.makeKeyAndVisible()
-        
+        loadController(kStoryboardNameMain, initWindow: true)
     }
     
     /**
@@ -58,7 +47,19 @@ class ControllerJumper: NSObject {
     
     class func loadController(storyboardName: String) {
         
+        loadController(storyboardName, initWindow: false)
+    }
+    
+    class func loadController(storyboardName: String, initWindow: Bool) {
+        
         let storyboard = UIStoryboard(name: storyboardName, bundle: NSBundle.mainBundle())
+        
+        
+        if initWindow {
+            let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window.backgroundColor = UIColor.whiteColor()
+            AppDelegate.getAppDelegate().window = window
+        }
         
         
         guard let window = AppDelegate.getAppDelegate().window, rootController = storyboard.instantiateInitialViewController() else {
@@ -66,6 +67,9 @@ class ControllerJumper: NSObject {
         }
         
         window.rootViewController = rootController
+        if initWindow {
+            window.makeKeyAndVisible()
+        }
     }
 
 }

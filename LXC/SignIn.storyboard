@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D4i-aN-SRL">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D4i-aN-SRL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -33,52 +33,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZGU-E2-YoX">
-                                <rect key="frame" x="20" y="94" width="335" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="BjO-Ky-ehk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DVr-4l-OL7">
-                                <rect key="frame" x="20" y="158" width="335" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="AjD-Fa-aXg"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjU-KO-bwg">
-                                <rect key="frame" x="20" y="222" width="335" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="fkY-ER-lXo"/>
-                                </constraints>
-                                <state key="normal" title="Login">
-                                    <color key="titleColor" red="0.95294117649999999" green="0.82352941180000006" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-82-Ua4">
+                                <rect key="frame" x="149.5" y="317" width="76" height="34"/>
+                                <state key="normal" title="authorize">
+                                    <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginBtnClicked:" destination="XA4-uv-HOc" eventType="touchUpInside" id="qN8-uM-VPP"/>
+                                    <action selector="authBtnClicked:" destination="XA4-uv-HOc" eventType="touchUpInside" id="opr-kH-10B"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZGU-E2-YoX" firstAttribute="leading" secondItem="1OG-2z-fm2" secondAttribute="leading" constant="20" id="1AA-Gx-kFi"/>
-                            <constraint firstItem="rjU-KO-bwg" firstAttribute="top" secondItem="DVr-4l-OL7" secondAttribute="bottom" constant="20" id="3cN-VJ-7lE"/>
-                            <constraint firstItem="ZGU-E2-YoX" firstAttribute="top" secondItem="gM7-AF-ND9" secondAttribute="bottom" constant="30" id="5Hv-yd-5oV"/>
-                            <constraint firstItem="DVr-4l-OL7" firstAttribute="leading" secondItem="1OG-2z-fm2" secondAttribute="leading" constant="20" id="5IV-Yj-QgJ"/>
-                            <constraint firstItem="rjU-KO-bwg" firstAttribute="leading" secondItem="1OG-2z-fm2" secondAttribute="leading" constant="20" id="7aJ-XB-gLV"/>
-                            <constraint firstAttribute="trailing" secondItem="rjU-KO-bwg" secondAttribute="trailing" constant="20" id="9CE-wm-Me2"/>
-                            <constraint firstItem="DVr-4l-OL7" firstAttribute="top" secondItem="ZGU-E2-YoX" secondAttribute="bottom" constant="20" id="K7X-Sv-Q9E"/>
-                            <constraint firstAttribute="trailing" secondItem="DVr-4l-OL7" secondAttribute="trailing" constant="20" id="ZjI-pK-KDv"/>
-                            <constraint firstAttribute="trailing" secondItem="ZGU-E2-YoX" secondAttribute="trailing" constant="20" id="mMy-Cp-Ecf"/>
+                            <constraint firstItem="WMZ-82-Ua4" firstAttribute="centerX" secondItem="1OG-2z-fm2" secondAttribute="centerX" id="AV7-9b-OVd"/>
+                            <constraint firstItem="WMZ-82-Ua4" firstAttribute="centerY" secondItem="1OG-2z-fm2" secondAttribute="centerY" id="zHR-o8-9If"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="GdM-k6-mwy"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="loginBtn" destination="rjU-KO-bwg" id="nIL-i7-Ydr"/>
+                        <outlet property="authBtn" destination="WMZ-82-Ua4" id="vth-do-9Id"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gH-VQ-iuR" userLabel="First Responder" sceneMemberID="firstResponder"/>

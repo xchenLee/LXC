@@ -59,6 +59,32 @@ class ToolBox: NSObject {
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0);
     }
     
+    class func dateFromString(timeString: String) -> NSDate {
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
+        guard let result = formatter.dateFromString(timeString) else {
+            return NSDate()
+        }
+        return result
+        
+//        var date : NSDate?
+//        do {
+//            let range = NSRange(location: 0, length: timeString.characters.count)
+//            
+//            let detector = try NSDataDetector(types: NSTextCheckingAllTypes)
+//            
+//            detector.enumerateMatchesInString(timeString, options: NSMatchingOptions.Anchored, range: range, usingBlock: { (result, flags, ss) in
+//                date = result?.date
+//            })
+//            return date!
+//        }
+//        catch {
+//            return NSDate()
+//        }
+        
+    }
+    
     
     // MARK: - Tool for image
     class func printImage(input : UIImage) {

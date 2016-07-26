@@ -10,8 +10,8 @@ import UIKit
 
 class SignInNormal: UIViewController {
 
-    @IBOutlet weak var loginBtn: UIButton!
     
+    @IBOutlet weak var authBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class SignInNormal: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginBtnClicked(sender: AnyObject) {
+    @IBAction func authBtnClicked(sender: AnyObject) {
         
         guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
             return
@@ -32,9 +32,10 @@ class SignInNormal: UIViewController {
         
         authRequest.redirectURI = kWeiboRedirectURL
         authRequest.scope = "all"
-        WeiboSDK.sendRequest(authRequest)
         
-//        ControllerJumper.login(nil)
+        //        SinalTool.requestUserData("", userId: "")
+        WeiboSDK.sendRequest(authRequest)
+
     }
 
     /*

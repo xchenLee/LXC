@@ -9,16 +9,34 @@
 import UIKit
 import Contacts
 import Photos
+import SwiftyJSON
+import Alamofire
+import RealmSwift
+
+
+let kNavigationBarTintColor = UIColor.fromARGB(0x1A1B1C,alpha: 1.0)
+let kBackgroundColor = UIColor.fromARGB(0xF5F5F2,alpha: 1.0)
+
+let kTumblrConsumerKey = "JWN0BIo6P7yF8HNNaa0Dy0lwKCHnQ01d5KcSnvxungjvtRVNce"
+let kTumblrSecretKey = "wiNo4z5MsZ18YnRIMzzXSMrpCIQTaAeiv6GWqGxBxLDsC3XfBx"
+
+let kTumblrToken = "FDZ07897wsPglGEHwIv4PW4PiMIGGwwUp25aq8u9HKs1fjmYcI"
+let kTumblrSecret = "KGZ9NVbuLWvrJlad24skbO0dBxzmuXQRTQYlKtX0ITotH6PEsQ"
+
 
 let kWeiboAppKey = "2721785301"
 let kWeiboAppSecret = "8b70ac89dfaa01cf68a9654639cf6750"
 let kWeiboRedirectURL = "https://api.weibo.com/oauth2/default.html"
+
+let uiRealm = try! Realm()
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
 
     var window: UIWindow?
+    
+    
     
     lazy var contactStore = CNContactStore()
     
@@ -39,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
         
         var isLaunchedFromQuickAction = false
         
+        UINavigationBar.appearance().tintColor = kNavigationBarTintColor
         
         ControllerJumper.afterLaunch(nil)
         
@@ -154,6 +173,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
             
             let sinaUser = SinaUser.constructFromResponse(authResponse)
             
+            SinaAPI.requestUserData(sinaUser.accessToken ,userId:sinaUser.userId, completionHandler:{ response in
+                
+                
+                var responseJSON : JSON
+                
+                if response.result.isFailure {
+                    responseJSON = JSON.null
+                } else {
+                    responseJSON = JSON(response.result.value!)
+                }
+                
+                sinaUser.parseFromUserJSON(responseJSON)
+                
+                do {
+                    try uiRealm.write({
+                        uiRealm.add(sinaUser)
+                    })
+                }
+                catch let error as NSError{
+                    print("store login sina user error : \(error)")
+                }
+                //跳往首页面
+                ControllerJumper.login(nil)
+            })
         }
         
     }
