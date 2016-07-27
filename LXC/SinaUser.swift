@@ -37,7 +37,7 @@ class SinaUser: Object {
     
     
     
-    class func constructFromResponse(response : WBAuthorizeResponse) -> SinaUser {
+    /*class func constructFromResponse(response : WBAuthorizeResponse) -> SinaUser {
         
         let user = SinaUser()
         user.accessToken = response.accessToken
@@ -45,7 +45,7 @@ class SinaUser: Object {
         user.expirationDate = response.expirationDate
         user.userId = response.userID
         return user
-    }
+    }*/
     
     func parseFromUserJSON(json : JSON) {
         

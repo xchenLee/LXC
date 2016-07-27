@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import TMTumblrSDK
+import OAuthSwift
+import SwiftyJSON
 
 class SignInNormal: UIViewController {
 
     
     @IBOutlet weak var authBtn: UIButton!
+    
+    @IBOutlet weak var tumblrBtn: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +31,8 @@ class SignInNormal: UIViewController {
     }
     
     @IBAction func authBtnClicked(sender: AnyObject) {
-                
-        guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
+        
+        /*guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
             return
         }
         
@@ -34,18 +40,55 @@ class SignInNormal: UIViewController {
         authRequest.scope = "all"
         
         //        SinalTool.requestUserData("", userId: "")
-        WeiboSDK.sendRequest(authRequest)
+        WeiboSDK.sendRequest(authRequest)*/
 
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func tumblrClicked(sender: AnyObject) {
+        
+        
+        TumblrAPI.authorize({ (credential, response, parameters) in
+            
+            let token = credential.oauth_token
+            let tokenSecret = credential.oauth_token_secret
+            //let verifier = credential.oauth_verifier
+            
+            TMAPIClient.sharedInstance().OAuthToken = token
+            TMAPIClient.sharedInstance().OAuthTokenSecret = tokenSecret
+            
+            TMAPIClient.sharedInstance().userInfo({ (result, error) in
+                
+                if error == nil {
+                    
+                    var response = JSON(result)
+                    let manThred = NSThread.currentThread() == NSThread.mainThread()
+                    
+                    let user = TumblrUser()
+                    user.token = token
+                    user.tokenSecret = tokenSecret
+                    user.name = response["user"]["name"].stringValue
+                    user.likes = response["user"]["likes"].intValue
+                    user.following = response["user"]["following"].intValue
+                    
+                    do {
+                        try uiRealm.write({ 
+                            uiRealm.add(user)
+                        })
+                        ControllerJumper.login(nil)
+                    } catch {
+                        
+                    }
+                }
+                
+            })
+            
+            
+            
+            }) { (error) in
+                
+        }
+        
     }
-    */
+    
 
 }

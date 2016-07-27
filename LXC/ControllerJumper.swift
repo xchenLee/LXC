@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kStoryboardNameMain = "sinaboard"
+let kStoryboardNameMain = "tumblrboard"
 let kStoryboardNameLogin = "SignIn"
 
 class ControllerJumper: NSObject {
@@ -19,13 +19,14 @@ class ControllerJumper: NSObject {
      */
     class func afterLaunch(params :Dictionary<String, AnyObject>?) {
         
-        let user = SinaContext.sharedInstance.user()
+        let user = TumblrContext.sharedInstance.user()
 
         guard let _ = user else {
             //传递过来的User为空
             loadController(kStoryboardNameLogin, initWindow: true)
             return
         }
+        
         loadController(kStoryboardNameMain, initWindow: true)
     }
     

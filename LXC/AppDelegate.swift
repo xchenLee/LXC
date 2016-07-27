@@ -11,14 +11,14 @@ import Contacts
 import Photos
 import SwiftyJSON
 import Alamofire
+import TMTumblrSDK
 import RealmSwift
+import OAuthSwift
 
 
 let kNavigationBarTintColor = UIColor.fromARGB(0x1A1B1C,alpha: 1.0)
 let kBackgroundColor = UIColor.fromARGB(0xF5F5F2,alpha: 1.0)
 
-let kTumblrConsumerKey = "JWN0BIo6P7yF8HNNaa0Dy0lwKCHnQ01d5KcSnvxungjvtRVNce"
-let kTumblrSecretKey = "wiNo4z5MsZ18YnRIMzzXSMrpCIQTaAeiv6GWqGxBxLDsC3XfBx"
 
 let kTumblrToken = "FDZ07897wsPglGEHwIv4PW4PiMIGGwwUp25aq8u9HKs1fjmYcI"
 let kTumblrSecret = "KGZ9NVbuLWvrJlad24skbO0dBxzmuXQRTQYlKtX0ITotH6PEsQ"
@@ -32,7 +32,7 @@ let uiRealm = try! Realm()
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {//,WeiboSDKDelegate
 
     var window: UIWindow?
     
@@ -53,13 +53,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
         // Override point for customization after application launch.
         //注册本地通知
         registerLocationNotification()
-        WeiboSDK.registerApp(kWeiboAppKey)
+        
+        //WeiboSDK.registerApp(kWeiboAppKey)
+        TumblrAPI.registerApp()
         
         var isLaunchedFromQuickAction = false
         
-        UINavigationBar.appearance().tintColor = kNavigationBarTintColor
-        
+        //根据数据库里的存储数据跳转
         ControllerJumper.afterLaunch(nil)
+        
+        //因为token, tokenSecret是没次取完之后自己维护的，客户端登录后需要从缓存拿出来
+        if let user = TumblrContext.sharedInstance.user() {
+            TMAPIClient.sharedInstance().OAuthToken = user.token
+            TMAPIClient.sharedInstance().OAuthTokenSecret = user.tokenSecret
+        }
         
         
         guard let options = launchOptions, _ = options[UIApplicationLaunchOptionsShortcutItemKey] as?
@@ -155,19 +162,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return WeiboSDK.handleOpenURL(url, delegate: self)
+        return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return WeiboSDK.handleOpenURL(url, delegate: self)
+        //return WeiboSDK.handleOpenURL(url, delegate: self)
+        
+        if (url.host == "oauth-swift") {
+            OAuthSwift.handleOpenURL(url)
+        }
+
+        return true
     }
-    
     
     
     // MARK: - Custom Methods
     
     // MARK: - WeiboSDKDelegate
-    func didReceiveWeiboResponse(response: WBBaseResponse!) {
+    /*func didReceiveWeiboResponse(response: WBBaseResponse!) {
         
         if let authResponse  = response as? WBAuthorizeResponse {
             
@@ -203,7 +215,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WeiboSDKDelegate {
     
     func didReceiveWeiboRequest(request: WBBaseRequest!) {
         
-    }
+    }*/
     
     // MARK: - 决定加载主页面
 

@@ -34,17 +34,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-82-Ua4">
-                                <rect key="frame" x="149.5" y="317" width="76" height="34"/>
-                                <state key="normal" title="authorize">
+                                <rect key="frame" x="170.5" y="317" width="33" height="34"/>
+                                <state key="normal" title="sina">
                                     <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="authBtnClicked:" destination="XA4-uv-HOc" eventType="touchUpInside" id="opr-kH-10B"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVS-F4-mZ1">
+                                <rect key="frame" x="161" y="371" width="53" height="34"/>
+                                <state key="normal" title="tumblr">
+                                    <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tumblrClicked:" destination="XA4-uv-HOc" eventType="touchUpInside" id="Faf-oD-JZg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xVS-F4-mZ1" firstAttribute="centerX" secondItem="1OG-2z-fm2" secondAttribute="centerX" id="1fz-AJ-b2K"/>
+                            <constraint firstItem="xVS-F4-mZ1" firstAttribute="top" secondItem="WMZ-82-Ua4" secondAttribute="bottom" constant="20" id="3I0-bz-A7x"/>
                             <constraint firstItem="WMZ-82-Ua4" firstAttribute="centerX" secondItem="1OG-2z-fm2" secondAttribute="centerX" id="AV7-9b-OVd"/>
                             <constraint firstItem="WMZ-82-Ua4" firstAttribute="centerY" secondItem="1OG-2z-fm2" secondAttribute="centerY" id="zHR-o8-9If"/>
                         </constraints>
@@ -53,6 +64,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="authBtn" destination="WMZ-82-Ua4" id="vth-do-9Id"/>
+                        <outlet property="tumblrBtn" destination="xVS-F4-mZ1" id="SIM-2c-IbX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gH-VQ-iuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
