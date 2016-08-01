@@ -51,7 +51,7 @@ struct PhotoSize : Mappable {
 struct Photo : Mappable {
     
     var caption : String?
-    var original_size : PhotoSize?
+    var originalSize : PhotoSize?
     var altSizes : [PhotoSize]?
     
     
@@ -61,7 +61,7 @@ struct Photo : Mappable {
     
     mutating func mapping(map: Map) {
         caption <- map["caption"]
-        original_size  <- map["original_size"]
+        originalSize  <- map["original_size"]
         altSizes <- map["alt_sizes"]
     }
 

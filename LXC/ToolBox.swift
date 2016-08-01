@@ -17,6 +17,10 @@ import Foundation
 
 class ToolBox: NSObject {
     
+    class func obtainFloatPixel(pixel: CGFloat) -> CGFloat {
+        return pixel / UIScreen.mainScreen().scale
+    }
+    
     // MARK: - Tool for making
     
     // MARK: - Tool Methods to modify views
@@ -156,6 +160,18 @@ class ToolBox: NSObject {
     class func scalePoint(point : CGPoint, previousSize : CGSize, currentSize : CGSize) -> CGPoint {
         let factor = currentSize.width / previousSize.width
         return CGPointMake(factor * point.x, factor * point.y)
+    }
+    
+    class func getScaleSize(original: CGSize, max: CGSize) -> CGSize {
+        
+        let width = max.width
+        let scale = original.width / width
+        var height = original.height / scale
+        
+        if height > max.height {
+            height = max.height
+        }
+        return CGSizeMake(width, height)
     }
     
 }
