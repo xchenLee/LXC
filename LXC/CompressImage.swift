@@ -16,8 +16,7 @@ class CompressImage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let screenW = AppDelegate.getAppDelegate().screenWidth
-        display.frame = CGRectMake(60, 100, screenW - 120, (screenW - 120) * 3 / 2)
+        display.frame = CGRectMake(60, 100, kScreenWidth - 120, (kScreenWidth - 120) * 3 / 2)
         display.contentMode = .ScaleAspectFit
         
         let inputImg = UIImage(named: "input.jpg")

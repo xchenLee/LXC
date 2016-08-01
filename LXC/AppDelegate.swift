@@ -19,16 +19,14 @@ import OAuthSwift
 let kNavigationBarTintColor = UIColor.fromARGB(0x1A1B1C,alpha: 1.0)
 let kBackgroundColor = UIColor.fromARGB(0xF5F5F2,alpha: 1.0)
 
+let kScreenWidth = UIScreen.mainScreen().bounds.size.width
+let kScreenHeight = UIScreen.mainScreen().bounds.size.height
 
-let kTumblrToken = "FDZ07897wsPglGEHwIv4PW4PiMIGGwwUp25aq8u9HKs1fjmYcI"
-let kTumblrSecret = "KGZ9NVbuLWvrJlad24skbO0dBxzmuXQRTQYlKtX0ITotH6PEsQ"
 
 
 let kWeiboAppKey = "2721785301"
 let kWeiboAppSecret = "8b70ac89dfaa01cf68a9654639cf6750"
 let kWeiboRedirectURL = "https://api.weibo.com/oauth2/default.html"
-
-let uiRealm = try! Realm()
 
 
 @UIApplicationMain
@@ -40,13 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {//,WeiboSDKDelegate
     
     lazy var contactStore = CNContactStore()
     
-    lazy var screenWidth : CGFloat = {
+    /*lazy var screenWidth : CGFloat = {
         return UIScreen.mainScreen().bounds.size.width
     }()
     
     lazy var screenHeight : CGFloat = {
        return UIScreen.mainScreen().bounds.size.height
-    }()
+    }()*/
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

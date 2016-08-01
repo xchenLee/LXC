@@ -10,6 +10,7 @@ import UIKit
 import TMTumblrSDK
 import OAuthSwift
 import SwiftyJSON
+import ObjectMapper
 
 class SignInNormal: UIViewController {
 
@@ -62,7 +63,7 @@ class SignInNormal: UIViewController {
                     
                     var response = JSON(result)
                     let manThred = NSThread.currentThread() == NSThread.mainThread()
-                    
+                                        
                     let user = TumblrUser()
                     user.token = token
                     user.tokenSecret = tokenSecret
@@ -71,8 +72,9 @@ class SignInNormal: UIViewController {
                     user.following = response["user"]["following"].intValue
                     
                     do {
-                        try uiRealm.write({ 
-                            uiRealm.add(user)
+                        let realm = TumblrContext.sharedInstance.obtainUIRealm()
+                        try realm.write({
+                            realm.add(user)
                         })
                         ControllerJumper.login(nil)
                     } catch {
@@ -82,13 +84,10 @@ class SignInNormal: UIViewController {
                 
             })
             
-            
-            
             }) { (error) in
                 
         }
         
     }
-    
 
 }

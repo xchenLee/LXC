@@ -8,19 +8,27 @@
 
 import Foundation
 import RealmSwift
-import SwiftyJSON
+import ObjectMapper
 
-class TumblrUser: Object {
+class TumblrUser: Object, Mappable {
     
 // Specify properties to ignore (Realm won't persist these)
     
-    dynamic var token = ""
-    dynamic var tokenSecret = ""
+    var token = ""
+    var tokenSecret = ""
     
-    dynamic var following = 0
+    var following = 0
 
-    dynamic var likes = 0
-    dynamic var name = ""
+    var likes = 0
+    var name = ""
+    
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        
+    }
     
 
 }

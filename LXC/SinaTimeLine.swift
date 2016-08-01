@@ -19,9 +19,9 @@ class SinaTimeLine: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        requestTimeline(nil, page: 1, feature: .All) { (status) in
-            
-        }
+//        requestTimeline(nil, page: 1, feature: .All) { (status) in
+//            
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,21 +103,21 @@ extension SinaTimeLine {
     /**
      请求网络数据
      */
-    func requestTimeline(sinceId: String?, page: Int, feature: SinaAPI.WeiboType, completionHandler:[SinaStatus]? -> Void) {
-        
-        
-        SinaAPI.requestTimeline(sinceId, page: page) { (response) in
-            
-            if response.result.isFailure {
-                completionHandler(nil)
-                return
-            }
-            var responseJSON = JSON(response.result.value!)
-            
-            var array = [SinaStatus]()
-            
-        }
-    }
+//    func requestTimeline(sinceId: String?, page: Int, feature: SinaAPI.WeiboType, completionHandler:[SinaStatus]? -> Void) {
+//        
+//        
+//        SinaAPI.requestTimeline(sinceId, page: page) { (response) in
+//            
+//            if response.result.isFailure {
+//                completionHandler(nil)
+//                return
+//            }
+//            var responseJSON = JSON(response.result.value!)
+//            
+//            var array = [SinaStatus]()
+//            
+//        }
+//    }
     
 }
 

@@ -12,27 +12,27 @@ import SwiftyJSON
 
 class SinaUser: Object {
     
-    dynamic var userId = ""
-    dynamic var accessToken = ""
-    dynamic var refreshToken = ""
-    dynamic var expirationDate = NSDate()
+    var userId = ""
+    var accessToken = ""
+    var refreshToken = ""
+    var expirationDate = NSDate()
     
     
-    dynamic var friendsCount = 0
-    dynamic var followersCount = 0
-    dynamic var favouritesCount = 0
-    dynamic var createdAt = NSDate()
+    var friendsCount = 0
+    var followersCount = 0
+    var favouritesCount = 0
+    var createdAt = NSDate()
     
     
-    dynamic var avatarLarge = ""
-    dynamic var sinaDescription = ""
-    dynamic var location = ""
-    dynamic var url = ""
-    dynamic var profileImageUrl = ""
-    dynamic var gender = ""
-    dynamic var screenName = ""
-    dynamic var name = ""
-    dynamic var coverImage = ""
+    var avatarLarge = ""
+    var sinaDescription = ""
+    var location = ""
+    var url = ""
+    var profileImageUrl = ""
+    var gender = ""
+    var screenName = ""
+    var name = ""
+    var coverImage = ""
 
     
     

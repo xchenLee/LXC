@@ -40,7 +40,7 @@ class CATransform: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let w = AppDelegate.getAppDelegate().screenWidth
+        let w = kScreenWidth
         imageView.frame = CGRectMake((w-100)/2.0, 100, 100, 100)
         imageView.contentMode = .ScaleAspectFit
         imageView.backgroundColor = UIColor.rgbColor(0xC35050, alpha: 1.0)

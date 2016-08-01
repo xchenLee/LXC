@@ -35,7 +35,7 @@ class CACubic: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let containerSize = (AppDelegate.getAppDelegate().screenWidth - 80) / 2.0
+        let containerSize = (kScreenWidth - 80) / 2.0
         
         container.frame = CGRect(x: 0, y: 0, width: containerSize, height: containerSize)
         container.center = self.view.center

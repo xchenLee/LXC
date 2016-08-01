@@ -29,34 +29,34 @@ class SinaContext: NSObject {
     /**
      获取当前用户
      */
-    func user() -> SinaUser? {
-        
-        guard let _ = sinaUser else {
-            
-            let realm = try! Realm()
-            var results : Results<SinaUser>!
-            
-            results = realm.objects(SinaUser)
-            //本地数据库没有存储
-            if results.count == 0 {
-                return nil
-            }
-            
-            let user = results[0]
-            
-            let token = user.accessToken
-            let expirationDate = user.expirationDate
-            
-            //token为空 或者token过期
-            if token.isEmpty || expirationDate.compare(NSDate()) == NSComparisonResult.OrderedAscending {
-                return nil
-            }
-            sinaUser = user
-            return sinaUser
-        }
-        
-        return sinaUser
-    }
+//    func user() -> SinaUser? {
+//        
+//        guard let _ = sinaUser else {
+//            
+//            let realm = try! Realm()
+//            var results : Results<SinaUser>!
+//            
+//            results = realm.objects(SinaUser)
+//            //本地数据库没有存储
+//            if results.count == 0 {
+//                return nil
+//            }
+//            
+//            let user = results[0]
+//            
+//            let token = user.accessToken
+//            let expirationDate = user.expirationDate
+//            
+//            //token为空 或者token过期
+//            if token.isEmpty || expirationDate.compare(NSDate()) == NSComparisonResult.OrderedAscending {
+//                return nil
+//            }
+//            sinaUser = user
+//            return sinaUser
+//        }
+//        
+//        return sinaUser
+//    }
     
     
     

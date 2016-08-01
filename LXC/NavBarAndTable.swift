@@ -46,10 +46,7 @@ class NavBarAndTable: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-        let width = AppDelegate.getAppDelegate().screenWidth
-        let height = AppDelegate.getAppDelegate().screenHeight
-        
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight))
         tableView!.delegate = self
         tableView!.dataSource = self
         tableView!.rowHeight = 90

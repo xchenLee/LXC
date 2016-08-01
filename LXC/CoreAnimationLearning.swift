@@ -35,11 +35,9 @@ class CoreAnimationLearning: UIViewController {
     
     // MARK: - Custom Method
     func obtainDivisionRect(index : NSInteger) -> CGRect {
-        let w = AppDelegate.getAppDelegate().screenWidth / 2
-        let h = AppDelegate.getAppDelegate().screenHeight
         
-        let x = index == 0 ?  0 : w
-        return CGRectMake(x, 0, w, h)
+        let x = index == 0 ?  0 : kScreenWidth / 2
+        return CGRectMake(x, 0, kScreenWidth, kScreenHeight)
     }
     
     func makeViewsManually() {

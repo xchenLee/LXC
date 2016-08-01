@@ -7,10 +7,14 @@
 //
 
 import UIKit
-import SwiftyJSON
 import TMTumblrSDK
+import SwiftyJSON
+import ObjectMapper
+import MJRefresh
 
 class TumblrPosts: UITableViewController {
+    
+    var aString: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,13 +24,29 @@ class TumblrPosts: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        requestDashboard(sinceId: 0)
+        
+        addDataHandler()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    // MARK: - Custom Method
+    func addDataHandler() {
+        
+        self.tableView.addPullDownRefresh {
+            self.requestDashboard(0)
+        }
+        
+        self.tableView.addPullUp2LoadMore {
+            
+        }
+    }
+    
 
     // MARK: - Table view data source
 
@@ -107,20 +127,23 @@ extension TumblrPosts {
             "since_id" : String(sinceId),
         ]
         
-        
-        TMAPIClient.sharedInstance().dashboard(parameters) { (result, error) in
-            
-            if error == nil {
-                
-                let response = JSON(result)
-                
-                let posts = response["posts"]
-                
+        TMAPIClient.sharedInstance().dashboard(nil) { (result, error) in
+            if error != nil {
+                return
             }
+            
+            //Success
+            let responseJSON = JSON(result)
+            let responsePosts = Mapper<ResponsePosts>().map(responseJSON.dictionaryObject!)
+            
+            let count = responsePosts?.posts?.count
+            
+            self.tableView.endRefreshing()
         }
+        
+        
     }
 }
-
 
 
 
