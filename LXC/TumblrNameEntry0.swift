@@ -39,8 +39,8 @@ class TumblrNameEntry0: UIView {
         
         self.blogNameView = UILabel()
         self.blogNameView.backgroundColor = UIColor.whiteColor()
-        self.blogNameView.font = kTMCellMainTextFont
-        self.blogNameView.textColor = kTMCellMainTextColor
+        self.blogNameView.font = kTMCellBlogNameFont
+        self.blogNameView.textColor = kTMCellBlogNameTextColor
         self.blogNameView.top = kTMCellPadding
         self.blogNameView.left = kTMCellPadding * 2 + kTMCellAvatarSize
         
@@ -55,21 +55,21 @@ class TumblrNameEntry0: UIView {
         self.topLine = UIView()
         self.topLine.width = kScreenWidth
         self.topLine.height = ToolBox.obtainFloatPixel(1)
-        self.topLine.backgroundColor = UIColor.blackColor()
+        self.topLine.backgroundColor = UIColor.fromARGB(0xDCDCDC, alpha: 1.0)
         
         self.avatarView = UIImageView()
         self.avatarView.clipsToBounds = true
         self.avatarView.layer.cornerRadius = kTMCellCornerRadius
         self.avatarView.layer.borderWidth = ToolBox.obtainFloatPixel(1)
-        self.avatarView.layer.borderColor = UIColor.blackColor().CGColor
+        self.avatarView.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).CGColor
         self.avatarView.top = kTMCellPadding
         self.avatarView.left = kTMCellPadding
         self.avatarView.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
         self.blogNameView = UILabel()
         self.blogNameView.backgroundColor = UIColor.whiteColor()
-        self.blogNameView.font = kTMCellMainTextFont
-        self.blogNameView.textColor = kTMCellMainTextColor
+        self.blogNameView.font = kTMCellBlogNameFont
+        self.blogNameView.textColor = kTMCellBlogNameTextColor
         self.blogNameView.top = kTMCellPadding
         self.blogNameView.size = CGSizeMake(0, kTMCellBlogNameFontSize + 2)
         self.blogNameView.left = kTMCellPadding * 2 + kTMCellAvatarSize

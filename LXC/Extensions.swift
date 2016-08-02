@@ -17,22 +17,8 @@ import ObjectMapper
 extension String {
     
     
-    func generalLinkAttributedString(attributedString: NSAttributedString) -> [String : AnyObject] {
-        var result = [
-            NSFontAttributeName : kTMCellReblogTextFont
-        ]
-//        let range = NSMakeRange(0, attributedString.string.characters.count)
-//        attributedString.enumerateAttributesInRange(range, options: [.Reverse]) { (attribute, range, stop) in
-//            
-//            if attribute.keys.contains(NSLinkAttributeName) {
-//                ns
-//            }
-//        }
-//        
-        return result
-    }
     
-    func convertToAttributedString() -> NSAttributedString {
+    func convertToAttributedString(font: UIFont, textColor: UIColor) -> NSAttributedString {
         
         //http://www.itstrike.cn/Question/feb10296-892d-486f-aa6a-396141184ad7.html
         
@@ -43,8 +29,7 @@ extension String {
         do {
             let options = [
                 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                NSFontAttributeName: kTMCellReblogTextFont,
-                NSForegroundColorAttributeName: kTMCellReblogTextColor]
+                NSForegroundColorAttributeName: textColor]
             
             let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil)
             

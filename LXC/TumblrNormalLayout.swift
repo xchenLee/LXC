@@ -24,6 +24,11 @@ class TumblrNormalLayout: NSObject {
     var imagesHeight: CGFloat = 0
     var imagesTop: CGFloat = 0
     
+    //文本区域高度
+    var textHeight: CGFloat = 0
+    var textTop: CGFloat = 0
+    var textAttributedString: NSAttributedString?
+    
     
     var quetoHeight: CGFloat = 0
 
@@ -56,6 +61,10 @@ class TumblrNormalLayout: NSObject {
         height += nameHeight
         blogNameWidth = LayoutManager.computeBlogNameWidth(tumblrPost.blogName)
         
+        //文本区域计算
+        readTypeTextEntry(tumblrPost)
+        
+        
         //图片高度
         imagesTop = nameHeight
         let computedHeight = LayoutManager.computeImagesHeight(tumblrPost.photos)
@@ -67,21 +76,23 @@ class TumblrNormalLayout: NSObject {
         //转发内容
         reblogTop = 0
         reblogTop += nameHeight
+        reblogTop += textHeight
         reblogTop += imagesHeight
         
         if let safeReblog = tumblrPost.reblog, let comment = safeReblog.comment where !comment.isEmpty {
-            let attributes = comment.convertToAttributedString()
+            
+            let attributes = LayoutManager.getReblogEntryTextAttributedString(comment)
             reblogAttributes = attributes
-            reblogHeight = LayoutManager.computeRelogHeight(attributes) + 2 * kTMCellPadding
+            reblogHeight = LayoutManager.computeRelogHeight(attributes)
             
         } else {
             reblogHeight = 0
             
             //如果comment ＝ 0，看一下treeHtml
             if let safeReblog = tumblrPost.reblog, let treeHtml = safeReblog.treeHtml where !treeHtml.isEmpty {
-                let attributes = treeHtml.convertToAttributedString()
+                let attributes = LayoutManager.getReblogEntryTextAttributedString(treeHtml)
                 reblogAttributes = attributes
-                reblogHeight = LayoutManager.computeRelogHeight(attributes) + 3 * kTMCellPadding
+                reblogHeight = LayoutManager.computeRelogHeight(attributes)
             }
             
         }
@@ -90,10 +101,32 @@ class TumblrNormalLayout: NSObject {
         
     }
     
+    func readTypeTextEntry(tumblrPost: TumblrPost) {
+        
+        textTop = nameHeight
+
+        if tumblrPost.type.lowercaseString != "quote" || tumblrPost.text.isEmpty {
+            textHeight = 0
+            return
+        }
+        
+        let attributedString = LayoutManager.getTextEntryTextAttributedString(tumblrPost.text)
+        
+        let height = attributedString.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
+        textHeight = height
+        textAttributedString = attributedString
+        
+        self.height += textHeight
+    }
+    
     func reset() {
         
         nameTop = 0
         height = 0
+        
+        textTop = 0
+        textHeight = 0
+        
         imagesTop = 0
         imagesHeight = 0
         imagesFrame = []

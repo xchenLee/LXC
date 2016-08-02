@@ -10,7 +10,6 @@ import UIKit
 
 class TumblrReblogEntry0: UIView {
     
-    var reblogLabel: UILabel
     var reblogTextLabel: UITextView
 
     convenience init() {
@@ -19,20 +18,11 @@ class TumblrReblogEntry0: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         
-        self.reblogLabel = UILabel()
-        self.reblogLabel.backgroundColor = UIColor.whiteColor()
-        self.reblogLabel.font = kTMCellMainTextFont
-        self.reblogLabel.textColor = kTMCellMainTextColor
-        self.reblogLabel.top = kTMCellPadding
-        self.reblogLabel.left = kTMCellPadding
-        self.reblogLabel.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, 0)
-        
-        
         self.reblogTextLabel = UITextView()
         self.reblogTextLabel.scrollEnabled = false
         self.reblogTextLabel.backgroundColor = UIColor.whiteColor()
-        self.reblogTextLabel.font = kTMCellMainTextFont
-        self.reblogTextLabel.textColor = kTMCellMainTextColor
+        self.reblogTextLabel.font = kTMCellReblogFont
+        self.reblogTextLabel.textColor = kTMCellReblogTextColor
         self.reblogTextLabel.top = kTMCellPadding
         self.reblogTextLabel.left = kTMCellPadding
         self.reblogTextLabel.editable = false
@@ -44,20 +34,11 @@ class TumblrReblogEntry0: UIView {
     
     override init(frame: CGRect) {
         
-        self.reblogLabel = UILabel()
-        self.reblogLabel.backgroundColor = UIColor.whiteColor()
-        self.reblogLabel.font = kTMCellMainTextFont
-        self.reblogLabel.textColor = kTMCellMainTextColor
-        self.reblogLabel.top = kTMCellPadding
-        self.reblogLabel.left = kTMCellPadding
-        self.reblogLabel.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, 0)
-        
-        
         self.reblogTextLabel = UITextView()
         self.reblogTextLabel.scrollEnabled = false
         self.reblogTextLabel.backgroundColor = UIColor.whiteColor()
-        self.reblogTextLabel.font = kTMCellMainTextFont
-        self.reblogTextLabel.textColor = kTMCellMainTextColor
+        self.reblogTextLabel.font = kTMCellReblogFont
+        self.reblogTextLabel.textColor = kTMCellReblogTextColor
         self.reblogTextLabel.top = kTMCellPadding
         self.reblogTextLabel.left = kTMCellPadding
         self.reblogTextLabel.editable = false
@@ -73,7 +54,6 @@ class TumblrReblogEntry0: UIView {
         self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
-        self.addSubview(self.reblogLabel)
         self.addSubview(self.reblogTextLabel)
         
     }
@@ -89,8 +69,7 @@ class TumblrReblogEntry0: UIView {
         NSUnderlineStyleAttributeName
         self.reblogTextLabel.attributedText = tumblrLayout.reblogAttributes
         self.reblogTextLabel.linkTextAttributes = [NSForegroundColorAttributeName : kTMCellReblogTextColor]
-        self.reblogTextLabel.frame = CGRectMake(kTMCellPadding, kTMCellPadding, kScreenWidth - 2 * kTMCellPadding, tumblrLayout.reblogHeight)
-        //self.reblogLabel.height = tumblrLayout.reblogHeight
+        self.reblogTextLabel.frame = CGRectMake(kTMCellPadding, 0, kScreenWidth - 2 * kTMCellPadding, tumblrLayout.reblogHeight)
         
     }
 

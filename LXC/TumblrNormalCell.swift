@@ -13,12 +13,14 @@ class TumblrNormalCell: UITableViewCell {
     var layout: TumblrNormalLayout?
     
     var nameEntry: TumblrNameEntry0
+    var textEntry: TumblrTextEntry0
     var imagesEntry: TumblrImageEntry0
     var reblogEntry: TumblrReblogEntry0
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         self.nameEntry = TumblrNameEntry0()
+        self.textEntry = TumblrTextEntry0()
         self.imagesEntry = TumblrImageEntry0()
         self.reblogEntry = TumblrReblogEntry0()
         
@@ -30,6 +32,7 @@ class TumblrNormalCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         
         self.nameEntry = TumblrNameEntry0()
+        self.textEntry = TumblrTextEntry0()
         self.imagesEntry = TumblrImageEntry0()
         self.reblogEntry = TumblrReblogEntry0()
         
@@ -42,6 +45,7 @@ class TumblrNormalCell: UITableViewCell {
         self.clipsToBounds = true
         self.contentView.clipsToBounds = true
         self.contentView.addSubview(self.nameEntry)
+        self.contentView.addSubview(self.textEntry)
         self.contentView.addSubview(self.imagesEntry)
         self.contentView.addSubview(self.reblogEntry)
     }
@@ -54,11 +58,17 @@ class TumblrNormalCell: UITableViewCell {
         self.contentView.height = safeLayout.height
         self.height = safeLayout.height
         
+        //名字区域
         self.nameEntry.top = safeLayout.nameTop
         self.nameEntry.left = 0;
         self.nameEntry.width = kScreenWidth
         self.nameEntry.height = safeLayout.nameHeight
         self.nameEntry.setWithLayout(safeLayout)
+        
+        //文本区域
+        self.textEntry.frame = CGRectMake(0, safeLayout.textTop, kScreenWidth, safeLayout.textHeight)
+        self.textEntry.setWithLayout(safeLayout)
+        
         
         self.imagesEntry.frame = CGRectMake(0, safeLayout.imagesTop, kTMCellImageContentWidth, safeLayout.height)
         self.imagesEntry.setWithPhotoData(safeLayout.post?.photos, rects: safeLayout.imagesFrame)

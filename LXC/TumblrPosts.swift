@@ -142,8 +142,10 @@ extension TumblrPosts {
     
     func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
         
+        TMAPIClient.sharedInstance().likes(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+
         
-        TMAPIClient.sharedInstance().dashboard(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+//        TMAPIClient.sharedInstance().dashboard(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }

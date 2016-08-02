@@ -18,7 +18,7 @@ class ResponsePosts: Mappable {
     }
     
     func mapping(map: Map) {
-        posts <- map["posts"]
+        posts <- map["liked_posts"]
     }
 
 }

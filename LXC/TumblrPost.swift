@@ -110,6 +110,8 @@ class TumblrPost: Object, Mappable {
     var summary : String = ""
     
     var avatarUrl : String = ""
+    
+    var videoUrl : String = ""
 
 
     required convenience init?(_ map: Map) {
@@ -121,7 +123,7 @@ class TumblrPost: Object, Mappable {
 
         slug <- map["slug"]
         blogName <- map["blog_name"]
-        avatarUrl = kTumblrAPIUrl + "blog/" + blogName + ".tumblr.com/avatar/48"
+        avatarUrl = kTumblrAPIUrl + "blog/" + blogName + ".tumblr.com/avatar/64"
         postId <- map["id"]
         url <- map["post_url"]
 
@@ -136,6 +138,8 @@ class TumblrPost: Object, Mappable {
         
         sourceUrl <- map["source_url"]
         sourceTitle <- map["source_title"]
+        
+        text <- map["text"]
         
 
         var tmpTags: [String]? = nil
@@ -155,6 +159,8 @@ class TumblrPost: Object, Mappable {
         shortUrl <- map["short_url"]
         noteCount <- map["note_count"]
         imagePermalink <- map["image_permalink"]
+        
+        videoUrl <- map["video_url"]
     }
 
 

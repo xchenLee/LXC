@@ -28,13 +28,19 @@ let kTMCellAvatarSize : CGFloat = 48
 let kTMCellCornerRadius : CGFloat = 4
 
 /// 文字
-let kTMCellBlogNameFontSize : CGFloat = 14
-let kTMCellMainTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellMainTextFont = UIFont.systemFontOfSize(kTMCellBlogNameFontSize, weight: UIFontWeightLight)
+let kTMCellTextFontSize: CGFloat = 18
+let kTMCellTextFontColor = UIColor.fromARGB(0x646464, alpha: 1.0)
+let kTMCellTextFont = UIFont.systemFontOfSize(kTMCellTextFontSize, weight: UIFontWeightRegular)
 
-let kTMCellReblogFontSize : CGFloat = 15
+
+
+let kTMCellBlogNameFontSize : CGFloat = 14
+let kTMCellBlogNameTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
+let kTMCellBlogNameFont = UIFont.systemFontOfSize(kTMCellBlogNameFontSize, weight: UIFontWeightLight)
+
+let kTMCellReblogFontSize : CGFloat = 14
 let kTMCellReblogTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellReblogTextFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: UIFontWeightLight)
+let kTMCellReblogFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: UIFontWeightLight)
 
 
 
@@ -51,6 +57,51 @@ class LayoutManager: NSObject {
     
     
     /**
+     获取Text的 NSAttributedString
+     
+     - parameter text: original text
+     
+     - returns: text的 NSAttributedString
+     */
+    class func getTextEntryTextAttributedString(text: String) -> NSAttributedString {
+        
+        //获取转化HTML过后的AS
+        let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
+        let mutableAS = NSMutableAttributedString(attributedString: attributedString)
+        
+        //开始添加自定义属性，段落，
+        let paragraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.minimumLineHeight = kTMCellTextFontSize * 1.2
+        
+        let range = NSMakeRange(0, attributedString.length)
+        mutableAS.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
+        mutableAS.addAttribute(NSFontAttributeName, value: kTMCellTextFont, range: range)
+        return mutableAS
+    }
+    
+    
+    /**
+     获取Reblog的 NSAttributedString
+     
+     - parameter text: original text
+     
+     - returns: reblog的 NSAttributedString
+     */
+    class func getReblogEntryTextAttributedString(text: String) -> NSAttributedString {
+        
+        //获取转化HTML过后的AS
+        let attributedString = text.convertToAttributedString(kTMCellReblogFont, textColor: kTMCellReblogTextColor)
+        let mutableAS = NSMutableAttributedString(attributedString: attributedString)
+        
+        //开始添加自定义属性
+        
+        let range = NSMakeRange(0, attributedString.length)
+        mutableAS.addAttribute(NSFontAttributeName, value: kTMCellReblogFont, range: range)
+        return mutableAS
+    }
+    
+    
+    /**
      计算名字长度
      
      - parameter blogName: blog name
@@ -59,7 +110,7 @@ class LayoutManager: NSObject {
      */
     class func computeBlogNameWidth(blogName: String) -> CGFloat {
         
-        var width = blogName.widthWithConstrainedHeight(kTMCellBlogNameFontSize + 2, font: kTMCellMainTextFont)
+        var width = blogName.widthWithConstrainedHeight(kTMCellBlogNameFontSize + 2, font: kTMCellBlogNameFont)
         //预留120
         let maxWidth = kScreenWidth - kTMCellAvatarSize - 2 * kTMCellPadding - 120
         if width > maxWidth {
@@ -77,7 +128,7 @@ class LayoutManager: NSObject {
      */
     class func computeRelogHeight(blogName: NSAttributedString) -> CGFloat {
         
-        let height = blogName.heightWithConstrainedWidth(kScreenWidth - 3 * kTMCellPadding)
+        let height = blogName.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
 
         return height
     }
