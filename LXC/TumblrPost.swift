@@ -72,11 +72,11 @@ class TumblrPost: Object, Mappable {
 
     var blogName : String    = ""
 
-    var id : Int64           = 0
+    var postId : Int           = 0
     var url : String         = ""
 
     var type : String        = ""
-    var timestamp : Int64    = 0
+    var timestamp : Int    = 0
     var date : String        = ""
     var format : String      = ""
     var reblogKey : String   = ""
@@ -108,6 +108,8 @@ class TumblrPost: Object, Mappable {
     var shortUrl : String = ""
     var noteCount : Int = 0
     var summary : String = ""
+    
+    var avatarUrl : String = ""
 
 
     required convenience init?(_ map: Map) {
@@ -119,7 +121,8 @@ class TumblrPost: Object, Mappable {
 
         slug <- map["slug"]
         blogName <- map["blog_name"]
-        id <- map["id"]
+        avatarUrl = kTumblrAPIUrl + "blog/" + blogName + ".tumblr.com/avatar/48"
+        postId <- map["id"]
         url <- map["post_url"]
 
         type <- map["type"]

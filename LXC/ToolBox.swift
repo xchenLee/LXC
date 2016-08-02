@@ -165,7 +165,7 @@ class ToolBox: NSObject {
     class func getScaleSize(original: CGSize, max: CGSize) -> CGSize {
         
         let width = max.width
-        let scale = original.width / width
+        let scale = CGFloat(original.width) / CGFloat(width)
         var height = original.height / scale
         
         if height > max.height {

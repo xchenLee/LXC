@@ -14,11 +14,13 @@ class TumblrNormalCell: UITableViewCell {
     
     var nameEntry: TumblrNameEntry0
     var imagesEntry: TumblrImageEntry0
+    var reblogEntry: TumblrReblogEntry0
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         self.nameEntry = TumblrNameEntry0()
         self.imagesEntry = TumblrImageEntry0()
+        self.reblogEntry = TumblrReblogEntry0()
         
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,6 +31,7 @@ class TumblrNormalCell: UITableViewCell {
         
         self.nameEntry = TumblrNameEntry0()
         self.imagesEntry = TumblrImageEntry0()
+        self.reblogEntry = TumblrReblogEntry0()
         
         super.init(coder: aDecoder)
         self.customInit()
@@ -40,6 +43,7 @@ class TumblrNormalCell: UITableViewCell {
         self.contentView.clipsToBounds = true
         self.contentView.addSubview(self.nameEntry)
         self.contentView.addSubview(self.imagesEntry)
+        self.contentView.addSubview(self.reblogEntry)
     }
     
     func configLayout(tumblrLayout: TumblrNormalLayout) {
@@ -51,29 +55,21 @@ class TumblrNormalCell: UITableViewCell {
         self.height = safeLayout.height
         
         self.nameEntry.top = safeLayout.nameTop
-        self.nameEntry.frame = CGRectMake(0, 0, kScreenWidth, safeLayout.nameHeight)
-//        self.nameEntry.left = 0;
-//        self.nameEntry.width = kScreenWidth
-//        self.nameEntry.height = safeLayout.nameHeight
+        self.nameEntry.left = 0;
+        self.nameEntry.width = kScreenWidth
+        self.nameEntry.height = safeLayout.nameHeight
+        self.nameEntry.setWithLayout(safeLayout)
         
-        self.imagesEntry.top = safeLayout.imagesTop
-        self.imagesEntry.left = 0
-        self.imagesEntry.width = kTMCellImageContentWidth
-        self.imagesEntry.height = safeLayout.height
+        self.imagesEntry.frame = CGRectMake(0, safeLayout.imagesTop, kTMCellImageContentWidth, safeLayout.height)
         self.imagesEntry.setWithPhotoData(safeLayout.post?.photos, rects: safeLayout.imagesFrame)
         
+        
+        //reblog
+        self.reblogEntry.frame = CGRectMake(0, safeLayout.reblogTop, kScreenWidth, safeLayout.reblogHeight)
+        self.reblogEntry.setWithLayout(safeLayout)
+        
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
 
 }
 

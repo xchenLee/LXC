@@ -33,6 +33,7 @@
 		772103A71D4F2B4400F18546 /* TumblrImageEntry0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772103A61D4F2B4400F18546 /* TumblrImageEntry0.swift */; };
 		772103A91D4F411D00F18546 /* TumblrNormalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772103A81D4F411D00F18546 /* TumblrNormalLayout.swift */; };
 		772103AB1D4F461000F18546 /* TumblrNameEntry0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772103AA1D4F461000F18546 /* TumblrNameEntry0.swift */; };
+		772103C11D509C7A00F18546 /* TumblrReblogEntry0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772103C01D509C7900F18546 /* TumblrReblogEntry0.swift */; };
 		772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772316111D3CD24B004D06F1 /* SignInNormal.swift */; };
 		772316141D3CD441004D06F1 /* ControllerJumper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772316131D3CD441004D06F1 /* ControllerJumper.swift */; };
 		772316161D3CD53D004D06F1 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772316151D3CD53D004D06F1 /* SignIn.storyboard */; };
@@ -145,6 +146,7 @@
 		772103A61D4F2B4400F18546 /* TumblrImageEntry0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrImageEntry0.swift; sourceTree = "<group>"; };
 		772103A81D4F411D00F18546 /* TumblrNormalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrNormalLayout.swift; sourceTree = "<group>"; };
 		772103AA1D4F461000F18546 /* TumblrNameEntry0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrNameEntry0.swift; sourceTree = "<group>"; };
+		772103C01D509C7900F18546 /* TumblrReblogEntry0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrReblogEntry0.swift; sourceTree = "<group>"; };
 		772316111D3CD24B004D06F1 /* SignInNormal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInNormal.swift; sourceTree = "<group>"; };
 		772316131D3CD441004D06F1 /* ControllerJumper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerJumper.swift; sourceTree = "<group>"; };
 		772316151D3CD53D004D06F1 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				772103A41D4F2AB600F18546 /* TumblrNormalCell.swift */,
 				772103AA1D4F461000F18546 /* TumblrNameEntry0.swift */,
 				772103A61D4F2B4400F18546 /* TumblrImageEntry0.swift */,
+				772103C01D509C7900F18546 /* TumblrReblogEntry0.swift */,
 				772103A81D4F411D00F18546 /* TumblrNormalLayout.swift */,
 			);
 			name = normalImp;
@@ -777,6 +780,7 @@
 				772103871D4CA0DD00F18546 /* TumblrLayout.swift in Sources */,
 				772103991D4E52B300F18546 /* ViewTouchable.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
+				772103C11D509C7A00F18546 /* TumblrReblogEntry0.swift in Sources */,
 				772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */,
 				77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */,
 				777D58141D485AC4007274BB /* TumblrContext.swift in Sources */,

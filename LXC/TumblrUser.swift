@@ -12,15 +12,14 @@ import ObjectMapper
 
 class TumblrUser: Object, Mappable {
     
-// Specify properties to ignore (Realm won't persist these)
     
-    var token = ""
-    var tokenSecret = ""
+    dynamic var token = ""
+    dynamic var tokenSecret = ""
     
-    var following = 0
+    dynamic var following = 0
 
-    var likes = 0
-    var name = ""
+    dynamic var likes = 0
+    dynamic var name = ""
     
     required convenience init?(_ map: Map) {
         self.init()
@@ -29,6 +28,9 @@ class TumblrUser: Object, Mappable {
     func mapping(map: Map) {
         
     }
+    
+    // Specify properties to ignore (Realm won't persist these)
+
     
 
 }

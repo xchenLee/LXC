@@ -23,12 +23,19 @@ let kTMCellImageContentWidth = kScreenWidth
 let kTMCellTextContentWidth = kScreenWidth - 2 * kTMCellPadding
 
 
-/// 大小
+/// 头像大小
 let kTMCellAvatarSize : CGFloat = 48
 let kTMCellCornerRadius : CGFloat = 4
 
+/// 文字
 let kTMCellBlogNameFontSize : CGFloat = 14
 let kTMCellMainTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
+let kTMCellMainTextFont = UIFont.systemFontOfSize(kTMCellBlogNameFontSize, weight: UIFontWeightLight)
+
+let kTMCellReblogFontSize : CGFloat = 15
+let kTMCellReblogTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
+let kTMCellReblogTextFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: UIFontWeightLight)
+
 
 
 let kTMCellAvatarAreaHeight = kTMCellAvatarSize + kTMCellPadding * 2
@@ -43,6 +50,46 @@ let kTMCellPhotoMaxSize = CGSizeMake(kTMCellPhotoMaxWidth, kTMCellPhotoMaxHeight
 class LayoutManager: NSObject {
     
     
+    /**
+     计算名字长度
+     
+     - parameter blogName: blog name
+     
+     - returns: 文本全部宽度
+     */
+    class func computeBlogNameWidth(blogName: String) -> CGFloat {
+        
+        var width = blogName.widthWithConstrainedHeight(kTMCellBlogNameFontSize + 2, font: kTMCellMainTextFont)
+        //预留120
+        let maxWidth = kScreenWidth - kTMCellAvatarSize - 2 * kTMCellPadding - 120
+        if width > maxWidth {
+            width = maxWidth
+        }
+        return width
+    }
+    
+    /**
+     计算reblog信息的高度
+     
+     - parameter blogName:
+     
+     - returns: reblog的全高
+     */
+    class func computeRelogHeight(blogName: NSAttributedString) -> CGFloat {
+        
+        let height = blogName.heightWithConstrainedWidth(kScreenWidth - 3 * kTMCellPadding)
+
+        return height
+    }
+    
+    
+    /**
+     计算图片大小，并返回布局信息
+     
+     - parameter photos: 图片数据
+     
+     - returns: 元组包含（整个图片控件高度,[imageView的布局]）
+     */
     class func computeImagesHeight(photos: [Photo]?) ->  (CGFloat,[CGRect]) {
         
         guard let photoData = photos else {
@@ -64,6 +111,12 @@ class LayoutManager: NSObject {
             guard let realSize = photoSize else {
                 return (0,[CGRectZero])
             }
+            if realSize.width == 0 || realSize.height == 0 {
+                let width = kScreenWidth
+                let height = kScreenWidth * 9 / 16
+                return(height, [CGRectMake(0, 0, width, height)])
+            }
+            
             let originalSize = CGSizeMake(CGFloat(realSize.width), CGFloat(realSize.height))
             let scaleSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
             
@@ -80,18 +133,34 @@ class LayoutManager: NSObject {
                 return (0, [CGRectZero, CGRectZero])
             }
             //如果第一张宽度大于高度就竖直排列
-            let vertical = realSize0.width >= realSize0.height
+            let vertical = realSize0.width > realSize0.height
+            
+
+            
             if vertical {
                 
                 let originalSize0 = CGSizeMake(CGFloat(realSize0.width), CGFloat(realSize0.height))
-                let scaleSize0 = ToolBox.getScaleSize(originalSize0, max: kTMCellPhotoMaxSize)
+                
+                var scaleSize0 = ToolBox.getScaleSize(originalSize0, max: kTMCellPhotoMaxSize)
+                
+                if originalSize0.width == 0 || originalSize0.height == 0 {
+                    scaleSize0 = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                }
+                
                 
                 let originalSize1 = CGSizeMake(CGFloat(realSize1.width), CGFloat(realSize1.height))
-                let scaleSize1 = ToolBox.getScaleSize(originalSize1, max: kTMCellPhotoMaxSize)
+                var scaleSize1 = ToolBox.getScaleSize(originalSize1, max: kTMCellPhotoMaxSize)
+                
+                if originalSize1.width == 0 || originalSize1.height == 0 {
+                    scaleSize1 = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                }
                 
                 let height = scaleSize0.height + scaleSize1.height
+                
                 let rect0 = CGRectMake(0, 0, kScreenWidth, scaleSize0.height)
-                let rect1 = CGRectMake(0, rect0.height, kScreenWidth, scaleSize1.height)
+                
+                let rect1 = CGRectMake(0, scaleSize0.height, kScreenWidth, scaleSize1.height)
+                
                 return (height,[rect0, rect1])
             } else {
                 
@@ -106,6 +175,7 @@ class LayoutManager: NSObject {
                 let scaleSize = ToolBox.getScaleSize(originalSize, max: maxSize)
                 
                 let rect0 = CGRectMake(0, 0, kScreenWidth / 2, scaleSize.height)
+                
                 let rect1 = CGRectMake(kScreenWidth / 2, 0, kScreenWidth / 2, scaleSize.height)
                 return (scaleSize.height,[rect0, rect1])
             }

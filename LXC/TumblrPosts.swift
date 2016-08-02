@@ -46,6 +46,12 @@ class TumblrPosts: UITableViewController {
         }
         
         self.tableView.addPullUp2LoadMore {
+//            guard let firstlayout = self.layouts.last, let firstPost = firstlayout.post else {
+//                self.tableView.endLoadingMore()
+//                return
+//            }
+//            let offset = self.layouts.count
+            self.requestDashboard(self.layouts.count)
             
         }
     }
@@ -136,13 +142,8 @@ extension TumblrPosts {
     
     func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
         
-        let parameters = [
-            "limit" : String(limit),
-            "offset" : String(offset),
-            "since_id" : String(sinceId),
-        ]
         
-        TMAPIClient.sharedInstance().dashboard(nil) { (result, error) in
+        TMAPIClient.sharedInstance().dashboard(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }
@@ -169,10 +170,16 @@ extension TumblrPosts {
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                
-                    self.layouts = tmpLayouts
-                    self.tableView.reloadData()
-                    self.tableView.endRefreshing()
+                    if offset > 0 {
+                        self.layouts.appendContentsOf(tmpLayouts)
+                        self.tableView.reloadData()
+                        self.tableView.endLoadingMore()
+                    } else {
+                        self.layouts = tmpLayouts
+                        self.tableView.reloadData()
+                        self.tableView.endRefreshing()
+
+                    }
                 })
                 
                 

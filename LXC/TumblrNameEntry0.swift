@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TumblrNameEntry0: UIView {
     
@@ -37,6 +38,11 @@ class TumblrNameEntry0: UIView {
         self.avatarView.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
         self.blogNameView = UILabel()
+        self.blogNameView.backgroundColor = UIColor.whiteColor()
+        self.blogNameView.font = kTMCellMainTextFont
+        self.blogNameView.textColor = kTMCellMainTextColor
+        self.blogNameView.top = kTMCellPadding
+        self.blogNameView.left = kTMCellPadding * 2 + kTMCellAvatarSize
         
         
         super.init(coder: aDecoder)
@@ -61,19 +67,42 @@ class TumblrNameEntry0: UIView {
         self.avatarView.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
         self.blogNameView = UILabel()
+        self.blogNameView.backgroundColor = UIColor.whiteColor()
+        self.blogNameView.font = kTMCellMainTextFont
+        self.blogNameView.textColor = kTMCellMainTextColor
+        self.blogNameView.top = kTMCellPadding
+        self.blogNameView.size = CGSizeMake(0, kTMCellBlogNameFontSize + 2)
+        self.blogNameView.left = kTMCellPadding * 2 + kTMCellAvatarSize
+
         
         super.init(frame: frame)
         customInit()
     }
     
     func customInit() {
+        
         self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
         self.addSubview(self.topLine)
         self.addSubview(self.avatarView)
-        
+        self.addSubview(self.blogNameView)
 
+    }
+    
+    func setWithLayout(tumblrLayout: TumblrNormalLayout) {
+        //头像
+        let tumblrPost = tumblrLayout.post!
+        let urlString = tumblrPost.avatarUrl
+        let url = NSURL(string: urlString)
+        
+        self.avatarView.kf_setImageWithURL(url!, placeholderImage: nil, optionsInfo: [KingfisherOptionsInfoItem.Transition(ImageTransition.Fade(0.2))])
+        
+        //blog
+        self.blogNameView.width = tumblrLayout.blogNameWidth
+        self.blogNameView.text = tumblrPost.blogName
+        
+        
     }
 
     

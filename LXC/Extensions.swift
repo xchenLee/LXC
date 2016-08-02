@@ -13,19 +13,108 @@ import Alamofire
 import ObjectMapper
 
 
-extension UIColor {
+
+extension String {
     
-    class func rgbColor(hexValue : UInt, alpha : CGFloat) -> UIColor {
-        return
-            UIColor(
-                red: CGFloat((hexValue & 0xFF0000) >> 16) / 255.0,
-                green: CGFloat((hexValue & 0x00FF00) >> 8) / 255.0,
-                blue: CGFloat(hexValue & 0x0000FF) / 255.0,
-                alpha: alpha
-        )
+    
+    func generalLinkAttributedString(attributedString: NSAttributedString) -> [String : AnyObject] {
+        var result = [
+            NSFontAttributeName : kTMCellReblogTextFont
+        ]
+//        let range = NSMakeRange(0, attributedString.string.characters.count)
+//        attributedString.enumerateAttributesInRange(range, options: [.Reverse]) { (attribute, range, stop) in
+//            
+//            if attribute.keys.contains(NSLinkAttributeName) {
+//                ns
+//            }
+//        }
+//        
+        return result
     }
     
+    func convertToAttributedString() -> NSAttributedString {
+        
+        //http://www.itstrike.cn/Question/feb10296-892d-486f-aa6a-396141184ad7.html
+        
+        guard let data = self.dataUsingEncoding(NSUnicodeStringEncoding) else {
+            return NSAttributedString(string: self)
+        }
+        
+        do {
+            let options = [
+                NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                NSFontAttributeName: kTMCellReblogTextFont,
+                NSForegroundColorAttributeName: kTMCellReblogTextColor]
+            
+            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil)
+            
+//            let range = NSMakeRange(0, attributedString.string.characters.count)
+//            
+//            let mutableAS = NSMutableAttributedString(attributedString: attributedString)
+//            mutableAS.enumerateAttributesInRange(range, options: [.Reverse]) { (attribute, range, stop) in
+//                    
+//                if attribute.keys.contains(NSLinkAttributeName) {
+//                    mutableAS.addAttribute(NSUnderlineColorAttributeName, value: UIColor.redColor(), range: range)
+//                    mutableAS.addAttribute(NSUnderlineStyleAttributeName, value: String(NSUnderlineStyle.StyleThick), range: range)
+//                }
+//            }
+//            
+            return attributedString
+            
+        } catch {
+            return NSAttributedString(string: self)
+        }
+    }
+    
+    func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
+        
+        let constrainedSize = CGSizeMake(CGFloat.max, height)
+        
+        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let attributes = [NSFontAttributeName : font]
+        
+        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, attributes: attributes, context: nil)
+        
+        return boundingRect.width
+    }
+    
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        
+        let constrainedSize = CGSizeMake(width, CGFloat.max)
+        
+        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let attributes = [NSFontAttributeName : font]
+        
+        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, attributes: attributes, context: nil)
+        
+        return boundingRect.height
+    }
 }
+
+extension NSAttributedString {
+    
+    
+    func heightWithConstrainedWidth(width: CGFloat) -> CGFloat {
+        
+        let constrainedSize = CGSize(width: width, height: CGFloat.max)
+        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+
+        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, context: nil)
+        
+        return ceil(boundingRect.height)
+    }
+    
+    func widthWithConstrainedHeight(height: CGFloat) -> CGFloat {
+        
+        let constrainedSize = CGSize(width: CGFloat.max, height: height)
+        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+
+        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, context: nil)
+        
+        return ceil(boundingRect.width)
+    }
+}
+
 
 extension UIColor {
     
@@ -52,7 +141,7 @@ extension UITableView {
     
     func addPullUp2LoadMore(handler:()->Void) {
         
-        let footer = MJRefreshAutoFooter.init(refreshingBlock: handler)
+        let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: handler)
         self.mj_footer = footer
     }
     

@@ -43,7 +43,7 @@ class CATransform: UIViewController {
         let w = kScreenWidth
         imageView.frame = CGRectMake((w-100)/2.0, 100, 100, 100)
         imageView.contentMode = .ScaleAspectFit
-        imageView.backgroundColor = UIColor.rgbColor(0xC35050, alpha: 1.0)
+        imageView.backgroundColor = UIColor.fromARGB(0xC35050, alpha: 1.0)
         imageView.image = UIImage(named: "wukong")
         
         self.view .addSubview(imageView)
@@ -160,7 +160,7 @@ class CATransform: UIViewController {
         
         imageViewLast.frame = CGRectMake((w-100)/2.0, 500, 100, 100)
         imageViewLast.contentMode = .ScaleAspectFit
-        imageViewLast.backgroundColor = UIColor.rgbColor(0xC35050, alpha: 1.0)
+        imageViewLast.backgroundColor = UIColor.fromARGB(0xC35050, alpha: 1.0)
         imageViewLast.image = UIImage(named: "tulin")
         self.view .addSubview(imageViewLast)
         

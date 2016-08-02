@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYKit
 import Kingfisher
 
 class TumblrImageEntry0: UIView {
@@ -95,12 +96,16 @@ class TumblrImageEntry0: UIView {
             photoCount = 2
         }
         
+        displayImageViews(photoData, rects: rects)
+        
         for index in 0...kTMCellMaxPhotoCount {
             
             let imageView = imageViews[index]
             
             if index >= photoCount {
                 imageView.hidden = true
+//                imageView.cancelCurrentImageRequest()
+                imageView.image = nil
                 continue
             }
             
@@ -112,32 +117,31 @@ class TumblrImageEntry0: UIView {
             let properSizePhoto = sizes[1]
             guard let photoUrlString = properSizePhoto.url,
                 let photoUrl = NSURL(string: photoUrlString)  else {
-                continue
+                    continue
             }
-            imageView.kf_setImageWithURL(photoUrl)
+            imageView.kf_setImageWithURL(photoUrl, placeholderImage: nil, optionsInfo: [KingfisherOptionsInfoItem.Transition(ImageTransition.Fade(0.2))])
         }
-        displayImageViews(photoData, rects: rects)
         
     }
     
     // MARK: - display images with count
     func displayImageViews(photos: [Photo], rects: [CGRect]) {
         
-        let photoCount = photos.count
+        var photoCount = photos.count
+        if photoCount > 2 {
+            photoCount = 2
+        }
+        
         switch photoCount {
         case 1:
             
             let imageView = imageViews[0]
-            imageView.origin = CGPointZero
-            imageView.frame = self.bounds
+            imageView.frame = rects[0]
 //            imageView.width = kTMCellImageContentWidth
 //            imageView.height =
             break
             
         case 2:
-            
-            let photo0 = photos[0]
-            let photo1 = photos[1]
 
             let imageView0 = imageViews[0]
             imageView0.frame = rects[0]
