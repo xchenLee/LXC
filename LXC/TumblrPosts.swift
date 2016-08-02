@@ -11,11 +11,14 @@ import TMTumblrSDK
 import SwiftyJSON
 import ObjectMapper
 import MJRefresh
+import MBProgressHUD
+
+let kTumblrPostsCell0 = "postCellZero"
 
 class TumblrPosts: UITableViewController {
     
-    var aString: String?
-
+    var layouts: [TumblrNormalLayout] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,24 +54,36 @@ class TumblrPosts: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return layouts.count
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return layouts[indexPath.row].height
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
+        //let cell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsCell0, forIndexPath: indexPath)
+        var dequeueCell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsCell0) as? TumblrNormalCell
+        
+        let layout = layouts[indexPath.row]
+        guard let cell = dequeueCell else {
+            dequeueCell = TumblrNormalCell(style: .Default, reuseIdentifier: kTumblrPostsCell0)
+            dequeueCell?.configLayout(layout)
+            return dequeueCell!
+        }
+        cell.configLayout(layout)
 
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -136,9 +151,33 @@ extension TumblrPosts {
             let responseJSON = JSON(result)
             let responsePosts = Mapper<ResponsePosts>().map(responseJSON.dictionaryObject!)
             
-            let count = responsePosts?.posts?.count
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { 
+                
+                guard let posts = responsePosts?.posts else {
+                    self.tableView.endRefreshing()
+//                    dispatch_async(dispatch_get_main_queue(), { 
+//                    })
+                    return
+                }
+                
+                var tmpLayouts: [TumblrNormalLayout] = []
+                for tumblrPost in posts {
+                    
+                    let layout = TumblrNormalLayout()
+                    layout.fitPostData(tumblrPost)
+                    tmpLayouts.append(layout)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                
+                    self.layouts = tmpLayouts
+                    self.tableView.reloadData()
+                    self.tableView.endRefreshing()
+                })
+                
+                
+            })
             
-            self.tableView.endRefreshing()
         }
         
         

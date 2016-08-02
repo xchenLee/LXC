@@ -28,6 +28,7 @@ class TumblrImageEntry0: UIView {
             let imageView = UIImageView()
             imageView.backgroundColor = UIColor.whiteColor()
             imageView.contentMode = .ScaleAspectFill
+            imageView.clipsToBounds = true
             imageViews.append(imageView)
         }
         
@@ -42,6 +43,7 @@ class TumblrImageEntry0: UIView {
             let imageView = UIImageView()
             imageView.backgroundColor = UIColor.whiteColor()
             imageView.contentMode = .ScaleAspectFill
+            imageView.clipsToBounds = true
             imageViews.append(imageView)
         }
         
@@ -52,7 +54,7 @@ class TumblrImageEntry0: UIView {
     
     // MARK: - init custom properties and events
     func customInit() {
-        
+        self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
         
@@ -75,7 +77,7 @@ class TumblrImageEntry0: UIView {
     }
     
     // MARK: - fill the component with datas
-    func setWithPhotoData(photos: [Photo]?) {
+    func setWithPhotoData(photos: [Photo]?, rects: [CGRect]) {
         
         // no photos, hide all the imageViews
         guard let photoData = photos else {
@@ -87,7 +89,12 @@ class TumblrImageEntry0: UIView {
         }
         
         // has photos
-        let photoCount = photoData.count
+        
+        var photoCount = photoData.count
+        if photoCount > 2 {
+            photoCount = 2
+        }
+        
         for index in 0...kTMCellMaxPhotoCount {
             
             let imageView = imageViews[index]
@@ -109,19 +116,22 @@ class TumblrImageEntry0: UIView {
             }
             imageView.kf_setImageWithURL(photoUrl)
         }
-        displayImageViews(photoData)
+        displayImageViews(photoData, rects: rects)
         
     }
     
     // MARK: - display images with count
-    func displayImageViews(photos: [Photo]) {
+    func displayImageViews(photos: [Photo], rects: [CGRect]) {
         
         let photoCount = photos.count
         switch photoCount {
         case 1:
             
-            let imageView = imageViews.first
-            imageView?.frame = self.bounds
+            let imageView = imageViews[0]
+            imageView.origin = CGPointZero
+            imageView.frame = self.bounds
+//            imageView.width = kTMCellImageContentWidth
+//            imageView.height =
             break
             
         case 2:
@@ -130,8 +140,19 @@ class TumblrImageEntry0: UIView {
             let photo1 = photos[1]
 
             let imageView0 = imageViews[0]
-            let imageView1 = imageViews[1]
+            imageView0.frame = rects[0]
+//            imageView0.origin = CGPointZero
+//            imageView0.width = kScreenWidth / 2
+//            imageView0.height = self.height
             
+            let imageView1 = imageViews[1]
+            imageView1.frame = rects[1]
+//            imageView1.origin = CGPointZero
+//            imageView1.left = kScreenWidth / 2
+//            imageView1.width = kScreenWidth / 2
+//            imageView1.height = self.height
+            
+            break
             
             
             

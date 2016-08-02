@@ -32,6 +32,7 @@ class TumblrNameEntry0: UIView {
         self.avatarView.layer.cornerRadius = kTMCellCornerRadius
         self.avatarView.layer.borderWidth = ToolBox.obtainFloatPixel(1)
         self.avatarView.layer.borderColor = UIColor.blackColor().CGColor
+        self.avatarView.top = kTMCellPadding
         self.avatarView.left = kTMCellPadding
         self.avatarView.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
@@ -55,6 +56,7 @@ class TumblrNameEntry0: UIView {
         self.avatarView.layer.cornerRadius = kTMCellCornerRadius
         self.avatarView.layer.borderWidth = ToolBox.obtainFloatPixel(1)
         self.avatarView.layer.borderColor = UIColor.blackColor().CGColor
+        self.avatarView.top = kTMCellPadding
         self.avatarView.left = kTMCellPadding
         self.avatarView.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
@@ -65,7 +67,7 @@ class TumblrNameEntry0: UIView {
     }
     
     func customInit() {
-        
+        self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
         self.addSubview(self.topLine)
