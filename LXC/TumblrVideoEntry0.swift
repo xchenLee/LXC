@@ -14,6 +14,8 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
 
     var videoThumbnail: UIImageView
     
+    var indicator: UIActivityIndicatorView
+    
     var videoPlayer: Player
     
     convenience init() {
@@ -23,6 +25,9 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     required init?(coder aDecoder: NSCoder) {
         
         self.videoPlayer = Player()
+        
+        self.indicator = UIActivityIndicatorView()
+        self.indicator.size = CGSizeMake(kTMCellVideoIndicatorSize, kTMCellVideoIndicatorSize)
         
         self.videoThumbnail = UIImageView()
         self.videoThumbnail.userInteractionEnabled = true
@@ -41,7 +46,9 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
         self.videoPlayer = Player()
         
-//        let volume = MPMusicPlayerController.applicationMusicPlayer()
+        self.indicator = UIActivityIndicatorView()
+        self.indicator.size = CGSizeMake(kTMCellVideoIndicatorSize, kTMCellVideoIndicatorSize)
+        
         self.videoThumbnail = UIImageView()
         self.videoThumbnail.userInteractionEnabled = true
         self.videoThumbnail.clipsToBounds = true
@@ -65,6 +72,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
         self.addSubview(self.videoPlayer.view)
         self.addSubview(self.videoThumbnail)
+        self.addSubview(self.indicator)
         
         let thumbnailGesture = UITapGestureRecognizer(target: self, action: #selector(tapThumbnailView))
         self.videoThumbnail .addGestureRecognizer(thumbnailGesture)
@@ -80,7 +88,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         switch playerState {
             
         case PlaybackState.Stopped.rawValue:
-            self.videoThumbnail.userInteractionEnabled = false
+            self.videoThumbnail.hidden = true
             self.videoPlayer.playFromBeginning()
             break
             
@@ -91,12 +99,12 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
             
         case PlaybackState.Failed.rawValue:
             self.videoThumbnail.hidden = false
-            self.videoPlayer.stop()
+            self.videoPlayer.pause()
             break
             
         default:
             self.videoThumbnail.hidden = false
-            self.videoPlayer.stop()
+            self.videoPlayer.pause()
         }
     }
     
@@ -115,19 +123,23 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
             break
             
         case PlaybackState.Playing.rawValue:
+            self.indicator.hidden = true
             self.videoPlayer.pause()
             break
             
         case PlaybackState.Failed.rawValue:
+            self.indicator.hidden = true
             self.videoPlayer.stop()
             break
             
         default:
+            self.indicator.hidden = true
             self.videoPlayer.stop()
         }
         
     }
     
+    // MARK: - set datas
     func setWithLayout(tumblrLayout: TumblrNormalLayout) {
         
         //视频缩略图
@@ -135,15 +147,13 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
             self.videoThumbnail.frame = CGRectZero
             return
         }
+        
+        self.indicator.left = tumblrLayout.indicatorLeft
+        self.indicator.top = tumblrLayout.indicatorTop
+        
         self.videoThumbnail.frame = CGRectMake(0, 0, kScreenWidth, tumblrLayout.videoHeight)
         self.videoThumbnail.kf_setImageWithURL(url)
         
-        //当在播放状态，或者暂定状态，不显示缩略图
-//        let playerState = self.videoPlayer.playbackState.rawValue
-//        
-//        let hideThumbnail = (playerState == PlaybackState.Playing.rawValue
-//            || playerState == PlaybackState.Paused.rawValue)
-//        self.videoThumbnail.hidden = hideThumbnail
         self.videoThumbnail.hidden = false
         
         self.videoPlayer.view.frame = CGRectMake(0, 0, kScreenWidth, tumblrLayout.videoHeight)
@@ -156,6 +166,8 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         }
     }
     
+    
+    // MARK: - PlayerDelegate methods
     func playerReady(player: Player) {
         print("player ready")
     }
@@ -166,11 +178,36 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     
     func playerBufferingStateDidChange(player: Player) {
         
-        if self.videoThumbnail.hidden == false && self.videoPlayer.playbackState == PlaybackState.Playing {
-            self.videoThumbnail.hidden = true
+        print("player buffering state change")
+
+        if self.videoPlayer.playbackState == PlaybackState.Playing {
             self.videoThumbnail.userInteractionEnabled = true
         }
-        print("player buffering state change")
+        
+        let bufferingState = self.videoPlayer.bufferingState.rawValue
+        
+        if bufferingState == BufferingState.Delayed.rawValue{
+            self.indicator.hidden = false
+            self.indicator.startAnimating()
+        } else {
+            self.indicator.stopAnimating()
+            self.indicator.hidden = true
+        }
+        
+        switch bufferingState {
+        case BufferingState.Ready.rawValue:
+            print("buffering ready")
+            break
+        case BufferingState.Delayed.rawValue:
+            print("buffering delayed")
+            break
+        case BufferingState.Unknown.rawValue:
+            print("buffering unknown")
+            break
+        default:
+            print("buffering default")
+            break
+        }
 
     }
     

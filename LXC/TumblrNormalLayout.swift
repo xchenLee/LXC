@@ -36,6 +36,9 @@ class TumblrNormalLayout: NSObject {
     var videoHeight: CGFloat = 0
     var videoTop: CGFloat = 0
     
+    var indicatorTop : CGFloat = 0
+    var indicatorLeft : CGFloat = 0
+    
 
     //转发评论区域高度
     var reblogHeight: CGFloat = 0
@@ -109,6 +112,8 @@ class TumblrNormalLayout: NSObject {
                 originalHeight = kScreenWidth * 9 / 16
             }
             videoHeight = originalHeight
+            indicatorTop = (videoHeight - kTMCellVideoIndicatorSize) / 2
+            indicatorLeft = (kScreenWidth - kTMCellVideoIndicatorSize) / 2
             height += videoHeight
         }
         
@@ -207,6 +212,8 @@ class TumblrNormalLayout: NSObject {
         
         videoHeight = 0
         videoTop = 0
+        indicatorTop = 0
+        indicatorLeft = 0
         
         reblogHeight = 0
         reblogTop = 0

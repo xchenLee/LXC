@@ -27,6 +27,9 @@ let kTMCellTextContentWidth = kScreenWidth - 2 * kTMCellPadding
 let kTMCellAvatarSize : CGFloat = 48
 let kTMCellCornerRadius : CGFloat = 4
 
+// indicator 大小
+let kTMCellVideoIndicatorSize : CGFloat = 40
+
 /// 文字
 let kTMCellTitleFontSize : CGFloat = 20
 let kTMCellTitleFontColor = UIColor.fromARGB(0x646464, alpha: 1.0)
@@ -51,7 +54,7 @@ let kTMCellReblogFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: U
 let kTMCellAvatarAreaHeight = kTMCellAvatarSize + kTMCellPadding * 2
 
 /// 图片足最大高度，不超过一屏可见高度
-let kTMCellPhotoMaxHeight = kScreenHeight - 50 - 64
+let kTMCellPhotoMaxHeight = kScreenHeight - 68
 let kTMCellPhotoMaxWidth = kScreenWidth
 
 let kTMCellPhotoMaxSize = CGSizeMake(kTMCellPhotoMaxWidth, kTMCellPhotoMaxHeight)
