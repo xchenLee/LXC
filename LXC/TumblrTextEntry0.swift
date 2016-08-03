@@ -10,6 +10,7 @@ import UIKit
 
 class TumblrTextEntry0: UIView {
 
+    var titleView: UILabel
     var textView: UITextView
     
     convenience init() {
@@ -17,6 +18,13 @@ class TumblrTextEntry0: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
+        self.titleView = UILabel()
+        self.titleView.numberOfLines = 0
+        self.titleView.backgroundColor = UIColor.whiteColor()
+        self.titleView.font = kTMCellTitleFont
+        self.titleView.textColor = kTMCellTitleFontColor
+        
         
         self.textView = UITextView()
         self.textView.scrollEnabled = false
@@ -33,6 +41,12 @@ class TumblrTextEntry0: UIView {
     }
     
     override init(frame: CGRect) {
+        
+        self.titleView = UILabel()
+        self.titleView.numberOfLines = 0
+        self.titleView.backgroundColor = UIColor.whiteColor()
+        self.titleView.font = kTMCellTitleFont
+        self.titleView.textColor = kTMCellTitleFontColor
         
         self.textView = UITextView()
         self.textView.scrollEnabled = false
@@ -54,21 +68,37 @@ class TumblrTextEntry0: UIView {
         self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
+        
+        self.addSubview(self.titleView)
         self.addSubview(self.textView)
     }
     
     func setWithLayout(tumblrLayout: TumblrNormalLayout) {
         
+        if tumblrLayout.titleHeight == 0 {
+            
+            self.titleView.text = ""
+            self.titleView.hidden = true
+            self.titleView.frame = CGRectZero
+        } else {
+            
+            self.titleView.hidden = false
+            self.titleView.text = tumblrLayout.tittleText
+            self.titleView.frame = CGRectMake(kTMCellPadding, 0, kTMCellTextContentWidth, tumblrLayout.titleHeight)
+        }
+        
+        
         if tumblrLayout.textHeight == 0 {
+            
             self.textView.attributedText = nil
             self.textView.hidden = true
-            return
+            self.textView.frame = CGRectZero
+        } else {
+            
+            self.textView.hidden = false
+            self.textView.attributedText = tumblrLayout.textAttributedString
+            self.textView.frame = CGRectMake(kTMCellPadding, tumblrLayout.titleHeight, kTMCellTextContentWidth, tumblrLayout.textHeight)
         }
-        self.textView.hidden = false
-
-        self.textView.attributedText = tumblrLayout.textAttributedString
-        
-        self.textView.frame = CGRectMake(kTMCellPadding, 0, kScreenWidth - 2 * kTMCellPadding, tumblrLayout.textHeight)
         
     }
 

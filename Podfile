@@ -16,7 +16,8 @@ pod 'MJRefresh', '~> 3.1.9'
 pod 'ObjectMapper', '~> 1.3'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'YYKit'
-
+pod 'Player'
+pod 'pop'
 
 #pod 'GPUImage@siuying', '~> 0.0.2'
 #pod 'AlamofireSwiftyJSON', '~> 0.1.1'

@@ -93,7 +93,8 @@ class TumblrPost: Object, Mappable {
 
     let tags                         = List<StringObject>()
     
-    
+    var title: String = ""
+    var body : String = ""
     var text : String   =  ""
     var slug : String  = ""
     
@@ -112,6 +113,9 @@ class TumblrPost: Object, Mappable {
     var avatarUrl : String = ""
     
     var videoUrl : String = ""
+    var thumbnailUrl : String = ""
+    var thumbnailHeight : Int = 0
+    var thumbnailWidth : Int = 0
 
 
     required convenience init?(_ map: Map) {
@@ -139,6 +143,8 @@ class TumblrPost: Object, Mappable {
         sourceUrl <- map["source_url"]
         sourceTitle <- map["source_title"]
         
+        title <- map["title"]
+        body <- map["body"]
         text <- map["text"]
         
 
@@ -161,6 +167,9 @@ class TumblrPost: Object, Mappable {
         imagePermalink <- map["image_permalink"]
         
         videoUrl <- map["video_url"]
+        thumbnailUrl <- map["thumbnail_url"]
+        thumbnailWidth <- map["thumbnail_width"]
+        thumbnailHeight <- map["thumbnail_height"]
     }
 
 

@@ -15,6 +15,7 @@ class TumblrNormalCell: UITableViewCell {
     var nameEntry: TumblrNameEntry0
     var textEntry: TumblrTextEntry0
     var imagesEntry: TumblrImageEntry0
+    var videoEntry: TumblrVideoEntry0
     var reblogEntry: TumblrReblogEntry0
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -22,6 +23,7 @@ class TumblrNormalCell: UITableViewCell {
         self.nameEntry = TumblrNameEntry0()
         self.textEntry = TumblrTextEntry0()
         self.imagesEntry = TumblrImageEntry0()
+        self.videoEntry = TumblrVideoEntry0()
         self.reblogEntry = TumblrReblogEntry0()
         
         
@@ -34,6 +36,7 @@ class TumblrNormalCell: UITableViewCell {
         self.nameEntry = TumblrNameEntry0()
         self.textEntry = TumblrTextEntry0()
         self.imagesEntry = TumblrImageEntry0()
+        self.videoEntry = TumblrVideoEntry0()
         self.reblogEntry = TumblrReblogEntry0()
         
         super.init(coder: aDecoder)
@@ -47,6 +50,7 @@ class TumblrNormalCell: UITableViewCell {
         self.contentView.addSubview(self.nameEntry)
         self.contentView.addSubview(self.textEntry)
         self.contentView.addSubview(self.imagesEntry)
+        self.contentView.addSubview(self.videoEntry)
         self.contentView.addSubview(self.reblogEntry)
     }
     
@@ -69,10 +73,13 @@ class TumblrNormalCell: UITableViewCell {
         self.textEntry.frame = CGRectMake(0, safeLayout.textTop, kScreenWidth, safeLayout.textHeight)
         self.textEntry.setWithLayout(safeLayout)
         
-        
+        //图片区域
         self.imagesEntry.frame = CGRectMake(0, safeLayout.imagesTop, kTMCellImageContentWidth, safeLayout.height)
         self.imagesEntry.setWithPhotoData(safeLayout.post?.photos, rects: safeLayout.imagesFrame)
         
+        //视频区域
+        self.videoEntry.frame = CGRectMake(0, safeLayout.videoTop, kScreenWidth, safeLayout.videoHeight)
+        self.videoEntry.setWithLayout(safeLayout)
         
         //reblog
         self.reblogEntry.frame = CGRectMake(0, safeLayout.reblogTop, kScreenWidth, safeLayout.reblogHeight)

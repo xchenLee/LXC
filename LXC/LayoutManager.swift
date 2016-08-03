@@ -28,9 +28,13 @@ let kTMCellAvatarSize : CGFloat = 48
 let kTMCellCornerRadius : CGFloat = 4
 
 /// 文字
-let kTMCellTextFontSize: CGFloat = 18
-let kTMCellTextFontColor = UIColor.fromARGB(0x646464, alpha: 1.0)
-let kTMCellTextFont = UIFont.systemFontOfSize(kTMCellTextFontSize, weight: UIFontWeightRegular)
+let kTMCellTitleFontSize : CGFloat = 20
+let kTMCellTitleFontColor = UIColor.fromARGB(0x646464, alpha: 1.0)
+let kTMCellTitleFont = UIFont.systemFontOfSize(kTMCellTitleFontSize, weight: UIFontWeightRegular)
+
+let kTMCellTextFontSize: CGFloat = 14
+let kTMCellTextFontColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
+let kTMCellTextFont = UIFont.systemFontOfSize(kTMCellTextFontSize, weight: UIFontWeightLight)
 
 
 

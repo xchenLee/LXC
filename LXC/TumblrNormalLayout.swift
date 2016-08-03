@@ -16,7 +16,6 @@ class TumblrNormalLayout: NSObject {
     //头部区域高度
     var nameHeight: CGFloat = kTMCellAvatarAreaHeight
     var nameTop: CGFloat = 0
-    
     //用户名宽度
     var blogNameWidth: CGFloat = 0
     
@@ -25,12 +24,18 @@ class TumblrNormalLayout: NSObject {
     var imagesTop: CGFloat = 0
     
     //文本区域高度
+    var titleHeight: CGFloat = 0
+    var titleTop: CGFloat = 0
+    var tittleText : String = ""
+    
     var textHeight: CGFloat = 0
     var textTop: CGFloat = 0
     var textAttributedString: NSAttributedString?
     
+    //视频区域
+    var videoHeight: CGFloat = 0
+    var videoTop: CGFloat = 0
     
-    var quetoHeight: CGFloat = 0
 
     //转发评论区域高度
     var reblogHeight: CGFloat = 0
@@ -64,6 +69,9 @@ class TumblrNormalLayout: NSObject {
         //文本区域计算
         readTypeTextEntry(tumblrPost)
         
+        //视频区域
+        readVideoEntry(tumblrPost)
+        
         
         //图片高度
         imagesTop = nameHeight
@@ -73,11 +81,94 @@ class TumblrNormalLayout: NSObject {
         
         height += imagesHeight
         
-        //转发内容
+        //读取转发区域
+        readReblogEntry(tumblrPost)
+        
+    }
+    
+    func readVideoEntry(tumblrPost: TumblrPost) {
+    
+        videoTop = nameHeight
+        
+        if tumblrPost.type.lowercaseString == "video" {
+            
+            var originalWidth = CGFloat(tumblrPost.thumbnailWidth)
+            var originalHeight = CGFloat(tumblrPost.thumbnailHeight)
+            
+            if originalWidth > 0 && originalHeight > 0 {
+                
+                let originalSize = CGSizeMake(originalWidth, originalHeight)
+                let scale = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
+                originalWidth = scale.width
+                originalHeight = scale.height
+                
+            }
+            
+            if originalWidth == 0 || originalHeight == 0 {
+                originalWidth = kScreenWidth
+                originalHeight = kScreenWidth * 9 / 16
+            }
+            videoHeight = originalHeight
+            height += videoHeight
+        }
+        
+    }
+    
+    func readTypeTextEntry(tumblrPost: TumblrPost) {
+        
+        titleTop = nameHeight
+        
+        let typeString = tumblrPost.type.lowercaseString
+        
+        // quote 类型
+        if typeString == "quote" && !tumblrPost.text.isEmpty {
+            
+            textTop = titleHeight + titleTop
+            
+            let attributedString = LayoutManager.getTextEntryTextAttributedString(tumblrPost.text)
+            let height = attributedString.heightWithConstrainedWidth(kTMCellTextContentWidth)
+            textHeight = height
+            textAttributedString = attributedString
+            
+        }
+
+        // text 类型
+        if typeString == "text" && !tumblrPost.body.isEmpty {
+            
+            if !tumblrPost.title.isEmpty {
+                
+                let titleH = tumblrPost.title.heightWithConstrainedWidth(kTMCellTextContentWidth, font: kTMCellTitleFont)
+                tittleText = tumblrPost.title
+                titleHeight = titleH
+            }
+            textTop = titleHeight + titleTop
+            
+            let attributedString = LayoutManager.getTextEntryTextAttributedString(tumblrPost.body)
+            let height = attributedString.heightWithConstrainedWidth(kTMCellTextContentWidth)
+            textHeight = height
+            textAttributedString = attributedString
+        }
+        
+        self.height += titleHeight
+        self.height += textHeight
+    }
+    
+    func readReblogEntry(tumblrPost: TumblrPost) {
+        
         reblogTop = 0
         reblogTop += nameHeight
+        reblogTop += titleHeight
         reblogTop += textHeight
+        reblogTop += videoHeight
         reblogTop += imagesHeight
+        
+        let typeString = tumblrPost.type.lowercaseString
+        
+        //text类型,treeHtml和内容一致,不再显示
+        if typeString == "text" && !tumblrPost.body.isEmpty {
+            height += reblogHeight
+            return
+        }
         
         if let safeReblog = tumblrPost.reblog, let comment = safeReblog.comment where !comment.isEmpty {
             
@@ -98,25 +189,6 @@ class TumblrNormalLayout: NSObject {
         }
         
         height += reblogHeight
-        
-    }
-    
-    func readTypeTextEntry(tumblrPost: TumblrPost) {
-        
-        textTop = nameHeight
-
-        if tumblrPost.type.lowercaseString != "quote" || tumblrPost.text.isEmpty {
-            textHeight = 0
-            return
-        }
-        
-        let attributedString = LayoutManager.getTextEntryTextAttributedString(tumblrPost.text)
-        
-        let height = attributedString.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
-        textHeight = height
-        textAttributedString = attributedString
-        
-        self.height += textHeight
     }
     
     func reset() {
@@ -124,12 +196,18 @@ class TumblrNormalLayout: NSObject {
         nameTop = 0
         height = 0
         
+        titleTop = 0
+        titleHeight = 0
         textTop = 0
         textHeight = 0
         
         imagesTop = 0
         imagesHeight = 0
         imagesFrame = []
+        
+        videoHeight = 0
+        videoTop = 0
+        
         reblogHeight = 0
         reblogTop = 0
         reblogAttributes = nil
