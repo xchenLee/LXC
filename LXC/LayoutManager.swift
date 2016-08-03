@@ -40,6 +40,8 @@ let kTMCellTextFontColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
 let kTMCellTextFont = UIFont.systemFontOfSize(kTMCellTextFontSize, weight: UIFontWeightLight)
 
 
+let kTMCellLineColor = UIColor.fromARGB(0xDCDCDC, alpha: 1.0)
+let kTMCellLineColorAlpha = UIColor.fromARGB(0xDCDCDC, alpha: 0.5)
 
 let kTMCellBlogNameFontSize : CGFloat = 14
 let kTMCellBlogNameTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
@@ -52,6 +54,7 @@ let kTMCellReblogFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: U
 
 
 let kTMCellAvatarAreaHeight = kTMCellAvatarSize + kTMCellPadding * 2
+let kTMCellToolBarHeight : CGFloat = 40
 
 /// 图片足最大高度，不超过一屏可见高度
 let kTMCellPhotoMaxHeight = kScreenHeight - 68

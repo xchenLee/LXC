@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol TumblrNormalCellDelegate {
+    
+    func didClickCopySourceBtn(cell: TumblrNormalCell)
+}
+
 class TumblrNormalCell: UITableViewCell {
     
     var layout: TumblrNormalLayout?
@@ -17,6 +22,9 @@ class TumblrNormalCell: UITableViewCell {
     var imagesEntry: TumblrImageEntry0
     var videoEntry: TumblrVideoEntry0
     var reblogEntry: TumblrReblogEntry0
+    var toolBarEntry: TumblrToolBarEntry0
+    
+    var delegate: TumblrNormalCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
@@ -25,6 +33,7 @@ class TumblrNormalCell: UITableViewCell {
         self.imagesEntry = TumblrImageEntry0()
         self.videoEntry = TumblrVideoEntry0()
         self.reblogEntry = TumblrReblogEntry0()
+        self.toolBarEntry = TumblrToolBarEntry0()
         
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,6 +47,7 @@ class TumblrNormalCell: UITableViewCell {
         self.imagesEntry = TumblrImageEntry0()
         self.videoEntry = TumblrVideoEntry0()
         self.reblogEntry = TumblrReblogEntry0()
+        self.toolBarEntry = TumblrToolBarEntry0()
         
         super.init(coder: aDecoder)
         self.customInit()
@@ -52,6 +62,15 @@ class TumblrNormalCell: UITableViewCell {
         self.contentView.addSubview(self.imagesEntry)
         self.contentView.addSubview(self.videoEntry)
         self.contentView.addSubview(self.reblogEntry)
+        self.contentView.addSubview(self.toolBarEntry)
+        
+        self.nameEntry.cell = self
+        self.textEntry.cell = self
+        self.imagesEntry.cell = self
+        self.videoEntry.cell = self
+        self.reblogEntry.cell = self
+        self.toolBarEntry.cell = self
+
     }
     
     func configLayout(tumblrLayout: TumblrNormalLayout) {
@@ -84,6 +103,10 @@ class TumblrNormalCell: UITableViewCell {
         //reblog
         self.reblogEntry.frame = CGRectMake(0, safeLayout.reblogTop, kScreenWidth, safeLayout.reblogHeight)
         self.reblogEntry.setWithLayout(safeLayout)
+        
+        //toolbar
+        self.toolBarEntry.frame = CGRectMake(0, safeLayout.toolbarTop, kScreenWidth, kTMCellToolBarHeight)
+        self.toolBarEntry.setWithLayout(safeLayout)
         
     }
     

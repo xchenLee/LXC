@@ -17,6 +17,19 @@ import Foundation
 
 class ToolBox: NSObject {
     
+    /**
+     黏贴到黏贴板
+     
+     - parameter content: <#content description#>
+     */
+    class func copytoPasteBoard(content: String) {
+        if content.isEmpty {
+            return
+        }
+        let pasteBoard = UIPasteboard.generalPasteboard()
+        pasteBoard.string = content
+    }
+    
     class func obtainFloatPixel(pixel: CGFloat) -> CGFloat {
         return pixel / UIScreen.mainScreen().scale
     }

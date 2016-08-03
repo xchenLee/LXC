@@ -79,8 +79,10 @@ class TumblrPosts: UITableViewController {
         guard let cell = dequeueCell else {
             dequeueCell = TumblrNormalCell(style: .Default, reuseIdentifier: kTumblrPostsCell0)
             dequeueCell?.configLayout(layout)
+            dequeueCell?.delegate = self
             return dequeueCell!
         }
+        cell.delegate = self
         cell.configLayout(layout)
 
         return cell
@@ -191,6 +193,27 @@ extension TumblrPosts {
         
         
     }
+}
+
+extension TumblrPosts: TumblrNormalCellDelegate {
+    
+    
+    func didClickCopySourceBtn(cell: TumblrNormalCell) {
+        
+        guard let layout = cell.layout, let post = layout.post else {
+            return
+        }
+        
+        let typeString = post.type.lowercaseString
+        
+        if typeString == "video"{
+            
+            ToolBox.copytoPasteBoard(post.videoUrl)
+            print(UIPasteboard.generalPasteboard().string)
+        }
+        
+    }
+    
 }
 
 

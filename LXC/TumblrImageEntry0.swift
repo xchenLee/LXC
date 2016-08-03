@@ -15,6 +15,7 @@ class TumblrImageEntry0: UIView {
     var imageViews: [UIImageView]
     
     var tumblrCell: TumblrNormalCell?
+    var cell: TumblrNormalCell?
     
     
     // MARK: - constructors

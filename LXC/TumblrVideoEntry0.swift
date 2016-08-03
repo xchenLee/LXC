@@ -18,6 +18,9 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     
     var videoPlayer: Player
     
+    var cell: TumblrNormalCell?
+    
+    
     convenience init() {
         self.init(frame: CGRectZero)
     }

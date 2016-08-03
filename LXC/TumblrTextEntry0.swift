@@ -12,6 +12,8 @@ class TumblrTextEntry0: UIView {
 
     var titleView: UILabel
     var textView: UITextView
+    var cell: TumblrNormalCell?
+
     
     convenience init() {
         self.init(frame: CGRectZero)

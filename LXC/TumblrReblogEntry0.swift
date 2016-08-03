@@ -11,6 +11,8 @@ import UIKit
 class TumblrReblogEntry0: UIView {
     
     var reblogTextLabel: UITextView
+    var cell: TumblrNormalCell?
+
 
     convenience init() {
         self.init(frame: CGRectZero)

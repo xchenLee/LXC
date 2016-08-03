@@ -14,6 +14,8 @@ class TumblrNameEntry0: UIView {
     var topLine: UIView
     var avatarView: UIImageView
     var blogNameView: UILabel
+    var cell: TumblrNormalCell?
+
     
     
     // MARK: - constructors
@@ -26,7 +28,7 @@ class TumblrNameEntry0: UIView {
         self.topLine = UIView()
         self.topLine.width = kScreenWidth
         self.topLine.height = ToolBox.obtainFloatPixel(1)
-        self.topLine.backgroundColor = UIColor.blackColor()
+        self.topLine.backgroundColor = kTMCellLineColor
         
         self.avatarView = UIImageView()
         self.avatarView.clipsToBounds = true
@@ -55,7 +57,7 @@ class TumblrNameEntry0: UIView {
         self.topLine = UIView()
         self.topLine.width = kScreenWidth
         self.topLine.height = ToolBox.obtainFloatPixel(1)
-        self.topLine.backgroundColor = UIColor.fromARGB(0xDCDCDC, alpha: 1.0)
+        self.topLine.backgroundColor = kTMCellLineColor
         
         self.avatarView = UIImageView()
         self.avatarView.clipsToBounds = true

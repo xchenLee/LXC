@@ -45,6 +45,9 @@ class TumblrNormalLayout: NSObject {
     var reblogTop: CGFloat = 0
     var reblogAttributes: NSAttributedString?
     
+    //工具栏
+    var toolbarTop: CGFloat = 0
+    
     var imagesFrame: [CGRect] = []
         
     func fitPostData(tumblrPost: TumblrPost) {
@@ -87,6 +90,8 @@ class TumblrNormalLayout: NSObject {
         //读取转发区域
         readReblogEntry(tumblrPost)
         
+        toolbarTop = height
+        height += kTMCellToolBarHeight
     }
     
     func readVideoEntry(tumblrPost: TumblrPost) {
@@ -149,7 +154,8 @@ class TumblrNormalLayout: NSObject {
             textTop = titleHeight + titleTop
             
             let attributedString = LayoutManager.getTextEntryTextAttributedString(tumblrPost.body)
-            let height = attributedString.heightWithConstrainedWidth(kTMCellTextContentWidth)
+            //多加了padding,因为会贴底
+            let height = attributedString.heightWithConstrainedWidth(kTMCellTextContentWidth) + kTMCellPadding
             textHeight = height
             textAttributedString = attributedString
         }
@@ -224,17 +230,3 @@ class TumblrNormalLayout: NSObject {
     
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
