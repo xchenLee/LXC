@@ -12,8 +12,8 @@ import MediaPlayer
 
 class TumblrVideoEntry0: UIView, PlayerDelegate {
 
+    var videoFlag: UIImageView
     var videoThumbnail: UIImageView
-    
     var indicator: UIActivityIndicatorView
     
     var videoPlayer: Player
@@ -31,6 +31,13 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
         self.indicator = UIActivityIndicatorView()
         self.indicator.size = CGSizeMake(kTMCellVideoIndicatorSize, kTMCellVideoIndicatorSize)
+        
+        self.videoFlag = UIImageView()
+        self.videoFlag.top = 0
+        self.videoFlag.contentMode = .Center
+        self.videoFlag.image = UIImage(named: "icon_video")
+        self.videoFlag.left = kScreenWidth - kTMCellVideoFlagSize
+        self.videoFlag.size = CGSizeMake(kTMCellVideoFlagSize, kTMCellVideoFlagSize)
         
         self.videoThumbnail = UIImageView()
         self.videoThumbnail.userInteractionEnabled = true
@@ -51,6 +58,13 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
         self.indicator = UIActivityIndicatorView()
         self.indicator.size = CGSizeMake(kTMCellVideoIndicatorSize, kTMCellVideoIndicatorSize)
+        
+        self.videoFlag = UIImageView()
+        self.videoFlag.top = 0
+        self.videoFlag.contentMode = .Center
+        self.videoFlag.image = UIImage(named: "icon_video")
+        self.videoFlag.left = kScreenWidth - kTMCellVideoFlagSize
+        self.videoFlag.size = CGSizeMake(kTMCellVideoFlagSize, kTMCellVideoFlagSize)
         
         self.videoThumbnail = UIImageView()
         self.videoThumbnail.userInteractionEnabled = true
@@ -76,6 +90,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         self.addSubview(self.videoPlayer.view)
         self.addSubview(self.videoThumbnail)
         self.addSubview(self.indicator)
+        self.addSubview(self.videoFlag)
         
         let thumbnailGesture = UITapGestureRecognizer(target: self, action: #selector(tapThumbnailView))
         self.videoThumbnail .addGestureRecognizer(thumbnailGesture)
@@ -92,21 +107,25 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
             
         case PlaybackState.Stopped.rawValue:
             self.videoThumbnail.hidden = true
+            self.videoFlag.hidden = true
             self.videoPlayer.playFromBeginning()
             break
             
         case PlaybackState.Paused.rawValue:
             self.videoThumbnail.hidden = true
+            self.videoFlag.hidden = true
             self.videoPlayer.playFromCurrentTime()
             break
             
         case PlaybackState.Failed.rawValue:
             self.videoThumbnail.hidden = false
+            self.videoFlag.hidden = false
             self.videoPlayer.pause()
             break
             
         default:
             self.videoThumbnail.hidden = false
+            self.videoFlag.hidden = false
             self.videoPlayer.pause()
         }
     }
@@ -118,15 +137,18 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         switch playerState {
             
         case PlaybackState.Stopped.rawValue:
+            self.videoFlag.hidden = true
             self.videoPlayer.playFromBeginning()
             break
             
         case PlaybackState.Paused.rawValue:
+            self.videoFlag.hidden = true
             self.videoPlayer.playFromCurrentTime()
             break
             
         case PlaybackState.Playing.rawValue:
             self.indicator.hidden = true
+            self.videoFlag.hidden = false
             self.videoPlayer.pause()
             break
             
@@ -136,6 +158,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
             break
             
         default:
+            self.videoFlag.hidden = false
             self.indicator.hidden = true
             self.videoPlayer.stop()
         }

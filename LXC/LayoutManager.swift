@@ -29,6 +29,7 @@ let kTMCellCornerRadius : CGFloat = 4
 
 // indicator 大小
 let kTMCellVideoIndicatorSize : CGFloat = 40
+let kTMCellVideoFlagSize : CGFloat = 24
 
 /// 文字
 let kTMCellTitleFontSize : CGFloat = 20
@@ -62,6 +63,8 @@ let kTMCellPhotoMaxWidth = kScreenWidth
 
 let kTMCellPhotoMaxSize = CGSizeMake(kTMCellPhotoMaxWidth, kTMCellPhotoMaxHeight)
 
+
+let kDebugMaxAllowedPhotoCount = 4
 
 class LayoutManager: NSObject {
     
@@ -160,8 +163,8 @@ class LayoutManager: NSObject {
         //TODO just for test
 
         var photoCount = photoData.count
-        if photoCount > 2 {
-            photoCount = 2
+        if photoCount > kDebugMaxAllowedPhotoCount {
+            photoCount = kDebugMaxAllowedPhotoCount
         }
         
         
@@ -191,7 +194,7 @@ class LayoutManager: NSObject {
             let photoSize1 = photoData[1].originalSize
 
             guard let realSize0 = photoSize0, let realSize1 = photoSize1 else {
-                return (0, [CGRectZero, CGRectZero])
+                return (0, Array<CGRect>(count: photoCount, repeatedValue: CGRectZero))
             }
             //如果第一张宽度大于高度就竖直排列
             let vertical = realSize0.width > realSize0.height
@@ -207,7 +210,6 @@ class LayoutManager: NSObject {
                 if originalSize0.width == 0 || originalSize0.height == 0 {
                     scaleSize0 = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
                 }
-                
                 
                 let originalSize1 = CGSizeMake(CGFloat(realSize1.width), CGFloat(realSize1.height))
                 var scaleSize1 = ToolBox.getScaleSize(originalSize1, max: kTMCellPhotoMaxSize)
@@ -241,6 +243,85 @@ class LayoutManager: NSObject {
                 return (scaleSize.height,[rect0, rect1])
             }
         }
+        
+        
+        if photoCount == 3 {
+            
+            var resultRects = Array<CGRect>(count: photoCount, repeatedValue: CGRectZero)
+            
+            guard let _ = photoData[0].originalSize else {
+                return (0, resultRects)
+            }
+            
+            var rectTop: CGFloat = 0
+            for index in 0..<photoCount {
+                
+                guard let photoSize = photoData[index].originalSize else {
+                    continue
+                }
+                let originalSize = CGSizeMake(CGFloat(photoSize.width), CGFloat(photoSize.height))
+                var scaledSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
+                if originalSize.width == 0 || originalSize.height == 0 {
+                    scaledSize = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                }
+                let rect = CGRectMake(0, rectTop, kScreenWidth, scaledSize.height)
+                rectTop += scaledSize.height
+                resultRects[index] = rect
+            }
+            return(rectTop, resultRects)
+        }
+        
+        if photoCount == 4 {
+            
+            var resultRects = Array<CGRect>(count: photoCount, repeatedValue: CGRectZero)
+            
+            guard let photoSize0 = photoData[0].originalSize else {
+                return (0, resultRects)
+            }
+            
+            var rectTop: CGFloat = 0
+
+            if CGFloat(photoSize0.width) < kScreenWidth {
+                //第一张宽度小于屏幕宽度,就两张并列放置
+                
+                let maxWidth = kScreenWidth / 2
+                
+                let originalSize0 = CGSizeMake(CGFloat(photoSize0.width), CGFloat(photoSize0.height))
+                var scaleSize0 = ToolBox.getScaleSize(originalSize0, max: CGSizeMake(maxWidth, kTMCellPhotoMaxHeight / 2))
+                if originalSize0.width == 0 || originalSize0.height == 0 {
+                    scaleSize0 = CGSizeMake(maxWidth, kScreenWidth * 9 / 32)
+                }
+                
+                let preferedHeight = scaleSize0.height
+                
+                for index in 0..<photoCount {
+                    
+                    let row = CGFloat(index / 2)
+                    let column = CGFloat(index % 2)
+                    let rect = CGRectMake(column * maxWidth, preferedHeight * row, maxWidth, preferedHeight)
+                    resultRects[index] = rect
+                }
+                return(2 * preferedHeight, resultRects)
+            }
+            
+            for index in 0..<photoCount {
+                
+                guard let photoSize = photoData[index].originalSize else {
+                    continue
+                }
+                let originalSize = CGSizeMake(CGFloat(photoSize.width), CGFloat(photoSize.height))
+                var scaledSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
+                if originalSize.width == 0 || originalSize.height == 0 {
+                    scaledSize = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                }
+                let rect = CGRectMake(0, rectTop, kScreenWidth, scaledSize.height)
+                rectTop += scaledSize.height
+                resultRects[index] = rect
+            }
+            return(rectTop, resultRects)
+        }
+
+
 
         return (0, [CGRectZero])
     }

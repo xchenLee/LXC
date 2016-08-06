@@ -97,6 +97,7 @@
 		77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB24A31CBCDC7B0035DE3F /* Extensions.swift */; };
 		77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4D1CF2A697009660C3 /* CanvasView.swift */; };
 		77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */; };
+		77FBFFF81D5388D70082E65A /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
@@ -211,6 +212,7 @@
 		77FB24A31CBCDC7B0035DE3F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		77FB2C4D1CF2A697009660C3 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchView.swift; sourceTree = "<group>"; };
+		77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
 		8D35BAF3983A3452CE219AD8 /* Pods_LXC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			children = (
 				77FB24A31CBCDC7B0035DE3F /* Extensions.swift */,
 				7721038C1D4CABAE00F18546 /* Extensions+UIView.swift */,
+				77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */,
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
 				7721036C1D4A059A00F18546 /* StringObject.swift */,
@@ -757,6 +760,7 @@
 				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
 				77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */,
 				777D58021D474A30007274BB /* SinaContext.swift in Sources */,
+				77FBFFF81D5388D70082E65A /* Extensions+UIViewController.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
 				772103C11D509C7A00F18546 /* TumblrReblogEntry0.swift in Sources */,
 				772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */,

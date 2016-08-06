@@ -11,6 +11,8 @@ import UIKit
 protocol TumblrNormalCellDelegate {
     
     func didClickCopySourceBtn(cell: TumblrNormalCell)
+    func didClickLikeBtn(cell: TumblrNormalCell)
+
 }
 
 class TumblrNormalCell: UITableViewCell {

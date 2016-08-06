@@ -175,6 +175,14 @@ class ToolBox: NSObject {
         return CGPointMake(factor * point.x, factor * point.y)
     }
     
+    /**
+     将原有Size根据，最大的Size等比压缩，生成新的Size
+     
+     - parameter original: <#original description#>
+     - parameter max:      <#max description#>
+     
+     - returns: <#return value description#>
+     */
     class func getScaleSize(original: CGSize, max: CGSize) -> CGSize {
         
         let width = max.width
@@ -187,6 +195,9 @@ class ToolBox: NSObject {
         return CGSizeMake(width, height)
     }
     
+    class func saveImgToSystemAlbum(image: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+    }
 }
 
 

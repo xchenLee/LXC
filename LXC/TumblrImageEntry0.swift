@@ -93,13 +93,13 @@ class TumblrImageEntry0: UIView {
         // has photos
         
         var photoCount = photoData.count
-        if photoCount > 2 {
-            photoCount = 2
+        if photoCount > kDebugMaxAllowedPhotoCount {
+            photoCount = kDebugMaxAllowedPhotoCount
         }
         
         displayImageViews(photoData, rects: rects)
         
-        for index in 0...kTMCellMaxPhotoCount {
+        for index in 0..<kTMCellMaxPhotoCount {
             
             let imageView = imageViews[index]
             
@@ -129,40 +129,14 @@ class TumblrImageEntry0: UIView {
     func displayImageViews(photos: [Photo], rects: [CGRect]) {
         
         var photoCount = photos.count
-        if photoCount > 2 {
-            photoCount = 2
+        if photoCount > kDebugMaxAllowedPhotoCount {
+            photoCount = kDebugMaxAllowedPhotoCount
         }
         
-        switch photoCount {
-        case 1:
+        for index in 0..<photoCount {
             
-            let imageView = imageViews[0]
-            imageView.frame = rects[0]
-//            imageView.width = kTMCellImageContentWidth
-//            imageView.height =
-            break
-            
-        case 2:
-
-            let imageView0 = imageViews[0]
-            imageView0.frame = rects[0]
-//            imageView0.origin = CGPointZero
-//            imageView0.width = kScreenWidth / 2
-//            imageView0.height = self.height
-            
-            let imageView1 = imageViews[1]
-            imageView1.frame = rects[1]
-//            imageView1.origin = CGPointZero
-//            imageView1.left = kScreenWidth / 2
-//            imageView1.width = kScreenWidth / 2
-//            imageView1.height = self.height
-            
-            break
-            
-            
-            
-        default:
-            break
+            let imageView = imageViews[index]
+            imageView.frame = rects[index]
         }
         
     }
