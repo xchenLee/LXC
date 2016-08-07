@@ -29,7 +29,7 @@ class TumblrPosts: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         addDataHandler()
-        
+        self.tableView.mj_header.beginRefreshing()
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,7 +148,7 @@ extension TumblrPosts {
 //        TMAPIClient.sharedInstance().likes(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
 
         
-        TMAPIClient.sharedInstance().dashboard(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }
