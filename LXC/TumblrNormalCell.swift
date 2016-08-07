@@ -12,6 +12,7 @@ protocol TumblrNormalCellDelegate {
     
     func didClickCopySourceBtn(cell: TumblrNormalCell)
     func didClickLikeBtn(cell: TumblrNormalCell)
+    func didClickImage(cell: TumblrNormalCell, index: Int)
 
 }
 
@@ -110,6 +111,14 @@ class TumblrNormalCell: UITableViewCell {
         self.toolBarEntry.frame = CGRectMake(0, safeLayout.toolbarTop, kScreenWidth, kTMCellToolBarHeight)
         self.toolBarEntry.setWithLayout(safeLayout)
         
+    }
+    
+    func likeChanged() {
+        guard let layout = self.layout, let post = layout.post else {
+            return
+        }
+        post.liked = !post.liked
+        self.toolBarEntry.likeChanged(post.liked)
     }
     
 

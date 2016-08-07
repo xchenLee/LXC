@@ -145,10 +145,10 @@ extension TumblrPosts {
     
     func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
         
-        TMAPIClient.sharedInstance().likes(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+//        TMAPIClient.sharedInstance().likes(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
 
         
-//        TMAPIClient.sharedInstance().dashboard(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+        TMAPIClient.sharedInstance().dashboard(sinceId > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }
@@ -206,6 +206,18 @@ extension TumblrPosts: TumblrNormalCellDelegate {
         guard let layout = cell.layout, let post = layout.post else {
             return
         }
+        
+        let postId = String(post.postId)
+        let reblogKey = post.reblogKey
+        
+        //之前赞过的
+        if post.liked {
+            TMAPIClient.sharedInstance().unlike(postId, reblogKey: reblogKey, callback: nil)
+        } else {
+            TMAPIClient.sharedInstance().like(postId, reblogKey: reblogKey, callback: nil)
+        }
+        
+        cell.likeChanged()
         
         let window = UIApplication.sharedApplication().delegate?.window!
         let likeBtn = cell.toolBarEntry.likeBtn
@@ -284,6 +296,16 @@ extension TumblrPosts: TumblrNormalCellDelegate {
             self.showTextHUD("image saved to photos")
         }
         
+    }
+    
+    func didClickImage(cell: TumblrNormalCell, index: Int) {
+        
+        guard let layout = cell.layout, let post = layout.post else {
+            return
+        }
+        
+        let photoView = TumblrPhotoView(photos: post.photos!, currentIndex: index)
+        photoView.present((self.navigationController?.view!)!)
     }
     
 }

@@ -81,6 +81,8 @@
 		77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D277731CA2EE8000899043 /* LocalAuthentication.framework */; };
 		77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D277761CA2EF8600899043 /* TouchIdTest.swift */; };
 		77D54AB61D42022F008B0A02 /* SinaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D54AB51D42022F008B0A02 /* SinaUser.swift */; };
+		77D8321A1D576C4000D0A6A5 /* TumblrPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D832191D576C4000D0A6A5 /* TumblrPhotoView.swift */; };
+		77D8321C1D57713100D0A6A5 /* TumblrPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8321B1D57713100D0A6A5 /* TumblrPhotoCell.swift */; };
 		77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */; };
 		77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312E81CA683FA00867373 /* IImageAlbumCell.swift */; };
 		77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312EA1CA6891000867373 /* IImagePickerAlbum.swift */; };
@@ -196,6 +198,8 @@
 		77D277731CA2EE8000899043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		77D277761CA2EF8600899043 /* TouchIdTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdTest.swift; sourceTree = "<group>"; };
 		77D54AB51D42022F008B0A02 /* SinaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaUser.swift; sourceTree = "<group>"; };
+		77D832191D576C4000D0A6A5 /* TumblrPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPhotoView.swift; sourceTree = "<group>"; };
+		77D8321B1D57713100D0A6A5 /* TumblrPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPhotoCell.swift; sourceTree = "<group>"; };
 		77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadVideoList.swift; sourceTree = "<group>"; };
 		77E312E81CA683FA00867373 /* IImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageAlbumCell.swift; sourceTree = "<group>"; };
 		77E312EA1CA6891000867373 /* IImagePickerAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePickerAlbum.swift; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 		7721039C1D4EE99100F18546 /* normalImp */ = {
 			isa = PBXGroup;
 			children = (
+				77D832191D576C4000D0A6A5 /* TumblrPhotoView.swift */,
+				77D8321B1D57713100D0A6A5 /* TumblrPhotoCell.swift */,
 				772103841D4C9FE200F18546 /* LayoutManager.swift */,
 				772103A41D4F2AB600F18546 /* TumblrNormalCell.swift */,
 				772103AA1D4F461000F18546 /* TumblrNameEntry0.swift */,
@@ -728,6 +734,7 @@
 				771F259A1CC4D91200E88260 /* SnowView.swift in Sources */,
 				77FB249D1CBCD3E20035DE3F /* LoginKey.swift in Sources */,
 				777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */,
+				77D8321A1D576C4000D0A6A5 /* TumblrPhotoView.swift in Sources */,
 				77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */,
 				772773C01C9FD3B000A6ED72 /* ImageFilters.swift in Sources */,
 				777D58041D475744007274BB /* SinaAPI.swift in Sources */,
@@ -796,6 +803,7 @@
 				772409621CCE117500CAD6C1 /* CoreAnimationList.swift in Sources */,
 				7777FB7C1D49E4D300D58607 /* TumblrPost.swift in Sources */,
 				77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */,
+				77D8321C1D57713100D0A6A5 /* TumblrPhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

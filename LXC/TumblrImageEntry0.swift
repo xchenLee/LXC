@@ -43,6 +43,7 @@ class TumblrImageEntry0: UIView {
         imageViews = []
         for _ in 0...kTMCellMaxPhotoCount {
             let imageView = UIImageView()
+            imageView.userInteractionEnabled = true
             imageView.backgroundColor = UIColor.whiteColor()
             imageView.contentMode = .ScaleAspectFill
             imageView.clipsToBounds = true
@@ -66,7 +67,7 @@ class TumblrImageEntry0: UIView {
             imageView.tag = kTMCellImageTagPrefix + index
             self.addSubview(imageView)
             
-            let tapGesture = UITapGestureRecognizer(target: self, action: "imageViewTapped")
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
             imageView.addGestureRecognizer(tapGesture)
             
         }
@@ -75,6 +76,11 @@ class TumblrImageEntry0: UIView {
     func imageViewTapped(gesture: UITapGestureRecognizer) {
         
         let imageViewIndex = (gesture.view?.tag)! - kTMCellImageTagPrefix
+        
+        guard let safeCell = cell ,let delegate = safeCell.delegate else {
+            return
+        }
+        delegate.didClickImage(safeCell, index: imageViewIndex)
         
     }
     

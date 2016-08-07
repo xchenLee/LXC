@@ -105,8 +105,17 @@ class TumblrToolBarEntry0: UIView {
         
     }
     
+    func likeChanged(state: Bool) {
+        let name = state ? "icon_liked" : "icon_like"
+        likeBtn.setImage(UIImage(named: name), forState: .Normal)
+    }
+    
     func setWithLayout(tumblrLayout: TumblrNormalLayout) {
-        
+        guard let post = tumblrLayout.post else {
+            return
+        }
+        let name = post.liked ? "icon_liked" : "icon_like"
+        likeBtn.setImage(UIImage(named: name), forState: .Normal)
     }
 
 }

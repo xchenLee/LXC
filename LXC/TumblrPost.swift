@@ -160,6 +160,7 @@ class TumblrPost: Object, Mappable {
         reblog <- map["reblog"]
         likedStamp <- map["liked_timestamp"]
         photos <- map["photos"]
+        liked <- map["liked"]
         
         summary <- map["summary"]
         shortUrl <- map["short_url"]
