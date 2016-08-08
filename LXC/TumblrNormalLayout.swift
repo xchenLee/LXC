@@ -136,7 +136,7 @@ class TumblrNormalLayout: NSObject {
             textTop = titleHeight + titleTop
             
             let attributedString = LayoutManager.getTextEntryTextAttributedString(tumblrPost.text)
-            let height = attributedString.heightWithConstrainedWidth(kTMCellTextContentWidth)
+            let height = attributedString.heightWithConstrainedWidth(kTMCellTextContentWidth) + kTMCellPadding
             textHeight = height
             textAttributedString = attributedString
             
