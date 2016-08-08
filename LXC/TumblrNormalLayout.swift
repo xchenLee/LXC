@@ -26,7 +26,7 @@ class TumblrNormalLayout: NSObject {
     //文本区域高度
     var titleHeight: CGFloat = 0
     var titleTop: CGFloat = 0
-    var tittleText : String = ""
+    var tittleText: String = ""
     
     var textHeight: CGFloat = 0
     var textTop: CGFloat = 0
@@ -36,8 +36,14 @@ class TumblrNormalLayout: NSObject {
     var videoHeight: CGFloat = 0
     var videoTop: CGFloat = 0
     
-    var indicatorTop : CGFloat = 0
-    var indicatorLeft : CGFloat = 0
+    var indicatorTop: CGFloat = 0
+    var indicatorLeft: CGFloat = 0
+    
+    
+    //tags高度
+    var tagsHeight: CGFloat = 0
+    var tagsTop: CGFloat = 0
+    var tagsAttributedString: NSAttributedString?
     
 
     //转发评论区域高度
@@ -86,6 +92,9 @@ class TumblrNormalLayout: NSObject {
         imagesFrame = computedHeight.1
         
         height += imagesHeight
+        
+        //读取tag部分
+        readTagsLayout(tumblrPost)
         
         //读取转发区域
         readReblogEntry(tumblrPost)
@@ -164,6 +173,30 @@ class TumblrNormalLayout: NSObject {
         self.height += textHeight
     }
     
+    func readTagsLayout(tumblrPost: TumblrPost) {
+        
+        tagsTop += nameHeight
+        tagsTop += titleHeight
+        tagsTop += textHeight
+        tagsTop += videoHeight
+        tagsTop += imagesHeight
+        
+        let tags = tumblrPost.tags
+        if tags.count == 0 {
+            return
+        }
+        var tagsString = "tags: "
+        for tag in tags {
+            tagsString += "#\(tag.value)#"
+        }
+        
+        let attributedString = LayoutManager.getTagsAttributedString(tagsString)
+        tagsAttributedString = attributedString
+        tagsHeight = LayoutManager.computeTagsHeight(attributedString)
+        
+        height += tagsHeight
+    }
+    
     func readReblogEntry(tumblrPost: TumblrPost) {
         
         reblogTop = 0
@@ -172,6 +205,7 @@ class TumblrNormalLayout: NSObject {
         reblogTop += textHeight
         reblogTop += videoHeight
         reblogTop += imagesHeight
+        reblogTop += tagsHeight
         
         let typeString = tumblrPost.type.lowercaseString
         
@@ -220,6 +254,9 @@ class TumblrNormalLayout: NSObject {
         videoTop = 0
         indicatorTop = 0
         indicatorLeft = 0
+        
+        tagsTop = 0
+        tagsHeight = 0
         
         reblogHeight = 0
         reblogTop = 0

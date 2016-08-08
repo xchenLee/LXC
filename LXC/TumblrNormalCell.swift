@@ -25,6 +25,7 @@ class TumblrNormalCell: UITableViewCell {
     var imagesEntry: TumblrImageEntry0
     var videoEntry: TumblrVideoEntry0
     var reblogEntry: TumblrReblogEntry0
+    var tagEntry: TumblrTagEntry0
     var toolBarEntry: TumblrToolBarEntry0
     
     var delegate: TumblrNormalCellDelegate?
@@ -36,6 +37,7 @@ class TumblrNormalCell: UITableViewCell {
         self.imagesEntry = TumblrImageEntry0()
         self.videoEntry = TumblrVideoEntry0()
         self.reblogEntry = TumblrReblogEntry0()
+        self.tagEntry = TumblrTagEntry0()
         self.toolBarEntry = TumblrToolBarEntry0()
         
         
@@ -50,6 +52,7 @@ class TumblrNormalCell: UITableViewCell {
         self.imagesEntry = TumblrImageEntry0()
         self.videoEntry = TumblrVideoEntry0()
         self.reblogEntry = TumblrReblogEntry0()
+        self.tagEntry = TumblrTagEntry0()
         self.toolBarEntry = TumblrToolBarEntry0()
         
         super.init(coder: aDecoder)
@@ -65,6 +68,7 @@ class TumblrNormalCell: UITableViewCell {
         self.contentView.addSubview(self.imagesEntry)
         self.contentView.addSubview(self.videoEntry)
         self.contentView.addSubview(self.reblogEntry)
+        self.contentView.addSubview(self.tagEntry)
         self.contentView.addSubview(self.toolBarEntry)
         
         self.nameEntry.cell = self
@@ -72,6 +76,7 @@ class TumblrNormalCell: UITableViewCell {
         self.imagesEntry.cell = self
         self.videoEntry.cell = self
         self.reblogEntry.cell = self
+        self.tagEntry.cell = self
         self.toolBarEntry.cell = self
 
     }
@@ -106,6 +111,9 @@ class TumblrNormalCell: UITableViewCell {
         //reblog
         self.reblogEntry.frame = CGRectMake(0, safeLayout.reblogTop, kScreenWidth, safeLayout.reblogHeight)
         self.reblogEntry.setWithLayout(safeLayout)
+        
+        self.tagEntry.frame = CGRectMake(0, safeLayout.tagsTop, kScreenWidth, safeLayout.tagsHeight)
+        self.tagEntry.setWithLayout(safeLayout)
         
         //toolbar
         self.toolBarEntry.frame = CGRectMake(0, safeLayout.toolbarTop, kScreenWidth, kTMCellToolBarHeight)

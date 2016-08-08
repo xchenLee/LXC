@@ -52,6 +52,10 @@ let kTMCellReblogFontSize : CGFloat = 14
 let kTMCellReblogTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
 let kTMCellReblogFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: UIFontWeightLight)
 
+let kTMCellTagFontSize : CGFloat = 14
+let kTMCellTagTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
+let kTMCellTagFont = UIFont.systemFontOfSize(kTMCellTagFontSize, weight: UIFontWeightLight)
+
 
 
 let kTMCellAvatarAreaHeight = kTMCellAvatarSize + kTMCellPadding * 2
@@ -69,6 +73,38 @@ let kDebugMaxAllowedPhotoCount = 4
 class LayoutManager: NSObject {
     
     
+    class func getTagsAttributedString(text: String) -> NSAttributedString {
+        
+        
+        let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
+        
+        let textRange = NSMakeRange(0, text.characters.count)
+        
+        let expression = try! NSRegularExpression(pattern: kCustomDetectionTagPattern, options: [])
+        
+        expression.enumerateMatchesInString(text, options: [], range: textRange) { (result, flags, stop) in
+            
+            guard let matchingResult = result else {
+               return
+            }
+            
+            let startIndex = text.startIndex.advancedBy(matchingResult.range.location)
+            let endIndex = text.startIndex.advancedBy(matchingResult.range.length)
+            let range = startIndex..<endIndex
+            
+            let matchedString = text.substringWithRange(range)
+            
+            let attributes = [
+                NSLinkAttributeName : matchedString,
+                kCustomDetectionTypeName : kCustomDetectionTypeTag
+            ]
+            attributedString.addAttributes(attributes, range: matchingResult.range)
+        }
+
+        return attributedString
+    }
+    
+    
     /**
      获取Text的 NSAttributedString
      
@@ -79,14 +115,13 @@ class LayoutManager: NSObject {
     class func getTextEntryTextAttributedString(text: String) -> NSAttributedString {
         
         //获取转化HTML过后的AS
-        let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
-        let mutableAS = NSMutableAttributedString(attributedString: attributedString)
+        let mutableAS = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
         
         //开始添加自定义属性，段落，
         let paragraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
         paragraphStyle.minimumLineHeight = kTMCellTextFontSize * 1.2
         
-        let range = NSMakeRange(0, attributedString.length)
+        let range = NSMakeRange(0, mutableAS.length)
         mutableAS.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
         mutableAS.addAttribute(NSFontAttributeName, value: kTMCellTextFont, range: range)
         return mutableAS
@@ -103,12 +138,11 @@ class LayoutManager: NSObject {
     class func getReblogEntryTextAttributedString(text: String) -> NSAttributedString {
         
         //获取转化HTML过后的AS
-        let attributedString = text.convertToAttributedString(kTMCellReblogFont, textColor: kTMCellReblogTextColor)
-        let mutableAS = NSMutableAttributedString(attributedString: attributedString)
+        let mutableAS = text.convertToAttributedString(kTMCellReblogFont, textColor: kTMCellReblogTextColor)
         
         //开始添加自定义属性
         
-        let range = NSMakeRange(0, attributedString.length)
+        let range = NSMakeRange(0, mutableAS.length)
         mutableAS.addAttribute(NSFontAttributeName, value: kTMCellReblogFont, range: range)
         return mutableAS
     }
@@ -143,6 +177,13 @@ class LayoutManager: NSObject {
         
         let height = blogName.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
 
+        return height
+    }
+    
+    class func computeTagsHeight(tagsText: NSAttributedString) -> CGFloat {
+        
+        let height = tagsText.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
+        
         return height
     }
     

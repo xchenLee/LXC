@@ -18,12 +18,12 @@ extension String {
     
     
     
-    func convertToAttributedString(font: UIFont, textColor: UIColor) -> NSAttributedString {
+    func convertToAttributedString(font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
         
         //http://www.itstrike.cn/Question/feb10296-892d-486f-aa6a-396141184ad7.html
         
         guard let data = self.dataUsingEncoding(NSUnicodeStringEncoding) else {
-            return NSAttributedString(string: self)
+            return NSMutableAttributedString(string: self)
         }
         
         do {
@@ -31,7 +31,7 @@ extension String {
                 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                 NSForegroundColorAttributeName: textColor]
             
-            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil)
+            let attributedString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             
 //            let range = NSMakeRange(0, attributedString.string.characters.count)
 //            
@@ -47,7 +47,7 @@ extension String {
             return attributedString
             
         } catch {
-            return NSAttributedString(string: self)
+            return NSMutableAttributedString(string: self)
         }
     }
     
