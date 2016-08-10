@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {//,WeiboSDKDelegate
             TMAPIClient.sharedInstance().OAuthTokenSecret = user.tokenSecret
         }
         
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
         guard let options = launchOptions, _ = options[UIApplicationLaunchOptionsShortcutItemKey] as?
             UIApplicationShortcutItem  else {

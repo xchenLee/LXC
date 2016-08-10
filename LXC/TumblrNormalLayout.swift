@@ -187,7 +187,7 @@ class TumblrNormalLayout: NSObject {
         }
         var tagsString = "tags: "
         for tag in tags {
-            tagsString += "#\(tag.value)#"
+            tagsString += "#\(tag.value!)# "
         }
         
         let attributedString = LayoutManager.getTagsAttributedString(tagsString)

@@ -1,69 +1,64 @@
 //
-//  TumblrPosts.swift
+//  TumblrPostsByTag.swift
 //  LXC
 //
-//  Created by renren on 16/7/27.
+//  Created by renren on 16/8/9.
 //  Copyright © 2016年 com.demo.lxc. All rights reserved.
 //
 
 import UIKit
-import TMTumblrSDK
 import SwiftyJSON
 import ObjectMapper
+import TMTumblrSDK
 
-let kTumblrPostsCell0 = "postCellZero"
+let kTumblrPostsTagCell = "postTagCell"
 
-class TumblrPosts: UITableViewController {
+
+class TumblrPostsByTag: UITableViewController {
     
     var layouts: [TumblrNormalLayout] = []
     var tmpIDString: String = ""
-    var postsCount: Int = 0
     
+    var tagName: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        addDataHandler()
+        self.addDataHandler()
         self.tableView.mj_header.beginRefreshing()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     
     
     // MARK: - Custom Method
     func addDataHandler() {
         
         self.tableView.addPullDownRefresh {
-            self.postsCount = 0
             self.tmpIDString = ""
-            self.requestDashboard(0)
+            self.requestTaggedPosts(0)
         }
         
         self.tableView.addPullUp2LoadMore {
-            guard let firstlayout = self.layouts.last, let lastPost = firstlayout.post else {
+            guard let firstlayout = self.layouts.first, let firstPost = firstlayout.post else {
                 self.tableView.endLoadingMore()
                 return
             }
-            self.requestDashboard(self.postsCount)
-            
+            let timestamp = firstPost.timestamp
+            self.requestTaggedPosts(timestamp)
         }
     }
+
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
     
-
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return layouts.count
     }
@@ -71,10 +66,10 @@ class TumblrPosts: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return layouts[indexPath.row].height
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsCell0, forIndexPath: indexPath)
-        var dequeueCell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsCell0) as? TumblrNormalCell
+        
+        var dequeueCell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsTagCell) as? TumblrNormalCell
         
         let layout = layouts[indexPath.row]
         guard let cell = dequeueCell else {
@@ -85,22 +80,13 @@ class TumblrPosts: UITableViewController {
         }
         cell.delegate = self
         cell.configLayout(layout)
-
+        
         return cell
     }
     
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
     /*
     // Override to support editing the table view.
@@ -141,25 +127,29 @@ class TumblrPosts: UITableViewController {
 
 }
 
-extension TumblrPosts {
-    
-    func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
-        
-        TMAPIClient.sharedInstance().likes(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
 
+extension TumblrPostsByTag {
+    
+    func requestTaggedPosts(before: Int) {
         
-//        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+        var parameters = ["feature_type" : "everything"]
+        if before > 0 {
+            parameters["before"] = String(before)
+        }
+        
+        TMAPIClient.sharedInstance().tagged("新垣结衣", parameters:parameters) { (result, error) in
+            
             if error != nil {
                 return
             }
-            
+            //TODO  Google 
             //Success
-            let responseJSON = JSON(result)
-            let responsePosts = Mapper<ResponsePosts>().map(responseJSON.dictionaryObject!)
+            let resultJSON = JSON(result)
+            let taggedPosts = Mapper<TumblrPost>().mapArray(result)
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { 
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
-                guard let posts = responsePosts?.posts else {
+                guard let posts = taggedPosts else {
                     self.tableView.endRefreshing()
                     dispatch_async(dispatch_get_main_queue(), {
                         self.showTextHUD("no posts get")
@@ -179,19 +169,17 @@ extension TumblrPosts {
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    if offset > 0 {
+                    if before > 0 {
                         self.layouts.appendContentsOf(tmpLayouts)
-                        self.tableView.reloadData()
                         self.tableView.endLoadingMore()
+                        self.tableView.reloadData()
                     } else {
                         self.layouts = tmpLayouts
-                        self.tableView.reloadData()
                         self.tableView.endRefreshing()
+                        self.tableView.reloadData()
                     }
-                    self.postsCount += 20
+                    
                 })
-                
-                
             })
             
         }
@@ -200,7 +188,7 @@ extension TumblrPosts {
     }
 }
 
-extension TumblrPostsByTag: TumblrNormalCellDelegate {
+extension TumblrPosts: TumblrNormalCellDelegate {
     
     func didClickLikeBtn(cell: TumblrNormalCell) {
         
@@ -266,17 +254,22 @@ extension TumblrPostsByTag: TumblrNormalCellDelegate {
     
     func didClickTag(cell: TumblrNormalCell, tag: String) {
         
-                
+        
         
         let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
         let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
-            as! TumblrPostsByTag
-        tagsController.tagName = tag
         tagsController.title = tag
         self.navigationController?.pushViewController(tagsController, animated: true)
-
+        
     }
     
 }
+
+
+
+
+
+
+
 
 

@@ -77,8 +77,12 @@ class LayoutManager: NSObject {
         
         
         let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
-        
+                
         let textRange = NSMakeRange(0, text.characters.count)
+        
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
+        attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)
+        
         
         let expression = try! NSRegularExpression(pattern: kCustomDetectionTagPattern, options: [])
         
@@ -89,7 +93,7 @@ class LayoutManager: NSObject {
             }
             
             let startIndex = text.startIndex.advancedBy(matchingResult.range.location)
-            let endIndex = text.startIndex.advancedBy(matchingResult.range.length)
+            let endIndex = startIndex.advancedBy(matchingResult.range.length)
             let range = startIndex..<endIndex
             
             let matchedString = text.substringWithRange(range)
@@ -98,6 +102,8 @@ class LayoutManager: NSObject {
                 NSLinkAttributeName : matchedString,
                 kCustomDetectionTypeName : kCustomDetectionTypeTag
             ]
+            
+
             attributedString.addAttributes(attributes, range: matchingResult.range)
         }
 
@@ -184,7 +190,7 @@ class LayoutManager: NSObject {
         
         let height = tagsText.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
         
-        return height
+        return height + kTMCellPadding
     }
     
     
@@ -365,6 +371,116 @@ class LayoutManager: NSObject {
 
 
         return (0, [CGRectZero])
+    }
+    
+    class func doLikeAnimation(cell : TumblrNormalCell, liked: Bool) {
+        //找到相对于Window的frame，开始做动画
+        
+        let window = UIApplication.sharedApplication().delegate?.window!
+        let likeBtn = cell.toolBarEntry.likeBtn
+        let frameInCell = cell.toolBarEntry.convertRect(likeBtn.frame, toView: cell.contentView)
+        let frameInWindow = cell.convertRect(frameInCell, toView: window)
+        
+        let size = frameInWindow.width
+        
+        //如果现在是喜欢的状态
+        if liked {
+            let animatedHeart = UIImageView()
+            animatedHeart.size = CGSizeMake(48, 48)
+            animatedHeart.contentMode = .ScaleAspectFill
+            animatedHeart.image = UIImage(named: "icon_animated_like")
+            animatedHeart.frame = frameInWindow
+            animatedHeart.alpha = 0.6
+            animatedHeart.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI / 9))
+            animatedHeart.transform = CGAffineTransformScale(animatedHeart.transform, 0.75, 0.75)
+            window?.addSubview(animatedHeart)
+            
+            let center = animatedHeart.center
+            
+            UIView.animateKeyframesWithDuration(0.7, delay: 0, options: [.CalculationModeLinear], animations: {
+                
+                UIView .addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.2, animations: {
+                    animatedHeart.alpha = 1.0
+                    animatedHeart.transform = CGAffineTransformScale(animatedHeart.transform, 4/3.0, 4/3.0)
+                    animatedHeart.center = CGPointMake(center.x - size * 0.1, center.y - size * 0.5)
+                })
+                
+                UIView .addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.5, animations: {
+                    animatedHeart.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 8))
+                    animatedHeart.center = CGPointMake(center.x, center.y - size * 1.8)
+                })
+                
+                UIView .addKeyframeWithRelativeStartTime(0.5, relativeDuration: 0.6, animations: {
+                    animatedHeart.center = CGPointMake(center.x + size * 0.2, center.y - size * 2.6)
+                    
+                })
+                
+                UIView .addKeyframeWithRelativeStartTime(0.6, relativeDuration: 0.7, animations: {
+                    animatedHeart.alpha = 0.3
+                })
+                
+            }) { (finish) in
+                animatedHeart.removeFromSuperview()
+                
+            }
+            return
+        }
+        
+        let centerX = frameInWindow.origin.x + size * 0.5
+        
+        let breakupTop = frameInWindow.origin.y - 2.5 * size
+        let leftLeft = centerX - 28 + 5
+        let rightLeft = centerX - 5
+        
+        //做不喜欢的动画
+        let animatedLeft = UIImageView()
+        animatedLeft.size = CGSizeMake(28, 48)
+        animatedLeft.contentMode = .ScaleAspectFill
+        animatedLeft.image = UIImage(named: "icon_animated_unlike_left")
+        animatedLeft.frame = CGRectMake(leftLeft, breakupTop, 28, 48)
+        window?.addSubview(animatedLeft)
+        
+        
+        let animatedRight = UIImageView()
+        animatedRight.size = CGSizeMake(28, 48)
+        animatedRight.contentMode = .ScaleAspectFill
+        animatedRight.image = UIImage(named: "icon_animated_unlike_right")
+        animatedRight.frame = CGRectMake(rightLeft, breakupTop-1, 28, 48)
+        window?.addSubview(animatedRight)
+        
+        let centerLeft = animatedLeft.center
+        let centerRight = animatedRight.center
+        
+        
+        UIView.animateKeyframesWithDuration(0.7, delay: 0, options: [.CalculationModeLinear], animations: {
+            
+            UIView .addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.3, animations: {
+                
+                animatedLeft.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI / 16))
+                animatedLeft.center = CGPointMake(centerLeft.x - 12, centerLeft.y)
+                
+                animatedRight.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 16))
+                animatedRight.center = CGPointMake(centerRight.x + 12, centerRight.y)
+                
+            })
+            
+            UIView .addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.7, animations: {
+                
+                animatedLeft.center = CGPointMake(centerLeft.x - 12, centerLeft.y + 2 * size)
+                animatedLeft.alpha = 0.0
+                animatedRight.center = CGPointMake(centerRight.x + 12, centerRight.y + 2 * size)
+                animatedRight.alpha = 0.0
+                
+            })
+            
+            
+        }) { (finish) in
+            animatedLeft.removeFromSuperview()
+            animatedRight.removeFromSuperview()
+            
+        }
+        
+        
     }
 
 }

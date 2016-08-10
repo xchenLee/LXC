@@ -13,6 +13,7 @@ protocol TumblrNormalCellDelegate {
     func didClickCopySourceBtn(cell: TumblrNormalCell)
     func didClickLikeBtn(cell: TumblrNormalCell)
     func didClickImage(cell: TumblrNormalCell, index: Int)
+    func didClickTag(cell: TumblrNormalCell, tag: String)
 
 }
 
@@ -61,6 +62,7 @@ class TumblrNormalCell: UITableViewCell {
     
     
     func customInit() {
+        
         self.clipsToBounds = true
         self.contentView.clipsToBounds = true
         self.contentView.addSubview(self.nameEntry)
@@ -131,14 +133,4 @@ class TumblrNormalCell: UITableViewCell {
     
 
 }
-
-
-
-
-
-
-
-
-
-
 

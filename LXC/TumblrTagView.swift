@@ -10,9 +10,9 @@ import UIKit
 
 let kCustomDetectionTypeName = "CustomDetectionType"
 let kCustomDetectionTypeTag = "Tag"
-let kCustomDetectionTagPattern = "\\#{1}[^\\#]+\\#"
+let kCustomDetectionTagPattern = "\\#{1}[^\\#]+\\#{1}"
 
-class TumblrTagView: UITextView {
+class TumblrTagView: UITextView, UITextViewDelegate {
     
     var tapTagAction:((tagText: String) -> Void)?
     
@@ -20,13 +20,7 @@ class TumblrTagView: UITextView {
         super.didMoveToSuperview()
         self.delegate = self
     }
-
-}
-
-extension TumblrTagView: UITextViewDelegate {
     
-    
-
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         
         guard let detectionType = self.attributedText.attribute(kCustomDetectionTypeName, atIndex: characterRange.location, effectiveRange: nil) as? String where detectionType == kCustomDetectionTypeTag else {
@@ -35,7 +29,7 @@ extension TumblrTagView: UITextViewDelegate {
         
         let text = (self.text as NSString).substringWithRange(characterRange)
         guard text.characters.count > 2 else {
-            return true
+            return false
         }
         
         let startIndex = text.startIndex.advancedBy(1)
@@ -48,8 +42,9 @@ extension TumblrTagView: UITextViewDelegate {
         if !tagText.isEmpty {
             tapTagAction?(tagText: tagText)
         }
-        return true
+        return false
     }
-    
+
 
 }
+

@@ -9,7 +9,16 @@
 import UIKit
 import MBProgressHUD
 
+let kNavigationBackBtnColor = UIColor.whiteColor()
+
 extension UIViewController {
+    
+    
+    func fixBackStyle() {
+        self.navigationItem.backBarButtonItem?.tintColor = kNavigationBackBtnColor
+        self.navigationController?.navigationBar.tintColor = kNavigationBackBtnColor
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+    }
     
     /**
      显示加载样式

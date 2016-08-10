@@ -10,6 +10,7 @@ import UIKit
 
 class TumblrTagEntry0: UIView {
     
+    var textView: TumblrTagView
     var cell: TumblrNormalCell?
 
     
@@ -18,13 +19,16 @@ class TumblrTagEntry0: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
+        textView = TumblrTagView()
+        
         super.init(coder: aDecoder)
         customInit()
     }
     
     override init(frame: CGRect) {
         
-
+        textView = TumblrTagView()
         
         super.init(frame: frame)
         customInit()
@@ -35,18 +39,36 @@ class TumblrTagEntry0: UIView {
         self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
+        self.textView.dataDetectorTypes = .Link
+        self.textView.userInteractionEnabled = true
+        self.textView.delaysContentTouches = true
+//        self.textView.selectable = false 写上会有问题
+        self.textView.editable = false
+        self.textView.scrollEnabled = false
+        self.textView.multipleTouchEnabled = true
+        self.textView.canCancelContentTouches = true
+        self.addSubview(self.textView)
         
+        self.textView.tapTagAction = { tagName in
+        
+            guard let safeCell = self.cell ,let delegate = safeCell.delegate else {
+                return
+            }
+
+            delegate.didClickTag(safeCell, tag: tagName)
+        }
     }
     
     func setWithLayout(tumblrLayout: TumblrNormalLayout) {
-        guard let post = tumblrLayout.post else {
+        
+        guard let _ = tumblrLayout.post else {
+            self.textView.frame = CGRectZero
+            self.textView.attributedText = nil
             return
         }
-        
-        let tagCount = post.tags.count
-        if tagCount > 0 {
-            
-        }
+        self.textView.frame = CGRectMake(kTMCellPadding, 0, kScreenWidth - 2 * kTMCellPadding, tumblrLayout.tagsHeight)
+        self.textView.attributedText = tumblrLayout.tagsAttributedString
+
     }
 
 
