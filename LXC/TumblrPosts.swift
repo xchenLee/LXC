@@ -13,32 +13,68 @@ import ObjectMapper
 
 let kTumblrPostsCell0 = "postCellZero"
 
-class TumblrPosts: UITableViewController {
+class TumblrPosts: UITableViewController, UINavigationControllerDelegate {
     
+    // MARK: - variables
     var layouts: [TumblrNormalLayout] = []
     var tmpIDString: String = ""
     var postsCount: Int = 0
     
+    var writeCenter: CGPoint = CGPointZero
+    
+    lazy var postBtn: UIButton = {
+        
+        var btn = UIButton(type: UIButtonType.Custom)
+        
+        let left = kScreenWidth - kTMWriteIconSize * 1.4
+        let top = kScreenHeight - kTMWriteIconSize * 1.4
+        
+        btn.setImage(UIImage(named: "icon_write"), forState: .Normal)
+        btn.frame = CGRectMake(left, top, kTMWriteIconSize, kTMWriteIconSize)
+        btn.addTarget(self, action: #selector(postBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+        return btn
+    }()
+    
+    
+    lazy var postBg: UIVisualEffectView = {
+    
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.layer.cornerRadius = kTMWriteIconSize / 2
+        blurEffectView.clipsToBounds = true
+        return blurEffectView
+    }()
+    
+    
+    // MARK: - methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         addDataHandler()
         self.tableView.mj_header.beginRefreshing()
+        
+        self.navigationController?.view.addSubview(self.postBg)
+        self.postBg.frame = self.postBtn.frame
+        
+        
+        self.navigationController?.view.addSubview(self.postBtn)
+        self.writeCenter = self.postBtn.center
+
+
+        self.navigationController?.delegate = self
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    
-    
     // MARK: - Custom Method
+    
+    func postBtnClick(btn: UIButton) {
+        
+    }
+    
     func addDataHandler() {
         
         self.tableView.addPullDownRefresh {
@@ -48,7 +84,7 @@ class TumblrPosts: UITableViewController {
         }
         
         self.tableView.addPullUp2LoadMore {
-            guard let firstlayout = self.layouts.last, let lastPost = firstlayout.post else {
+            guard let firstlayout = self.layouts.last, let _ = firstlayout.post else {
                 self.tableView.endLoadingMore()
                 return
             }
@@ -93,54 +129,34 @@ class TumblrPosts: UITableViewController {
         return false
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - UINavigationControllerDelegate
+    
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        
+        if viewController == self {
+            
+            UIView.animateWithDuration(0.2, delay: 0.2, options: [.CurveLinear], animations: {
+                
+                self.postBg.center = self.writeCenter
+                self.postBtn.center = self.writeCenter
+                
+                }, completion: nil)
+        } else {
+            
+            UIView.animateWithDuration(0.3, delay: 0, options: [.CurveLinear], animations: {
+                
+                self.postBg.center = CGPointMake(self.writeCenter.x, kScreenHeight + self.postBtn.size.width)
+                self.postBtn.center = CGPointMake(self.writeCenter.x, kScreenHeight + self.postBtn.size.width)
+                
+                }, completion: nil)
+            
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
+// MARK: - extension for request datas
 extension TumblrPosts {
     
     func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
@@ -173,6 +189,10 @@ extension TumblrPosts {
                     if !self.tmpIDString.containsString("\(id),") {
                         let layout = TumblrNormalLayout()
                         layout.fitPostData(tumblrPost)
+                        if layout.deleted {
+                            self.tmpIDString += "\(id),"
+                            continue
+                        }
                         tmpLayouts.append(layout)
                         self.tmpIDString += "\(id),"
                     }
@@ -200,7 +220,8 @@ extension TumblrPosts {
     }
 }
 
-extension TumblrPostsByTag: TumblrNormalCellDelegate {
+// MARK: - extension for cell delegate
+extension TumblrPosts: TumblrNormalCellDelegate {
     
     func didClickLikeBtn(cell: TumblrNormalCell) {
         
@@ -266,7 +287,10 @@ extension TumblrPostsByTag: TumblrNormalCellDelegate {
     
     func didClickTag(cell: TumblrNormalCell, tag: String) {
         
-                
+        
+//        let ss = TumblrSearch()
+//        self.navigationController?.pushViewController(ss, animated: true)
+//        
         
         let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
         let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
@@ -278,5 +302,6 @@ extension TumblrPostsByTag: TumblrNormalCellDelegate {
     }
     
 }
+
 
 

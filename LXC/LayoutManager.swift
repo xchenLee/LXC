@@ -12,6 +12,8 @@ let kTMCellImageTagPrefix = 2000
 
 let kTMCellMaxPhotoCount = 10
 
+let kTMWriteIconSize : CGFloat = 48
+
 
 /// Padding
 let kTMCellPadding : CGFloat = 12

@@ -55,6 +55,8 @@ class TumblrNormalLayout: NSObject {
     var toolbarTop: CGFloat = 0
     
     var imagesFrame: [CGRect] = []
+    
+    var deleted: Bool = false
         
     func fitPostData(tumblrPost: TumblrPost) {
         
@@ -84,14 +86,8 @@ class TumblrNormalLayout: NSObject {
         //视频区域
         readVideoEntry(tumblrPost)
         
-        
-        //图片高度
-        imagesTop = nameHeight
-        let computedHeight = LayoutManager.computeImagesHeight(tumblrPost.photos)
-        imagesHeight = computedHeight.0
-        imagesFrame = computedHeight.1
-        
-        height += imagesHeight
+        //图片区域
+        readImageEntry(tumblrPost)
         
         //读取tag部分
         readTagsLayout(tumblrPost)
@@ -133,6 +129,17 @@ class TumblrNormalLayout: NSObject {
         
     }
     
+    func readImageEntry(tumblrPost: TumblrPost) {
+        
+        //图片高度
+        imagesTop = nameHeight
+        let computedHeight = LayoutManager.computeImagesHeight(tumblrPost.photos)
+        imagesHeight = computedHeight.0
+        imagesFrame = computedHeight.1
+        
+        height += imagesHeight
+    }
+    
     func readTypeTextEntry(tumblrPost: TumblrPost) {
         
         titleTop = nameHeight
@@ -153,6 +160,11 @@ class TumblrNormalLayout: NSObject {
 
         // text 类型
         if typeString == "text" && !tumblrPost.body.isEmpty {
+            
+            if tumblrPost.body.containsString("<img") && !tumblrPost.body.containsString("width=") {
+                self.height = 0
+                self.deleted = true
+            }
             
             if !tumblrPost.title.isEmpty {
                 

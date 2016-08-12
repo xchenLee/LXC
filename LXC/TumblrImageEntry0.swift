@@ -44,7 +44,7 @@ class TumblrImageEntry0: UIView {
         for _ in 0...kTMCellMaxPhotoCount {
             let imageView = UIImageView()
             imageView.userInteractionEnabled = true
-            imageView.backgroundColor = UIColor.whiteColor()
+            imageView.backgroundColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0)
             imageView.contentMode = .ScaleAspectFill
             imageView.clipsToBounds = true
             imageViews.append(imageView)

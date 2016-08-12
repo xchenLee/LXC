@@ -26,6 +26,13 @@ class TumblrPostsByTag: UITableViewController {
         
         self.addDataHandler()
         self.tableView.mj_header.beginRefreshing()
+        
+        /**
+         "新垣結衣",
+         "aragaki  yui"
+         */
+        var array = ["新垣結衣",
+                     "aragaki  yui"]
     }
     
     
@@ -137,11 +144,17 @@ extension TumblrPostsByTag {
             parameters["before"] = String(before)
         }
         
-        TMAPIClient.sharedInstance().tagged("新垣结衣", parameters:parameters) { (result, error) in
+        TMAPIClient.sharedInstance().tagged(self.tagName, parameters:parameters) { (result, error) in
             
             if error != nil {
                 return
             }
+            /**
+             "tags" : [
+             "新垣結衣",
+             "aragaki  yui"
+             ]
+             */
             //TODO  Google 
             //Success
             let resultJSON = JSON(result)
@@ -158,6 +171,7 @@ extension TumblrPostsByTag {
                 }
                 
                 var tmpLayouts: [TumblrNormalLayout] = []
+                var i = 0
                 for tumblrPost in posts {
                     let id = tumblrPost.postId
                     if !self.tmpIDString.containsString("\(id),") {
@@ -166,6 +180,8 @@ extension TumblrPostsByTag {
                         tmpLayouts.append(layout)
                         self.tmpIDString += "\(id),"
                     }
+                    i += 1
+                    print("layouts in \(i)")
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -188,7 +204,7 @@ extension TumblrPostsByTag {
     }
 }
 
-extension TumblrPosts: TumblrNormalCellDelegate {
+extension TumblrPostsByTag: TumblrNormalCellDelegate {
     
     func didClickLikeBtn(cell: TumblrNormalCell) {
         
@@ -256,10 +272,10 @@ extension TumblrPosts: TumblrNormalCellDelegate {
         
         
         
-        let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
-        let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
-        tagsController.title = tag
-        self.navigationController?.pushViewController(tagsController, animated: true)
+//        let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
+//        let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
+//        tagsController.title = tag
+//        self.navigationController?.pushViewController(tagsController, animated: true)
         
     }
     

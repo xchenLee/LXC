@@ -7,22 +7,38 @@
 //
 
 import UIKit
+import TMTumblrSDK
+import SwiftyJSON
+import ObjectMapper
+
 
 class TumblrSearch: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let parameters = [
+            "filter" : "clean",
+            "mode" : "recent",
+            "post_limit" : "20",
+            "blog_limit" : "2",
+            "blog_post_count" : "2"
+        ]
+        
+        TMAPIClient.sharedInstance().search("新垣结衣", parameters: parameters) { (result, error) in
+            
+            if error != nil {
+                return
+            }
+            let resultJSON = JSON(result)
+            
+            let haha = resultJSON
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
