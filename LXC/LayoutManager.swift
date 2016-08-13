@@ -80,7 +80,7 @@ class LayoutManager: NSObject {
         
         let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
                 
-        let textRange = NSMakeRange(0, text.characters.count)
+        let textRange = NSMakeRange(0, attributedString.length)
         
         attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
         attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)

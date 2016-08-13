@@ -62,6 +62,23 @@ class TumblrPosts: UITableViewController, UINavigationControllerDelegate {
 
 
         self.navigationController?.delegate = self
+        
+        /**
+         "新垣結衣",
+         "aragaki  yui"
+         */
+//        let tags = ["新垣結衣",
+//                    "aragaki  yui"]
+//        
+//        var tagsString = "tags: "
+//        for string in tags {
+//            tagsString += "#\(string)# "
+//        }
+//        
+//        let attributedString = LayoutManager.getTagsAttributedString(tagsString)
+//        
+//        let a = attributedString
+
 
     }
 

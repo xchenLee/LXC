@@ -27,12 +27,6 @@ class TumblrPostsByTag: UITableViewController {
         self.addDataHandler()
         self.tableView.mj_header.beginRefreshing()
         
-        /**
-         "新垣結衣",
-         "aragaki  yui"
-         */
-        var array = ["新垣結衣",
-                     "aragaki  yui"]
     }
     
     

@@ -20,8 +20,6 @@ extension String {
     
     func convertToAttributedString(font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
         
-        //http://www.itstrike.cn/Question/feb10296-892d-486f-aa6a-396141184ad7.html
-        
         guard let data = self.dataUsingEncoding(NSUnicodeStringEncoding) else {
             return NSMutableAttributedString(string: self)
         }
@@ -32,24 +30,31 @@ extension String {
                 NSForegroundColorAttributeName: textColor]
             
             let attributedString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
-            
-//            let range = NSMakeRange(0, attributedString.string.characters.count)
-//            
-//            let mutableAS = NSMutableAttributedString(attributedString: attributedString)
-//            mutableAS.enumerateAttributesInRange(range, options: [.Reverse]) { (attribute, range, stop) in
-//                    
-//                if attribute.keys.contains(NSLinkAttributeName) {
-//                    mutableAS.addAttribute(NSUnderlineColorAttributeName, value: UIColor.redColor(), range: range)
-//                    mutableAS.addAttribute(NSUnderlineStyleAttributeName, value: String(NSUnderlineStyle.StyleThick), range: range)
-//                }
-//            }
-//            
             return attributedString
             
         } catch {
             return NSMutableAttributedString(string: self)
         }
     }
+    
+    /**
+     
+     //http://www.itstrike.cn/Question/feb10296-892d-486f-aa6a-396141184ad7.html
+
+     
+     //            let range = NSMakeRange(0, attributedString.string.characters.count)
+     //
+     //            let mutableAS = NSMutableAttributedString(attributedString: attributedString)
+     //            mutableAS.enumerateAttributesInRange(range, options: [.Reverse]) { (attribute, range, stop) in
+     //
+     //                if attribute.keys.contains(NSLinkAttributeName) {
+     //                    mutableAS.addAttribute(NSUnderlineColorAttributeName, value: UIColor.redColor(), range: range)
+     //                    mutableAS.addAttribute(NSUnderlineStyleAttributeName, value: String(NSUnderlineStyle.StyleThick), range: range)
+     //                }
+     //            }
+     //
+     
+     */
     
     func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
         
