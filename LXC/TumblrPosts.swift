@@ -10,6 +10,8 @@ import UIKit
 import TMTumblrSDK
 import SwiftyJSON
 import ObjectMapper
+import MediaPlayer
+import AVKit
 
 let kTumblrPostsCell0 = "postCellZero"
 
@@ -19,6 +21,7 @@ class TumblrPosts: UITableViewController, UINavigationControllerDelegate {
     var layouts: [TumblrNormalLayout] = []
     var tmpIDString: String = ""
     var postsCount: Int = 0
+    
     
     var writeCenter: CGPoint = CGPointZero
     
@@ -62,24 +65,6 @@ class TumblrPosts: UITableViewController, UINavigationControllerDelegate {
 
 
         self.navigationController?.delegate = self
-        
-        /**
-         "新垣結衣",
-         "aragaki  yui"
-         */
-//        let tags = ["新垣結衣",
-//                    "aragaki  yui"]
-//        
-//        var tagsString = "tags: "
-//        for string in tags {
-//            tagsString += "#\(string)# "
-//        }
-//        
-//        let attributedString = LayoutManager.getTagsAttributedString(tagsString)
-//        
-//        let a = attributedString
-
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -178,7 +163,16 @@ extension TumblrPosts {
     
     func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
         
-        TMAPIClient.sharedInstance().likes(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+        
+        var parameters = [
+            "filter" : "clean",
+            "reblog_info" : String(true)
+        ]
+        if offset > 0 {
+            parameters["offset"] = String(offset)
+        }
+        //offset > 0 ? ["offset" : String(offset)] : nil
+        TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
 
         
 //        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
@@ -305,10 +299,6 @@ extension TumblrPosts: TumblrNormalCellDelegate {
     func didClickTag(cell: TumblrNormalCell, tag: String) {
         
         
-//        let ss = TumblrSearch()
-//        self.navigationController?.pushViewController(ss, animated: true)
-//        
-        
         let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
         let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
             as! TumblrPostsByTag
@@ -318,7 +308,111 @@ extension TumblrPosts: TumblrNormalCellDelegate {
 
     }
     
+    func didClickOuterVideo(cell: TumblrNormalCell) {
+        
+        guard let layout = cell.layout, let post = layout.post else {
+            return
+        }
+        
+        let youtubeUrl = post.permalinkUrl
+        
+        let url = NSURL(string: youtubeUrl)
+        
+        UIApplication.sharedApplication().openURL(url!)
+
+    }
+    
+    func classFromString(cls: String, interface: Protocol?) -> NSObject.Type? {
+        guard let interface = interface else {
+            return NSClassFromString(cls) as? NSObject.Type
+        }
+        
+        if let cls = NSClassFromString(cls) {
+            if class_conformsToProtocol(cls, interface) {
+                return cls as? NSObject.Type
+            }
+            
+            if class_addProtocol(cls, interface) {
+                return cls as? NSObject.Type
+            }
+        }
+        return nil
+    }
+    
+    func instanceFromString<T>(cls: String, interface: Protocol?) -> T? {
+        return classFromString(cls, interface: interface)?.init() as? T
+    }
+
+    
+    func didLongPressVideo(cell: TumblrNormalCell) {
+        
+        //http://stackoverflow.com/questions/38152763/passing-closures-to-private-apis
+       
+        //https://developer.apple.com/videos/play/wwdc2011/406/ 24分钟
+        
+        guard let layout = cell.layout, let post = layout.post else {
+            return
+        }
+        
+        let url = NSURL(string: post.videoUrl)
+        
+        let bounds = CGRectMake(0, 0, kScreenWidth, layout.videoHeight)
+        
+        let videoPlayerController = VideoPlayerController(url: url!, bounds: bounds)
+        
+        self.presentViewController(videoPlayerController, animated: true) { 
+            //videoPlayerController.playFromBeginning()
+        }
+        
+        
+//        let avPlayerController = AVPlayerViewController()
+//        let avPlayer = AVPlayer(URL: url!)
+//        avPlayer.allowsExternalPlayback = true
+//        avPlayer.usesExternalPlaybackWhileExternalScreenIsActive = true
+//        avPlayerController.player = avPlayer
+//        
+//        let volumeView = MPVolumeView()
+//        volumeView.backgroundColor = UIColor.redColor()
+//        volumeView.showsVolumeSlider = false
+//        volumeView.showsRouteButton = true
+//        volumeView.top = 80
+//        volumeView.tag = 2008
+//        volumeView.left = 270
+//        volumeView.sizeToFit()
+//        avPlayerController.view.addSubview(volumeView)
+//        
+//        self.presentViewController(avPlayerController, animated: true) { 
+//            
+//            let volumeView = avPlayerController.view.viewWithTag(2008) as! MPVolumeView
+//            
+//            let avaliable = volumeView.wirelessRoutesAvailable
+//            
+//            let active = volumeView.wirelessRouteActive
+//            
+//            
+//        }
+    
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import Player
-import MediaPlayer
 
 class TumblrVideoEntry0: UIView, PlayerDelegate {
 
     var videoFlag: UIImageView
     var videoThumbnail: UIImageView
     var indicator: UIActivityIndicatorView
+    
+    var videoSourceFlag : UIImageView
     
     var videoPlayer: Player
     
@@ -47,6 +47,11 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         self.videoThumbnail.left = 0
         self.videoThumbnail.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
+        
+        self.videoSourceFlag = UIImageView()
+        self.videoSourceFlag.contentMode = .Center
+        self.videoSourceFlag.size = CGSizeMake(kTMCellVideoSourceFlagSize, kTMCellVideoSourceFlagSize)
+        
         super.init(coder: aDecoder)
         customInit()
     }
@@ -74,6 +79,10 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         self.videoThumbnail.left = 0
         self.videoThumbnail.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
         
+        self.videoSourceFlag = UIImageView()
+        self.videoSourceFlag.contentMode = .Center
+        self.videoSourceFlag.image = UIImage(named: "icon_video_youtube")
+        self.videoSourceFlag.size = CGSizeMake(kTMCellVideoSourceFlagSize, kTMCellVideoSourceFlagSize)
         
         super.init(frame: frame)
         customInit()
@@ -91,6 +100,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         self.addSubview(self.videoThumbnail)
         self.addSubview(self.indicator)
         self.addSubview(self.videoFlag)
+        self.addSubview(self.videoSourceFlag)
         
         let thumbnailGesture = UITapGestureRecognizer(target: self, action: #selector(tapThumbnailView))
         self.videoThumbnail .addGestureRecognizer(thumbnailGesture)
@@ -98,9 +108,27 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         let videoGesture = UITapGestureRecognizer(target: self, action: #selector(tapVideoPlayerView))
         self.videoPlayer.view .addGestureRecognizer(videoGesture)
         
+        let videoLongGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressVideoPlayerView))
+        self.videoPlayer.view .addGestureRecognizer(videoLongGesture)
+        
     }
     
     func tapThumbnailView(gesture: UITapGestureRecognizer) {
+        
+        
+        guard let safeCell = cell, let layout = safeCell.layout else {
+            return
+        }
+        
+        if layout.outerVideo {
+            
+            /*guard let delegate = safeCell.delegate else {
+                return
+            }*/
+            safeCell.delegate?.didClickOuterVideo(safeCell)
+            return
+        }
+        
         
         let playerState = self.videoPlayer.playbackState.rawValue
         switch playerState {
@@ -131,6 +159,15 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     }
     
     func tapVideoPlayerView(gesture: UITapGestureRecognizer) {
+        
+        guard let layout = self.cell?.layout else {
+            return
+        }
+        
+        if layout.outerVideo {
+            return
+        }
+        
         
         let playerState = self.videoPlayer.playbackState.rawValue
         
@@ -165,14 +202,37 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
     }
     
+    func longPressVideoPlayerView(gesture: UILongPressGestureRecognizer) {
+        
+        guard let safeCell = cell else {
+            return
+        }
+        self.videoPlayer.pause()
+        safeCell.delegate?.didLongPressVideo(safeCell)
+    }
+    
     // MARK: - set datas
     func setWithLayout(tumblrLayout: TumblrNormalLayout) {
         
         //视频缩略图
         guard let tumblrPost = tumblrLayout.post, let url = NSURL(string: tumblrPost.thumbnailUrl) else {
             self.videoThumbnail.frame = CGRectZero
+            self.videoSourceFlag.hidden = true
             return
         }
+        
+        //如果是youtube 视频
+        
+        if tumblrLayout.outerVideo {
+            self.videoSourceFlag.image = UIImage(named: tumblrLayout.sourceIconName)
+            self.videoSourceFlag.hidden = false
+            self.videoSourceFlag.frame = CGRectMake(tumblrLayout.sourceFlagLeft, tumblrLayout.sourceFlagTop, kTMCellVideoSourceFlagSize, kTMCellVideoSourceFlagSize)
+        } else {
+            self.videoSourceFlag.image = nil
+            self.videoSourceFlag.hidden = true
+            self.videoSourceFlag.frame = CGRectZero
+        }
+        
         
         self.indicator.left = tumblrLayout.indicatorLeft
         self.indicator.top = tumblrLayout.indicatorTop

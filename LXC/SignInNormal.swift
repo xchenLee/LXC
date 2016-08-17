@@ -62,7 +62,7 @@ class SignInNormal: UIViewController {
                 if error == nil {
                     
                     var response = JSON(result)
-                    let manThred = NSThread.currentThread() == NSThread.mainThread()
+                    //let manThred = NSThread.currentThread() == NSThread.mainThread()
                                         
                     let user = TumblrUser()
                     user.token = token
@@ -80,12 +80,14 @@ class SignInNormal: UIViewController {
                     } catch {
                         
                     }
+                } else {
+                    
                 }
                 
             })
             
             }) { (error) in
-                
+                print("tumblr signin error")
         }
         
     }

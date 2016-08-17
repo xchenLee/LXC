@@ -113,9 +113,12 @@ class TumblrPost: Object, Mappable {
     var avatarUrl : String = ""
     
     var videoUrl : String = ""
+    var videoType : String = ""
     var thumbnailUrl : String = ""
     var thumbnailHeight : Int = 0
     var thumbnailWidth : Int = 0
+    
+    var permalinkUrl : String = ""
 
 
     required convenience init?(_ map: Map) {
@@ -167,7 +170,10 @@ class TumblrPost: Object, Mappable {
         noteCount <- map["note_count"]
         imagePermalink <- map["image_permalink"]
         
+        permalinkUrl <- map["permalink_url"]
+        
         videoUrl <- map["video_url"]
+        videoType <- map["video_type"]
         thumbnailUrl <- map["thumbnail_url"]
         thumbnailWidth <- map["thumbnail_width"]
         thumbnailHeight <- map["thumbnail_height"]

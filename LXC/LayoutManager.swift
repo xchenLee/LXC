@@ -32,6 +32,8 @@ let kTMCellCornerRadius : CGFloat = 4
 // indicator 大小
 let kTMCellVideoIndicatorSize : CGFloat = 40
 let kTMCellVideoFlagSize : CGFloat = 24
+let kTMCellVideoSourceFlagSize : CGFloat = 40
+
 
 /// 文字
 let kTMCellTitleFontSize : CGFloat = 20

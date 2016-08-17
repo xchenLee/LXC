@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum VideoSource: String {
+    case Youtube = "youtube"
+    case Instagram = "instagram"
+    case Tumblr = "tumblr"
+}
+
 class TumblrNormalLayout: NSObject {
     
     var post: TumblrPost?
@@ -35,9 +41,14 @@ class TumblrNormalLayout: NSObject {
     //视频区域
     var videoHeight: CGFloat = 0
     var videoTop: CGFloat = 0
+    var outerVideo: Bool = false
     
     var indicatorTop: CGFloat = 0
     var indicatorLeft: CGFloat = 0
+    
+    var sourceIconName: String = ""
+    var sourceFlagTop: CGFloat = 0
+    var sourceFlagLeft: CGFloat = 0
     
     
     //tags高度
@@ -114,16 +125,34 @@ class TumblrNormalLayout: NSObject {
                 let scale = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
                 originalWidth = scale.width
                 originalHeight = scale.height
-                
             }
             
             if originalWidth == 0 || originalHeight == 0 {
                 originalWidth = kScreenWidth
                 originalHeight = kScreenWidth * 9 / 16
             }
+            
+            
             videoHeight = originalHeight
-            indicatorTop = (videoHeight - kTMCellVideoIndicatorSize) / 2
-            indicatorLeft = (kScreenWidth - kTMCellVideoIndicatorSize) / 2
+            
+            if !tumblrPost.videoType.isEmpty && tumblrPost.videoType != "tumblr" {
+                
+                switch tumblrPost.videoType.lowercaseString {
+                case VideoSource.Youtube.rawValue:
+                    sourceIconName = "icon_video_youtube"
+                    break
+                case VideoSource.Instagram.rawValue:
+                    sourceIconName = "icon_video_instagram"
+                    break
+                default: break
+                }
+                
+                outerVideo = true
+                sourceFlagLeft = (kScreenWidth - kTMCellVideoSourceFlagSize) / 2
+                sourceFlagTop = (videoHeight - kTMCellVideoSourceFlagSize) / 2
+            }
+
+            
             height += videoHeight
         }
         
@@ -266,6 +295,10 @@ class TumblrNormalLayout: NSObject {
         videoTop = 0
         indicatorTop = 0
         indicatorLeft = 0
+        
+        sourceFlagLeft = 0
+        sourceFlagTop = 0
+        sourceIconName = ""
         
         tagsTop = 0
         tagsHeight = 0

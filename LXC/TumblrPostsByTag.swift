@@ -273,6 +273,24 @@ extension TumblrPostsByTag: TumblrNormalCellDelegate {
         
     }
     
+    func didClickOuterVideo(cell: TumblrNormalCell) {
+        
+        guard let layout = cell.layout, let post = layout.post else {
+            return
+        }
+        
+        let youtubeUrl = post.permalinkUrl
+        
+        let url = NSURL(string: youtubeUrl)
+        
+        UIApplication.sharedApplication().openURL(url!)
+        
+    }
+    
+    func didLongPressVideo(cell: TumblrNormalCell) {
+        
+    }
+    
 }
 
 

@@ -78,6 +78,8 @@
 		777D58141D485AC4007274BB /* TumblrContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D58131D485AC4007274BB /* TumblrContext.swift */; };
 		7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC271CE0934300DE3132 /* CASpecialLayer.swift */; };
 		7791CC401CE1C4B000DE3132 /* CompressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */; };
+		77A9E8801D64A35200D2E492 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A9E87F1D64A35200D2E492 /* Player.swift */; };
+		77A9E8821D64A66C00D2E492 /* VideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A9E8811D64A66C00D2E492 /* VideoPlayerController.swift */; };
 		77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D277731CA2EE8000899043 /* LocalAuthentication.framework */; };
 		77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D277761CA2EF8600899043 /* TouchIdTest.swift */; };
 		77D54AB61D42022F008B0A02 /* SinaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D54AB51D42022F008B0A02 /* SinaUser.swift */; };
@@ -87,7 +89,6 @@
 		77D832301D58B0B800D0A6A5 /* TumblrTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8322F1D58B0B800D0A6A5 /* TumblrTagView.swift */; };
 		77D8323D1D59B23E00D0A6A5 /* TumblrPostsByTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8323C1D59B23E00D0A6A5 /* TumblrPostsByTag.swift */; };
 		77D8323F1D5AF1E900D0A6A5 /* TumblrSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8323E1D5AF1E900D0A6A5 /* TumblrSearch.swift */; };
-		77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */; };
 		77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312E81CA683FA00867373 /* IImageAlbumCell.swift */; };
 		77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312EA1CA6891000867373 /* IImagePickerAlbum.swift */; };
 		77E312ED1CA9889300867373 /* IImagePickerAlbumAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312EC1CA9889300867373 /* IImagePickerAlbumAssets.swift */; };
@@ -104,6 +105,8 @@
 		77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4D1CF2A697009660C3 /* CanvasView.swift */; };
 		77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */; };
 		77FBFFF81D5388D70082E65A /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */; };
+		77FCBB751D6365BF00F9A224 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */; };
+		77FCBB771D6365C700F9A224 /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB761D6365C700F9A224 /* MediaToolbox.framework */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
@@ -199,6 +202,8 @@
 		777D58131D485AC4007274BB /* TumblrContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrContext.swift; sourceTree = "<group>"; };
 		7791CC271CE0934300DE3132 /* CASpecialLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASpecialLayer.swift; sourceTree = "<group>"; };
 		7791CC3F1CE1C4B000DE3132 /* CompressImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressImage.swift; sourceTree = "<group>"; };
+		77A9E87F1D64A35200D2E492 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		77A9E8811D64A66C00D2E492 /* VideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerController.swift; sourceTree = "<group>"; };
 		77D277731CA2EE8000899043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		77D277761CA2EF8600899043 /* TouchIdTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdTest.swift; sourceTree = "<group>"; };
 		77D54AB51D42022F008B0A02 /* SinaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinaUser.swift; sourceTree = "<group>"; };
@@ -208,7 +213,6 @@
 		77D8322F1D58B0B800D0A6A5 /* TumblrTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagView.swift; sourceTree = "<group>"; };
 		77D8323C1D59B23E00D0A6A5 /* TumblrPostsByTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPostsByTag.swift; sourceTree = "<group>"; };
 		77D8323E1D5AF1E900D0A6A5 /* TumblrSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrSearch.swift; sourceTree = "<group>"; };
-		77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadVideoList.swift; sourceTree = "<group>"; };
 		77E312E81CA683FA00867373 /* IImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageAlbumCell.swift; sourceTree = "<group>"; };
 		77E312EA1CA6891000867373 /* IImagePickerAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePickerAlbum.swift; sourceTree = "<group>"; };
 		77E312EC1CA9889300867373 /* IImagePickerAlbumAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePickerAlbumAssets.swift; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 		77FB2C4D1CF2A697009660C3 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchView.swift; sourceTree = "<group>"; };
 		77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
+		77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		77FCBB761D6365C700F9A224 /* MediaToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaToolbox.framework; path = System/Library/Frameworks/MediaToolbox.framework; sourceTree = SDKROOT; };
 		8D35BAF3983A3452CE219AD8 /* Pods_LXC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
@@ -237,6 +243,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FCBB771D6365C700F9A224 /* MediaToolbox.framework in Frameworks */,
+				77FCBB751D6365BF00F9A224 /* MediaPlayer.framework in Frameworks */,
 				77D277741CA2EE8000899043 /* LocalAuthentication.framework in Frameworks */,
 				71DB418C080B3219B1D72474 /* Pods_LXC.framework in Frameworks */,
 				777481661D48A09600065F46 /* OAuthSwift.framework in Frameworks */,
@@ -258,6 +266,8 @@
 		5851120C04154529C5AB122A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77FCBB761D6365C700F9A224 /* MediaToolbox.framework */,
+				77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */,
 				8D35BAF3983A3452CE219AD8 /* Pods_LXC.framework */,
 			);
 			name = Frameworks;
@@ -590,7 +600,8 @@
 		77E11B691D34F7FE005F42F5 /* video */ = {
 			isa = PBXGroup;
 			children = (
-				77E11B6A1D34F811005F42F5 /* ReadVideoList.swift */,
+				77A9E87F1D64A35200D2E492 /* Player.swift */,
+				77A9E8811D64A66C00D2E492 /* VideoPlayerController.swift */,
 			);
 			name = video;
 			sourceTree = "<group>";
@@ -780,6 +791,7 @@
 				772103851D4C9FE200F18546 /* LayoutManager.swift in Sources */,
 				7724095C1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift in Sources */,
 				772773B51C9D452800A6ED72 /* QRCodeGenerator.swift in Sources */,
+				77A9E8821D64A66C00D2E492 /* VideoPlayerController.swift in Sources */,
 				777D58121D485AA8007274BB /* TumblrAPI.swift in Sources */,
 				772592181C7DEEF300000FBA /* ViewController.swift in Sources */,
 				77F8B10F1CDCA8FB0094ADA3 /* CACubic.swift in Sources */,
@@ -803,7 +815,6 @@
 				77FB0EE21CB50B81003DD7B6 /* IImagePickerAssetPop.swift in Sources */,
 				A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */,
 				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
-				77E11B6B1D34F811005F42F5 /* ReadVideoList.swift in Sources */,
 				777D58021D474A30007274BB /* SinaContext.swift in Sources */,
 				77FBFFF81D5388D70082E65A /* Extensions+UIViewController.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
@@ -833,6 +844,7 @@
 				773E16A31CEC499A00D11762 /* QuartzBase.swift in Sources */,
 				77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */,
 				770089991C9BB4ED00E6BCB9 /* GoodyList.swift in Sources */,
+				77A9E8801D64A35200D2E492 /* Player.swift in Sources */,
 				771AE0F21C8048AE00AAF16F /* VideoPlaybackView.swift in Sources */,
 				772103AB1D4F461000F18546 /* TumblrNameEntry0.swift in Sources */,
 				772103A71D4F2B4400F18546 /* TumblrImageEntry0.swift in Sources */,

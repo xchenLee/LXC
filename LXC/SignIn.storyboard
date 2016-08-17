@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-82-Ua4">
-                                <rect key="frame" x="170.5" y="317" width="33" height="34"/>
+                                <rect key="frame" x="171" y="317" width="33" height="34"/>
                                 <state key="normal" title="sina">
                                     <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -43,7 +43,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVS-F4-mZ1">
-                                <rect key="frame" x="161" y="371" width="53" height="34"/>
+                                <rect key="frame" x="138" y="371" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="kB5-qh-EM0"/>
+                                    <constraint firstAttribute="height" constant="50" id="lzs-4v-b5T"/>
+                                </constraints>
                                 <state key="normal" title="tumblr">
                                     <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -69,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gH-VQ-iuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306.5" y="333.5"/>
+            <point key="canvasLocation" x="232.5" y="333.5"/>
         </scene>
     </scenes>
 </document>

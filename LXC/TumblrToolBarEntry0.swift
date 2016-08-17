@@ -21,6 +21,7 @@ class TumblrToolBarEntry0: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         
+        
         toolbarSeperatorLine = UIView()
         toolbarSeperatorLine.backgroundColor = kTMCellLineColorAlpha
         toolbarSeperatorLine.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, ToolBox.obtainFloatPixel(1))

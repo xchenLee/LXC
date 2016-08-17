@@ -14,6 +14,8 @@ protocol TumblrNormalCellDelegate {
     func didClickLikeBtn(cell: TumblrNormalCell)
     func didClickImage(cell: TumblrNormalCell, index: Int)
     func didClickTag(cell: TumblrNormalCell, tag: String)
+    func didClickOuterVideo(cell: TumblrNormalCell)
+    func didLongPressVideo(cell: TumblrNormalCell)
 
 }
 
