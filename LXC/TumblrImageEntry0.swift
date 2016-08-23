@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import YYKit
+//import YYKit
 import Kingfisher
 
 class TumblrImageEntry0: UIView {

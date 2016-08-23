@@ -17,10 +17,17 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
     
     private var mpVolumeView: MPVolumeView!
     
+    // read-only 
+    //
+    private var originalFrame: CGRect! {
+        return CGRectMake(0, (kScreenHeight - playerBounds.size.height) / 2, playerBounds.size.width, playerBounds.size.height)
+    }
+    
     convenience init(url: NSURL, bounds: CGRect) {
         self.init()
         self.playVideoUrl = url
         self.playerBounds = bounds
+        
         //这样子背景色可以透明了
         self.modalPresentationStyle = .OverCurrentContext
     }
@@ -48,10 +55,17 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPlayer))
         self.player.view.addGestureRecognizer(tapGesture)
         
+        let panGesutre = UIPanGestureRecognizer(target: self, action: #selector(panPlayer))
+        self.player.view.addGestureRecognizer(panGesutre)
+        
         
         // player added and resources set
         self.addChildViewController(self.player)
-        self.player.view.frame = CGRectMake(0, (kScreenHeight - playerBounds.size.height) / 2, playerBounds.size.width, playerBounds.size.height)
+        
+        // store the original frame
+        
+        
+        self.player.view.frame = self.originalFrame
         self.view.addSubview(self.player.view)
         self.player.didMoveToParentViewController(self)
         
@@ -78,6 +92,26 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
     
     func tapPlayer(gesture: UITapGestureRecognizer) {
         self.dismissViewControllerAnimated(true, completion: {})
+    }
+    
+    
+    func panPlayer(gesture: UIPanGestureRecognizer) {
+        
+        let touchView = gesture.view
+        let offsetPoint = gesture.translationInView(self.view)
+        
+        var translateFrame = touchView?.frame
+        translateFrame?.origin.x += offsetPoint.x
+        translateFrame?.origin.y += offsetPoint.y
+        
+        touchView?.frame = translateFrame!
+        gesture .setTranslation(CGPointZero, inView: touchView)
+        
+        
+        if gesture.state == .Cancelled || gesture.state == .Failed || gesture.state == .Ended {
+            touchView?.frame = self.originalFrame
+        }
+        
     }
     
     // MARK: - PlayerDelegate methods
@@ -122,7 +156,6 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         print("player end")
         
     }
-
 
 
 }

@@ -83,7 +83,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
             let photoCell = TumblrPhotoCell()
             photoCell.cellIndex = index
             photoCell.frame = self.bounds
-            photoCell.left = CGFloat(index) * kScreenWidth
+            photoCell.frame.origin.x = CGFloat(index) * kScreenWidth
             photoCell.containerView.frame = photoCell.bounds
             photoCells.append(photoCell)
             self.scrollView.addSubview(photoCell)

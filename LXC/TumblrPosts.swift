@@ -111,7 +111,7 @@ class TumblrPosts: UITableViewController, UINavigationControllerDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsCell0, forIndexPath: indexPath)
+
         var dequeueCell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsCell0) as? TumblrNormalCell
         
         let layout = layouts[indexPath.row]
@@ -226,8 +226,6 @@ extension TumblrPosts {
             })
             
         }
-        
-        
     }
 }
 
@@ -298,7 +296,6 @@ extension TumblrPosts: TumblrNormalCellDelegate {
     
     func didClickTag(cell: TumblrNormalCell, tag: String) {
         
-        
         let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
         let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
             as! TumblrPostsByTag
@@ -315,34 +312,11 @@ extension TumblrPosts: TumblrNormalCellDelegate {
         }
         
         let youtubeUrl = post.permalinkUrl
-        
         let url = NSURL(string: youtubeUrl)
         
         UIApplication.sharedApplication().openURL(url!)
-
     }
     
-    func classFromString(cls: String, interface: Protocol?) -> NSObject.Type? {
-        guard let interface = interface else {
-            return NSClassFromString(cls) as? NSObject.Type
-        }
-        
-        if let cls = NSClassFromString(cls) {
-            if class_conformsToProtocol(cls, interface) {
-                return cls as? NSObject.Type
-            }
-            
-            if class_addProtocol(cls, interface) {
-                return cls as? NSObject.Type
-            }
-        }
-        return nil
-    }
-    
-    func instanceFromString<T>(cls: String, interface: Protocol?) -> T? {
-        return classFromString(cls, interface: interface)?.init() as? T
-    }
-
     
     func didLongPressVideo(cell: TumblrNormalCell) {
         
@@ -355,64 +329,15 @@ extension TumblrPosts: TumblrNormalCellDelegate {
         }
         
         let url = NSURL(string: post.videoUrl)
-        
         let bounds = CGRectMake(0, 0, kScreenWidth, layout.videoHeight)
         
         let videoPlayerController = VideoPlayerController(url: url!, bounds: bounds)
         
-        self.presentViewController(videoPlayerController, animated: true) { 
+        self.presentViewController(videoPlayerController, animated: true) {
+            //会引起闪退
             //videoPlayerController.playFromBeginning()
         }
-        
-        
-//        let avPlayerController = AVPlayerViewController()
-//        let avPlayer = AVPlayer(URL: url!)
-//        avPlayer.allowsExternalPlayback = true
-//        avPlayer.usesExternalPlaybackWhileExternalScreenIsActive = true
-//        avPlayerController.player = avPlayer
-//        
-//        let volumeView = MPVolumeView()
-//        volumeView.backgroundColor = UIColor.redColor()
-//        volumeView.showsVolumeSlider = false
-//        volumeView.showsRouteButton = true
-//        volumeView.top = 80
-//        volumeView.tag = 2008
-//        volumeView.left = 270
-//        volumeView.sizeToFit()
-//        avPlayerController.view.addSubview(volumeView)
-//        
-//        self.presentViewController(avPlayerController, animated: true) { 
-//            
-//            let volumeView = avPlayerController.view.viewWithTag(2008) as! MPVolumeView
-//            
-//            let avaliable = volumeView.wirelessRoutesAvailable
-//            
-//            let active = volumeView.wirelessRouteActive
-//            
-//            
-//        }
     
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -32,7 +32,7 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
         self.tableView.dataSource = self
         self.tableView.registerNib(UINib(nibName: "PhoneContactsCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "PhoneContactsCell")
         
-        let pickButonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "performAddAction")
+        let pickButonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PhoneContactsList.performAddAction))
         navigationItem.rightBarButtonItem = pickButonItem
         
         self.requestContactsData()

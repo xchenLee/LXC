@@ -12,6 +12,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y9k-2R-1Ft">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="XA4-uv-HOc" kind="relationship" relationship="rootViewController" id="yLH-Hk-a3U"/>
@@ -33,41 +38,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMZ-82-Ua4">
-                                <rect key="frame" x="171" y="317" width="33" height="34"/>
-                                <state key="normal" title="sina">
-                                    <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="authBtnClicked:" destination="XA4-uv-HOc" eventType="touchUpInside" id="opr-kH-10B"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVS-F4-mZ1">
-                                <rect key="frame" x="138" y="371" width="100" height="50"/>
+                                <rect key="frame" x="164" y="590" width="47" height="47"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="kB5-qh-EM0"/>
-                                    <constraint firstAttribute="height" constant="50" id="lzs-4v-b5T"/>
+                                    <constraint firstAttribute="width" constant="47" id="Hex-sU-ovi"/>
                                 </constraints>
-                                <state key="normal" title="tumblr">
+                                <state key="normal" image="icon_login_tumblr">
                                     <color key="titleColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="tumblrClicked:" destination="XA4-uv-HOc" eventType="touchUpInside" id="Faf-oD-JZg"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hU1-Xu-IyM">
+                                <rect key="frame" x="20" y="84" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Fts-WT-qR6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="namePhonePad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XA4-uv-HOc" id="NLd-Bv-ZaG"/>
+                                </connections>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYW-Te-1pd">
+                                <rect key="frame" x="20" y="124" width="335" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="rky-XW-Mju"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xVS-F4-mZ1" firstAttribute="centerX" secondItem="1OG-2z-fm2" secondAttribute="centerX" id="1fz-AJ-b2K"/>
-                            <constraint firstItem="xVS-F4-mZ1" firstAttribute="top" secondItem="WMZ-82-Ua4" secondAttribute="bottom" constant="20" id="3I0-bz-A7x"/>
-                            <constraint firstItem="WMZ-82-Ua4" firstAttribute="centerX" secondItem="1OG-2z-fm2" secondAttribute="centerX" id="AV7-9b-OVd"/>
-                            <constraint firstItem="WMZ-82-Ua4" firstAttribute="centerY" secondItem="1OG-2z-fm2" secondAttribute="centerY" id="zHR-o8-9If"/>
+                            <constraint firstItem="hU1-Xu-IyM" firstAttribute="top" secondItem="gM7-AF-ND9" secondAttribute="bottom" constant="20" id="4jU-Qf-fo5"/>
+                            <constraint firstAttribute="trailing" secondItem="hU1-Xu-IyM" secondAttribute="trailing" constant="20" id="9DF-Pa-n5m"/>
+                            <constraint firstItem="hU1-Xu-IyM" firstAttribute="leading" secondItem="1OG-2z-fm2" secondAttribute="leading" constant="20" id="H5r-fy-7C0"/>
+                            <constraint firstItem="cop-yc-YMM" firstAttribute="top" secondItem="xVS-F4-mZ1" secondAttribute="bottom" constant="30" id="Stv-yF-FmV"/>
+                            <constraint firstItem="KYW-Te-1pd" firstAttribute="top" secondItem="hU1-Xu-IyM" secondAttribute="bottom" id="eu8-Dw-bq5"/>
+                            <constraint firstAttribute="trailing" secondItem="KYW-Te-1pd" secondAttribute="trailing" constant="20" id="jwv-kv-Lch"/>
+                            <constraint firstItem="KYW-Te-1pd" firstAttribute="leading" secondItem="1OG-2z-fm2" secondAttribute="leading" constant="20" id="mrD-lD-vwg"/>
+                            <constraint firstItem="xVS-F4-mZ1" firstAttribute="centerX" secondItem="1OG-2z-fm2" secondAttribute="centerX" id="tBh-ZT-Cfg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="GdM-k6-mwy"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="authBtn" destination="WMZ-82-Ua4" id="vth-do-9Id"/>
+                        <outlet property="inputField" destination="hU1-Xu-IyM" id="i8G-Y7-GIS"/>
                         <outlet property="tumblrBtn" destination="xVS-F4-mZ1" id="SIM-2c-IbX"/>
                     </connections>
                 </viewController>
@@ -76,4 +94,7 @@
             <point key="canvasLocation" x="232.5" y="333.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_login_tumblr" width="47" height="47"/>
+    </resources>
 </document>

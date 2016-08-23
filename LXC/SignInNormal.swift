@@ -7,30 +7,52 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import TMTumblrSDK
 import OAuthSwift
 import SwiftyJSON
 import ObjectMapper
 
-class SignInNormal: UIViewController {
+class SignInNormal: UIViewController, UITextFieldDelegate {
 
-    
-    @IBOutlet weak var authBtn: UIButton!
+        
+    @IBOutlet weak var inputField: UITextField!
     
     @IBOutlet weak var tumblrBtn: UIButton!
     
     
+    
+    
+    
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.inputField.resignFirstResponder()
+        return true
+    }
+    
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.subscribe()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Subscribe events
+    func subscribe() {
+        let text = inputField.rx_text
+        text.subscribeNext { (text) in
+            
+        }
+    }
+    
+    
+    
+    // MARK: - Auth btn click actions
     @IBAction func authBtnClicked(sender: AnyObject) {
         
         /*guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
