@@ -10,9 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class RxDashboard: UIViewController, UITableViewDelegate {
+class RxDashboard: UIViewController {
     
     var tableView: UITableView!
+    
+    var disposeBag = DisposeBag()
     
     let items = Observable.just([
         "First item",
@@ -26,11 +28,23 @@ class RxDashboard: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         self.tableView = RxUI.buildTableView()
+        self.tableView.frame = self.view.bounds
+        self.view.addSubview(self.tableView)
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        items
+        self.items
             .bindTo(tableView.rx_itemsWithCellIdentifier("cell", cellType: UITableViewCell.self)){
                 (row, element, cell) in
                 cell.textLabel?.text = "\(element) @ row \(row)"
+            }
+            .addDisposableTo(disposeBag)
+        
+        
+        tableView
+            .rx_modelSelected(String)
+            .subscribeNext{
+                value in
+            
             }
             .addDisposableTo(disposeBag)
     }
@@ -39,7 +53,6 @@ class RxDashboard: UIViewController, UITableViewDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

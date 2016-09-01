@@ -68,6 +68,11 @@ class ControllerJumper: NSObject {
         }
         
         window.rootViewController = rootController
+        
+        //TEST
+//        if storyboardName == kStoryboardNameMain {
+//            window.rootViewController = RxDashboard()
+//        }
         if initWindow {
             window.makeKeyAndVisible()
         }

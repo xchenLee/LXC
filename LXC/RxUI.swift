@@ -14,6 +14,7 @@ class RxUI: NSObject {
         
         let tableview = UITableView()
         tableview.separatorStyle = .None
+        tableview.rowHeight = 50
         return tableview
     }
 

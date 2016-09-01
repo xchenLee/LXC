@@ -13,7 +13,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     var containerView: UIView
     var imageView: UIImageView
     var cellIndex: Int = 0
-    var photo: Photo?
+    var photo: TumblrPhotoPreviewItem?
     
     
     // MARK: - Constructors
@@ -68,9 +68,9 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     }
     
     // MARK: - setDatas and resize
-    func fitPhotoData(photoData: Photo) {
+    func fitPhotoData(photoData: TumblrPhotoPreviewItem) {
         //如果图片数据一样，因为不是 NSObject，无法比较，只能比较JSON
-        if self.photo != nil && self.photo!.toJSONString() == photoData.toJSONString() {
+        if self.photo != nil && self.photo!.photo.toJSONString() == photoData.photo.toJSONString() {
             return
         }
         
@@ -79,12 +79,15 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
         self.maximumZoomScale = 1
         
         //TODO Progress
-        let urlString = photoData.originalSize!.url!
+        let urlString = photoData.photo.originalSize!.url!
         let photoUrl = NSURL(string: urlString)
         
+        //先用缓存数据
+        imageView.image = photoData.thumView.image
+        
         imageView.kf_setImageWithURL(photoUrl!, placeholderImage: nil, optionsInfo: [], progressBlock: { (receivedSize, totalSize) in
-            self.maximumZoomScale = 2
             }) { (image, error, cacheType, imageURL) in
+                self.maximumZoomScale = 2
                 
         }
         
@@ -97,7 +100,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
         self.containerView.width = self.bounds.size.width
         
         //矫正尺寸
-        let photoSize = self.photo!.originalSize!
+        let photoSize = self.photo!.photo.originalSize!
         var photoWidth = CGFloat(photoSize.width)
         if photoWidth == 0 {
             photoWidth = kScreenWidth

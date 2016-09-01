@@ -101,4 +101,14 @@ extension UIView {
         }
     }
     
+    func snapshotImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0)
+        self.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let snap = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snap
+    }
+    
+    
+    
 }

@@ -258,8 +258,8 @@ extension TumblrPostsByTag: TumblrNormalCellDelegate {
             return
         }
         
-        let photoView = TumblrPhotoView(photos: post.photos!, currentIndex: index)
-        photoView.present((self.navigationController?.view!)!)
+        //let photoView = TumblrPhotoView(photos: post.photos!, currentIndex: index)
+        //photoView.present((self.navigationController?.view!)!)
     }
     
     func didClickTag(cell: TumblrNormalCell, tag: String) {

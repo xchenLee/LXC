@@ -59,6 +59,7 @@
 		772773C01C9FD3B000A6ED72 /* ImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772773BF1C9FD3B000A6ED72 /* ImageFilters.swift */; };
 		772773C41C9FE13600A6ED72 /* filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772773C31C9FE13600A6ED72 /* filters.storyboard */; };
 		772773CC1CA03A7A00A6ED72 /* ImageFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772773CB1CA03A7A00A6ED72 /* ImageFilterCell.swift */; };
+		7729DB1F1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729DB1E1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift */; };
 		773E16981CEC1B7900D11762 /* QuartzLearning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E16971CEC1B7900D11762 /* QuartzLearning.swift */; };
 		773E169A1CEC1BAD00D11762 /* quartz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 773E16991CEC1BAD00D11762 /* quartz.storyboard */; };
 		773E16A31CEC499A00D11762 /* QuartzBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E16A21CEC499A00D11762 /* QuartzBase.swift */; };
@@ -185,6 +186,7 @@
 		772773BF1C9FD3B000A6ED72 /* ImageFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFilters.swift; sourceTree = "<group>"; };
 		772773C31C9FE13600A6ED72 /* filters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = filters.storyboard; sourceTree = "<group>"; };
 		772773CB1CA03A7A00A6ED72 /* ImageFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFilterCell.swift; sourceTree = "<group>"; };
+		7729DB1E1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrStaticIMGAnimator.swift; sourceTree = "<group>"; };
 		773E16971CEC1B7900D11762 /* QuartzLearning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuartzLearning.swift; sourceTree = "<group>"; };
 		773E16991CEC1BAD00D11762 /* quartz.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = quartz.storyboard; sourceTree = "<group>"; };
 		773E16A21CEC499A00D11762 /* QuartzBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuartzBase.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 			children = (
 				77D832191D576C4000D0A6A5 /* TumblrPhotoView.swift */,
 				77D8321B1D57713100D0A6A5 /* TumblrPhotoCell.swift */,
+				7729DB1E1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift */,
 			);
 			name = photoviewer;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				772409721CCF4DAC00CAD6C1 /* ParentController.swift in Sources */,
 				772409621CCE117500CAD6C1 /* CoreAnimationList.swift in Sources */,
 				7777FB7C1D49E4D300D58607 /* TumblrPost.swift in Sources */,
+				7729DB1F1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift in Sources */,
 				77D832301D58B0B800D0A6A5 /* TumblrTagView.swift in Sources */,
 				77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */,
 				77D8321C1D57713100D0A6A5 /* TumblrPhotoCell.swift in Sources */,

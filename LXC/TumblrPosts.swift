@@ -250,8 +250,8 @@ extension TumblrPosts: TumblrNormalCellDelegate {
         
         cell.likeChanged()
         
-        LayoutManager.doLikeAnimation(cell, liked: post.liked)
         
+        LayoutManager.doLikeAnimation(cell, liked: post.liked)
     }
     
     
@@ -289,9 +289,22 @@ extension TumblrPosts: TumblrNormalCellDelegate {
         guard let layout = cell.layout, let post = layout.post else {
             return
         }
+        let clickedImageView = cell.imagesEntry.imageViews[index]
         
-        let photoView = TumblrPhotoView(photos: post.photos!, currentIndex: index)
-        photoView.present((self.navigationController?.view!)!)
+        let photos = post.photos!
+        
+        var previewItems: [TumblrPhotoPreviewItem] = []
+        
+        for i in 0..<photos.count {
+            let item = TumblrPhotoPreviewItem()
+            item.photo = photos[i]
+            item.thumView = cell.imagesEntry.imageViews[i]
+            previewItems.append(item)
+        }
+        
+        
+        let photoView = TumblrPhotoView(photos: previewItems, currentIndex: index)
+        photoView.preset(clickedImageView, index: index, container: (self.navigationController?.view!)!)
     }
     
     func didClickTag(cell: TumblrNormalCell, tag: String) {

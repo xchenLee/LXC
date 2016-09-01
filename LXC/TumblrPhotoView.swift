@@ -8,23 +8,28 @@
 
 import UIKit
 
+let kTumblrPhotoViewAnimationDuration: NSTimeInterval = 0.3
+
 class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
-    var photoDatas: [Photo] = []
+    var photoDatas: [TumblrPhotoPreviewItem] = []
     var currentIndex: Int = 0
     var blurBackground: Bool = true
     
-    
+    private var background: UIImageView
     private var scrollView: UIScrollView
     private var photoCells: [TumblrPhotoCell] = []
     
+    private var fromView: UIImageView!
+    private var fromViewIndex: NSInteger!
+    
     // MARK: - 初始化方法
-    init(photos: [Photo], currentIndex: Int) {
+    init(photos: [TumblrPhotoPreviewItem], currentIndex: Int) {
         
         self.scrollView = UIScrollView()
-        self.currentIndex = currentIndex
+        self.background = UIImageView()
         self.photoDatas = photos
-        
+        self.currentIndex = currentIndex
         super.init(frame: UIScreen.mainScreen().bounds)
         customInit()
     }
@@ -33,11 +38,13 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     required init?(coder aDecoder: NSCoder) {
         
         self.scrollView = UIScrollView()
+        self.background = UIImageView()
         super.init(coder: aDecoder)
     }
     override init(frame: CGRect) {
         
         self.scrollView = UIScrollView()
+        self.background = UIImageView()
         super.init(frame: frame)
     }
     
@@ -45,9 +52,11 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         
         self.clipsToBounds = true
         self.userInteractionEnabled = true
-        self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
+        //self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
         self.frame = UIScreen.mainScreen().bounds
-        //TODO background
+        
+        self.background.frame = self.bounds
+        self.addSubview(self.background)
         
         self.scrollView.frame = self.bounds
         self.scrollView.delegate = self
@@ -91,24 +100,91 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     }
     
     func singleTapAction(gesture: UITapGestureRecognizer) {
-        self.removeFromSuperview()
+        self.dimiss()
     }
     
     func doubleTapAction(gesture: UITapGestureRecognizer) {
         
     }
     
-    // MARK: - 显示
-    func present(displayContainer: UIView) {
+    // MARK: - Self methods
+    func cellForPage(index: NSInteger) -> TumblrPhotoCell? {
         
-        displayContainer.addSubview(self)
+        for photoCell in photoCells {
+            if photoCell.cellIndex == index {
+                return photoCell
+            }
+        }
+        return nil
+    }
+    
+    // MARK: - 显示
+    func preset(fromView: UIImageView, index: NSInteger, container: UIView) {
+        
+        self.fromView = fromView
+        self.fromViewIndex = index
+        fromView.hidden = true
+        
+        
+        container.addSubview(self)
         
         let count = self.photoDatas.count
         self.scrollView.contentSize = CGSizeMake(CGFloat(count) * kScreenWidth, kScreenHeight)
         let currentRect = CGRectMake(kScreenWidth * CGFloat(currentIndex), 0, kScreenWidth, kScreenHeight)
         self.scrollView.scrollRectToVisible(currentRect, animated: false)
-
         self.scrollViewDidScroll(self.scrollView)
+        
+        let imageCell = photoCells[index]
+        
+        let fromRect = fromView.convertRect(fromView.bounds, toView: imageCell.containerView)
+        
+        imageCell.containerView.clipsToBounds = false
+        imageCell.imageView.frame = fromRect
+        imageCell.contentMode = .ScaleAspectFill
+        
+        self.scrollView.userInteractionEnabled = false
+        
+        UIView.animateWithDuration(kTumblrPhotoViewAnimationDuration, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+            imageCell.imageView.frame = imageCell.containerView.bounds
+            }) { (finished) in
+                
+                UIView.animateWithDuration(kTumblrPhotoViewAnimationDuration, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+                    imageCell.containerView.clipsToBounds = true
+                    self.scrollViewDidScroll(self.scrollView)
+                    self.scrollView.userInteractionEnabled = true
+                    }, completion: { (finish) in
+                })
+                
+        }
+    }
+    
+    func dimiss() {
+        
+        let photoCell = self.cellForPage(self.currentIndex)
+        let photoData = self.photoDatas[self.currentIndex]
+        
+        var fromView = self.fromView
+        if self.currentIndex != self.fromViewIndex {
+            fromView = photoData.thumView
+        }
+        
+        UIView.animateWithDuration(kTumblrPhotoViewAnimationDuration, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+            
+            let fromRect = fromView.convertRect(fromView.bounds, toView: photoCell?.containerView)
+            photoCell?.containerView.clipsToBounds = false
+            photoCell?.contentMode = fromView.contentMode
+            photoCell?.imageView.frame = fromRect
+            
+        }) { (finished) in
+            fromView.hidden = false
+            UIView.animateWithDuration(0.15, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+                self.alpha = 0
+                }, completion: { (finish) in
+                    self.removeFromSuperview()
+            })
+            
+        }
+        
     }
     
     // MARK: - UIScrollViewDelegate
@@ -128,6 +204,8 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
             let photoCell = photoCells[index]
             photoCell.fitPhotoData(photoData)
         }
+        self.currentIndex = page
+        
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -142,6 +220,11 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
 
 }
 
+class TumblrPhotoPreviewItem: NSObject {
+    
+    var photo: Photo!
+    var thumView: UIImageView!
+}
 
 
 
