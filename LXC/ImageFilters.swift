@@ -55,7 +55,7 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
         filteredImageView.ciFilter = filters[0]
         filteredImageView.inputImage = sample
         
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveFilterImg")
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(ImageFilters.saveFilterImg))
         navigationItem.rightBarButtonItem = rightBarButtonItem
         
         

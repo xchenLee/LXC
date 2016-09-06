@@ -55,6 +55,7 @@ class TumblrToolBarEntry0: UIView {
         toolbarSeperatorLine.top = 0
         
         copySourceBtn = UIButton(type: .Custom)
+        copySourceBtn.backgroundColor = UIColor.whiteColor()
         copySourceBtn.size = CGSizeMake(kTMCellToolBarHeight, kTMCellToolBarHeight-2)
         copySourceBtn.top = 1
         copySourceBtn.setImage(UIImage(named: "icon_clipboard"), forState: .Normal)
@@ -62,6 +63,7 @@ class TumblrToolBarEntry0: UIView {
         copySourceBtn.backgroundColor = UIColor.whiteColor()
         
         likeBtn = UIButton(type: .Custom)
+        likeBtn.backgroundColor = UIColor.whiteColor()
         likeBtn.size = CGSizeMake(kTMCellToolBarHeight, kTMCellToolBarHeight - 2)
         likeBtn.top = 1
         likeBtn.setImage(UIImage(named: "icon_like"), forState: .Normal)

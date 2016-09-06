@@ -70,6 +70,7 @@ class TumblrTextEntry0: UIView {
         self.clipsToBounds = true
         self.userInteractionEnabled = true
         self.exclusiveTouch = true
+        self.backgroundColor = UIColor.whiteColor()
         
         self.addSubview(self.titleView)
         self.addSubview(self.textView)

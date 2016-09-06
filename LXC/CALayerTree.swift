@@ -82,8 +82,6 @@ class CALayerTree: UIViewController {
             resultLabel.text?.appendContentsOf("They are the same\n")
         }
         
-
-        
     }
 
     override func didReceiveMemoryWarning() {

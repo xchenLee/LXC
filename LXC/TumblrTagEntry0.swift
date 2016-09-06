@@ -38,7 +38,10 @@ class TumblrTagEntry0: UIView {
         
         self.clipsToBounds = true
         self.userInteractionEnabled = true
+        self.backgroundColor = UIColor.whiteColor()
         self.exclusiveTouch = true
+        
+        self.textView.backgroundColor = UIColor.whiteColor()
         self.textView.dataDetectorTypes = .Link
         self.textView.userInteractionEnabled = true
         self.textView.delaysContentTouches = true

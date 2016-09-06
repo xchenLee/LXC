@@ -14,7 +14,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     var imageView: UIImageView
     var cellIndex: Int = 0
     var photo: TumblrPhotoPreviewItem?
-    
+        
     
     // MARK: - Constructors
     
@@ -37,7 +37,6 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
         
         self.containerView = UIView()
         self.containerView.clipsToBounds = true
-        
         self.imageView = UIImageView()
         self.imageView.clipsToBounds = true
         

@@ -61,6 +61,8 @@ class TumblrNameEntry0: UIView {
         
         self.avatarView = UIImageView()
         self.avatarView.clipsToBounds = true
+        self.avatarView.layer.shouldRasterize = true
+        self.avatarView.layer.rasterizationScale = UIScreen.mainScreen().scale
         self.avatarView.layer.cornerRadius = kTMCellCornerRadius
         self.avatarView.layer.borderWidth = ToolBox.obtainFloatPixel(1)
         self.avatarView.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).CGColor
@@ -85,6 +87,7 @@ class TumblrNameEntry0: UIView {
         
         self.clipsToBounds = true
         self.userInteractionEnabled = true
+        self.backgroundColor = UIColor.whiteColor()
         self.exclusiveTouch = true
         self.addSubview(self.topLine)
         self.addSubview(self.avatarView)

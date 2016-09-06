@@ -70,7 +70,6 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         self.player.didMoveToParentViewController(self)
         
         self.player.setUrl(self.playVideoUrl)
-        self.player.playFromBeginning()
         
         
         // airplay
@@ -112,6 +111,10 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
             touchView?.frame = self.originalFrame
         }
         
+    }
+    
+    func playFromBeginning() {
+        self.player.playFromBeginning()
     }
     
     // MARK: - PlayerDelegate methods

@@ -123,7 +123,10 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         
         self.fromView = fromView
         self.fromViewIndex = index
-        fromView.hidden = true
+        //let snapshot = container.snapshotImageAfterScreenUpdates(false)
+        //fromView.hidden = true
+        //fromView.hidden = false
+        //self.background.image = snapshot
         
         
         container.addSubview(self)
@@ -176,7 +179,6 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
             photoCell?.imageView.frame = fromRect
             
         }) { (finished) in
-            fromView.hidden = false
             UIView.animateWithDuration(0.15, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
                 self.alpha = 0
                 }, completion: { (finish) in

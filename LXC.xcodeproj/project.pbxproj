@@ -65,6 +65,9 @@
 		773E16A31CEC499A00D11762 /* QuartzBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E16A21CEC499A00D11762 /* QuartzBase.swift */; };
 		776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776054A71CA4EF4C00EF3618 /* IImagePicker.swift */; };
 		776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776054A91CA5237C00EF3618 /* imagepicker.storyboard */; };
+		7761FEA41D7E98A7001EE55F /* FPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7761FEA31D7E98A7001EE55F /* FPSLabel.swift */; };
+		7761FEAF1D7EC1A5001EE55F /* TumblrPostsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7761FEAE1D7EC1A5001EE55F /* TumblrPostsList.swift */; };
+		7761FEB11D7EC2B9001EE55F /* TumblrDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7761FEB01D7EC2B9001EE55F /* TumblrDashboard.swift */; };
 		777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777048811C9AA22D00A15A5B /* DigitalScale.swift */; };
 		777481661D48A09600065F46 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777481651D48A09600065F46 /* OAuthSwift.framework */; };
 		777481671D48A09600065F46 /* OAuthSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 777481651D48A09600065F46 /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -193,6 +196,9 @@
 		774F03D11D3E273F005FA275 /* LXC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LXC-Bridging-Header.h"; sourceTree = "<group>"; };
 		776054A71CA4EF4C00EF3618 /* IImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagePicker.swift; sourceTree = "<group>"; };
 		776054A91CA5237C00EF3618 /* imagepicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = imagepicker.storyboard; sourceTree = "<group>"; };
+		7761FEA31D7E98A7001EE55F /* FPSLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSLabel.swift; sourceTree = "<group>"; };
+		7761FEAE1D7EC1A5001EE55F /* TumblrPostsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPostsList.swift; sourceTree = "<group>"; };
+		7761FEB01D7EC2B9001EE55F /* TumblrDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrDashboard.swift; sourceTree = "<group>"; };
 		777048811C9AA22D00A15A5B /* DigitalScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalScale.swift; sourceTree = "<group>"; };
 		777481651D48A09600065F46 /* OAuthSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OAuthSwift.framework; path = "/Users/renren/Library/Developer/Xcode/DerivedData/LXC-eelmtixqxevmvfeebyprqtkhabcl/Build/Products/Debug-iphonesimulator/OAuthSwift/OAuthSwift.framework"; sourceTree = "<absolute>"; };
 		7777FB541D48A75D00D58607 /* TumblrUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrUser.swift; sourceTree = "<group>"; };
@@ -328,6 +334,7 @@
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
 				7721036C1D4A059A00F18546 /* StringObject.swift */,
+				7761FEA31D7E98A7001EE55F /* FPSLabel.swift */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -589,6 +596,8 @@
 				77D8323C1D59B23E00D0A6A5 /* TumblrPostsByTag.swift */,
 				7777FB5D1D48ABF400D58607 /* tumblrboard.storyboard */,
 				77D8323E1D5AF1E900D0A6A5 /* TumblrSearch.swift */,
+				7761FEAE1D7EC1A5001EE55F /* TumblrPostsList.swift */,
+				7761FEB01D7EC2B9001EE55F /* TumblrDashboard.swift */,
 			);
 			name = pages;
 			sourceTree = "<group>";
@@ -801,6 +810,7 @@
 				77D8321A1D576C4000D0A6A5 /* TumblrPhotoView.swift in Sources */,
 				77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */,
 				772773C01C9FD3B000A6ED72 /* ImageFilters.swift in Sources */,
+				7761FEB11D7EC2B9001EE55F /* TumblrDashboard.swift in Sources */,
 				777D58041D475744007274BB /* SinaAPI.swift in Sources */,
 				771F25AC1CC731C700E88260 /* NavBarAndTable.swift in Sources */,
 				77007AE41D6B414700225F9B /* RxDashboard.swift in Sources */,
@@ -817,6 +827,7 @@
 				7721036D1D4A059A00F18546 /* StringObject.swift in Sources */,
 				77E312ED1CA9889300867373 /* IImagePickerAlbumAssets.swift in Sources */,
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
+				7761FEAF1D7EC1A5001EE55F /* TumblrPostsList.swift in Sources */,
 				771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */,
 				77D54AB61D42022F008B0A02 /* SinaUser.swift in Sources */,
 				773E16981CEC1B7900D11762 /* QuartzLearning.swift in Sources */,
@@ -871,6 +882,7 @@
 				772103D61D52514700F18546 /* TumblrToolBarEntry0.swift in Sources */,
 				772409721CCF4DAC00CAD6C1 /* ParentController.swift in Sources */,
 				772409621CCE117500CAD6C1 /* CoreAnimationList.swift in Sources */,
+				7761FEA41D7E98A7001EE55F /* FPSLabel.swift in Sources */,
 				7777FB7C1D49E4D300D58607 /* TumblrPost.swift in Sources */,
 				7729DB1F1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift in Sources */,
 				77D832301D58B0B800D0A6A5 /* TumblrTagView.swift in Sources */,

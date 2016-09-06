@@ -1,8 +1,8 @@
 //
-//  TumblrPosts.swift
+//  TumblrDashboard.swift
 //  LXC
 //
-//  Created by renren on 16/7/27.
+//  Created by renren on 16/9/6.
 //  Copyright © 2016年 com.demo.lxc. All rights reserved.
 //
 
@@ -10,13 +10,9 @@ import UIKit
 import TMTumblrSDK
 import SwiftyJSON
 import ObjectMapper
-import MediaPlayer
-import AVKit
 
+class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
 
-class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
-    
-    
     var writeCenter: CGPoint = CGPointZero
     
     lazy var postBtn: UIButton = {
@@ -34,7 +30,7 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
     
     
     lazy var postBg: UIVisualEffectView = {
-    
+        
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = kTMWriteIconSize / 2
@@ -56,8 +52,8 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
         
         self.navigationController?.view.addSubview(self.postBtn)
         self.writeCenter = self.postBtn.center
-
-
+        
+        
         self.navigationController?.delegate = self
         
         let fpsLabel = FPSLabel()
@@ -112,11 +108,11 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
             
         }
     }
-
+    
 }
 
 // MARK: - extension for request datas
-extension TumblrPosts {
+extension TumblrDashboard {
     
     func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
         
@@ -130,9 +126,9 @@ extension TumblrPosts {
         }
         //offset > 0 ? ["offset" : String(offset)] : nil
         TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
-
-        
-//        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+            
+            
+            //        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }
@@ -141,7 +137,7 @@ extension TumblrPosts {
             let responseJSON = JSON(result)
             let responsePosts = Mapper<ResponsePosts>().map(responseJSON.dictionaryObject!)
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { 
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
                 guard let posts = responsePosts?.posts else {
                     self.tableView.endRefreshing()
@@ -185,4 +181,3 @@ extension TumblrPosts {
         }
     }
 }
-

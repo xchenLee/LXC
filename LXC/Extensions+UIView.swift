@@ -109,6 +109,28 @@ extension UIView {
         return snap
     }
     
+    func snapshotImageAfterScreenUpdates(afterUpdate: Bool) -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
+        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: afterUpdate)
+        let snap = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return snap
+    }
+    
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

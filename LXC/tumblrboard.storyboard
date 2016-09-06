@@ -7,7 +7,7 @@
         <!--Posts-->
         <scene sceneID="e2s-fg-8wx">
             <objects>
-                <tableViewController id="UUN-6u-Xyv" customClass="TumblrPosts" customModule="LXC" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="UUN-6u-Xyv" customClass="TumblrDashboard" customModule="LXC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oG2-Er-Fke">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
