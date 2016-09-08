@@ -22,6 +22,8 @@ class TumblrPostsByTag: TumblrPostsList {
         super.viewDidLoad()
         self.addDataHandler()
         self.tableView.mj_header.beginRefreshing()
+        
+        self.addObserver(self, forKeyPath: "tagName", options: .New, context: nil)
     }
     
     
@@ -43,6 +45,15 @@ class TumblrPostsByTag: TumblrPostsList {
         }
     }
     
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if keyPath == "tagName" {
+            let newTagValue = change![NSKeyValueChangeNewKey] as! String
+            self.title = newTagValue
+            self.tableView.mj_header.beginRefreshing()
+        }
+    }
+    
     /**
      重新方法，当在tag页面点击的时候，在本页面刷新数据
      
@@ -50,9 +61,11 @@ class TumblrPostsByTag: TumblrPostsList {
      - parameter tag:  name of tag
      */
     override func didClickTag(cell: TumblrNormalCell, tag: String) {
-        self.tagName = tag
-        self.title = tag
-        self.tableView.mj_header.beginRefreshing()
+        self.setValue(tag, forKeyPath: "tagName")
+    }
+    
+    deinit {
+        self.removeObserver(self, forKeyPath: "tagName")
     }
 
 }

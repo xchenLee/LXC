@@ -87,7 +87,5 @@ class TumblrContext: NSObject {
         
         return tumblrUser
     }
-
-
-
+    
 }

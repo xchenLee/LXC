@@ -84,8 +84,6 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         }
         
         cell.likeChanged()
-        
-        
         LayoutManager.doLikeAnimation(cell, liked: post.liked)
     }
     

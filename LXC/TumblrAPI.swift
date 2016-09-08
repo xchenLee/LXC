@@ -14,7 +14,6 @@ import OAuthSwift
 let kTumblrAPIUrl = "https://api.tumblr.com/v2/"
 let kTumblrThirdScheme = "iTumblr"
 
-
 let kTumblrConsumerKey = "JWN0BIo6P7yF8HNNaa0Dy0lwKCHnQ01d5KcSnvxungjvtRVNce"
 let kTumblrConsumerSecretKey = "wiNo4z5MsZ18YnRIMzzXSMrpCIQTaAeiv6GWqGxBxLDsC3XfBx"
 
@@ -49,7 +48,6 @@ class TumblrAPI: NSObject {
      )
      
      oauthswift.authorizeWithCallbackURL(NSURL(string: "oauth-swift://oauth-swift/tumblr")!, success: success, failure: failure)
-    
     }
 
 }

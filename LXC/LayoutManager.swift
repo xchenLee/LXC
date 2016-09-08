@@ -9,9 +9,7 @@
 import UIKit
 
 let kTMCellImageTagPrefix = 2000
-
 let kTMCellMaxPhotoCount = 10
-
 let kTMWriteIconSize : CGFloat = 48
 
 
@@ -483,8 +481,6 @@ class LayoutManager: NSObject {
             animatedRight.removeFromSuperview()
             
         }
-        
-        
     }
 
 }

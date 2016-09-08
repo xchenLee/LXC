@@ -74,7 +74,6 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
             
             let token = credential.oauth_token
             let tokenSecret = credential.oauth_token_secret
-            //let verifier = credential.oauth_verifier
             
             TMAPIClient.sharedInstance().OAuthToken = token
             TMAPIClient.sharedInstance().OAuthTokenSecret = tokenSecret

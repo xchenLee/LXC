@@ -82,8 +82,7 @@ extension String {
 }
 
 extension NSAttributedString {
-    
-    
+
     func heightWithConstrainedWidth(width: CGFloat) -> CGFloat {
         
         let constrainedSize = CGSize(width: width, height: CGFloat.max)
@@ -325,9 +324,4 @@ extension Request {
         return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
     }
 }
-
-extension UIViewController {
-    
-}
-
 

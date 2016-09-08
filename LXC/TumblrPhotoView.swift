@@ -52,7 +52,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         
         self.clipsToBounds = true
         self.userInteractionEnabled = true
-        //self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
+        self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
         self.frame = UIScreen.mainScreen().bounds
         
         self.background.frame = self.bounds

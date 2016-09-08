@@ -20,7 +20,7 @@ class ToolBox: NSObject {
     /**
      黏贴到黏贴板
      
-     - parameter content: <#content description#>
+     - parameter content: content
      */
     class func copytoPasteBoard(content: String) {
         if content.isEmpty {
@@ -30,11 +30,11 @@ class ToolBox: NSObject {
         pasteBoard.string = content
     }
     
+    
     class func obtainFloatPixel(pixel: CGFloat) -> CGFloat {
         return pixel / UIScreen.mainScreen().scale
     }
     
-    // MARK: - Tool for making
     
     // MARK: - Tool Methods to modify views
     class func makeNavigationBarAlpha(naviController : UINavigationController) {
@@ -84,22 +84,6 @@ class ToolBox: NSObject {
             return NSDate()
         }
         return result
-        
-//        var date : NSDate?
-//        do {
-//            let range = NSRange(location: 0, length: timeString.characters.count)
-//            
-//            let detector = try NSDataDetector(types: NSTextCheckingAllTypes)
-//            
-//            detector.enumerateMatchesInString(timeString, options: NSMatchingOptions.Anchored, range: range, usingBlock: { (result, flags, ss) in
-//                date = result?.date
-//            })
-//            return date!
-//        }
-//        catch {
-//            return NSDate()
-//        }
-        
     }
     
     
@@ -199,29 +183,4 @@ class ToolBox: NSObject {
         UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

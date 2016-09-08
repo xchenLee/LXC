@@ -13,12 +13,7 @@ let kNavigationBackBtnColor = UIColor.whiteColor()
 
 extension UIViewController {
     
-    
-    func fixBackStyle() {
-        self.navigationItem.backBarButtonItem?.tintColor = kNavigationBackBtnColor
-        self.navigationController?.navigationBar.tintColor = kNavigationBackBtnColor
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-    }
+    // MARK: - HUD
     
     /**
      显示加载样式
