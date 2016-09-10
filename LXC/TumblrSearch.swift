@@ -25,16 +25,16 @@ class TumblrSearch: UITableViewController {
             "blog_post_count" : "2"
         ]
         
-        TMAPIClient.sharedInstance().search("新垣结衣", parameters: parameters) { (result, error) in
-            
-            if error != nil {
-                return
-            }
-            let resultJSON = JSON(result)
-            
-            let haha = resultJSON
-            
-        }
+//        TMAPIClient.sharedInstance().search("新垣结衣", parameters: parameters) { (result, error) in
+//            
+//            if error != nil {
+//                return
+//            }
+//            let resultJSON = JSON(result)
+//            
+//            let haha = resultJSON
+//            
+//        }
     }
 
     override func didReceiveMemoryWarning() {
