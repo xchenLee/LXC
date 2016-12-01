@@ -17,25 +17,25 @@ import AVKit
 class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
     
     
-    var writeCenter: CGPoint = CGPointZero
+    var writeCenter: CGPoint = CGPoint.zero
     
     lazy var postBtn: UIButton = {
         
-        var btn = UIButton(type: UIButtonType.Custom)
+        var btn = UIButton(type: UIButtonType.custom)
         
         let left = kScreenWidth - kTMWriteIconSize * 1.4
         let top = kScreenHeight - kTMWriteIconSize * 1.4
         
-        btn.setImage(UIImage(named: "icon_write"), forState: .Normal)
-        btn.frame = CGRectMake(left, top, kTMWriteIconSize, kTMWriteIconSize)
-        btn.addTarget(self, action: #selector(postBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+        btn.setImage(UIImage(named: "icon_write"), for: UIControlState())
+        btn.frame = CGRect(x: left, y: top, width: kTMWriteIconSize, height: kTMWriteIconSize)
+        btn.addTarget(self, action: #selector(postBtnClick), for: UIControlEvents.touchUpInside)
         return btn
     }()
     
     
     lazy var postBg: UIVisualEffectView = {
     
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = kTMWriteIconSize / 2
         blurEffectView.clipsToBounds = true
@@ -61,13 +61,13 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
         self.navigationController?.delegate = self
         
         let fpsLabel = FPSLabel()
-        fpsLabel.frame = CGRectMake(10, kScreenHeight - 20, 65, 25)
+        fpsLabel.frame = CGRect(x: 10, y: kScreenHeight - 20, width: 65, height: 25)
         self.navigationController?.view.addSubview(fpsLabel)
     }
     
     // MARK: - Custom Method
     
-    func postBtnClick(btn: UIButton) {
+    func postBtnClick(_ btn: UIButton) {
         
     }
     
@@ -91,11 +91,11 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
     
     // MARK: - UINavigationControllerDelegate
     
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         
         if viewController == self {
             
-            UIView.animateWithDuration(0.2, delay: 0.2, options: [.CurveLinear], animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.2, options: [.curveLinear], animations: {
                 
                 self.postBg.center = self.writeCenter
                 self.postBtn.center = self.writeCenter
@@ -103,10 +103,10 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
                 }, completion: nil)
         } else {
             
-            UIView.animateWithDuration(0.3, delay: 0, options: [.CurveLinear], animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
                 
-                self.postBg.center = CGPointMake(self.writeCenter.x, kScreenHeight + self.postBtn.size.width)
-                self.postBtn.center = CGPointMake(self.writeCenter.x, kScreenHeight + self.postBtn.size.width)
+                self.postBg.center = CGPoint(x: self.writeCenter.x, y: kScreenHeight + self.postBtn.size.width)
+                self.postBtn.center = CGPoint(x: self.writeCenter.x, y: kScreenHeight + self.postBtn.size.width)
                 
                 }, completion: nil)
             
@@ -118,7 +118,7 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
 // MARK: - extension for request datas
 extension TumblrPosts {
     
-    func requestDashboard(offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
+    func requestDashboard(_ offset: Int = 0, limit: Int = 20, sinceId: Int = 0, containsReblog: Bool = false, containsNotes: Bool = false) {
         
         
         var parameters = [
@@ -139,13 +139,13 @@ extension TumblrPosts {
             
             //Success
             let responseJSON = JSON(result)
-            let responsePosts = Mapper<ResponsePosts>().map(responseJSON.dictionaryObject!)
+            let responsePosts = Mapper<ResponsePosts>().map(JSON: responseJSON.dictionaryObject!)
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { 
+            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { 
                 
                 guard let posts = responsePosts?.posts else {
                     self.tableView.endRefreshing()
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.showTextHUD("no posts get")
                     })
                     return
@@ -154,7 +154,8 @@ extension TumblrPosts {
                 var tmpLayouts: [TumblrNormalLayout] = []
                 for tumblrPost in posts {
                     let id = tumblrPost.postId
-                    if !self.tmpIDString.containsString("\(id),") {
+                    
+                    if !self.tmpIDString.contains("\(id),") {
                         let layout = TumblrNormalLayout()
                         layout.fitPostData(tumblrPost)
                         if layout.deleted {
@@ -166,9 +167,9 @@ extension TumblrPosts {
                     }
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if offset > 0 {
-                        self.layouts.appendContentsOf(tmpLayouts)
+                        self.layouts.append(contentsOf: tmpLayouts)
                         self.tableView.reloadData()
                         self.tableView.endLoadingMore()
                     } else {

@@ -9,8 +9,8 @@
 import UIKit
 
 enum PresentType : Int {
-    case Push
-    case Present
+    case push
+    case present
 }
 
 class GoodyItem: NSObject {
@@ -25,14 +25,14 @@ class GoodyItem: NSObject {
         self.goodyName = name
         self.goodyClassName = goodyClassName
         self.storyboardName = ""
-        self.presetnType = .Push
+        self.presetnType = .push
     }
     
     init(name : String, storyboardName : String) {
         self.goodyName = name
         self.goodyClassName = ""
         self.storyboardName = storyboardName
-        self.presetnType = .Push
+        self.presetnType = .push
     }
 
 }

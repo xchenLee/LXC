@@ -13,7 +13,7 @@ class VideoPlaybackView: UIView {
     
     var avPlayer : AVPlayer?
     
-    func setPlayer(player : AVPlayer) {
+    func setPlayer(_ player : AVPlayer) {
         let playerLayer = self.layer as! AVPlayerLayer
         playerLayer.player = player
     }
@@ -23,12 +23,12 @@ class VideoPlaybackView: UIView {
         return playerLayer.player!
     }
     
-    func setVideoFillMode(mode : String) {
+    func setVideoFillMode(_ mode : String) {
         let playerLayer = self.layer as! AVPlayerLayer
         playerLayer.videoGravity = mode
     }
     
-    override class func layerClass() -> AnyClass {
+    override class var layerClass : AnyClass {
         return AVPlayerLayer.self
     }
     

@@ -30,9 +30,9 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
         self.title = "Contacts"
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.registerNib(UINib(nibName: "PhoneContactsCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "PhoneContactsCell")
+        self.tableView.register(UINib(nibName: "PhoneContactsCell", bundle: Bundle.main), forCellReuseIdentifier: "PhoneContactsCell")
         
-        let pickButonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PhoneContactsList.performAddAction))
+        let pickButonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(PhoneContactsList.performAddAction))
         navigationItem.rightBarButtonItem = pickButonItem
         
         self.requestContactsData()
@@ -42,7 +42,7 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
         let contactPickerViewController = CNContactPickerViewController()
         contactPickerViewController.predicateForEnablingContact = NSPredicate(format: "birthday != nil")
         contactPickerViewController.delegate = self
-        presentViewController(contactPickerViewController, animated: true, completion: nil)
+        present(contactPickerViewController, animated: true, completion: nil)
     }
     
     func requestContactsData() {
@@ -53,18 +53,18 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
                 return
             }
             
-            let fetchKeys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),
+            let fetchKeys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
                 CNContactPhoneNumbersKey,
                 CNContactEmailAddressesKey,
                 CNContactImageDataKey
-            ]
+            ] as [Any]
             
             var contacts = [CNContact]()
             
-            let fetchRequest = CNContactFetchRequest(keysToFetch: fetchKeys)
+            let fetchRequest = CNContactFetchRequest(keysToFetch: fetchKeys as! [CNKeyDescriptor])
             let contactStore = AppDelegate.getAppDelegate().contactStore
             do {
-                try contactStore.enumerateContactsWithFetchRequest(fetchRequest, usingBlock: { (contact, stop) -> Void in
+                try contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
                     contacts .append(contact)
                 })
             }
@@ -72,8 +72,8 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
                 
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.contactsArray .addObjectsFromArray(contacts)
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.contactsArray .addObjects(from: contacts)
                 self.tableView.reloadData()
             })
         }
@@ -81,21 +81,21 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
     
     
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactsArray.count
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("PhoneContactsCell", forIndexPath: indexPath) as! PhoneContactsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhoneContactsCell", for: indexPath) as! PhoneContactsCell
         
         let contact = self.contactsArray[indexPath.row] as! CNContact
         
@@ -106,7 +106,7 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
         
         var numberArray = [String]()
         for number in contact.phoneNumbers {
-            let phoneNumber = number.value as! CNPhoneNumber
+            let phoneNumber = number.value 
             numberArray.append(phoneNumber.stringValue)
         }
         
@@ -132,7 +132,7 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
     
     // MARK: CNContactPickerDelegate function
     
-    func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         
         //TODO  delegate
     }

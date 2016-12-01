@@ -42,14 +42,14 @@ class QuartzBase: UIViewController {
         //创建 Bitmap Graphics Context
         
         //最开始没有写下面这行，image nil
-        UIGraphicsBeginImageContext(CGSizeMake(100, 100))
+        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
         
         //拿到当前的page, bitmap
         let context = UIGraphicsGetCurrentContext()
         
         //在page上开始绘制
-        CGContextSetRGBFillColor(context, 1, 0, 0, 1)
-        CGContextFillRect(context, CGRectMake(0, 0, 100, 100))
+        context?.setFillColor(red: 1, green: 0, blue: 0, alpha: 1)
+        context?.fill(CGRect(x: 0, y: 0, width: 100, height: 100))
         
         //获取到
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -57,21 +57,21 @@ class QuartzBase: UIViewController {
         
         
         let screen = UIImageView()
-        screen.frame = CGRectMake(100, 100, 100, 100)
+        screen.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         screen.image = image
         
         self.view.addSubview(screen)
         
         //描边路径
         
-        UIGraphicsBeginImageContext(CGSizeMake(200, 200))
+        UIGraphicsBeginImageContext(CGSize(width: 200, height: 200))
         let context1 = UIGraphicsGetCurrentContext()
-        CGContextStrokeRect(context1, CGRectMake(10, 10, 180, 180))
+        context1?.stroke(CGRect(x: 10, y: 10, width: 180, height: 180))
         
         let screen1 = UIImageView()
         
         let image1 = UIGraphicsGetImageFromCurrentImageContext()
-        screen1.frame = CGRectMake(100, 210, 200, 200)
+        screen1.frame = CGRect(x: 100, y: 210, width: 200, height: 200)
         screen1.image = image1
         self.view.addSubview(screen1)
         UIGraphicsEndImageContext()
@@ -80,10 +80,10 @@ class QuartzBase: UIViewController {
 //        self.view .addSubview(canvasView)
         
         let image2 = UIImage(named: "beauties")
-        let imageView = UIImageView(frame: CGRectMake(0, 0, 118, 111))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 118, height: 111))
         imageView.image = image2
                 
-        let scratchView = ScratchView(frame: CGRectMake(100,420,118,111))
+        let scratchView = ScratchView(frame: CGRect(x: 100,y: 420,width: 118,height: 111))
         scratchView.addMaskView(imageView)
 
         self.view.addSubview(scratchView)
@@ -92,7 +92,7 @@ class QuartzBase: UIViewController {
         let s1img = UIImage(named: "paint01-01")
         
         let s1imgview = UIImageView()
-        s1imgview.frame = CGRectMake(40, 100, 200, 600)
+        s1imgview.frame = CGRect(x: 40, y: 100, width: 200, height: 600)
         s1imgview.image = s1img
         
         self.view.addSubview(s1imgview)
@@ -100,7 +100,7 @@ class QuartzBase: UIViewController {
         let scratch = ScratchViewOne()
         let s1imgs = UIImage(named: "paint01-01blur")
 
-        scratch.frame = CGRectMake(40, 100, 200, 600)
+        scratch.frame = CGRect(x: 40, y: 100, width: 200, height: 600)
         scratch.fuck(s1imgs!, radius: 20)
         self.view.addSubview(scratch)
 

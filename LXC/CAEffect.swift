@@ -24,27 +24,27 @@ class CAEffect: UIViewController {
         super.viewDidLoad()
         
         imageViewOne = UIImageView()
-        imageViewOne?.frame = CGRectMake(30, 84, 100, 100)
+        imageViewOne?.frame = CGRect(x: 30, y: 84, width: 100, height: 100)
         imageViewOne!.image = UIImage(named: "tulin")
-        imageViewOne!.contentMode = .ScaleAspectFit
+        imageViewOne!.contentMode = .scaleAspectFit
         
         imageViewOne!.layer.shadowOpacity = 0.6
-        imageViewOne!.layer.shadowColor = UIColor.redColor().CGColor
+        imageViewOne!.layer.shadowColor = UIColor.red.cgColor
         
         self.view.addSubview(imageViewOne!)
         
         
         imageViewTwo = UIImageView()
-        imageViewTwo!.frame = CGRectMake(180, 84, 100, 100)
+        imageViewTwo!.frame = CGRect(x: 180, y: 84, width: 100, height: 100)
         imageViewTwo!.layer.shadowOpacity = 0.6
         imageViewTwo!.image = UIImage(named: "tulin")
-        imageViewTwo!.contentMode = .ScaleAspectFit
-        imageViewTwo!.layer.shadowColor = UIColor.redColor().CGColor
+        imageViewTwo!.contentMode = .scaleAspectFit
+        imageViewTwo!.layer.shadowColor = UIColor.red.cgColor
         
         self.view.addSubview(imageViewTwo!)
         
-        let squarePath = CGPathCreateMutable()
-        CGPathAddEllipseInRect(squarePath, nil, imageViewTwo!.bounds)
+        let squarePath = CGMutablePath()
+        squarePath.addEllipse(in: imageViewTwo!.bounds)
         //CGPathAddRect(squarePath, nil, imageViewTwo!.bounds)
         imageViewTwo!.layer.shadowPath = squarePath
         
@@ -65,13 +65,13 @@ class CAEffect: UIViewController {
         
         
         imageViewThr = UIImageView()
-        imageViewThr!.frame = CGRectMake(30, 220, 100, 100)
-        imageViewThr!.backgroundColor = UIColor.redColor()
+        imageViewThr!.frame = CGRect(x: 30, y: 220, width: 100, height: 100)
+        imageViewThr!.backgroundColor = UIColor.red
         self.view .addSubview(imageViewThr!)
         
         let maskLayer = CALayer()
-        maskLayer.contents = UIImage(named: "wukong")?.CGImage
-        maskLayer.contentsScale = UIScreen.mainScreen().scale
+        maskLayer.contents = UIImage(named: "wukong")?.cgImage
+        maskLayer.contentsScale = UIScreen.main.scale
         maskLayer.frame = imageViewThr!.bounds
         maskLayer.contentsGravity = kCAGravityResizeAspect
         
@@ -118,29 +118,29 @@ class CAEffect: UIViewController {
         //另一个方法就是，你可以设置CALayer的一个叫做shouldRasterize属性.来实现组透明的效果，如果它被设置为YES，在应用透明度之前，图层及其子图层都会被整合成一个整体的图片，这样就没有透明度混合的问题了
         
         let aView = UIView()
-        aView.frame = CGRectMake(30, 340, 120, 120)
-        aView.backgroundColor = UIColor.redColor()
+        aView.frame = CGRect(x: 30, y: 340, width: 120, height: 120)
+        aView.backgroundColor = UIColor.red
         aView.alpha = 0.5
         self.view.addSubview(aView)
         
         imageViewFou = UIImageView()
-        imageViewFou!.frame = CGRectMake(10, 10, 100, 100)
-        imageViewFou!.contentMode = .ScaleAspectFit
+        imageViewFou!.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
+        imageViewFou!.contentMode = .scaleAspectFit
         imageViewFou!.image = UIImage(named: "wukong")
         aView.addSubview(imageViewFou!)
         
         
         let bView = UIView()
-        bView.frame = CGRectMake(170, 340, 120, 120)
-        bView.backgroundColor = UIColor.redColor()
+        bView.frame = CGRect(x: 170, y: 340, width: 120, height: 120)
+        bView.backgroundColor = UIColor.red
         bView.layer.shouldRasterize = true
         bView.alpha = 0.5
-        bView.layer.rasterizationScale = UIScreen.mainScreen().scale
+        bView.layer.rasterizationScale = UIScreen.main.scale
         self.view.addSubview(bView)
         
         imageViewFiv = UIImageView()
-        imageViewFiv!.frame = CGRectMake(10, 10, 100, 100)
-        imageViewFiv!.contentMode = .ScaleAspectFit
+        imageViewFiv!.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
+        imageViewFiv!.contentMode = .scaleAspectFit
         imageViewFiv!.image = UIImage(named: "wukong")
         bView.addSubview(imageViewFiv!)
 

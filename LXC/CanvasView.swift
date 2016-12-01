@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 
 let kBrushSize  : CGFloat = 8
-let kBrushColor : UIColor = UIColor.redColor()
+let kBrushColor : UIColor = UIColor.red
 
 class CanvasView: UIView {
     
@@ -28,23 +28,23 @@ class CanvasView: UIView {
     }
     
     func customInit() {
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
-        let events = event?.touchesForView(self)
+        let events = event?.touches(for: self)
         
         if let eventTouch = events, let touch = eventTouch.first {
             
-            let point = touch.locationInView(self)
+            let point = touch.location(in: self)
             
             let path = UIBezierPath()
             path.lineWidth = kBrushSize
-            path.lineJoinStyle = .Round
-            path.lineCapStyle = .Round
-            path.moveToPoint(point)
+            path.lineJoinStyle = .round
+            path.lineCapStyle = .round
+            path.move(to: point)
         
             self.movingPaths.append(path)
             
@@ -53,17 +53,17 @@ class CanvasView: UIView {
 
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesMoved(touches, withEvent: event)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         
-        let events = event?.touchesForView(self)
+        let events = event?.touches(for: self)
         
         if let eventTouch = events, let touch = eventTouch.first {
             
-            let point = touch.locationInView(self)
+            let point = touch.location(in: self)
             //let previousPoint = touch.precisePreviousLocationInView(self)
             let lastPath = self.movingPaths.last
-            lastPath?.addLineToPoint(point)
+            lastPath?.addLine(to: point)
             
             self.setNeedsDisplay()
             
@@ -73,10 +73,10 @@ class CanvasView: UIView {
     }
     
     
-    func movePoint(from : CGPoint, to : CGPoint) {
+    func movePoint(_ from : CGPoint, to : CGPoint) {
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
 //        let context = UIGraphicsGetCurrentContext()
         
         for path : UIBezierPath in self.movingPaths {

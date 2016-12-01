@@ -35,23 +35,23 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
     lazy var arrowView : UIView = {
         
         let view = UIView()
-        view.frame = CGRectMake(0, 0, 30, 30)
-        view.backgroundColor = UIColor.grayColor()
+        view.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        view.backgroundColor = UIColor.gray
         view.layer.cornerRadius = 15
         view.layer.allowsEdgeAntialiasing = true
         view.clipsToBounds = true
         
-        let line = UIView(frame: CGRectMake(14, 3, 2, 24))
+        let line = UIView(frame: CGRect(x: 14, y: 3, width: 2, height: 24))
         line.layer.cornerRadius = 1
         line.clipsToBounds = true
         view.addSubview(line)
         
-        let redLine = UIView(frame: CGRectMake(0, 0, 2, 12))
-        redLine.backgroundColor = UIColor.redColor()
+        let redLine = UIView(frame: CGRect(x: 0, y: 0, width: 2, height: 12))
+        redLine.backgroundColor = UIColor.red
         line.addSubview(redLine)
         
-        let blackLine = UIView(frame: CGRectMake(0, 12, 2, 12))
-        blackLine.backgroundColor = UIColor.blackColor()
+        let blackLine = UIView(frame: CGRect(x: 0, y: 12, width: 2, height: 12))
+        blackLine.backgroundColor = UIColor.black
         line.addSubview(blackLine)
         
         return view
@@ -63,7 +63,7 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         self.title = "Location"
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         if !CLLocationManager.locationServicesEnabled() {
             return;
         }
@@ -71,7 +71,7 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.headingAvailable() {
             
             let arrow = self.arrowView
-            let screenW = UIScreen.mainScreen().bounds.size.width
+            let screenW = UIScreen.main.bounds.size.width
             
             arrow.frame = CGRect(x: (screenW - 50), y: 84, width: 30, height: 30)
             self.view.addSubview(arrow)
@@ -90,19 +90,19 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     // MARK: - Custom Methods
-    func methodForEntering( status : CLAuthorizationStatus) {
+    func methodForEntering( _ status : CLAuthorizationStatus) {
         
         switch status {
             
-        case .NotDetermined:
+        case .notDetermined:
             self.locationManager.requestWhenInUseAuthorization()
             
-        case .Denied, .Restricted:
+        case .denied, .restricted:
             
-            let alertController = UIAlertController(title: "", message: "in Setting u can enable this", preferredStyle: .Alert)
-            let alertAction = UIAlertAction(title: "OK", style: .Default, handler:nil)
+            let alertController = UIAlertController(title: "", message: "in Setting u can enable this", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler:nil)
             alertController.addAction(alertAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             
             
         default:
@@ -111,7 +111,7 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     // MARK: - CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if locations.count > 0 , let location = locations.last {
             
@@ -147,10 +147,10 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         switch status {
-        case .AuthorizedWhenInUse, .AuthorizedAlways:
+        case .authorizedWhenInUse, .authorizedAlways:
             self.locationManager.startUpdatingLocation()
             self.locationManager.startUpdatingHeading()
         default:
@@ -159,7 +159,7 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     //方向变化
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         
         //0.0 - 359.9 degrees, 0 being magnetic North
         let magneticHeading  = newHeading.magneticHeading
@@ -167,7 +167,7 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
         //let trueHeading = newHeading.trueHeading
         
         let heading : CGFloat = CGFloat(-1.0 * magneticHeading / 57.2957795)
-        arrowView.transform = CGAffineTransformMakeRotation(heading)
+        arrowView.transform = CGAffineTransform(rotationAngle: heading)
     }
     
 

@@ -13,7 +13,7 @@ class ResponsePosts: Mappable {
     
     var posts: [TumblrPost]?
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

@@ -23,7 +23,7 @@ class TumblrPostsByTag: TumblrPostsList {
         self.addDataHandler()
         self.tableView.mj_header.beginRefreshing()
         
-        self.addObserver(self, forKeyPath: "tagName", options: .New, context: nil)
+        self.addObserver(self, forKeyPath: "tagName", options: .new, context: nil)
     }
     
     
@@ -45,10 +45,10 @@ class TumblrPostsByTag: TumblrPostsList {
         }
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if keyPath == "tagName" {
-            let newTagValue = change![NSKeyValueChangeNewKey] as! String
+            let newTagValue = change![NSKeyValueChangeKey.newKey] as! String
             self.title = newTagValue
             self.tableView.mj_header.beginRefreshing()
         }
@@ -60,7 +60,7 @@ class TumblrPostsByTag: TumblrPostsList {
      - parameter cell: cell
      - parameter tag:  name of tag
      */
-    override func didClickTag(cell: TumblrNormalCell, tag: String) {
+    override func didClickTag(_ cell: TumblrNormalCell, tag: String) {
         self.setValue(tag, forKeyPath: "tagName")
     }
     
@@ -73,7 +73,7 @@ class TumblrPostsByTag: TumblrPostsList {
 
 extension TumblrPostsByTag {
     
-    func requestTaggedPosts(before: Int) {
+    func requestTaggedPosts(_ before: Int) {
         
         var parameters = ["feature_type" : "everything"]
         if before > 0 {
@@ -94,13 +94,14 @@ extension TumblrPostsByTag {
             //TODO  Google 
             //Success
             //let resultJSON = JSON(result)
-            let taggedPosts = Mapper<TumblrPost>().mapArray(result)
+            var taggedPosts: [TumblrPost]?
+                //Mapper<TumblrPost>().map(JSONString: result)
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
                 
                 guard let posts = taggedPosts else {
                     self.tableView.endRefreshing()
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.showTextHUD("no posts get")
                     })
                     return
@@ -110,7 +111,7 @@ extension TumblrPostsByTag {
                 var i = 0
                 for tumblrPost in posts {
                     let id = tumblrPost.postId
-                    if !self.tmpIDString.containsString("\(id),") {
+                    if !self.tmpIDString.contains("\(id),") {
                         let layout = TumblrNormalLayout()
                         layout.fitPostData(tumblrPost)
                         tmpLayouts.append(layout)
@@ -120,9 +121,9 @@ extension TumblrPostsByTag {
                     print("layouts in \(i)")
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if before > 0 {
-                        self.layouts.appendContentsOf(tmpLayouts)
+                        self.layouts.append(contentsOf: tmpLayouts)
                         self.tableView.endLoadingMore()
                         self.tableView.reloadData()
                     } else {

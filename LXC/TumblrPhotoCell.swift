@@ -19,7 +19,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     // MARK: - Constructors
     
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,15 +46,15 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     
     func customInit() {
         
-        self.userInteractionEnabled = true
-        self.frame = UIScreen.mainScreen().bounds
+        self.isUserInteractionEnabled = true
+        self.frame = UIScreen.main.bounds
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
         self.alwaysBounceVertical = false
-        self.multipleTouchEnabled = true
+        self.isMultipleTouchEnabled = true
         
-        self.containerView.userInteractionEnabled = true
-        self.imageView.userInteractionEnabled = true
+        self.containerView.isUserInteractionEnabled = true
+        self.imageView.isUserInteractionEnabled = true
         
         self.bouncesZoom = true
         self.maximumZoomScale = 2
@@ -67,7 +67,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     }
     
     // MARK: - setDatas and resize
-    func fitPhotoData(photoData: TumblrPhotoPreviewItem) {
+    func fitPhotoData(_ photoData: TumblrPhotoPreviewItem) {
         //如果图片数据一样，因为不是 NSObject，无法比较，只能比较JSON
         if self.photo != nil && self.photo!.photo.toJSONString() == photoData.photo.toJSONString() {
             return
@@ -79,23 +79,25 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
         
         //TODO Progress
         let urlString = photoData.photo.originalSize!.url!
-        let photoUrl = NSURL(string: urlString)
+        let photoUrl = URL(string: urlString)
         
         //先用缓存数据
         imageView.image = photoData.thumView.image
         
-        imageView.kf_setImageWithURL(photoUrl!, placeholderImage: nil, optionsInfo: [], progressBlock: { (receivedSize, totalSize) in
+        /*imageView.kf.setImageWithURL(photoUrl!, placeholderImage: nil, optionsInfo: [], progressBlock: { (receivedSize, totalSize) in
             }) { (image, error, cacheType, imageURL) in
                 self.maximumZoomScale = 2
                 
-        }
+        }*/
+        
+        imageView.kf.setImage(with: photoUrl, placeholder: nil, options: [], progressBlock: nil, completionHandler: nil)
         
         self.resizeSubViews()
     }
     
     
     func resizeSubViews() {
-        self.containerView.origin = CGPointZero
+        self.containerView.origin = CGPoint.zero
         self.containerView.width = self.bounds.size.width
         
         //矫正尺寸
@@ -122,7 +124,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
             containerView.height = self.height
         }
         
-        self.contentSize = CGSizeMake(self.width, max(containerView.height, self.height));
+        self.contentSize = CGSize(width: self.width, height: max(containerView.height, self.height));
         self.scrollRectToVisible(self.bounds, animated: false)
         
         //如果图片高度大于自身高度可以bounce vertical
@@ -136,11 +138,11 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     
     
     // MARK: - UIScrollViewDelegate
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.containerView
     }
     
-    func scrollViewDidZoom(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
         
         let containerView = self.containerView
         
@@ -154,7 +156,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
             offsetY = (scrollView.bounds.size.height - scrollView.contentSize.height) / 2
         }
         
-        containerView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY)
+        containerView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
         
     }
 

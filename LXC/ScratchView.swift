@@ -13,9 +13,9 @@ class ScratchView: UIView {
     
     var previousPoint : CGPoint?
     var currentPoint  : CGPoint?
-    var bonusImage    : CGImageRef?
-    var scratchImage  : CGImageRef?
-    var contextMask   : CGContextRef?
+    var bonusImage    : CGImage?
+    var scratchImage  : CGImage?
+    var contextMask   : CGContext?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,110 +28,110 @@ class ScratchView: UIView {
     }
     
     func customInit() {
-        self.opaque = false
+        self.isOpaque = false
     }
     
-    func addMask(image : UIImage) {
+    func addMask(_ image : UIImage) {
         
         let w = self.bounds.width
         let h = self.bounds.height
-        bonusImage = ToolBox.fitImageToSize(image, w: w, h: h).CGImage
+        bonusImage = ToolBox.fitImageToSize(image, w: w, h: h).cgImage
         
         buildResources()
     }
     
-    func addMaskView(mask : UIView) {
+    func addMaskView(_ mask : UIView) {
         
-        let scale = UIScreen.mainScreen().scale
+        let scale = UIScreen.main.scale
         
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0)
         
-        mask.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        mask.layer.render(in: UIGraphicsGetCurrentContext()!)
         mask.layer.contentsScale = scale
         
-        bonusImage = UIGraphicsGetImageFromCurrentImageContext().CGImage
+        bonusImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
         
         buildResources()
     }
     
-    private func buildResources() {
-        let scale = UIScreen.mainScreen().scale
+    fileprivate func buildResources() {
+        let scale = UIScreen.main.scale
 
         let colorSpace = CGColorSpaceCreateDeviceGray()
         
-        let imageW = CGImageGetWidth(bonusImage)
-        let imageH = CGImageGetHeight(bonusImage)
+        let imageW = (bonusImage)?.width
+        let imageH = (bonusImage)?.height
         
-        let pixels = CFDataCreateMutable(nil, imageW * imageH)
+        let pixels = CFDataCreateMutable(nil, imageW! * imageH!)
         
-        contextMask = CGBitmapContextCreate(CFDataGetMutableBytePtr(pixels), imageW, imageH , 8, imageW, colorSpace, 0)
-        let dataProvider = CGDataProviderCreateWithCFData(pixels);
+        contextMask = CGContext(data: CFDataGetMutableBytePtr(pixels), width: imageW!, height: imageH! , bitsPerComponent: 8, bytesPerRow: imageW!, space: colorSpace, bitmapInfo: 0)
+        let dataProvider = CGDataProvider(data: pixels!);
         
-        CGContextSetFillColorWithColor(contextMask, UIColor.blackColor().CGColor);
-        CGContextFillRect(contextMask, CGRectMake(0, 0, self.frame.size.width * scale, self.frame.size.height * scale));
+        (contextMask)?.setFillColor(UIColor.black.cgColor);
+        (contextMask)?.fill(CGRect(x: 0, y: 0, width: self.frame.size.width * scale, height: self.frame.size.height * scale));
         
         
-        CGContextSetStrokeColorWithColor(contextMask, UIColor.whiteColor().CGColor);
-        CGContextSetLineWidth(contextMask, 12);
-        CGContextSetLineCap(contextMask, .Round);
+        (contextMask)?.setStrokeColor(UIColor.white.cgColor);
+        (contextMask)?.setLineWidth(12);
+        (contextMask)?.setLineCap(.round);
         
-        let mask = CGImageMaskCreate(imageW, imageH, 8, 8, imageW, dataProvider, nil, false);
-        scratchImage = CGImageCreateWithMask(bonusImage, mask);
+        let mask = CGImage(maskWidth: imageW!, height: imageH!, bitsPerComponent: 8, bitsPerPixel: 8, bytesPerRow: imageW!, provider: dataProvider!, decode: nil, shouldInterpolate: false);
+        scratchImage = (bonusImage)?.masking(mask!);
 
     }
     
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        let imageToDraw = UIImage(CGImage: self.scratchImage!)
-        imageToDraw.drawInRect(CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height))
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        let imageToDraw = UIImage(cgImage: self.scratchImage!)
+        imageToDraw.draw(in: CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: self.frame.size.height))
     }
     
     
     // MARK: - Touch
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
-        let touchesForView = event?.touchesForView(self)
+        let touchesForView = event?.touches(for: self)
         if let touch = touchesForView?.first {
-            currentPoint = touch.locationInView(self)
+            currentPoint = touch.location(in: self)
         }
         
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesMoved(touches, withEvent: event)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         
-        let touchesForView = event?.touchesForView(self)
+        let touchesForView = event?.touches(for: self)
         if let touch = touchesForView?.first {
-            currentPoint = touch.locationInView(self)
-            previousPoint = touch.previousLocationInView(self)
+            currentPoint = touch.location(in: self)
+            previousPoint = touch.previousLocation(in: self)
             self.scratchView(previousPoint!, endPoint: currentPoint!)
         }
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         
-        let touchesForView = event?.touchesForView(self)
+        let touchesForView = event?.touches(for: self)
         if let touch = touchesForView?.first {
-            previousPoint = touch.previousLocationInView(self)
+            previousPoint = touch.previousLocation(in: self)
             self.scratchView(previousPoint!, endPoint: currentPoint!)
         }
     }
     
     
-    func scratchView(startPoint : CGPoint, endPoint : CGPoint) {
+    func scratchView(_ startPoint : CGPoint, endPoint : CGPoint) {
         
-        let scale = UIScreen.mainScreen().scale
+        let scale = UIScreen.main.scale
         
-        CGContextMoveToPoint(contextMask, startPoint.x * scale, (self.frame.size.height - startPoint.y) * scale);
-        CGContextAddLineToPoint(contextMask, endPoint.x * scale, (self.frame.size.height - endPoint.y) * scale);
-        CGContextStrokePath(contextMask)
+        (contextMask)?.move(to: CGPoint(x: startPoint.x * scale, y: (self.frame.size.height - startPoint.y) * scale));
+        (contextMask)?.addLine(to: CGPoint(x: endPoint.x * scale, y: (self.frame.size.height - endPoint.y) * scale));
+        (contextMask)?.strokePath()
         
         self.setNeedsDisplay()
 

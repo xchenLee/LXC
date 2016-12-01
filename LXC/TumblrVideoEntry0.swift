@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TumblrVideoEntry0: UIView, PlayerDelegate {
 
@@ -22,7 +23,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     
     
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,27 +31,27 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         self.videoPlayer = Player()
         
         self.indicator = UIActivityIndicatorView()
-        self.indicator.size = CGSizeMake(kTMCellVideoIndicatorSize, kTMCellVideoIndicatorSize)
+        self.indicator.size = CGSize(width: kTMCellVideoIndicatorSize, height: kTMCellVideoIndicatorSize)
         
         self.videoFlag = UIImageView()
         self.videoFlag.top = 0
-        self.videoFlag.contentMode = .Center
+        self.videoFlag.contentMode = .center
         self.videoFlag.image = UIImage(named: "icon_video")
         self.videoFlag.left = kScreenWidth - kTMCellVideoFlagSize
-        self.videoFlag.size = CGSizeMake(kTMCellVideoFlagSize, kTMCellVideoFlagSize)
+        self.videoFlag.size = CGSize(width: kTMCellVideoFlagSize, height: kTMCellVideoFlagSize)
         
         self.videoThumbnail = UIImageView()
-        self.videoThumbnail.userInteractionEnabled = true
+        self.videoThumbnail.isUserInteractionEnabled = true
         self.videoThumbnail.clipsToBounds = true
-        self.videoThumbnail.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).CGColor
+        self.videoThumbnail.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).cgColor
         self.videoThumbnail.top = 0
         self.videoThumbnail.left = 0
-        self.videoThumbnail.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
+        self.videoThumbnail.size = CGSize(width: kTMCellAvatarSize, height: kTMCellAvatarSize)
         
         
         self.videoSourceFlag = UIImageView()
-        self.videoSourceFlag.contentMode = .Center
-        self.videoSourceFlag.size = CGSizeMake(kTMCellVideoSourceFlagSize, kTMCellVideoSourceFlagSize)
+        self.videoSourceFlag.contentMode = .center
+        self.videoSourceFlag.size = CGSize(width: kTMCellVideoSourceFlagSize, height: kTMCellVideoSourceFlagSize)
         
         super.init(coder: aDecoder)
         customInit()
@@ -62,27 +63,27 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         self.videoPlayer = Player()
         
         self.indicator = UIActivityIndicatorView()
-        self.indicator.size = CGSizeMake(kTMCellVideoIndicatorSize, kTMCellVideoIndicatorSize)
+        self.indicator.size = CGSize(width: kTMCellVideoIndicatorSize, height: kTMCellVideoIndicatorSize)
         
         self.videoFlag = UIImageView()
         self.videoFlag.top = 0
-        self.videoFlag.contentMode = .Center
+        self.videoFlag.contentMode = .center
         self.videoFlag.image = UIImage(named: "icon_video")
         self.videoFlag.left = kScreenWidth - kTMCellVideoFlagSize
-        self.videoFlag.size = CGSizeMake(kTMCellVideoFlagSize, kTMCellVideoFlagSize)
+        self.videoFlag.size = CGSize(width: kTMCellVideoFlagSize, height: kTMCellVideoFlagSize)
         
         self.videoThumbnail = UIImageView()
-        self.videoThumbnail.userInteractionEnabled = true
+        self.videoThumbnail.isUserInteractionEnabled = true
         self.videoThumbnail.clipsToBounds = true
-        self.videoThumbnail.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).CGColor
+        self.videoThumbnail.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).cgColor
         self.videoThumbnail.top = 0
         self.videoThumbnail.left = 0
-        self.videoThumbnail.size = CGSizeMake(kTMCellAvatarSize, kTMCellAvatarSize)
+        self.videoThumbnail.size = CGSize(width: kTMCellAvatarSize, height: kTMCellAvatarSize)
         
         self.videoSourceFlag = UIImageView()
-        self.videoSourceFlag.contentMode = .Center
+        self.videoSourceFlag.contentMode = .center
         self.videoSourceFlag.image = UIImage(named: "icon_video_youtube")
-        self.videoSourceFlag.size = CGSizeMake(kTMCellVideoSourceFlagSize, kTMCellVideoSourceFlagSize)
+        self.videoSourceFlag.size = CGSize(width: kTMCellVideoSourceFlagSize, height: kTMCellVideoSourceFlagSize)
         
         super.init(frame: frame)
         customInit()
@@ -91,8 +92,8 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     func customInit() {
         
         self.clipsToBounds = true
-        self.userInteractionEnabled = true
-        self.exclusiveTouch = true
+        self.isUserInteractionEnabled = true
+        self.isExclusiveTouch = true
         
         self.videoPlayer.delegate = self
         
@@ -113,7 +114,7 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
     }
     
-    func tapThumbnailView(gesture: UITapGestureRecognizer) {
+    func tapThumbnailView(_ gesture: UITapGestureRecognizer) {
         
         
         guard let safeCell = cell, let layout = safeCell.layout else {
@@ -133,32 +134,32 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         let playerState = self.videoPlayer.playbackState.rawValue
         switch playerState {
             
-        case PlaybackState.Stopped.rawValue:
-            self.videoThumbnail.hidden = true
-            self.videoFlag.hidden = true
+        case PlaybackState.stopped.rawValue:
+            self.videoThumbnail.isHidden = true
+            self.videoFlag.isHidden = true
             self.videoPlayer.playFromBeginning()
             break
             
-        case PlaybackState.Paused.rawValue:
-            self.videoThumbnail.hidden = true
-            self.videoFlag.hidden = true
+        case PlaybackState.paused.rawValue:
+            self.videoThumbnail.isHidden = true
+            self.videoFlag.isHidden = true
             self.videoPlayer.playFromCurrentTime()
             break
             
-        case PlaybackState.Failed.rawValue:
-            self.videoThumbnail.hidden = false
-            self.videoFlag.hidden = false
+        case PlaybackState.failed.rawValue:
+            self.videoThumbnail.isHidden = false
+            self.videoFlag.isHidden = false
             self.videoPlayer.pause()
             break
             
         default:
-            self.videoThumbnail.hidden = false
-            self.videoFlag.hidden = false
+            self.videoThumbnail.isHidden = false
+            self.videoFlag.isHidden = false
             self.videoPlayer.pause()
         }
     }
     
-    func tapVideoPlayerView(gesture: UITapGestureRecognizer) {
+    func tapVideoPlayerView(_ gesture: UITapGestureRecognizer) {
         
         guard let layout = self.cell?.layout else {
             return
@@ -173,36 +174,36 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
         switch playerState {
             
-        case PlaybackState.Stopped.rawValue:
-            self.videoFlag.hidden = true
+        case PlaybackState.stopped.rawValue:
+            self.videoFlag.isHidden = true
             self.videoPlayer.playFromBeginning()
             break
             
-        case PlaybackState.Paused.rawValue:
-            self.videoFlag.hidden = true
+        case PlaybackState.paused.rawValue:
+            self.videoFlag.isHidden = true
             self.videoPlayer.playFromCurrentTime()
             break
             
-        case PlaybackState.Playing.rawValue:
-            self.indicator.hidden = true
-            self.videoFlag.hidden = false
+        case PlaybackState.playing.rawValue:
+            self.indicator.isHidden = true
+            self.videoFlag.isHidden = false
             self.videoPlayer.pause()
             break
             
-        case PlaybackState.Failed.rawValue:
-            self.indicator.hidden = true
+        case PlaybackState.failed.rawValue:
+            self.indicator.isHidden = true
             self.videoPlayer.stop()
             break
             
         default:
-            self.videoFlag.hidden = false
-            self.indicator.hidden = true
+            self.videoFlag.isHidden = false
+            self.indicator.isHidden = true
             self.videoPlayer.stop()
         }
         
     }
     
-    func longPressVideoPlayerView(gesture: UILongPressGestureRecognizer) {
+    func longPressVideoPlayerView(_ gesture: UILongPressGestureRecognizer) {
         
         guard let safeCell = cell else {
             return
@@ -212,12 +213,12 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     }
     
     // MARK: - set datas
-    func setWithLayout(tumblrLayout: TumblrNormalLayout) {
+    func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
         
         //视频缩略图
-        guard let tumblrPost = tumblrLayout.post, let url = NSURL(string: tumblrPost.thumbnailUrl) else {
-            self.videoThumbnail.frame = CGRectZero
-            self.videoSourceFlag.hidden = true
+        guard let tumblrPost = tumblrLayout.post, let url = URL(string: tumblrPost.thumbnailUrl) else {
+            self.videoThumbnail.frame = CGRect.zero
+            self.videoSourceFlag.isHidden = true
             return
         }
         
@@ -225,27 +226,27 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         
         if tumblrLayout.outerVideo {
             self.videoSourceFlag.image = UIImage(named: tumblrLayout.sourceIconName)
-            self.videoSourceFlag.hidden = false
-            self.videoSourceFlag.frame = CGRectMake(tumblrLayout.sourceFlagLeft, tumblrLayout.sourceFlagTop, kTMCellVideoSourceFlagSize, kTMCellVideoSourceFlagSize)
+            self.videoSourceFlag.isHidden = false
+            self.videoSourceFlag.frame = CGRect(x: tumblrLayout.sourceFlagLeft, y: tumblrLayout.sourceFlagTop, width: kTMCellVideoSourceFlagSize, height: kTMCellVideoSourceFlagSize)
         } else {
             self.videoSourceFlag.image = nil
-            self.videoSourceFlag.hidden = true
-            self.videoSourceFlag.frame = CGRectZero
+            self.videoSourceFlag.isHidden = true
+            self.videoSourceFlag.frame = CGRect.zero
         }
         
         
         self.indicator.left = tumblrLayout.indicatorLeft
         self.indicator.top = tumblrLayout.indicatorTop
         
-        self.videoThumbnail.frame = CGRectMake(0, 0, kScreenWidth, tumblrLayout.videoHeight)
-        self.videoThumbnail.kf_setImageWithURL(url)
+        self.videoThumbnail.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: tumblrLayout.videoHeight)
+        self.videoThumbnail.kf.setImage(with: url)
         
-        self.videoThumbnail.hidden = false
+        self.videoThumbnail.isHidden = false
         
-        self.videoPlayer.view.frame = CGRectMake(0, 0, kScreenWidth, tumblrLayout.videoHeight)
+        self.videoPlayer.view.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: tumblrLayout.videoHeight)
         if !tumblrPost.videoUrl.isEmpty {
             
-            guard let url = NSURL(string: tumblrPost.videoUrl) else {
+            guard let url = URL(string: tumblrPost.videoUrl) else {
                 return
             }
             self.videoPlayer.setUrl(url)
@@ -254,40 +255,40 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     
     
     // MARK: - PlayerDelegate methods
-    func playerReady(player: Player) {
+    func playerReady(_ player: Player) {
         print("player ready")
     }
     
-    func playerPlaybackStateDidChange(player: Player) {
+    func playerPlaybackStateDidChange(_ player: Player) {
         print("player state did change")
     }
     
-    func playerBufferingStateDidChange(player: Player) {
+    func playerBufferingStateDidChange(_ player: Player) {
         
         print("player buffering state change")
 
-        if self.videoPlayer.playbackState == PlaybackState.Playing {
-            self.videoThumbnail.userInteractionEnabled = true
+        if self.videoPlayer.playbackState == PlaybackState.playing {
+            self.videoThumbnail.isUserInteractionEnabled = true
         }
         
         let bufferingState = self.videoPlayer.bufferingState.rawValue
         
-        if bufferingState == BufferingState.Delayed.rawValue{
-            self.indicator.hidden = false
+        if bufferingState == BufferingState.delayed.rawValue{
+            self.indicator.isHidden = false
             self.indicator.startAnimating()
         } else {
             self.indicator.stopAnimating()
-            self.indicator.hidden = true
+            self.indicator.isHidden = true
         }
         
         switch bufferingState {
-        case BufferingState.Ready.rawValue:
+        case BufferingState.ready.rawValue:
             print("buffering ready")
             break
-        case BufferingState.Delayed.rawValue:
+        case BufferingState.delayed.rawValue:
             print("buffering delayed")
             break
-        case BufferingState.Unknown.rawValue:
+        case BufferingState.unknown.rawValue:
             print("buffering unknown")
             break
         default:
@@ -297,14 +298,14 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
 
     }
     
-    func playerPlaybackWillStartFromBeginning(player: Player) {
+    func playerPlaybackWillStartFromBeginning(_ player: Player) {
         print("player will start from beginning")
     }
     
-    func playerPlaybackDidEnd(player: Player) {
+    func playerPlaybackDidEnd(_ player: Player) {
         //视频播放结束，显示
-        self.videoThumbnail.userInteractionEnabled = true
-        self.videoThumbnail.hidden = false
+        self.videoThumbnail.isUserInteractionEnabled = true
+        self.videoThumbnail.isHidden = false
         print("player end")
 
     }

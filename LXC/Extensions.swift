@@ -18,16 +18,16 @@ extension String {
     
     
     
-    func convertToAttributedString(font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
+    func convertToAttributedString(_ font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
         
-        guard let data = self.dataUsingEncoding(NSUnicodeStringEncoding) else {
+        guard let data = self.data(using: String.Encoding.unicode) else {
             return NSMutableAttributedString(string: self)
         }
         
         do {
             let options = [
                 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                NSForegroundColorAttributeName: textColor]
+                NSForegroundColorAttributeName: textColor] as [String : Any]
             
             let attributedString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             return attributedString
@@ -56,26 +56,26 @@ extension String {
      
      */
     
-    func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
+    func widthWithConstrainedHeight(_ height: CGFloat, font: UIFont) -> CGFloat {
         
-        let constrainedSize = CGSizeMake(CGFloat.max, height)
+        let constrainedSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
         
-        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let options = NSStringDrawingOptions.usesLineFragmentOrigin
         let attributes = [NSFontAttributeName : font]
         
-        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, attributes: attributes, context: nil)
+        let boundingRect = self.boundingRect(with: constrainedSize, options: options, attributes: attributes, context: nil)
         
         return boundingRect.width
     }
     
-    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+    func heightWithConstrainedWidth(_ width: CGFloat, font: UIFont) -> CGFloat {
         
-        let constrainedSize = CGSizeMake(width, CGFloat.max)
+        let constrainedSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
         
-        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let options = NSStringDrawingOptions.usesLineFragmentOrigin
         let attributes = [NSFontAttributeName : font]
         
-        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, attributes: attributes, context: nil)
+        let boundingRect = self.boundingRect(with: constrainedSize, options: options, attributes: attributes, context: nil)
         
         return boundingRect.height
     }
@@ -83,22 +83,22 @@ extension String {
 
 extension NSAttributedString {
 
-    func heightWithConstrainedWidth(width: CGFloat) -> CGFloat {
+    func heightWithConstrainedWidth(_ width: CGFloat) -> CGFloat {
         
-        let constrainedSize = CGSize(width: width, height: CGFloat.max)
-        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let constrainedSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let options = NSStringDrawingOptions.usesLineFragmentOrigin
 
-        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, context: nil)
+        let boundingRect = self.boundingRect(with: constrainedSize, options: options, context: nil)
         
         return ceil(boundingRect.height)
     }
     
-    func widthWithConstrainedHeight(height: CGFloat) -> CGFloat {
+    func widthWithConstrainedHeight(_ height: CGFloat) -> CGFloat {
         
-        let constrainedSize = CGSize(width: CGFloat.max, height: height)
-        let options = NSStringDrawingOptions.UsesLineFragmentOrigin
+        let constrainedSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
+        let options = NSStringDrawingOptions.usesLineFragmentOrigin
 
-        let boundingRect = self.boundingRectWithSize(constrainedSize, options: options, context: nil)
+        let boundingRect = self.boundingRect(with: constrainedSize, options: options, context: nil)
         
         return ceil(boundingRect.width)
     }
@@ -107,7 +107,7 @@ extension NSAttributedString {
 
 extension UIColor {
     
-    class func fromARGB(rgb : Int, alpha : Float) ->UIColor {
+    class func fromARGB(_ rgb : Int, alpha : Float) ->UIColor {
         let red   =  CGFloat(rgb & 0xFF0000 >> 16) / 255.0
         let green =  CGFloat(rgb & 0x00FF00 >>  8) / 255.0
         let blue  =  CGFloat(rgb & 0x0000FF >>  0) / 255.0
@@ -120,15 +120,15 @@ extension UIColor {
 extension UITableView {
     
     
-    func addPullDownRefresh(handler:()->Void) {
+    func addPullDownRefresh(_ handler:@escaping ()->Void) {
         
         let header = MJRefreshNormalHeader.init(refreshingBlock: handler)
-        header.lastUpdatedTimeLabel.hidden = true
-        header.stateLabel.hidden = true
+        header?.lastUpdatedTimeLabel.isHidden = true
+        header?.stateLabel.isHidden = true
         self.mj_header = header
     }
     
-    func addPullUp2LoadMore(handler:()->Void) {
+    func addPullUp2LoadMore(_ handler:@escaping ()->Void) {
         
         let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: handler)
         self.mj_footer = footer
@@ -153,74 +153,80 @@ extension UITableView {
 extension UIImage {
     
     func fixOrientationOne() ->UIImage {
-        if self.imageOrientation == UIImageOrientation.Up {
+        if self.imageOrientation == UIImageOrientation.up {
             return self
         }
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
-        drawInRect(CGRectMake(0, 0, self.size.width, self.size.height))
+        draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         let normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return normalizedImage;
+        return normalizedImage!;
     }
     
     func fixOrientation() -> UIImage {
         
-        var transform = CGAffineTransformIdentity
+        var transform = CGAffineTransform.identity
         
         let width = self.size.width
         let height = self.size.height
         
         switch self.imageOrientation {
-        case .Up:
+        case .up:
             return self
-        case .Down, .DownMirrored:
-            transform = CGAffineTransformTranslate(transform, width, height)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
-        case .Left, .LeftMirrored:
-            transform = CGAffineTransformTranslate(transform, width, 0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
-        case .Right, .RightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, height)
-            transform = CGAffineTransformRotate(transform, CGFloat(-M_PI_2))
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: width, y: height)
+            transform = transform.rotated(by: CGFloat(M_PI))
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: width, y: 0)
+            transform = transform.rotated(by: CGFloat(M_PI_2))
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: height)
+            transform = transform.rotated(by: CGFloat(-M_PI_2))
             
         default:
             break
         }
         
         switch self.imageOrientation {
-        case .UpMirrored, .DownMirrored:
-            transform = CGAffineTransformTranslate(transform, width, 0)
-            transform = CGAffineTransformScale(transform, -1, 1)
-        case .LeftMirrored, .RightMirrored:
-            transform = CGAffineTransformTranslate(transform, self.size.height, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: self.size.height, y: 0);
+            transform = transform.scaledBy(x: -1, y: 1);
         default:
             break
         }
-        let contextRef = CGBitmapContextCreate(nil, Int(width), Int(height),
-                                               CGImageGetBitsPerComponent(self.CGImage), 0,
-                                               CGImageGetColorSpace(self.CGImage),
-                                               CGImageGetBitmapInfo(self.CGImage).rawValue);
-        CGContextConcatCTM(contextRef, transform)
+        let contextRef = CGContext(data: nil, width: Int(width), height: Int(height),
+                                               bitsPerComponent: ((self.cgImage)?.bitsPerComponent)!, bytesPerRow: 0,
+                                               space: ((self.cgImage)?.colorSpace!)!,
+                                               bitmapInfo: ((self.cgImage)?.bitmapInfo.rawValue)!);
+        contextRef?.concatenate(transform)
         
         switch self.imageOrientation {
-        case .Left, .LeftMirrored, .Right, .RightMirrored:
-            CGContextDrawImage(contextRef, CGRectMake(0, 0, height, width), self.CGImage);
+        case .left, .leftMirrored, .right, .rightMirrored:
+            contextRef?.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: height, height: width));
         default:
-            CGContextDrawImage(contextRef, CGRectMake(0, 0, height, width), self.CGImage);
+            contextRef?.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: height, height: width));
             break
         }
         
-        let cgImg = CGBitmapContextCreateImage(contextRef)
-        let image = UIImage(CGImage: cgImg!)
+        let cgImg = contextRef?.makeImage()
+        let image = UIImage(cgImage: cgImg!)
         
         return image
     }
 }
 
-extension Request {
+
+extension DataRequest {
     
-    internal static func newError(code: Error.Code, failureReason: String) -> NSError {
+    enum ErrorCode: Int {
+        case noData = 1
+        case dataSerializationFailed = 2
+    }
+    
+    internal static func newError(_ code: ErrorCode, failureReason: String) -> NSError {
         let errorDomain = "com.alamofireobjectmapper.error"
         
         let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -229,38 +235,38 @@ extension Request {
         return returnError
     }
     
-    public static func ObjectMapperSerializer<T: Mappable>(keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> ResponseSerializer<T, NSError> {
-        return ResponseSerializer { request, response, data, error in
+    public static func ObjectMapperSerializer<T: BaseMappable>(_ keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> DataResponseSerializer<T> {
+        return DataResponseSerializer { request, response, data, error in
             guard error == nil else {
-                return .Failure(error!)
+                return .failure(error!)
             }
             
             guard let _ = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = newError(.DataSerializationFailed, failureReason: failureReason)
-                return .Failure(error)
+                let error = newError(.noData, failureReason: failureReason)
+                return .failure(error)
             }
             
-            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
+            let result = jsonResponseSerializer.serializeResponse(request, response, data, error)
             
-            let JSONToMap: AnyObject?
-            if let keyPath = keyPath where keyPath.isEmpty == false {
-                JSONToMap = result.value?.valueForKeyPath(keyPath)
+            let JSONToMap: Any?
+            if let keyPath = keyPath , keyPath.isEmpty == false {
+                JSONToMap = (result.value as AnyObject?)?.value(forKeyPath: keyPath)
             } else {
                 JSONToMap = result.value
             }
             
             if let object = object {
-                Mapper<T>().map(JSONToMap, toObject: object)
-                return .Success(object)
-            } else if let parsedObject = Mapper<T>(context: context).map(JSONToMap){
-                return .Success(parsedObject)
+                _ = Mapper<T>().map(JSONObject: JSONToMap, toObject: object)
+                return .success(object)
+            } else if let parsedObject = Mapper<T>(context: context).map(JSONObject: JSONToMap){
+                return .success(parsedObject)
             }
             
             let failureReason = "ObjectMapper failed to serialize response."
-            let error = newError(.DataSerializationFailed, failureReason: failureReason)
-            return .Failure(error)
+            let error = newError(.dataSerializationFailed, failureReason: failureReason)
+            return .failure(error)
         }
     }
     
@@ -274,40 +280,40 @@ extension Request {
      
      - returns: The request.
      */
-    
-    public func responseObject<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: Response<T, NSError> -> Void) -> Self {
-        return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
+    @discardableResult
+    public func responseObject<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
     }
     
-    public static func ObjectMapperArraySerializer<T: Mappable>(keyPath: String?, context: MapContext? = nil) -> ResponseSerializer<[T], NSError> {
-        return ResponseSerializer { request, response, data, error in
+    public static func ObjectMapperArraySerializer<T: BaseMappable>(_ keyPath: String?, context: MapContext? = nil) -> DataResponseSerializer<[T]> {
+        return DataResponseSerializer { request, response, data, error in
             guard error == nil else {
-                return .Failure(error!)
+                return .failure(error!)
             }
             
             guard let _ = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = newError(.DataSerializationFailed, failureReason: failureReason)
-                return .Failure(error)
+                let error = newError(.dataSerializationFailed, failureReason: failureReason)
+                return .failure(error)
             }
             
-            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
+            let result = jsonResponseSerializer.serializeResponse(request, response, data, error)
             
-            let JSONToMap: AnyObject?
-            if let keyPath = keyPath where keyPath.isEmpty == false {
-                JSONToMap = result.value?.valueForKeyPath(keyPath)
+            let JSONToMap: Any?
+            if let keyPath = keyPath, keyPath.isEmpty == false {
+                JSONToMap = (result.value as AnyObject?)?.value(forKeyPath: keyPath)
             } else {
                 JSONToMap = result.value
             }
             
-            if let parsedObject = Mapper<T>(context: context).mapArray(JSONToMap){
-                return .Success(parsedObject)
+            if let parsedObject = Mapper<T>(context: context).mapArray(JSONObject: JSONToMap){
+                return .success(parsedObject)
             }
             
             let failureReason = "ObjectMapper failed to serialize response."
-            let error = newError(.DataSerializationFailed, failureReason: failureReason)
-            return .Failure(error)
+            let error = newError(.dataSerializationFailed, failureReason: failureReason)
+            return .failure(error)
         }
     }
     
@@ -320,8 +326,38 @@ extension Request {
      
      - returns: The request.
      */
-    public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: Response<[T], NSError> -> Void) -> Self {
-        return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
+    @discardableResult
+    public func responseArray<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<[T]>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

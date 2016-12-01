@@ -19,7 +19,7 @@ class QuartzLearning: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kQuzrtzCell)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: kQuzrtzCell)
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,16 +29,16 @@ class QuartzLearning: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kQuzrtzCell, forIndexPath: indexPath) as UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kQuzrtzCell, for: indexPath) as UITableViewCell
 
         let data = datas[indexPath.row]
         
@@ -47,13 +47,13 @@ class QuartzLearning: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = datas[indexPath.row];
         
         let storyboardID = data.sbID
         
-        let subController = self.storyboard?.instantiateViewControllerWithIdentifier(storyboardID)
-        self.showViewController(subController!, sender: nil)
+        let subController = self.storyboard?.instantiateViewController(withIdentifier: storyboardID)
+        self.show(subController!, sender: nil)
     }
 
     /*

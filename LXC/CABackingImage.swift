@@ -33,27 +33,27 @@ class CABackingImage: UIViewController {
         let w = viewTwo.bounds.size.width
         let h = viewTwo.bounds.size.height
         
-        imageView.layer.shadowColor = UIColor.blackColor().CGColor
+        imageView.layer.shadowColor = UIColor.black.cgColor
         imageView.layer.shadowOpacity = 0.8
         
         imageLayer.frame = CGRect(x: (w - 100) / 2.0, y: (h - 100) / 2.0, width: 100, height: 100)
-        imageLayer.backgroundColor = UIColor.whiteColor().CGColor
+        imageLayer.backgroundColor = UIColor.white.cgColor
         viewTwo.layer.addSublayer(imageLayer)
         
         let image = UIImage(named: "tulin")
-        imageLayer.contents = image?.CGImage
+        imageLayer.contents = image?.cgImage
         
         //contentsGravity
         imageLayer.contentsGravity = kCAGravityCenter//kCAGravityResizeAspect
         //contentsScale
-        imageLayer.contentsScale = UIScreen.mainScreen().scale
+        imageLayer.contentsScale = UIScreen.main.scale
         //
         imageLayer.contentsScale = (image?.scale)!
         //contentsScale
         imageLayer.masksToBounds = true
         
         //contentsRect
-        imageLayer.contentsRect = CGRectMake(0, 0.5, 1, 0.5)
+        imageLayer.contentsRect = CGRect(x: 0, y: 0.5, width: 1, height: 0.5)
         
         //contentsRect的用法，就是image sprites,图片拼接到一张大图上一次性载入，
         //带来的好处是 内存使用，载入时间，渲染性能等

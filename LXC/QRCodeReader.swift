@@ -43,7 +43,7 @@ class QRCodeReader: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
-        let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.
@@ -59,7 +59,7 @@ class QRCodeReader: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession?.addOutput(captureMetadataOutput)
             
             // Set delegate and use the default dispatch queue to execute the call back
-            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             
             // Detect all the supported bar code
             captureMetadataOutput.metadataObjectTypes = supportedBarCodes
@@ -75,16 +75,16 @@ class QRCodeReader: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             // Move the message label to the top view
             //TODO
-            view.bringSubviewToFront(messageLabel)
+            view.bringSubview(toFront: messageLabel)
             
             // Initialize QR Code Frame to highlight the QR code
             qrCodeFrameView = UIView()
             
             if let qrCodeFrameView = qrCodeFrameView {
-                qrCodeFrameView.layer.borderColor = UIColor.greenColor().CGColor
+                qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
                 qrCodeFrameView.layer.borderWidth = 2
                 view.addSubview(qrCodeFrameView)
-                view.bringSubviewToFront(qrCodeFrameView)
+                view.bringSubview(toFront: qrCodeFrameView)
             }
 
             
@@ -102,11 +102,11 @@ class QRCodeReader: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects == nil || metadataObjects.count == 0 {
-            qrCodeFrameView?.frame = CGRectZero
+            qrCodeFrameView?.frame = CGRect.zero
             messageLabel.text = "No barcode/QR code is detected"
             NSLog("No barcode/QR code is detected")
 
@@ -122,7 +122,7 @@ class QRCodeReader: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         if supportedBarCodes.contains(metadataObj.type) {
             //        if metadataObj.type == AVMetadataObjectTypeQRCode {
             // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
-            let barCodeObject = videoPreviewLayer?.transformedMetadataObjectForMetadataObject(metadataObj)
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
@@ -136,11 +136,11 @@ class QRCodeReader: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     func loadBeepSound() {
-        let soundFilePath = NSBundle.mainBundle().pathForResource("beep", ofType: "mp3")
-        let fileUrl = NSURL(string: soundFilePath!)
+        let soundFilePath = Bundle.main.path(forResource: "beep", ofType: "mp3")
+        let fileUrl = URL(string: soundFilePath!)
         
         do {
-            try self.audioPlayer = AVAudioPlayer(contentsOfURL: fileUrl!)
+            try self.audioPlayer = AVAudioPlayer(contentsOf: fileUrl!)
             self.audioPlayer?.prepareToPlay()
         } catch {
             print(error)

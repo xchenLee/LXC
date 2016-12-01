@@ -10,12 +10,12 @@ import UIKit
 
 protocol TumblrNormalCellDelegate {
     
-    func didClickCopySourceBtn(cell: TumblrNormalCell)
-    func didClickLikeBtn(cell: TumblrNormalCell)
-    func didClickImage(cell: TumblrNormalCell, index: Int)
-    func didClickTag(cell: TumblrNormalCell, tag: String)
-    func didClickOuterVideo(cell: TumblrNormalCell)
-    func didLongPressVideo(cell: TumblrNormalCell)
+    func didClickCopySourceBtn(_ cell: TumblrNormalCell)
+    func didClickLikeBtn(_ cell: TumblrNormalCell)
+    func didClickImage(_ cell: TumblrNormalCell, index: Int)
+    func didClickTag(_ cell: TumblrNormalCell, tag: String)
+    func didClickOuterVideo(_ cell: TumblrNormalCell)
+    func didLongPressVideo(_ cell: TumblrNormalCell)
 
 }
 
@@ -85,7 +85,7 @@ class TumblrNormalCell: UITableViewCell {
 
     }
     
-    func configLayout(tumblrLayout: TumblrNormalLayout) {
+    func configLayout(_ tumblrLayout: TumblrNormalLayout) {
         self.layout = tumblrLayout
         guard let safeLayout = self.layout else {
             return
@@ -101,26 +101,26 @@ class TumblrNormalCell: UITableViewCell {
         self.nameEntry.setWithLayout(safeLayout)
         
         //文本区域
-        self.textEntry.frame = CGRectMake(0, safeLayout.textTop, kScreenWidth, safeLayout.textHeight)
+        self.textEntry.frame = CGRect(x: 0, y: safeLayout.textTop, width: kScreenWidth, height: safeLayout.textHeight)
         self.textEntry.setWithLayout(safeLayout)
         
         //图片区域
-        self.imagesEntry.frame = CGRectMake(0, safeLayout.imagesTop, kTMCellImageContentWidth, safeLayout.height)
+        self.imagesEntry.frame = CGRect(x: 0, y: safeLayout.imagesTop, width: kTMCellImageContentWidth, height: safeLayout.height)
         self.imagesEntry.setWithPhotoData(safeLayout.post?.photos, rects: safeLayout.imagesFrame)
         
         //视频区域
-        self.videoEntry.frame = CGRectMake(0, safeLayout.videoTop, kScreenWidth, safeLayout.videoHeight)
+        self.videoEntry.frame = CGRect(x: 0, y: safeLayout.videoTop, width: kScreenWidth, height: safeLayout.videoHeight)
         self.videoEntry.setWithLayout(safeLayout)
         
         //reblog
-        self.reblogEntry.frame = CGRectMake(0, safeLayout.reblogTop, kScreenWidth, safeLayout.reblogHeight)
+        self.reblogEntry.frame = CGRect(x: 0, y: safeLayout.reblogTop, width: kScreenWidth, height: safeLayout.reblogHeight)
         self.reblogEntry.setWithLayout(safeLayout)
         
-        self.tagEntry.frame = CGRectMake(0, safeLayout.tagsTop, kScreenWidth, safeLayout.tagsHeight)
+        self.tagEntry.frame = CGRect(x: 0, y: safeLayout.tagsTop, width: kScreenWidth, height: safeLayout.tagsHeight)
         self.tagEntry.setWithLayout(safeLayout)
         
         //toolbar
-        self.toolBarEntry.frame = CGRectMake(0, safeLayout.toolbarTop, kScreenWidth, kTMCellToolBarHeight)
+        self.toolBarEntry.frame = CGRect(x: 0, y: safeLayout.toolbarTop, width: kScreenWidth, height: kTMCellToolBarHeight)
         self.toolBarEntry.setWithLayout(safeLayout)
         
     }

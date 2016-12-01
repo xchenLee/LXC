@@ -51,11 +51,11 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
         }
         let sample = UIImage(named: kSamepleImageName)?.fixOrientation()
         
-        filteredImageView.contentMode = .ScaleAspectFit
+        filteredImageView.contentMode = .scaleAspectFit
         filteredImageView.ciFilter = filters[0]
         filteredImageView.inputImage = sample
         
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(ImageFilters.saveFilterImg))
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(ImageFilters.saveFilterImg))
         navigationItem.rightBarButtonItem = rightBarButtonItem
         
         
@@ -98,22 +98,22 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filterDescriptors.count
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let filterCell = collectionView.dequeueReusableCellWithReuseIdentifier("filterCell", forIndexPath: indexPath) as! ImageFilterCell
+        let filterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterCell", for: indexPath) as! ImageFilterCell
         let filterName = filterDescriptors[indexPath.row].filterDisplayName
         //substringFromIndex(filterName.startIndex.advancedBy(2))
         filterCell.filterNameView.text = filterName
         
-        filterCell.filterImageView.contentMode = .ScaleAspectFill
+        filterCell.filterImageView.contentMode = .scaleAspectFill
         filterCell.filterImageView.inputImage = filteredImageView.inputImage
         filterCell.filterImageView.ciFilter = filters[indexPath.item]
         
@@ -121,7 +121,7 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
     }
     
     // MRAK: - UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         filteredImageView.ciFilter = filters[indexPath.row]
         
@@ -182,13 +182,13 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
         let imageToSave = filteredImageView.ciFilter.outputImage!
         
         let softwareContext = CIContext(options: [kCIContextUseSoftwareRenderer:true])
-        let finalImage = softwareContext.createCGImage(imageToSave, fromRect: imageToSave.extent)
-        let image = UIImage(CGImage: finalImage)
+        let finalImage = softwareContext.createCGImage(imageToSave, from: imageToSave.extent)
+        let image = UIImage(cgImage: finalImage!)
         
         var assetPlaceHolder : PHObjectPlaceholder?
         
-        PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
-            assetPlaceHolder = PHAssetCreationRequest.creationRequestForAssetFromImage(image).placeholderForCreatedAsset
+        PHPhotoLibrary.shared().performChanges({ () -> Void in
+            assetPlaceHolder = PHAssetCreationRequest.creationRequestForAsset(from: image).placeholderForCreatedAsset
             }) { (success, error) -> Void in
                 
                 if success == false {

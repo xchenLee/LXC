@@ -17,7 +17,7 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
     var imagePicker : IImagePicker?
     var assetCollection : PHAssetCollection?
     
-    var fetchResult :PHFetchResult?
+    var fetchResult :PHFetchResult<PHAsset>?
     
     var catchingManager = PHCachingImageManager()
 
@@ -34,16 +34,16 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
         // Do any additional setup after loading the view.
         
         //check 3D Touch before using it
-        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
+        if self.traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             
-            self.registerForPreviewingWithDelegate(self, sourceView: self.view)
+            self.registerForPreviewing(with: self, sourceView: self.view)
         }
         else {
             //TODO  if use long Press
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = self.assetCollection?.localizedTitle
     }
 
@@ -59,8 +59,7 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
             return
         }
         
-        self.fetchResult = PHAsset.fetchAssetsInAssetCollection(self.assetCollection!, options: nil)
-        
+        self.fetchResult = PHAsset.fetchAssets(in: self.assetCollection!, options: nil)
     }
 
     /*
@@ -75,19 +74,19 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return (fetchResult?.count)!
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! IImageAlbumAssetCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! IImageAlbumAssetCell
         cell.tag = indexPath.item
         
         let asset = fetchResult![indexPath.row] as! PHAsset
@@ -95,7 +94,7 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
         let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let size = flowLayout.itemSize
         
-        self.catchingManager.requestImageForAsset(asset, targetSize: size, contentMode: .AspectFit, options: nil) { (assetImage, info) -> Void in
+        self.catchingManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { (assetImage, info) -> Void in
             
             if cell.tag == indexPath.item {
                 cell.assetImageView.image = assetImage
@@ -137,23 +136,23 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
     */
     
     // MARK: - UICollectionViewDelegateFlowLayout
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var numberOfColumns : Int = 0;
-        let portrait = UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication().statusBarOrientation)
+        let portrait = UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation)
         numberOfColumns = (portrait ? self.imagePicker?.numberOfColumnsInPortrait : self.imagePicker?.numberOfColumnsInLandScape)!
         
-        let width = (Int(CGRectGetWidth(self.view.frame)) - cellSpace * (numberOfColumns - 1)) / numberOfColumns
+        let width = (Int(self.view.frame.width) - cellSpace * (numberOfColumns - 1)) / numberOfColumns
         let floatW = CGFloat(width)
-        return CGSizeMake(floatW, floatW)
+        return CGSize(width: floatW, height: floatW)
     }
     
     // MARK: - UIViewControllerPreviewingDelegate
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        let convertPoint = self.collectionView!.convertPoint(location, fromView: self.view)
-        if let indexPath = self.collectionView?.indexPathForItemAtPoint(convertPoint), attributes = collectionView?.layoutAttributesForItemAtIndexPath(indexPath) {
+        let convertPoint = self.collectionView!.convert(location, from: self.view)
+        if let indexPath = self.collectionView?.indexPathForItem(at: convertPoint), let attributes = collectionView?.layoutAttributesForItem(at: indexPath) {
             
-            let convertRect = self.collectionView?.convertRect(attributes.frame, toView: self.view)
+            let convertRect = self.collectionView?.convert(attributes.frame, to: self.view)
             previewingContext.sourceRect = convertRect!
             return buildPreviewController(indexPath)
         }
@@ -161,11 +160,11 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
         return nil
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        showViewController(viewControllerToCommit, sender: self)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
     
-    func buildPreviewController(indexPath : NSIndexPath) -> UIViewController {
+    func buildPreviewController(_ indexPath : IndexPath) -> UIViewController {
         
         let pop = IImagePickerAssetPop()
         
@@ -173,25 +172,25 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
         
         let asset = fetchResult![indexPath.row] as! PHAsset
         let options = PHImageRequestOptions()
-        options.deliveryMode = .HighQualityFormat
-        options.synchronous = true
+        options.deliveryMode = .highQualityFormat
+        options.isSynchronous = true
         
         let sizeWanted = getScaledSize(asset.pixelWidth, height: asset.pixelHeight)
         
-        self.catchingManager.requestImageForAsset(asset, targetSize: sizeWanted, contentMode: .AspectFill, options: options) { (assetImage, info) -> Void in
+        self.catchingManager.requestImage(for: asset, targetSize: sizeWanted, contentMode: .aspectFill, options: options) { (assetImage, info) -> Void in
             imageView.image = assetImage
         }
         pop.preferredContentSize = sizeWanted
         return pop
     }
     
-    func getScaledSize(width : Int, height : Int) -> CGSize {
+    func getScaledSize(_ width : Int, height : Int) -> CGSize {
         
         var finalW : CGFloat = 0
         var finalH : CGFloat = 0
         
-        let screenW = UIScreen.mainScreen().bounds.size.width
-        let screenH = UIScreen.mainScreen().bounds.size.height
+        let screenW = UIScreen.main.bounds.size.width
+        let screenH = UIScreen.main.bounds.size.height
         let radioScreen = screenW / screenH
         
         let radioCompare = CGFloat(width) / CGFloat(height)
@@ -205,7 +204,7 @@ class IImagePickerAlbumAssets: UICollectionViewController, UICollectionViewDeleg
             finalW = finalH / CGFloat(height) * CGFloat(width)
         }
         
-        return CGSizeMake(finalW, finalH)
+        return CGSize(width: finalW, height: finalH)
     }
 
 }

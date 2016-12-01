@@ -16,7 +16,7 @@ class TumblrToolBarEntry0: UIView {
     var cell: TumblrNormalCell?
     
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,23 +24,23 @@ class TumblrToolBarEntry0: UIView {
         
         toolbarSeperatorLine = UIView()
         toolbarSeperatorLine.backgroundColor = kTMCellLineColorAlpha
-        toolbarSeperatorLine.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, ToolBox.obtainFloatPixel(1))
+        toolbarSeperatorLine.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: ToolBox.obtainFloatPixel(1))
         toolbarSeperatorLine.left = kTMCellPadding
         toolbarSeperatorLine.top = 0
         
-        copySourceBtn = UIButton(type: .Custom)
-        copySourceBtn.size = CGSizeMake(kTMCellToolBarHeight, kTMCellToolBarHeight)
+        copySourceBtn = UIButton(type: .custom)
+        copySourceBtn.size = CGSize(width: kTMCellToolBarHeight, height: kTMCellToolBarHeight)
         copySourceBtn.top = 0
-        copySourceBtn.setImage(UIImage(named: "icon_clipboard"), forState: .Normal)
+        copySourceBtn.setImage(UIImage(named: "icon_clipboard"), for: UIControlState())
         copySourceBtn.left = kScreenWidth - kTMCellPadding - kTMCellToolBarHeight
-        copySourceBtn.backgroundColor = UIColor.whiteColor()
+        copySourceBtn.backgroundColor = UIColor.white
         
-        likeBtn = UIButton(type: .Custom)
-        likeBtn.size = CGSizeMake(kTMCellToolBarHeight, kTMCellToolBarHeight)
+        likeBtn = UIButton(type: .custom)
+        likeBtn.size = CGSize(width: kTMCellToolBarHeight, height: kTMCellToolBarHeight)
         likeBtn.top = 0
-        likeBtn.setImage(UIImage(named: "icon_clipboard"), forState: .Normal)
+        likeBtn.setImage(UIImage(named: "icon_clipboard"), for: UIControlState())
         likeBtn.left = kScreenWidth - kTMCellPadding - kTMCellToolBarHeight * 2
-        likeBtn.backgroundColor = UIColor.whiteColor()
+        likeBtn.backgroundColor = UIColor.white
         
         super.init(coder: aDecoder)
         customInit()
@@ -50,25 +50,25 @@ class TumblrToolBarEntry0: UIView {
         
         toolbarSeperatorLine = UIView()
         toolbarSeperatorLine.backgroundColor = kTMCellLineColorAlpha
-        toolbarSeperatorLine.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, ToolBox.obtainFloatPixel(1))
+        toolbarSeperatorLine.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: ToolBox.obtainFloatPixel(1))
         toolbarSeperatorLine.left = kTMCellPadding
         toolbarSeperatorLine.top = 0
         
-        copySourceBtn = UIButton(type: .Custom)
-        copySourceBtn.backgroundColor = UIColor.whiteColor()
-        copySourceBtn.size = CGSizeMake(kTMCellToolBarHeight, kTMCellToolBarHeight-2)
+        copySourceBtn = UIButton(type: .custom)
+        copySourceBtn.backgroundColor = UIColor.white
+        copySourceBtn.size = CGSize(width: kTMCellToolBarHeight, height: kTMCellToolBarHeight-2)
         copySourceBtn.top = 1
-        copySourceBtn.setImage(UIImage(named: "icon_clipboard"), forState: .Normal)
+        copySourceBtn.setImage(UIImage(named: "icon_clipboard"), for: UIControlState())
         copySourceBtn.left = kScreenWidth - kTMCellPadding - kTMCellToolBarHeight
-        copySourceBtn.backgroundColor = UIColor.whiteColor()
+        copySourceBtn.backgroundColor = UIColor.white
         
-        likeBtn = UIButton(type: .Custom)
-        likeBtn.backgroundColor = UIColor.whiteColor()
-        likeBtn.size = CGSizeMake(kTMCellToolBarHeight, kTMCellToolBarHeight - 2)
+        likeBtn = UIButton(type: .custom)
+        likeBtn.backgroundColor = UIColor.white
+        likeBtn.size = CGSize(width: kTMCellToolBarHeight, height: kTMCellToolBarHeight - 2)
         likeBtn.top = 1
-        likeBtn.setImage(UIImage(named: "icon_like"), forState: .Normal)
+        likeBtn.setImage(UIImage(named: "icon_like"), for: UIControlState())
         likeBtn.left = kScreenWidth - kTMCellPadding - kTMCellToolBarHeight * 2
-        likeBtn.backgroundColor = UIColor.whiteColor()
+        likeBtn.backgroundColor = UIColor.white
         
         super.init(frame: frame)
         customInit()
@@ -77,20 +77,20 @@ class TumblrToolBarEntry0: UIView {
     func customInit() {
         
         self.clipsToBounds = true
-        self.userInteractionEnabled = true
-        self.exclusiveTouch = true
-        self.backgroundColor = UIColor.whiteColor()
+        self.isUserInteractionEnabled = true
+        self.isExclusiveTouch = true
+        self.backgroundColor = UIColor.white
         self.addSubview(self.copySourceBtn)
         self.addSubview(self.toolbarSeperatorLine)
         self.addSubview(self.likeBtn)
         
-        self.copySourceBtn.addTarget(self, action: #selector(clickCopySourceBtn), forControlEvents: .TouchUpInside)
+        self.copySourceBtn.addTarget(self, action: #selector(clickCopySourceBtn), for: .touchUpInside)
         
-        self.likeBtn.addTarget(self, action: #selector(clickLikeBtn), forControlEvents: .TouchUpInside)
+        self.likeBtn.addTarget(self, action: #selector(clickLikeBtn), for: .touchUpInside)
         
     }
     
-    func clickCopySourceBtn(button: UIButton) {
+    func clickCopySourceBtn(_ button: UIButton) {
         
         guard let safeCell = cell ,let delegate = safeCell.delegate else {
             return
@@ -99,7 +99,7 @@ class TumblrToolBarEntry0: UIView {
         
     }
     
-    func clickLikeBtn(button: UIButton) {
+    func clickLikeBtn(_ button: UIButton) {
         
         guard let safeCell = cell ,let delegate = safeCell.delegate else {
             return
@@ -108,17 +108,17 @@ class TumblrToolBarEntry0: UIView {
         
     }
     
-    func likeChanged(state: Bool) {
+    func likeChanged(_ state: Bool) {
         let name = state ? "icon_liked" : "icon_like"
-        likeBtn.setImage(UIImage(named: name), forState: .Normal)
+        likeBtn.setImage(UIImage(named: name), for: UIControlState())
     }
     
-    func setWithLayout(tumblrLayout: TumblrNormalLayout) {
+    func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
         guard let post = tumblrLayout.post else {
             return
         }
         let name = post.liked ? "icon_liked" : "icon_like"
-        likeBtn.setImage(UIImage(named: name), forState: .Normal)
+        likeBtn.setImage(UIImage(named: name), for: UIControlState())
     }
 
 }

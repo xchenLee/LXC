@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>oauth-swift</string>
+                <string>lee.goody</string>
 			</array>
 		</dict>
 		<dict>

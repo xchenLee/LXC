@@ -22,9 +22,9 @@ class CACubic: UIViewController {
             let view = UILabel()
             view.backgroundColor = ToolBox.randomColor()
             view.text = "\(i)"
-            view.textColor = UIColor.whiteColor()
-            view.font = UIFont.systemFontOfSize(36, weight: UIFontWeightBold)
-            view.textAlignment = .Center
+            view.textColor = UIColor.white
+            view.font = UIFont.systemFont(ofSize: 36, weight: UIFontWeightBold)
+            view.textAlignment = .center
             faces.append(view)
         }
         return faces
@@ -81,10 +81,10 @@ class CACubic: UIViewController {
         
     }
     
-    func addFace(face : UIView, transform : CATransform3D) {
+    func addFace(_ face : UIView, transform : CATransform3D) {
         
         face.frame = container.bounds
-        face.center = CGPointMake(container.bounds.size.width / 2.0, container.bounds.size.height / 2.0)
+        face.center = CGPoint(x: container.bounds.size.width / 2.0, y: container.bounds.size.height / 2.0)
         container.addSubview(face)
         
         face.layer.transform = transform

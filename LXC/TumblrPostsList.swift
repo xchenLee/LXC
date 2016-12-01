@@ -29,25 +29,25 @@ class TumblrPostsList: UITableViewController {
     
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return layouts.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return layouts[indexPath.row].height
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var dequeueCell = tableView.dequeueReusableCellWithIdentifier(kTumblrPostsTagCell) as? TumblrNormalCell
+        var dequeueCell = tableView.dequeueReusableCell(withIdentifier: kTumblrPostsTagCell) as? TumblrNormalCell
         
         let layout = layouts[indexPath.row]
         guard let cell = dequeueCell else {
-            dequeueCell = TumblrNormalCell(style: .Default, reuseIdentifier: kTumblrPostsCell0)
+            dequeueCell = TumblrNormalCell(style: .default, reuseIdentifier: kTumblrPostsCell0)
             dequeueCell?.configLayout(layout)
             dequeueCell?.delegate = self
             return dequeueCell!
@@ -58,7 +58,7 @@ class TumblrPostsList: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
@@ -67,7 +67,7 @@ class TumblrPostsList: UITableViewController {
 // MARK: - extension for cell delegate
 extension TumblrPostsList: TumblrNormalCellDelegate {
     
-    func didClickLikeBtn(cell: TumblrNormalCell) {
+    func didClickLikeBtn(_ cell: TumblrNormalCell) {
         
         guard let layout = cell.layout, let post = layout.post else {
             return
@@ -88,18 +88,18 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
     }
     
     
-    func didClickCopySourceBtn(cell: TumblrNormalCell) {
+    func didClickCopySourceBtn(_ cell: TumblrNormalCell) {
         
         guard let layout = cell.layout, let post = layout.post else {
             return
         }
         
-        let typeString = post.type.lowercaseString
+        let typeString = post.type.lowercased()
         
         if typeString == "video" {
             
             ToolBox.copytoPasteBoard(post.videoUrl)
-            print(UIPasteboard.generalPasteboard().string)
+            print(UIPasteboard.general.string)
             self.showTextHUD("video url copyed to pasteboard")
             return
         }
@@ -117,7 +117,7 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         
     }
     
-    func didClickImage(cell: TumblrNormalCell, index: Int) {
+    func didClickImage(_ cell: TumblrNormalCell, index: Int) {
         
         guard let layout = cell.layout, let post = layout.post else {
             return
@@ -140,10 +140,10 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         photoView.preset(clickedImageView, index: index, container: (self.navigationController?.view!)!)
     }
     
-    func didClickTag(cell: TumblrNormalCell, tag: String) {
+    func didClickTag(_ cell: TumblrNormalCell, tag: String) {
         
-        let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: NSBundle.mainBundle())
-        let tagsController = storyboard.instantiateViewControllerWithIdentifier("tagscontroller")
+        let storyboard = UIStoryboard(name: kStoryboardNameMain, bundle: Bundle.main)
+        let tagsController = storyboard.instantiateViewController(withIdentifier: "tagscontroller")
             as! TumblrPostsByTag
         tagsController.tagName = tag
         tagsController.title = tag
@@ -151,20 +151,20 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         
     }
     
-    func didClickOuterVideo(cell: TumblrNormalCell) {
+    func didClickOuterVideo(_ cell: TumblrNormalCell) {
         
         guard let layout = cell.layout, let post = layout.post else {
             return
         }
         
         let youtubeUrl = post.permalinkUrl
-        let url = NSURL(string: youtubeUrl)
+        let url = URL(string: youtubeUrl)
         
-        UIApplication.sharedApplication().openURL(url!)
+        UIApplication.shared.openURL(url!)
     }
     
     
-    func didLongPressVideo(cell: TumblrNormalCell) {
+    func didLongPressVideo(_ cell: TumblrNormalCell) {
         
         //http://stackoverflow.com/questions/38152763/passing-closures-to-private-apis
         //https://developer.apple.com/videos/play/wwdc2011/406/ 24分钟
@@ -173,12 +173,12 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
             return
         }
         
-        let url = NSURL(string: post.videoUrl)
-        let bounds = CGRectMake(0, 0, kScreenWidth, layout.videoHeight)
+        let url = URL(string: post.videoUrl)
+        let bounds = CGRect(x: 0, y: 0, width: kScreenWidth, height: layout.videoHeight)
         
         let videoPlayerController = VideoPlayerController(url: url!, bounds: bounds)
         
-        self.presentViewController(videoPlayerController, animated: true) {
+        self.present(videoPlayerController, animated: true) {
             //会引起闪退
             [weak videoPlayerController] Void in
             

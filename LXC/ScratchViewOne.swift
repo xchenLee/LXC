@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 struct Matrix {
     
@@ -18,10 +42,10 @@ struct Matrix {
     init(rows : Int, columns : Int) {
         self.rows = rows
         self.columns = columns
-        self.grid = Array(count: rows * columns, repeatedValue: 0)
+        self.grid = Array(repeating: 0, count: rows * columns)
     }
     
-    func indexIsValid(row : Int, column : Int) -> Bool {
+    func indexIsValid(_ row : Int, column : Int) -> Bool {
         return row >= 0 && row < rows && column >= 0 && column < columns
     }
     
@@ -38,8 +62,8 @@ struct Matrix {
         }
     }
     
-    mutating func fillWithValue(value : Int) {
-        self.grid = Array(count: rows * columns, repeatedValue: value)
+    mutating func fillWithValue(_ value : Int) {
+        self.grid = Array(repeating: value, count: rows * columns)
     }
     
 }
@@ -47,23 +71,23 @@ struct Matrix {
 
 protocol ScratchViewOneDelegate {
     //进度发生变化
-    func scratchProgressChanged(scratchView : ScratchViewOne, maskingProgress : CGFloat)
+    func scratchProgressChanged(_ scratchView : ScratchViewOne, maskingProgress : CGFloat)
 }
 
 let kDefaultRadius : Int = 30
 
 class ScratchViewOne: UIImageView {
     
-    private var radius : Int = 10
-    private var tilesX : Int = 0
-    private var tilesY : Int = 0
-    private var tilesFilled : Int = 0
+    fileprivate var radius : Int = 10
+    fileprivate var tilesX : Int = 0
+    fileprivate var tilesY : Int = 0
+    fileprivate var tilesFilled : Int = 0
     
-    private var colorSpace : CGColorSpaceRef?
-    private var imgContext : CGContextRef?
+    fileprivate var colorSpace : CGColorSpace?
+    fileprivate var imgContext : CGContext?
     
-    private var touchPoints  : [CGPoint]?
-    private var maskedMatrix : Matrix?
+    fileprivate var touchPoints  : [CGPoint]?
+    fileprivate var maskedMatrix : Matrix?
     
     override var image : UIImage? {
         didSet {
@@ -83,14 +107,14 @@ class ScratchViewOne: UIImageView {
     }
     var scratchingDelegate  : ScratchViewOneDelegate?
     
-    func fuck(image : UIImage, radius : Int) {
+    func fuck(_ image : UIImage, radius : Int) {
         self.image = image
         self.radius = radius
         self.customInit()
     }
     
     func customInit() {
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         
         if self.image == nil {
             tilesX = 0
@@ -108,7 +132,7 @@ class ScratchViewOne: UIImageView {
         touchPoints = []
         let w = (self.image?.size.width)! * (self.image?.scale)!
         let h = (self.image?.size.height)! * (self.image?.scale)!
-        let size = CGSizeMake(w, h)
+        let size = CGSize(width: w, height: h)
         
         if colorSpace == nil {
             colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -117,12 +141,12 @@ class ScratchViewOne: UIImageView {
         if imgContext != nil {
             imgContext = nil
         }
-        imgContext = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), 8, Int(size.width * 4), colorSpace, 1)
+        imgContext = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: 8, bytesPerRow: Int(size.width * 4), space: colorSpace!, bitmapInfo: 1)
         
-        CGContextDrawImage(imgContext, CGRectMake(0, 0, size.width, size.height), self.image?.CGImage)
+        (imgContext)?.draw((self.image?.cgImage)!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         
-        let blendMode = CGBlendMode.Clear
-        CGContextSetBlendMode(imgContext, blendMode)
+        let blendMode = CGBlendMode.clear
+        (imgContext)?.setBlendMode(blendMode)
         
         tilesX = Int(size.width / CGFloat(2 * radius))
         tilesY = Int(size.height / CGFloat(2 * radius))
@@ -131,80 +155,85 @@ class ScratchViewOne: UIImageView {
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.image = self.addTouches(touches)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.image = self.addTouches(touches as NSSet)
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.image = self.addTouches(touches)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.image = self.addTouches(touches as NSSet)
     }
     
-    func addTouches(set : NSSet) -> UIImage {
+    func addTouches(_ set : NSSet) -> UIImage {
         let w = (self.image?.size.width)! * (self.image?.scale)!
         let h = (self.image?.size.height)! * (self.image?.scale)!
-        let size = CGSizeMake(w, h)
+        let size = CGSize(width: w, height: h)
         
-        CGContextSetFillColorWithColor(imgContext, UIColor.clearColor().CGColor)
-        CGContextSetStrokeColorWithColor(imgContext, UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor)
+        (imgContext)?.setFillColor(UIColor.clear.cgColor)
+        (imgContext)?.setStrokeColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor)
         
         let tempFilled = tilesFilled
         
         for touch in set {
             
-            CGContextBeginPath(imgContext)
-            var touchPoint = touch.locationInView(self)
+            (imgContext)?.beginPath()
+            var touchPoint = (touch as AnyObject).location(in: self)
             touchPoint =  ToolBox.convertUIPointToQuartz(touchPoint, frameSize: self.bounds.size)
             touchPoint = ToolBox.scalePoint(touchPoint, previousSize: self.bounds.size, currentSize: size)
             
-            if touch.phase == UITouchPhase.Began {
+            if (touch as AnyObject).phase == UITouchPhase.began {
                 
                 self.touchPoints?.removeAll()
                 self.touchPoints?.append(touchPoint)
                 self.touchPoints?.append(touchPoint)
                 
-                let rect = CGRectMake(touchPoint.x - CGFloat(radius), touchPoint.y - CGFloat(radius), CGFloat(radius * 2), CGFloat(radius * 2))
-                CGContextAddEllipseInRect(imgContext, rect)
-                CGContextFillPath(imgContext)
+                let rect = CGRect(x: touchPoint.x - CGFloat(radius), y: touchPoint.y - CGFloat(radius), width: CGFloat(radius * 2), height: CGFloat(radius * 2))
+                (imgContext)?.addEllipse(in: rect)
+                imgContext?.fillPath()
                 
                 fillTileWithPoint(rect.origin)
             }
-            else if (touch.phase == UITouchPhase.Moved) {
+            else if ((touch as AnyObject).phase == UITouchPhase.moved) {
                 
                 self.touchPoints?.append(touchPoint)
                 
-                CGContextSetStrokeColor(imgContext, CGColorGetComponents(UIColor.yellowColor().CGColor))
-                CGContextSetLineCap(imgContext, .Round)
-                CGContextSetLineWidth(imgContext, CGFloat(2 * radius))
+                (imgContext)?.setStrokeColor(UIColor.yellow.cgColor.components!)
+                (imgContext)?.setLineCap(.round)
+                (imgContext)?.setLineWidth(CGFloat(2 * radius))
                 
                 while(self.touchPoints?.count > 3) {
-                    var bezier = [CGPoint](count: 4, repeatedValue: CGPointZero)
+                    var bezier = [CGPoint](repeating: CGPoint.zero, count: 4)
                     bezier[0] = self.touchPoints![1]
                     bezier[3] = self.touchPoints![2]
                     
                     let k : CGFloat = 0.3
                     let len = sqrt(pow(bezier[3].x - bezier[0].x, 2) + pow(bezier[3].y - bezier[0].y, 2))
                     bezier[1] = self.touchPoints![0]
-                    bezier[1] = self.normalizeVector(CGPointMake(bezier[0].x - bezier[1].x - (bezier[0].x - bezier[3].x), bezier[0].y - bezier[1].y - (bezier[0].y - bezier[3].y)))
+                    bezier[1] = self.normalizeVector(CGPoint(x: bezier[0].x - bezier[1].x - (bezier[0].x - bezier[3].x), y: bezier[0].y - bezier[1].y - (bezier[0].y - bezier[3].y)))
                     bezier[1].x *= CGFloat(len) * k;
                     bezier[1].y *= len * k;
                     bezier[1].x += bezier[0].x;
                     bezier[1].y += bezier[0].y;
                     
                     bezier[2] = bezier[3]
-                    bezier[2] = self.normalizeVector(CGPointMake( (bezier[3].x - bezier[2].x)  - (bezier[3].x - bezier[0].x), (bezier[3].y - bezier[2].y)  - (bezier[3].y - bezier[0].y)))
+                    bezier[2] = self.normalizeVector(CGPoint( x: (bezier[3].x - bezier[2].x)  - (bezier[3].x - bezier[0].x), y: (bezier[3].y - bezier[2].y)  - (bezier[3].y - bezier[0].y)))
                     bezier[2].x *= len * k;
                     bezier[2].y *= len * k;
                     bezier[2].x += bezier[3].x;
                     bezier[2].y += bezier[3].y;
 
-                    CGContextMoveToPoint(imgContext, bezier[0].x, bezier[0].y);
-                    CGContextAddCurveToPoint(imgContext, bezier[1].x, bezier[1].y, bezier[2].x, bezier[2].y, bezier[3].x, bezier[3].y);
-                    self.touchPoints?.removeAtIndex(0)
+                    (imgContext)?.move(to: CGPoint(x: bezier[0].x, y: bezier[0].y));
+                    
+                    let fromPoint = CGPoint(x: bezier[3].x, y: bezier[3].y)
+                    let control1 = CGPoint(x: bezier[1].x, y: bezier[1].y)
+                    let control2 = CGPoint(x: bezier[2].x, y: bezier[2].y)
+                    
+                    imgContext?.addCurve(to: fromPoint, control1: control1, control2: control2)
+                    self.touchPoints?.remove(at: 0)
                 }
                 
-                CGContextStrokePath(imgContext)
+                (imgContext)?.strokePath()
                 
-                var prevPoint = touch.previousLocationInView(self)
+                var prevPoint = (touch as AnyObject).previousLocation(in: self)
                 prevPoint = ToolBox.convertUIPointToQuartz(prevPoint, frameSize: self.bounds.size)
                 prevPoint = ToolBox.scalePoint(prevPoint, previousSize: self.bounds.size, currentSize: size)
                 fillTileWithTwoPoints(touchPoint, end: prevPoint)
@@ -214,12 +243,12 @@ class ScratchViewOne: UIImageView {
         if tempFilled != tilesFilled {
             delegate?.scratchProgressChanged(self, maskingProgress: self.maskingProgress)
         }
-        let cgImage = CGBitmapContextCreateImage(imgContext)
-        let image = UIImage(CGImage: cgImage!)
+        let cgImage = (imgContext)?.makeImage()
+        let image = UIImage(cgImage: cgImage!)
         return image
     }
     
-    func fillTileWithPoint(point : CGPoint) {
+    func fillTileWithPoint(_ point : CGPoint) {
         var x : Int
         var y : Int
         let newX = max(min(point.x, (self.image?.size.width)! - 1), 0)
@@ -234,7 +263,7 @@ class ScratchViewOne: UIImageView {
         }
     }
     
-    func fillTileWithTwoPoints(begin : CGPoint, end : CGPoint) {
+    func fillTileWithTwoPoints(_ begin : CGPoint, end : CGPoint) {
         
         var incrementerForx : CGFloat
         var incrementerFory : CGFloat
@@ -255,9 +284,10 @@ class ScratchViewOne: UIImageView {
     }
 
     
-    func normalizeVector(var p : CGPoint) -> CGPoint{
+    func normalizeVector(_ p : CGPoint) -> CGPoint{
+        var p = p
         let len = sqrt(p.x*p.x + p.y*p.y);
-        if(0 == len){return CGPointMake(0, 0);}
+        if(0 == len){return CGPoint(x: 0, y: 0);}
         p.x /= len;
         p.y /= len;
         return p;

@@ -17,10 +17,9 @@ class ControllerJumper: NSObject {
     /**
      检查是否登录，决定用户首次可见页面
      */
-    class func afterLaunch(params :Dictionary<String, AnyObject>?) {
+    class func afterLaunch(_ params :Dictionary<String, AnyObject>?) {
         
-        let user = TumblrContext.sharedInstance.user()
-
+        let user = TumblrContext.sharedInstance.obtainTumblrUser()
         guard let _ = user else {
             //传递过来的User为空
             loadController(kStoryboardNameLogin, initWindow: true)
@@ -33,7 +32,7 @@ class ControllerJumper: NSObject {
     /**
      退出登录
      */
-    class func login(params :Dictionary<String, AnyObject>?) {
+    class func login(_ params :Dictionary<String, AnyObject>?) {
         
         loadController(kStoryboardNameMain)
     }
@@ -41,29 +40,29 @@ class ControllerJumper: NSObject {
     /**
      退出登录
      */
-    class func logout(params :Dictionary<String, AnyObject>?) {
+    class func logout(_ params :Dictionary<String, AnyObject>?) {
         
         loadController(kStoryboardNameLogin)
     }
     
-    class func loadController(storyboardName: String) {
+    class func loadController(_ storyboardName: String) {
         
         loadController(storyboardName, initWindow: false)
     }
     
-    class func loadController(storyboardName: String, initWindow: Bool) {
+    class func loadController(_ storyboardName: String, initWindow: Bool) {
         
-        let storyboard = UIStoryboard(name: storyboardName, bundle: NSBundle.mainBundle())
+        let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
         
         
         if initWindow {
-            let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            window.backgroundColor = UIColor.whiteColor()
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.backgroundColor = UIColor.white
             AppDelegate.getAppDelegate().window = window
         }
         
         
-        guard let window = AppDelegate.getAppDelegate().window, rootController = storyboard.instantiateInitialViewController() else {
+        guard let window = AppDelegate.getAppDelegate().window, let rootController = storyboard.instantiateInitialViewController() else {
             return
         }
         

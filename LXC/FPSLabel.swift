@@ -10,10 +10,10 @@ import UIKit
 
 class FPSLabel: UILabel {
 
-    private var caDisplayLink: CADisplayLink!
-    private var count: Int = 0
-    private var lastTime: NSTimeInterval = 0
-    private var llll: NSTimeInterval = 0
+    fileprivate var caDisplayLink: CADisplayLink!
+    fileprivate var count: Int = 0
+    fileprivate var lastTime: TimeInterval = 0
+    fileprivate var llll: TimeInterval = 0
     
     
     override init(frame: CGRect) {
@@ -27,17 +27,17 @@ class FPSLabel: UILabel {
     }
     
     func customInit() {
-        self.frame = CGRectMake(0, 0, 55, 25)
-        self.textAlignment = NSTextAlignment.Center
-        self.userInteractionEnabled = false
+        self.frame = CGRect(x: 0, y: 0, width: 55, height: 25)
+        self.textAlignment = NSTextAlignment.center
+        self.isUserInteractionEnabled = false
         self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
-        self.textColor = UIColor.whiteColor()
-        self.font = UIFont.systemFontOfSize(14)
+        self.textColor = UIColor.white
+        self.font = UIFont.systemFont(ofSize: 14)
         self.caDisplayLink = CADisplayLink(target: self, selector: #selector(tick))
-        self.caDisplayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        self.caDisplayLink.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
     }
     
-    func tick(link: CADisplayLink) {
+    func tick(_ link: CADisplayLink) {
         
         if lastTime == 0 {
             lastTime = link.timestamp

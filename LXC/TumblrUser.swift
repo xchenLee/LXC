@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import RealmSwift
 import ObjectMapper
 
-class TumblrUser: Object, Mappable {
+class TumblrUser:NSObject, Mappable, NSCoding {
     
     
     dynamic var token = ""
@@ -21,16 +20,41 @@ class TumblrUser: Object, Mappable {
     dynamic var likes = 0
     dynamic var name = ""
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
+    }
+    
+    override init() {
+        
     }
     
     func mapping(map: Map) {
         
     }
     
-    // Specify properties to ignore (Realm won't persist these)
-
+    
+    // MARK: - NSCoding
+    public func encode(with aCoder: NSCoder) {
+        
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.token = aDecoder.decodeObject(forKey: "token") as! String
+        self.tokenSecret = aDecoder.decodeObject(forKey: "tokenSecret") as! String
+    }
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

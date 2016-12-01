@@ -13,7 +13,7 @@ class TouchIdTest: UIViewController, UIAlertViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         authenticateUser()
     }
     
@@ -27,33 +27,32 @@ class TouchIdTest: UIViewController, UIAlertViewDelegate {
         let reasonString = "Authentication is needed to complete the test"
         
         // check if the device can evaluate the policy
-        if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) -> Void in
+        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) -> Void in
                 
                 if success {
                     print("Authentication was given by the user")
                 } else {
                     // If authentication failed then show a message to the console with a short description.
                     // In case that the error is a user fallback, then show the password alert view.
-                    print(evalPolicyError?.localizedDescription)
                     
-                    switch evalPolicyError!.code {
+                    switch evalPolicyError! {
                         
-                    case LAError.SystemCancel.rawValue:
+                    case LAError.systemCancel:
                         print("Authentication was cancelled by the system")
                         
-                    case LAError.UserCancel.rawValue:
+                    case LAError.userCancel:
                         print("Authentication was cancelled by the user")
                         
-                    case LAError.UserFallback.rawValue:
+                    case LAError.userFallback:
                         print("User selected to enter custom password")
-                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                        OperationQueue.main.addOperation({ () -> Void in
                             self.showOtherAlert()
                         })
                         
                     default:
                         print("Authentication failed")
-                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                        OperationQueue.main.addOperation({ () -> Void in
                             self.showOtherAlert()
                         })
                     }
@@ -63,10 +62,10 @@ class TouchIdTest: UIViewController, UIAlertViewDelegate {
             // If the security policy cannot be evaluated then show a short message depending on the error.
             switch error!.code{
                 
-            case LAError.TouchIDNotEnrolled.rawValue:
+            case LAError.Code.touchIDNotEnrolled.rawValue:
                 print("TouchID is not enrolled")
                 
-            case LAError.PasscodeNotSet.rawValue:
+            case LAError.Code.passcodeNotSet.rawValue:
                 print("A passcode has not been set")
                 
             default:
@@ -84,11 +83,11 @@ class TouchIdTest: UIViewController, UIAlertViewDelegate {
     
     func showOtherAlert() {
         
-        let alertC = UIAlertController(title: "TouchIDDemo", message: "Touch not used", preferredStyle: .Alert)
-        let okayAction = UIAlertAction(title: "OK", style: .Default) { (action) -> Void in
+        let alertC = UIAlertController(title: "TouchIDDemo", message: "Touch not used", preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
         }
         alertC.addAction(okayAction)
-        presentViewController(alertC, animated: true, completion: nil)
+        present(alertC, animated: true, completion: nil)
     }
 
     /*

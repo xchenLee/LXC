@@ -23,29 +23,29 @@ class DigitalScale: UIViewController {
         let viewWidth = width - 40;
         
         titleLabel.frame = CGRect(x: 0, y: 50, width: width, height: 20)
-        titleLabel.font = UIFont.systemFontOfSize(18, weight:UIFontWeightLight)
-        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight:UIFontWeightLight)
+        titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.text = "Place item below"
         self.view.addSubview(titleLabel)
         
         centerView.frame = CGRect(x: (width - viewWidth) / 2, y: (height - viewWidth) / 2, width: viewWidth, height: viewWidth)
-        centerView.contentMode = UIViewContentMode.ScaleAspectFill
+        centerView.contentMode = UIViewContentMode.scaleAspectFill
         centerView.image = UIImage(named: "Touch")
         self.view.addSubview(centerView)
         
         forceLabel.frame = CGRect(x: 0, y: height - 50, width: width, height: 20)
-        forceLabel.font = UIFont.systemFontOfSize(18, weight:UIFontWeightLight)
-        forceLabel.textAlignment = NSTextAlignment.Center
+        forceLabel.font = UIFont.systemFont(ofSize: 18, weight:UIFontWeightLight)
+        forceLabel.textAlignment = NSTextAlignment.center
         forceLabel.text = "0 gram"
         self.view.addSubview(forceLabel)
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
     }
 
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if let touch = touches.first {
             if #available(iOS 9.0, *) {
-                if traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
+                if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
                     if touch.force >= touch.maximumPossibleForce {
                         forceLabel.text = "385+ grams"
                     } else {
@@ -59,7 +59,7 @@ class DigitalScale: UIViewController {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         forceLabel.text = "0 gram"
     }
 }

@@ -41,17 +41,17 @@ class CATransform: UIViewController {
         super.viewDidLoad()
         
         let w = kScreenWidth
-        imageView.frame = CGRectMake((w-100)/2.0, 100, 100, 100)
-        imageView.contentMode = .ScaleAspectFit
+        imageView.frame = CGRect(x: (w-100)/2.0, y: 100, width: 100, height: 100)
+        imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = UIColor.fromARGB(0xC35050, alpha: 1.0)
         imageView.image = UIImage(named: "wukong")
         
         self.view .addSubview(imageView)
         
-        imageLayer.backgroundColor = imageView.backgroundColor?.CGColor
-        imageLayer.frame = CGRectMake((w-100)/2.0, 300, 100, 100)
-        imageLayer.contents = UIImage(named : "wukong")?.CGImage
-        imageLayer.contentsScale = UIScreen.mainScreen().scale
+        imageLayer.backgroundColor = imageView.backgroundColor?.cgColor
+        imageLayer.frame = CGRect(x: (w-100)/2.0, y: 300, width: 100, height: 100)
+        imageLayer.contents = UIImage(named : "wukong")?.cgImage
+        imageLayer.contentsScale = UIScreen.main.scale
         imageLayer.contentsGravity = kCAGravityResizeAspect
         
         self.view.layer.addSublayer(imageLayer)
@@ -69,7 +69,7 @@ class CATransform: UIViewController {
         //周长 2 Pi r = 360度 = 2 Pi 弧度
         //1 弧度 ＝ 180 ／ Pi
         //180 度 ＝ Pi 弧度
-        let rotateTransform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+        let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
         
         //imageView.transform = rotateTransform
         
@@ -77,10 +77,10 @@ class CATransform: UIViewController {
 
         // Combining Transforms
         
-        var transform = CGAffineTransformIdentity
-        transform = CGAffineTransformScale(transform, 0.5, 0.5);
-        transform = CGAffineTransformRotate(transform, ToolBox.degreesToRadians(30));
-        transform = CGAffineTransformTranslate(transform, 200, 0);
+        var transform = CGAffineTransform.identity
+        transform = transform.scaledBy(x: 0.5, y: 0.5);
+        transform = transform.rotated(by: ToolBox.degreesToRadians(30));
+        transform = transform.translatedBy(x: 200, y: 0);
         
 //        imageView.layer.setAffineTransform(transform)
         //图片向右边发生了平移，但并没有指定距离那么远（200像素），另外它还有点向下发生了平移。原因在于当你按顺序做了变换，上一个变换的结果将会影响之后的变换，所以200像素的向右平移同样也被旋转了30度，缩小了50%，所以它实际上是斜向移动了100像素。
@@ -120,7 +120,7 @@ class CATransform: UIViewController {
         |  0   0    1 |
         
         */
-        var shearTransform = CGAffineTransformIdentity
+        var shearTransform = CGAffineTransform.identity
         shearTransform.c = -1
         shearTransform.b = 0
         
@@ -158,8 +158,8 @@ class CATransform: UIViewController {
         
         */
         
-        imageViewLast.frame = CGRectMake((w-100)/2.0, 500, 100, 100)
-        imageViewLast.contentMode = .ScaleAspectFit
+        imageViewLast.frame = CGRect(x: (w-100)/2.0, y: 500, width: 100, height: 100)
+        imageViewLast.contentMode = .scaleAspectFit
         imageViewLast.backgroundColor = UIColor.fromARGB(0xC35050, alpha: 1.0)
         imageViewLast.image = UIImage(named: "tulin")
         self.view .addSubview(imageViewLast)

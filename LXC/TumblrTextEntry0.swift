@@ -16,27 +16,27 @@ class TumblrTextEntry0: UIView {
 
     
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         self.titleView = UILabel()
         self.titleView.numberOfLines = 0
-        self.titleView.backgroundColor = UIColor.whiteColor()
+        self.titleView.backgroundColor = UIColor.white
         self.titleView.font = kTMCellTitleFont
         self.titleView.textColor = kTMCellTitleFontColor
         
         
         self.textView = UITextView()
-        self.textView.scrollEnabled = false
-        self.textView.backgroundColor = UIColor.whiteColor()
+        self.textView.isScrollEnabled = false
+        self.textView.backgroundColor = UIColor.white
         self.textView.font = kTMCellReblogFont
         self.textView.textColor = kTMCellReblogTextColor
         self.textView.top = kTMCellPadding
         self.textView.left = kTMCellPadding
-        self.textView.editable = false
-        self.textView.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, 0)
+        self.textView.isEditable = false
+        self.textView.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: 0)
         
         super.init(coder: aDecoder)
         customInit()
@@ -46,19 +46,19 @@ class TumblrTextEntry0: UIView {
         
         self.titleView = UILabel()
         self.titleView.numberOfLines = 0
-        self.titleView.backgroundColor = UIColor.whiteColor()
+        self.titleView.backgroundColor = UIColor.white
         self.titleView.font = kTMCellTitleFont
         self.titleView.textColor = kTMCellTitleFontColor
         
         self.textView = UITextView()
-        self.textView.scrollEnabled = false
-        self.textView.backgroundColor = UIColor.whiteColor()
+        self.textView.isScrollEnabled = false
+        self.textView.backgroundColor = UIColor.white
         self.textView.font = kTMCellReblogFont
         self.textView.textColor = kTMCellReblogTextColor
         self.textView.top = 0
         self.textView.left = kTMCellPadding
-        self.textView.editable = false
-        self.textView.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, 0)
+        self.textView.isEditable = false
+        self.textView.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: 0)
         
         
         super.init(frame: frame)
@@ -68,39 +68,39 @@ class TumblrTextEntry0: UIView {
     func customInit() {
         
         self.clipsToBounds = true
-        self.userInteractionEnabled = true
-        self.exclusiveTouch = true
-        self.backgroundColor = UIColor.whiteColor()
+        self.isUserInteractionEnabled = true
+        self.isExclusiveTouch = true
+        self.backgroundColor = UIColor.white
         
         self.addSubview(self.titleView)
         self.addSubview(self.textView)
     }
     
-    func setWithLayout(tumblrLayout: TumblrNormalLayout) {
+    func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
         
         if tumblrLayout.titleHeight == 0 {
             
             self.titleView.text = ""
-            self.titleView.hidden = true
-            self.titleView.frame = CGRectZero
+            self.titleView.isHidden = true
+            self.titleView.frame = CGRect.zero
         } else {
             
-            self.titleView.hidden = false
+            self.titleView.isHidden = false
             self.titleView.text = tumblrLayout.tittleText
-            self.titleView.frame = CGRectMake(kTMCellPadding, 0, kTMCellTextContentWidth, tumblrLayout.titleHeight)
+            self.titleView.frame = CGRect(x: kTMCellPadding, y: 0, width: kTMCellTextContentWidth, height: tumblrLayout.titleHeight)
         }
         
         
         if tumblrLayout.textHeight == 0 {
             
             self.textView.attributedText = nil
-            self.textView.hidden = true
-            self.textView.frame = CGRectZero
+            self.textView.isHidden = true
+            self.textView.frame = CGRect.zero
         } else {
             
-            self.textView.hidden = false
+            self.textView.isHidden = false
             self.textView.attributedText = tumblrLayout.textAttributedString
-            self.textView.frame = CGRectMake(kTMCellPadding, tumblrLayout.titleHeight, kTMCellTextContentWidth, tumblrLayout.textHeight)
+            self.textView.frame = CGRect(x: kTMCellPadding, y: tumblrLayout.titleHeight, width: kTMCellTextContentWidth, height: tumblrLayout.textHeight)
         }
         
     }

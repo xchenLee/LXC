@@ -22,22 +22,22 @@ class ToolBox: NSObject {
      
      - parameter content: content
      */
-    class func copytoPasteBoard(content: String) {
+    class func copytoPasteBoard(_ content: String) {
         if content.isEmpty {
             return
         }
-        let pasteBoard = UIPasteboard.generalPasteboard()
+        let pasteBoard = UIPasteboard.general
         pasteBoard.string = content
     }
     
     
-    class func obtainFloatPixel(pixel: CGFloat) -> CGFloat {
-        return pixel / UIScreen.mainScreen().scale
+    class func obtainFloatPixel(_ pixel: CGFloat) -> CGFloat {
+        return pixel / UIScreen.main.scale
     }
     
     
     // MARK: - Tool Methods to modify views
-    class func makeNavigationBarAlpha(naviController : UINavigationController) {
+    class func makeNavigationBarAlpha(_ naviController : UINavigationController) {
         
         let subViews = naviController.navigationBar.subviews
         
@@ -46,7 +46,7 @@ class ToolBox: NSObject {
         viewOne.alpha = 0
     }
     
-    class func makeNavigationBarAlphaNo(naviController : UINavigationController) {
+    class func makeNavigationBarAlphaNo(_ naviController : UINavigationController) {
         
         let subViews = naviController.navigationBar.subviews
         
@@ -55,11 +55,11 @@ class ToolBox: NSObject {
         viewOne.alpha = 1
     }
     
-    class func radiansToDegrees(degree : UInt) -> CGFloat {
+    class func radiansToDegrees(_ degree : UInt) -> CGFloat {
         return CGFloat(Double(degree) / M_PI * 180.0)
     }
     
-    class func degreesToRadians(radian : UInt) -> CGFloat {
+    class func degreesToRadians(_ radian : UInt) -> CGFloat {
         return CGFloat( Double(radian) / 180.0 * M_PI)
     }
     
@@ -76,19 +76,19 @@ class ToolBox: NSObject {
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0);
     }
     
-    class func dateFromString(timeString: String) -> NSDate {
+    class func dateFromString(_ timeString: String) -> Date {
         
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
-        guard let result = formatter.dateFromString(timeString) else {
-            return NSDate()
+        guard let result = formatter.date(from: timeString) else {
+            return Date()
         }
         return result
     }
     
     
     // MARK: - Tool for image
-    class func printImage(input : UIImage) {
+    class func printImage(_ input : UIImage) {
         
         let w = input.size.width
         let h = input.size.height
@@ -97,10 +97,10 @@ class ToolBox: NSObject {
         
         let data = UIImageJPEGRepresentation(input, 1.0)
         
-        NSLog("image length aflter UIImageJPEGRepresentation 1.0 : \(CGFloat((data?.length)! / 1024)) kb")
+        NSLog("image length aflter UIImageJPEGRepresentation 1.0 : \(CGFloat((data?.count)! / 1024)) kb")
     }
     
-    class func imageCompressResolution(input : UIImage, max : CGFloat) -> UIImage {
+    class func imageCompressResolution(_ input : UIImage, max : CGFloat) -> UIImage {
         
         let scale = input.scale
         let originalW = input.size.width
@@ -119,44 +119,44 @@ class ToolBox: NSObject {
             newW = newH * originalW / originalH
         }
         
-        let newSize = CGSizeMake(newW, newH)
+        let newSize = CGSize(width: newW, height: newH)
         UIGraphicsBeginImageContext(newSize)
         
-        let newRect = CGRectMake(0, 0, newW, newH)
-        input.drawInRect(newRect)
+        let newRect = CGRect(x: 0, y: 0, width: newW, height: newH)
+        input.draw(in: newRect)
         
         let newImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImg
+        return newImg!
     }
     
-    class func fitImageToSize(input : UIImage, w : CGFloat, h : CGFloat) -> UIImage {
+    class func fitImageToSize(_ input : UIImage, w : CGFloat, h : CGFloat) -> UIImage {
         
         if w <= 0 || h >= 0 {
             return input
         }
-        let newSize = CGSizeMake(w, h)
+        let newSize = CGSize(width: w, height: h)
         UIGraphicsBeginImageContext(newSize)
         
-        let newRect = CGRectMake(0, 0, w, h)
-        input.drawInRect(newRect)
+        let newRect = CGRect(x: 0, y: 0, width: w, height: h)
+        input.draw(in: newRect)
         
         let newImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImg
+        return newImg!
     }
     
     // MARK: -Tool for Quartz
-    class func convertUIPointToQuartz(point : CGPoint, frameSize : CGSize) -> CGPoint {
+    class func convertUIPointToQuartz(_ point : CGPoint, frameSize : CGSize) -> CGPoint {
         let convertY = frameSize.height - point.y
-        return CGPointMake(point.x, convertY)
+        return CGPoint(x: point.x, y: convertY)
     }
     
-    class func scalePoint(point : CGPoint, previousSize : CGSize, currentSize : CGSize) -> CGPoint {
+    class func scalePoint(_ point : CGPoint, previousSize : CGSize, currentSize : CGSize) -> CGPoint {
         let factor = currentSize.width / previousSize.width
-        return CGPointMake(factor * point.x, factor * point.y)
+        return CGPoint(x: factor * point.x, y: factor * point.y)
     }
     
     /**
@@ -167,7 +167,7 @@ class ToolBox: NSObject {
      
      - returns: <#return value description#>
      */
-    class func getScaleSize(original: CGSize, max: CGSize) -> CGSize {
+    class func getScaleSize(_ original: CGSize, max: CGSize) -> CGSize {
         
         let width = max.width
         let scale = CGFloat(original.width) / CGFloat(width)
@@ -176,10 +176,10 @@ class ToolBox: NSObject {
         if height > max.height {
             height = max.height
         }
-        return CGSizeMake(width, height)
+        return CGSize(width: width, height: height)
     }
     
-    class func saveImgToSystemAlbum(image: UIImage) {
+    class func saveImgToSystemAlbum(_ image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
     }
 }

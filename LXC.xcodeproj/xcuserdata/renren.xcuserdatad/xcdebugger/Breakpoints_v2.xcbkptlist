@@ -32,7 +32,39 @@
             startingLineNumber = "182"
             endingLineNumber = "182"
             landmarkName = "buildPreviewController(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.IImagePickerAlbumAssets.buildPreviewController (Foundation.IndexPath) -&gt; __ObjC.UIViewController"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renren/Desktop/LXC/LXC/LXC/IImagePickerAlbumAssets.swift"
+                  timestampString = "502278956.348492"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "732">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.IImagePickerAlbumAssets.(buildPreviewController (Foundation.IndexPath) -&gt; __ObjC.UIViewController).(closure #1)"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renren/Desktop/LXC/LXC/LXC/IImagePickerAlbumAssets.swift"
+                  timestampString = "502278956.350509"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import RealmSwift
 
-class StringObject: Object {
+class StringObject: NSObject {
     
-    public var value: String?
+    open var value: String?
 }

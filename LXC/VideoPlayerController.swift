@@ -11,28 +11,28 @@ import MediaPlayer
 
 class VideoPlayerController: UIViewController, PlayerDelegate {
     
-    private var player: Player!
-    private var playerBounds: CGRect!
-    private var playVideoUrl: NSURL!
+    fileprivate var player: Player!
+    fileprivate var playerBounds: CGRect!
+    fileprivate var playVideoUrl: URL!
     
-    private var mpVolumeView: MPVolumeView!
+    fileprivate var mpVolumeView: MPVolumeView!
     
     // read-only 
     //
-    private var originalFrame: CGRect! {
-        return CGRectMake(0, (kScreenHeight - playerBounds.size.height) / 2, playerBounds.size.width, playerBounds.size.height)
+    fileprivate var originalFrame: CGRect! {
+        return CGRect(x: 0, y: (kScreenHeight - playerBounds.size.height) / 2, width: playerBounds.size.width, height: playerBounds.size.height)
     }
     
-    convenience init(url: NSURL, bounds: CGRect) {
+    convenience init(url: URL, bounds: CGRect) {
         self.init()
         self.playVideoUrl = url
         self.playerBounds = bounds
         
         //这样子背景色可以透明了
-        self.modalPresentationStyle = .OverCurrentContext
+        self.modalPresentationStyle = .overCurrentContext
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let transparentColor = UIColor.fromARGB(0x000000, alpha: 0.8)
         self.view.backgroundColor = transparentColor
@@ -50,7 +50,7 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         self.player = Player()
         self.player.delegate = self
         self.player.playbackLoops = true
-        self.player.enableExternalPlay()
+        //self.player.enableExternalPlay()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPlayer))
         self.player.view.addGestureRecognizer(tapGesture)
@@ -67,7 +67,7 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         
         self.player.view.frame = self.originalFrame
         self.view.addSubview(self.player.view)
-        self.player.didMoveToParentViewController(self)
+        self.player.didMove(toParentViewController: self)
         
         self.player.setUrl(self.playVideoUrl)
         
@@ -80,7 +80,7 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         
         let left = kScreenWidth - volumeView.size.width
         let top = kScreenHeight - volumeView.size.height - kTMCellPadding
-        volumeView.frame = CGRectMake(left, top, volumeView.size.width, volumeView.size.height)
+        volumeView.frame = CGRect(x: left, y: top, width: volumeView.size.width, height: volumeView.size.height)
         self.view.addSubview(volumeView)
         
     }
@@ -89,25 +89,25 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    func tapPlayer(gesture: UITapGestureRecognizer) {
-        self.dismissViewControllerAnimated(true, completion: {})
+    func tapPlayer(_ gesture: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: {})
     }
     
     
-    func panPlayer(gesture: UIPanGestureRecognizer) {
+    func panPlayer(_ gesture: UIPanGestureRecognizer) {
         
         let touchView = gesture.view
-        let offsetPoint = gesture.translationInView(self.view)
+        let offsetPoint = gesture.translation(in: self.view)
         
         var translateFrame = touchView?.frame
         translateFrame?.origin.x += offsetPoint.x
         translateFrame?.origin.y += offsetPoint.y
         
         touchView?.frame = translateFrame!
-        gesture .setTranslation(CGPointZero, inView: touchView)
+        gesture .setTranslation(CGPoint.zero, in: touchView)
         
         
-        if gesture.state == .Cancelled || gesture.state == .Failed || gesture.state == .Ended {
+        if gesture.state == .cancelled || gesture.state == .failed || gesture.state == .ended {
             touchView?.frame = self.originalFrame
         }
         
@@ -118,15 +118,15 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
     }
     
     // MARK: - PlayerDelegate methods
-    func playerReady(player: Player) {
+    func playerReady(_ player: Player) {
         print("player ready")
     }
     
-    func playerPlaybackStateDidChange(player: Player) {
+    func playerPlaybackStateDidChange(_ player: Player) {
         print("player state did change")
     }
     
-    func playerBufferingStateDidChange(player: Player) {
+    func playerBufferingStateDidChange(_ player: Player) {
         
         print("player buffering state change")
 
@@ -134,13 +134,13 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
 
         
         switch bufferingState {
-        case BufferingState.Ready.rawValue:
+        case BufferingState.ready.rawValue:
             print("buffering ready")
             break
-        case BufferingState.Delayed.rawValue:
+        case BufferingState.delayed.rawValue:
             print("buffering delayed")
             break
-        case BufferingState.Unknown.rawValue:
+        case BufferingState.unknown.rawValue:
             print("buffering unknown")
             break
         default:
@@ -150,11 +150,11 @@ class VideoPlayerController: UIViewController, PlayerDelegate {
         
     }
     
-    func playerPlaybackWillStartFromBeginning(player: Player) {
+    func playerPlaybackWillStartFromBeginning(_ player: Player) {
         print("player will start from beginning")
     }
     
-    func playerPlaybackDidEnd(player: Player) {
+    func playerPlaybackDidEnd(_ player: Player) {
         //视频播放结束，显示
         print("player end")
         

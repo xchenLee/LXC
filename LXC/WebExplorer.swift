@@ -33,23 +33,23 @@ class WebExplorer: UIViewController, WKNavigationDelegate, WKUIDelegate {
         
         webView.frame = CGRect(x: 0, y: 0, width: width, height: height - 66)
         webView.navigationDelegate = self
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: nil)
-        webView.addObserver(self, forKeyPath: "title", options: .New, context: nil)
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
         view.insertSubview(webView, belowSubview: progressView)
         
-        let url = NSURL(string: kSampleUrl)
-        let request = NSURLRequest(URL: url!)
-        webView.loadRequest(request)
+        let url = URL(string: kSampleUrl)
+        let request = URLRequest(url: url!)
+        webView.load(request)
         
         self.webView.allowsBackForwardNavigationGestures = true
         
 
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if (keyPath == "estimatedProgress") {
-            progressView.hidden = webView.estimatedProgress == 1
+            progressView.isHidden = webView.estimatedProgress == 1
             progressView.setProgress(Float(webView.estimatedProgress), animated: true)
         }
         
@@ -60,23 +60,23 @@ class WebExplorer: UIViewController, WKNavigationDelegate, WKUIDelegate {
 
     
     // MARK: - WKNavigationDelegate
-    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         progressView.setProgress(0.0, animated: false)
     }
     
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        if (navigationAction.navigationType == WKNavigationType.LinkActivated && !navigationAction.request.URL!.host!.lowercaseString.hasPrefix("www.appcoda.com")) {
-            UIApplication.sharedApplication().openURL(navigationAction.request.URL!)
-            decisionHandler(WKNavigationActionPolicy.Cancel)
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if (navigationAction.navigationType == WKNavigationType.linkActivated && !(navigationAction.request as NSURLRequest).url!.host!.lowercased().hasPrefix("www.appcoda.com")) {
+            UIApplication.shared.openURL(navigationAction.request.url!)
+            decisionHandler(WKNavigationActionPolicy.cancel)
         } else {
-            decisionHandler(WKNavigationActionPolicy.Allow)
+            decisionHandler(WKNavigationActionPolicy.allow)
         }
     }
     

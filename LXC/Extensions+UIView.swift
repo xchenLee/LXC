@@ -107,20 +107,20 @@ extension UIView {
     // MARK: - Snapshot of view
     
     func snapshotImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0)
-        self.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0)
+        self.layer.render(in: UIGraphicsGetCurrentContext()!)
         let snap = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return snap
+        return snap!
     }
     
-    func snapshotImageAfterScreenUpdates(afterUpdate: Bool) -> UIImage {
+    func snapshotImageAfterScreenUpdates(_ afterUpdate: Bool) -> UIImage {
         
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
-        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: afterUpdate)
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0);
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: afterUpdate)
         let snap = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return snap
+        return snap!
     }
     
     

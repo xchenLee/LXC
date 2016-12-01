@@ -15,7 +15,7 @@ class TumblrTagEntry0: UIView {
 
     
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,18 +37,18 @@ class TumblrTagEntry0: UIView {
     func customInit() {
         
         self.clipsToBounds = true
-        self.userInteractionEnabled = true
-        self.backgroundColor = UIColor.whiteColor()
-        self.exclusiveTouch = true
+        self.isUserInteractionEnabled = true
+        self.backgroundColor = UIColor.white
+        self.isExclusiveTouch = true
         
-        self.textView.backgroundColor = UIColor.whiteColor()
-        self.textView.dataDetectorTypes = .Link
-        self.textView.userInteractionEnabled = true
+        self.textView.backgroundColor = UIColor.white
+        self.textView.dataDetectorTypes = .link
+        self.textView.isUserInteractionEnabled = true
         self.textView.delaysContentTouches = true
 //        self.textView.selectable = false 写上会有问题
-        self.textView.editable = false
-        self.textView.scrollEnabled = false
-        self.textView.multipleTouchEnabled = true
+        self.textView.isEditable = false
+        self.textView.isScrollEnabled = false
+        self.textView.isMultipleTouchEnabled = true
         self.textView.canCancelContentTouches = true
         self.addSubview(self.textView)
         
@@ -62,14 +62,14 @@ class TumblrTagEntry0: UIView {
         }
     }
     
-    func setWithLayout(tumblrLayout: TumblrNormalLayout) {
+    func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
         
         guard let _ = tumblrLayout.post else {
-            self.textView.frame = CGRectZero
+            self.textView.frame = CGRect.zero
             self.textView.attributedText = nil
             return
         }
-        self.textView.frame = CGRectMake(kTMCellPadding, 0, kScreenWidth - 2 * kTMCellPadding, tumblrLayout.tagsHeight)
+        self.textView.frame = CGRect(x: kTMCellPadding, y: 0, width: kScreenWidth - 2 * kTMCellPadding, height: tumblrLayout.tagsHeight)
         self.textView.attributedText = tumblrLayout.tagsAttributedString
 
     }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 import ObjectMapper
 
 
@@ -21,7 +20,7 @@ struct Relog : Mappable {
     var comment : String?
     var treeHtml : String?
     
-    init?(_ map: Map) {
+    init?(map: Map) {
         
     }
     
@@ -37,7 +36,7 @@ struct PhotoSize : Mappable {
     var width : Int = 0
     var height : Int = 0
     
-    init?(_ map: Map) {
+    init?(map: Map) {
     }
     
     mutating func mapping(map: Map) {
@@ -55,7 +54,7 @@ struct Photo : Mappable {
     var altSizes : [PhotoSize]?
     
     
-    init?(_ map: Map) {
+    init?(map: Map) {
         
     }
     
@@ -67,7 +66,7 @@ struct Photo : Mappable {
 
 }
 
-class TumblrPost: Object, Mappable {
+class TumblrPost: NSObject, Mappable {
 
 
     var blogName : String    = ""
@@ -91,7 +90,7 @@ class TumblrPost: Object, Mappable {
     var sourceTitle : String = ""
     var totalPosts : Int32   = 0
 
-    let tags                         = List<StringObject>()
+    var tags          = [StringObject]()
     
     var title: String = ""
     var body : String = ""
@@ -121,7 +120,7 @@ class TumblrPost: Object, Mappable {
     var permalinkUrl : String = ""
 
 
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
     }
 
@@ -180,10 +179,4 @@ class TumblrPost: Object, Mappable {
     }
 
 
-
-// Specify properties to ignore (Realm won't persist these)
-
-//  override static func ignoredProperties() -> [String] {
-//    return []
-//  }
 }

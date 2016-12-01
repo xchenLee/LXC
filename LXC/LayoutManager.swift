@@ -36,11 +36,11 @@ let kTMCellVideoSourceFlagSize : CGFloat = 40
 /// 文字
 let kTMCellTitleFontSize : CGFloat = 20
 let kTMCellTitleFontColor = UIColor.fromARGB(0x646464, alpha: 1.0)
-let kTMCellTitleFont = UIFont.systemFontOfSize(kTMCellTitleFontSize, weight: UIFontWeightRegular)
+let kTMCellTitleFont = UIFont.systemFont(ofSize: kTMCellTitleFontSize, weight: UIFontWeightRegular)
 
 let kTMCellTextFontSize: CGFloat = 14
 let kTMCellTextFontColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellTextFont = UIFont.systemFontOfSize(kTMCellTextFontSize, weight: UIFontWeightLight)
+let kTMCellTextFont = UIFont.systemFont(ofSize: kTMCellTextFontSize, weight: UIFontWeightLight)
 
 
 let kTMCellLineColor = UIColor.fromARGB(0xDCDCDC, alpha: 1.0)
@@ -48,15 +48,15 @@ let kTMCellLineColorAlpha = UIColor.fromARGB(0xDCDCDC, alpha: 0.5)
 
 let kTMCellBlogNameFontSize : CGFloat = 14
 let kTMCellBlogNameTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellBlogNameFont = UIFont.systemFontOfSize(kTMCellBlogNameFontSize, weight: UIFontWeightLight)
+let kTMCellBlogNameFont = UIFont.systemFont(ofSize: kTMCellBlogNameFontSize, weight: UIFontWeightLight)
 
 let kTMCellReblogFontSize : CGFloat = 14
 let kTMCellReblogTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellReblogFont = UIFont.systemFontOfSize(kTMCellReblogFontSize, weight: UIFontWeightLight)
+let kTMCellReblogFont = UIFont.systemFont(ofSize: kTMCellReblogFontSize, weight: UIFontWeightLight)
 
 let kTMCellTagFontSize : CGFloat = 14
 let kTMCellTagTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellTagFont = UIFont.systemFontOfSize(kTMCellTagFontSize, weight: UIFontWeightLight)
+let kTMCellTagFont = UIFont.systemFont(ofSize: kTMCellTagFontSize, weight: UIFontWeightLight)
 
 
 
@@ -67,7 +67,7 @@ let kTMCellToolBarHeight : CGFloat = 40
 let kTMCellPhotoMaxHeight = kScreenHeight - 68
 let kTMCellPhotoMaxWidth = kScreenWidth
 
-let kTMCellPhotoMaxSize = CGSizeMake(kTMCellPhotoMaxWidth, kTMCellPhotoMaxHeight)
+let kTMCellPhotoMaxSize = CGSize(width: kTMCellPhotoMaxWidth, height: kTMCellPhotoMaxHeight)
 
 
 let kDebugMaxAllowedPhotoCount = 4
@@ -75,7 +75,7 @@ let kDebugMaxAllowedPhotoCount = 4
 class LayoutManager: NSObject {
     
     
-    class func getTagsAttributedString(text: String) -> NSAttributedString {
+    class func getTagsAttributedString(_ text: String) -> NSAttributedString {
         
         
         let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
@@ -88,17 +88,17 @@ class LayoutManager: NSObject {
         
         let expression = try! NSRegularExpression(pattern: kCustomDetectionTagPattern, options: [])
         
-        expression.enumerateMatchesInString(text, options: [], range: textRange) { (result, flags, stop) in
+        expression.enumerateMatches(in: text, options: [], range: textRange) { (result, flags, stop) in
             
             guard let matchingResult = result else {
                return
             }
             
-            let startIndex = text.startIndex.advancedBy(matchingResult.range.location)
-            let endIndex = startIndex.advancedBy(matchingResult.range.length)
-            let range = startIndex..<endIndex
+            let startIndex = text.characters.index(text.startIndex, offsetBy: matchingResult.range.location)
+            let lastIndex = text.characters.index(text.startIndex, offsetBy: matchingResult.range.location + matchingResult.range.length)
+            let range = startIndex..<lastIndex
             
-            let matchedString = text.substringWithRange(range)
+            let matchedString = text.substring(with: range)
             
             let attributes = [
                 NSLinkAttributeName : matchedString,
@@ -120,13 +120,13 @@ class LayoutManager: NSObject {
      
      - returns: text的 NSAttributedString
      */
-    class func getTextEntryTextAttributedString(text: String) -> NSAttributedString {
+    class func getTextEntryTextAttributedString(_ text: String) -> NSAttributedString {
         
         //获取转化HTML过后的AS
         let mutableAS = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
         
         //开始添加自定义属性，段落，
-        let paragraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyle.minimumLineHeight = kTMCellTextFontSize * 1.2
         
         let range = NSMakeRange(0, mutableAS.length)
@@ -143,7 +143,7 @@ class LayoutManager: NSObject {
      
      - returns: reblog的 NSAttributedString
      */
-    class func getReblogEntryTextAttributedString(text: String) -> NSAttributedString {
+    class func getReblogEntryTextAttributedString(_ text: String) -> NSAttributedString {
         
         //获取转化HTML过后的AS
         let mutableAS = text.convertToAttributedString(kTMCellReblogFont, textColor: kTMCellReblogTextColor)
@@ -163,7 +163,7 @@ class LayoutManager: NSObject {
      
      - returns: 文本全部宽度
      */
-    class func computeBlogNameWidth(blogName: String) -> CGFloat {
+    class func computeBlogNameWidth(_ blogName: String) -> CGFloat {
         
         var width = blogName.widthWithConstrainedHeight(kTMCellBlogNameFontSize + 2, font: kTMCellBlogNameFont)
         //预留120
@@ -181,14 +181,14 @@ class LayoutManager: NSObject {
      
      - returns: reblog的全高
      */
-    class func computeRelogHeight(blogName: NSAttributedString) -> CGFloat {
+    class func computeRelogHeight(_ blogName: NSAttributedString) -> CGFloat {
         
         let height = blogName.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
 
         return height
     }
     
-    class func computeTagsHeight(tagsText: NSAttributedString) -> CGFloat {
+    class func computeTagsHeight(_ tagsText: NSAttributedString) -> CGFloat {
         
         let height = tagsText.heightWithConstrainedWidth(kScreenWidth - 2 * kTMCellPadding)
         
@@ -203,7 +203,7 @@ class LayoutManager: NSObject {
      
      - returns: 元组包含（整个图片控件高度,[imageView的布局]）
      */
-    class func computeImagesHeight(photos: [Photo]?) ->  (CGFloat,[CGRect]) {
+    class func computeImagesHeight(_ photos: [Photo]?) ->  (CGFloat,[CGRect]) {
         
         guard let photoData = photos else {
             return (0, [])
@@ -222,18 +222,18 @@ class LayoutManager: NSObject {
             let photoSize = photoData[0].originalSize
             
             guard let realSize = photoSize else {
-                return (0,[CGRectZero])
+                return (0,[CGRect.zero])
             }
             if realSize.width == 0 || realSize.height == 0 {
                 let width = kScreenWidth
                 let height = kScreenWidth * 9 / 16
-                return(height, [CGRectMake(0, 0, width, height)])
+                return(height, [CGRect(x: 0, y: 0, width: width, height: height)])
             }
             
-            let originalSize = CGSizeMake(CGFloat(realSize.width), CGFloat(realSize.height))
+            let originalSize = CGSize(width: CGFloat(realSize.width), height: CGFloat(realSize.height))
             let scaleSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
             
-            let rect = CGRectMake(0, 0, kScreenWidth, scaleSize.height)
+            let rect = CGRect(x: 0, y: 0, width: kScreenWidth, height: scaleSize.height)
             return (scaleSize.height,[rect])
         }
         
@@ -243,7 +243,7 @@ class LayoutManager: NSObject {
             let photoSize1 = photoData[1].originalSize
 
             guard let realSize0 = photoSize0, let realSize1 = photoSize1 else {
-                return (0, Array<CGRect>(count: photoCount, repeatedValue: CGRectZero))
+                return (0, Array<CGRect>(repeating: CGRect.zero, count: photoCount))
             }
             //如果第一张宽度大于高度就竖直排列
             let vertical = realSize0.width > realSize0.height
@@ -252,26 +252,26 @@ class LayoutManager: NSObject {
             
             if vertical {
                 
-                let originalSize0 = CGSizeMake(CGFloat(realSize0.width), CGFloat(realSize0.height))
+                let originalSize0 = CGSize(width: CGFloat(realSize0.width), height: CGFloat(realSize0.height))
                 
                 var scaleSize0 = ToolBox.getScaleSize(originalSize0, max: kTMCellPhotoMaxSize)
                 
                 if originalSize0.width == 0 || originalSize0.height == 0 {
-                    scaleSize0 = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                    scaleSize0 = CGSize(width: kScreenWidth, height: kScreenWidth * 9 / 16)
                 }
                 
-                let originalSize1 = CGSizeMake(CGFloat(realSize1.width), CGFloat(realSize1.height))
+                let originalSize1 = CGSize(width: CGFloat(realSize1.width), height: CGFloat(realSize1.height))
                 var scaleSize1 = ToolBox.getScaleSize(originalSize1, max: kTMCellPhotoMaxSize)
                 
                 if originalSize1.width == 0 || originalSize1.height == 0 {
-                    scaleSize1 = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                    scaleSize1 = CGSize(width: kScreenWidth, height: kScreenWidth * 9 / 16)
                 }
                 
                 let height = scaleSize0.height + scaleSize1.height
                 
-                let rect0 = CGRectMake(0, 0, kScreenWidth, scaleSize0.height)
+                let rect0 = CGRect(x: 0, y: 0, width: kScreenWidth, height: scaleSize0.height)
                 
-                let rect1 = CGRectMake(0, scaleSize0.height, kScreenWidth, scaleSize1.height)
+                let rect1 = CGRect(x: 0, y: scaleSize0.height, width: kScreenWidth, height: scaleSize1.height)
                 
                 return (height,[rect0, rect1])
             } else {
@@ -282,13 +282,13 @@ class LayoutManager: NSObject {
                     pairedWidth = realSize1.width
                 }
                 
-                let originalSize = CGSizeMake(CGFloat(pairedWidth), CGFloat(minOriginalHeight))
-                let maxSize = CGSizeMake(kScreenWidth / 2, kTMCellPhotoMaxHeight / 2)
+                let originalSize = CGSize(width: CGFloat(pairedWidth), height: CGFloat(minOriginalHeight))
+                let maxSize = CGSize(width: kScreenWidth / 2, height: kTMCellPhotoMaxHeight / 2)
                 let scaleSize = ToolBox.getScaleSize(originalSize, max: maxSize)
                 
-                let rect0 = CGRectMake(0, 0, kScreenWidth / 2, scaleSize.height)
+                let rect0 = CGRect(x: 0, y: 0, width: kScreenWidth / 2, height: scaleSize.height)
                 
-                let rect1 = CGRectMake(kScreenWidth / 2, 0, kScreenWidth / 2, scaleSize.height)
+                let rect1 = CGRect(x: kScreenWidth / 2, y: 0, width: kScreenWidth / 2, height: scaleSize.height)
                 return (scaleSize.height,[rect0, rect1])
             }
         }
@@ -296,7 +296,7 @@ class LayoutManager: NSObject {
         
         if photoCount == 3 {
             
-            var resultRects = Array<CGRect>(count: photoCount, repeatedValue: CGRectZero)
+            var resultRects = Array<CGRect>(repeating: CGRect.zero, count: photoCount)
             
             guard let _ = photoData[0].originalSize else {
                 return (0, resultRects)
@@ -308,12 +308,12 @@ class LayoutManager: NSObject {
                 guard let photoSize = photoData[index].originalSize else {
                     continue
                 }
-                let originalSize = CGSizeMake(CGFloat(photoSize.width), CGFloat(photoSize.height))
+                let originalSize = CGSize(width: CGFloat(photoSize.width), height: CGFloat(photoSize.height))
                 var scaledSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
                 if originalSize.width == 0 || originalSize.height == 0 {
-                    scaledSize = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                    scaledSize = CGSize(width: kScreenWidth, height: kScreenWidth * 9 / 16)
                 }
-                let rect = CGRectMake(0, rectTop, kScreenWidth, scaledSize.height)
+                let rect = CGRect(x: 0, y: rectTop, width: kScreenWidth, height: scaledSize.height)
                 rectTop += scaledSize.height
                 resultRects[index] = rect
             }
@@ -322,7 +322,7 @@ class LayoutManager: NSObject {
         
         if photoCount == 4 {
             
-            var resultRects = Array<CGRect>(count: photoCount, repeatedValue: CGRectZero)
+            var resultRects = Array<CGRect>(repeating: CGRect.zero, count: photoCount)
             
             guard let photoSize0 = photoData[0].originalSize else {
                 return (0, resultRects)
@@ -335,10 +335,10 @@ class LayoutManager: NSObject {
                 
                 let maxWidth = kScreenWidth / 2
                 
-                let originalSize0 = CGSizeMake(CGFloat(photoSize0.width), CGFloat(photoSize0.height))
-                var scaleSize0 = ToolBox.getScaleSize(originalSize0, max: CGSizeMake(maxWidth, kTMCellPhotoMaxHeight / 2))
+                let originalSize0 = CGSize(width: CGFloat(photoSize0.width), height: CGFloat(photoSize0.height))
+                var scaleSize0 = ToolBox.getScaleSize(originalSize0, max: CGSize(width: maxWidth, height: kTMCellPhotoMaxHeight / 2))
                 if originalSize0.width == 0 || originalSize0.height == 0 {
-                    scaleSize0 = CGSizeMake(maxWidth, kScreenWidth * 9 / 32)
+                    scaleSize0 = CGSize(width: maxWidth, height: kScreenWidth * 9 / 32)
                 }
                 
                 let preferedHeight = scaleSize0.height
@@ -347,7 +347,7 @@ class LayoutManager: NSObject {
                     
                     let row = CGFloat(index / 2)
                     let column = CGFloat(index % 2)
-                    let rect = CGRectMake(column * maxWidth, preferedHeight * row, maxWidth, preferedHeight)
+                    let rect = CGRect(x: column * maxWidth, y: preferedHeight * row, width: maxWidth, height: preferedHeight)
                     resultRects[index] = rect
                 }
                 return(2 * preferedHeight, resultRects)
@@ -358,12 +358,12 @@ class LayoutManager: NSObject {
                 guard let photoSize = photoData[index].originalSize else {
                     continue
                 }
-                let originalSize = CGSizeMake(CGFloat(photoSize.width), CGFloat(photoSize.height))
+                let originalSize = CGSize(width: CGFloat(photoSize.width), height: CGFloat(photoSize.height))
                 var scaledSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
                 if originalSize.width == 0 || originalSize.height == 0 {
-                    scaledSize = CGSizeMake(kScreenWidth, kScreenWidth * 9 / 16)
+                    scaledSize = CGSize(width: kScreenWidth, height: kScreenWidth * 9 / 16)
                 }
-                let rect = CGRectMake(0, rectTop, kScreenWidth, scaledSize.height)
+                let rect = CGRect(x: 0, y: rectTop, width: kScreenWidth, height: scaledSize.height)
                 rectTop += scaledSize.height
                 resultRects[index] = rect
             }
@@ -372,52 +372,52 @@ class LayoutManager: NSObject {
 
 
 
-        return (0, [CGRectZero])
+        return (0, [CGRect.zero])
     }
     
-    class func doLikeAnimation(cell : TumblrNormalCell, liked: Bool) {
+    class func doLikeAnimation(_ cell : TumblrNormalCell, liked: Bool) {
         //找到相对于Window的frame，开始做动画
         
-        let window = UIApplication.sharedApplication().delegate?.window!
+        let window = UIApplication.shared.delegate?.window!
         let likeBtn = cell.toolBarEntry.likeBtn
-        let frameInCell = cell.toolBarEntry.convertRect(likeBtn.frame, toView: cell.contentView)
-        let frameInWindow = cell.convertRect(frameInCell, toView: window)
+        let frameInCell = cell.toolBarEntry.convert(likeBtn.frame, to: cell.contentView)
+        let frameInWindow = cell.convert(frameInCell, to: window)
         
         let size = frameInWindow.width
         
         //如果现在是喜欢的状态
         if liked {
             let animatedHeart = UIImageView()
-            animatedHeart.size = CGSizeMake(48, 48)
-            animatedHeart.contentMode = .ScaleAspectFill
+            animatedHeart.size = CGSize(width: 48, height: 48)
+            animatedHeart.contentMode = .scaleAspectFill
             animatedHeart.image = UIImage(named: "icon_animated_like")
             animatedHeart.frame = frameInWindow
             animatedHeart.alpha = 0.6
-            animatedHeart.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI / 9))
-            animatedHeart.transform = CGAffineTransformScale(animatedHeart.transform, 0.75, 0.75)
+            animatedHeart.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI / 9))
+            animatedHeart.transform = animatedHeart.transform.scaledBy(x: 0.75, y: 0.75)
             window?.addSubview(animatedHeart)
             
             let center = animatedHeart.center
             
-            UIView.animateKeyframesWithDuration(0.7, delay: 0, options: [.CalculationModeLinear], animations: {
+            UIView.animateKeyframes(withDuration: 0.7, delay: 0, options: UIViewKeyframeAnimationOptions(), animations: {
                 
-                UIView .addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.2, animations: {
+                UIView .addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
                     animatedHeart.alpha = 1.0
-                    animatedHeart.transform = CGAffineTransformScale(animatedHeart.transform, 4/3.0, 4/3.0)
-                    animatedHeart.center = CGPointMake(center.x - size * 0.1, center.y - size * 0.5)
+                    animatedHeart.transform = animatedHeart.transform.scaledBy(x: 4/3.0, y: 4/3.0)
+                    animatedHeart.center = CGPoint(x: center.x - size * 0.1, y: center.y - size * 0.5)
                 })
                 
-                UIView .addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.5, animations: {
-                    animatedHeart.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 8))
-                    animatedHeart.center = CGPointMake(center.x, center.y - size * 1.8)
+                UIView .addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.5, animations: {
+                    animatedHeart.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI / 8))
+                    animatedHeart.center = CGPoint(x: center.x, y: center.y - size * 1.8)
                 })
                 
-                UIView .addKeyframeWithRelativeStartTime(0.5, relativeDuration: 0.6, animations: {
-                    animatedHeart.center = CGPointMake(center.x + size * 0.2, center.y - size * 2.6)
+                UIView .addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.6, animations: {
+                    animatedHeart.center = CGPoint(x: center.x + size * 0.2, y: center.y - size * 2.6)
                     
                 })
                 
-                UIView .addKeyframeWithRelativeStartTime(0.6, relativeDuration: 0.7, animations: {
+                UIView .addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.7, animations: {
                     animatedHeart.alpha = 0.3
                 })
                 
@@ -436,41 +436,41 @@ class LayoutManager: NSObject {
         
         //做不喜欢的动画
         let animatedLeft = UIImageView()
-        animatedLeft.size = CGSizeMake(28, 48)
-        animatedLeft.contentMode = .ScaleAspectFill
+        animatedLeft.size = CGSize(width: 28, height: 48)
+        animatedLeft.contentMode = .scaleAspectFill
         animatedLeft.image = UIImage(named: "icon_animated_unlike_left")
-        animatedLeft.frame = CGRectMake(leftLeft, breakupTop, 28, 48)
+        animatedLeft.frame = CGRect(x: leftLeft, y: breakupTop, width: 28, height: 48)
         window?.addSubview(animatedLeft)
         
         
         let animatedRight = UIImageView()
-        animatedRight.size = CGSizeMake(28, 48)
-        animatedRight.contentMode = .ScaleAspectFill
+        animatedRight.size = CGSize(width: 28, height: 48)
+        animatedRight.contentMode = .scaleAspectFill
         animatedRight.image = UIImage(named: "icon_animated_unlike_right")
-        animatedRight.frame = CGRectMake(rightLeft, breakupTop-1, 28, 48)
+        animatedRight.frame = CGRect(x: rightLeft, y: breakupTop-1, width: 28, height: 48)
         window?.addSubview(animatedRight)
         
         let centerLeft = animatedLeft.center
         let centerRight = animatedRight.center
         
         
-        UIView.animateKeyframesWithDuration(0.7, delay: 0, options: [.CalculationModeLinear], animations: {
+        UIView.animateKeyframes(withDuration: 0.7, delay: 0, options: UIViewKeyframeAnimationOptions(), animations: {
             
-            UIView .addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.3, animations: {
+            UIView .addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.3, animations: {
                 
-                animatedLeft.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI / 16))
-                animatedLeft.center = CGPointMake(centerLeft.x - 12, centerLeft.y)
+                animatedLeft.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI / 16))
+                animatedLeft.center = CGPoint(x: centerLeft.x - 12, y: centerLeft.y)
                 
-                animatedRight.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 16))
-                animatedRight.center = CGPointMake(centerRight.x + 12, centerRight.y)
+                animatedRight.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI / 16))
+                animatedRight.center = CGPoint(x: centerRight.x + 12, y: centerRight.y)
                 
             })
             
-            UIView .addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.7, animations: {
+            UIView .addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.7, animations: {
                 
-                animatedLeft.center = CGPointMake(centerLeft.x - 12, centerLeft.y + 2 * size)
+                animatedLeft.center = CGPoint(x: centerLeft.x - 12, y: centerLeft.y + 2 * size)
                 animatedLeft.alpha = 0.0
-                animatedRight.center = CGPointMake(centerRight.x + 12, centerRight.y + 2 * size)
+                animatedRight.center = CGPoint(x: centerRight.x + 12, y: centerRight.y + 2 * size)
                 animatedRight.alpha = 0.0
                 
             })

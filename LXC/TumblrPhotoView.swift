@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kTumblrPhotoViewAnimationDuration: NSTimeInterval = 0.3
+let kTumblrPhotoViewAnimationDuration: TimeInterval = 0.3
 
 class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
@@ -16,12 +16,12 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     var currentIndex: Int = 0
     var blurBackground: Bool = true
     
-    private var background: UIImageView
-    private var scrollView: UIScrollView
-    private var photoCells: [TumblrPhotoCell] = []
+    fileprivate var background: UIImageView
+    fileprivate var scrollView: UIScrollView
+    fileprivate var photoCells: [TumblrPhotoCell] = []
     
-    private var fromView: UIImageView!
-    private var fromViewIndex: NSInteger!
+    fileprivate var fromView: UIImageView!
+    fileprivate var fromViewIndex: NSInteger!
     
     // MARK: - 初始化方法
     init(photos: [TumblrPhotoPreviewItem], currentIndex: Int) {
@@ -30,7 +30,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         self.background = UIImageView()
         self.photoDatas = photos
         self.currentIndex = currentIndex
-        super.init(frame: UIScreen.mainScreen().bounds)
+        super.init(frame: UIScreen.main.bounds)
         customInit()
     }
     
@@ -51,9 +51,9 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     func customInit() {
         
         self.clipsToBounds = true
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
-        self.frame = UIScreen.mainScreen().bounds
+        self.frame = UIScreen.main.bounds
         
         self.background.frame = self.bounds
         self.addSubview(self.background)
@@ -61,14 +61,14 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         self.scrollView.frame = self.bounds
         self.scrollView.delegate = self
         self.scrollView.scrollsToTop = false
-        self.scrollView.pagingEnabled = true
-        self.scrollView.userInteractionEnabled = true
+        self.scrollView.isPagingEnabled = true
+        self.scrollView.isUserInteractionEnabled = true
         
         self.scrollView.alwaysBounceHorizontal = self.photoDatas.count > 1
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.showsHorizontalScrollIndicator = false
         
-        self.scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.scrollView.delaysContentTouches = false
         self.scrollView.canCancelContentTouches = true
         
@@ -80,7 +80,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         let duobleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapAction))
         duobleTapGesture.numberOfTapsRequired = 2
         duobleTapGesture.delegate = self
-        duobleTapGesture.requireGestureRecognizerToFail(tapGesture)
+        duobleTapGesture.require(toFail: tapGesture)
         self.addGestureRecognizer(duobleTapGesture)
         
         self.addSubview(self.scrollView)
@@ -99,16 +99,16 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         }
     }
     
-    func singleTapAction(gesture: UITapGestureRecognizer) {
+    func singleTapAction(_ gesture: UITapGestureRecognizer) {
         self.dimiss()
     }
     
-    func doubleTapAction(gesture: UITapGestureRecognizer) {
+    func doubleTapAction(_ gesture: UITapGestureRecognizer) {
         
     }
     
     // MARK: - Self methods
-    func cellForPage(index: NSInteger) -> TumblrPhotoCell? {
+    func cellForPage(_ index: NSInteger) -> TumblrPhotoCell? {
         
         for photoCell in photoCells {
             if photoCell.cellIndex == index {
@@ -119,7 +119,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     }
     
     // MARK: - 显示
-    func preset(fromView: UIImageView, index: NSInteger, container: UIView) {
+    func preset(_ fromView: UIImageView, index: NSInteger, container: UIView) {
         
         self.fromView = fromView
         self.fromViewIndex = index
@@ -132,29 +132,29 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         container.addSubview(self)
         
         let count = self.photoDatas.count
-        self.scrollView.contentSize = CGSizeMake(CGFloat(count) * kScreenWidth, kScreenHeight)
-        let currentRect = CGRectMake(kScreenWidth * CGFloat(currentIndex), 0, kScreenWidth, kScreenHeight)
+        self.scrollView.contentSize = CGSize(width: CGFloat(count) * kScreenWidth, height: kScreenHeight)
+        let currentRect = CGRect(x: kScreenWidth * CGFloat(currentIndex), y: 0, width: kScreenWidth, height: kScreenHeight)
         self.scrollView.scrollRectToVisible(currentRect, animated: false)
         self.scrollViewDidScroll(self.scrollView)
         
         let imageCell = photoCells[index]
         
-        let fromRect = fromView.convertRect(fromView.bounds, toView: imageCell.containerView)
+        let fromRect = fromView.convert(fromView.bounds, to: imageCell.containerView)
         
         imageCell.containerView.clipsToBounds = false
         imageCell.imageView.frame = fromRect
-        imageCell.contentMode = .ScaleAspectFill
+        imageCell.contentMode = .scaleAspectFill
         
-        self.scrollView.userInteractionEnabled = false
+        self.scrollView.isUserInteractionEnabled = false
         
-        UIView.animateWithDuration(kTumblrPhotoViewAnimationDuration, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+        UIView.animate(withDuration: kTumblrPhotoViewAnimationDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
             imageCell.imageView.frame = imageCell.containerView.bounds
             }) { (finished) in
                 
-                UIView.animateWithDuration(kTumblrPhotoViewAnimationDuration, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+                UIView.animate(withDuration: kTumblrPhotoViewAnimationDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
                     imageCell.containerView.clipsToBounds = true
                     self.scrollViewDidScroll(self.scrollView)
-                    self.scrollView.userInteractionEnabled = true
+                    self.scrollView.isUserInteractionEnabled = true
                     }, completion: { (finish) in
                 })
                 
@@ -171,15 +171,15 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
             fromView = photoData.thumView
         }
         
-        UIView.animateWithDuration(kTumblrPhotoViewAnimationDuration, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+        UIView.animate(withDuration: kTumblrPhotoViewAnimationDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
             
-            let fromRect = fromView.convertRect(fromView.bounds, toView: photoCell?.containerView)
+            let fromRect = fromView?.convert((fromView?.bounds)!, to: photoCell?.containerView)
             photoCell?.containerView.clipsToBounds = false
-            photoCell?.contentMode = fromView.contentMode
-            photoCell?.imageView.frame = fromRect
+            photoCell?.contentMode = (fromView?.contentMode)!
+            photoCell?.imageView.frame = fromRect!
             
         }) { (finished) in
-            UIView.animateWithDuration(0.15, delay: 0, options: [.BeginFromCurrentState, .CurveEaseOut], animations: {
+            UIView.animate(withDuration: 0.15, delay: 0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
                 self.alpha = 0
                 }, completion: { (finish) in
                     self.removeFromSuperview()
@@ -190,7 +190,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     }
     
     // MARK: - UIScrollViewDelegate
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let page = Int(round(scrollView.contentOffset.x / scrollView.width))
         var indexes: [Int] = [page]
@@ -210,11 +210,11 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
     }
     

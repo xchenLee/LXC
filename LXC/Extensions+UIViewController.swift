@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-let kNavigationBackBtnColor = UIColor.whiteColor()
+let kNavigationBackBtnColor = UIColor.white
 
 extension UIViewController {
     
@@ -20,10 +20,10 @@ extension UIViewController {
      */
     func showLoadingHUD() {
         
-        let hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
-        hud.mode = .Indeterminate
-        hud.removeFromSuperViewOnHide = true
-        hud.show(true)
+        let hud = MBProgressHUD.showAdded(to: self.navigationController?.view, animated: true)
+        hud?.mode = .indeterminate
+        hud?.removeFromSuperViewOnHide = true
+        hud?.show(true)
     }
     
     /**
@@ -31,21 +31,21 @@ extension UIViewController {
      
      - parameter string: 展示的文本
      */
-    func showTextHUD(string: String) {
+    func showTextHUD(_ string: String) {
         
-        let hud = MBProgressHUD.showHUDAddedTo(self.navigationController?.view, animated: true)
-        hud.mode = .Text
-        hud.labelText = string
-        hud.removeFromSuperViewOnHide = true
-        hud.hide(true, afterDelay: 2)
+        let hud = MBProgressHUD.showAdded(to: self.navigationController?.view, animated: true)
+        hud?.mode = .text
+        hud?.labelText = string
+        hud?.removeFromSuperViewOnHide = true
+        hud?.hide(true, afterDelay: 2)
     }
     
     /**
      隐藏
      */
     func hideHUD() {
-        dispatch_async(dispatch_get_main_queue()) { 
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+        DispatchQueue.main.async { 
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     

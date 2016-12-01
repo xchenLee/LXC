@@ -47,19 +47,19 @@ class ImageFilterView: GLKView {
     }
     
     override init(frame: CGRect) {
-        super.init(frame: frame, context: EAGLContext(API: .OpenGLES2))
+        super.init(frame: frame, context: EAGLContext(api: .openGLES2))
         clipsToBounds = true
-        ciContext = CIContext(EAGLContext: context)
+        ciContext = CIContext(eaglContext: context)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         clipsToBounds = true
-        self.context = EAGLContext(API: .OpenGLES2)
-        ciContext = CIContext(EAGLContext: context)
+        self.context = EAGLContext(api: .openGLES2)
+        ciContext = CIContext(eaglContext: context)
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         if ciContext != nil && inputImage != nil && ciFilter != nil {
             let inputCIImage = CIImage(image: inputImage)
             ciFilter.setValue(inputCIImage, forKey: kCIInputImageKey)
@@ -70,7 +70,7 @@ class ImageFilterView: GLKView {
                 let inputBounds = inputCIImage!.extent
                 let drawableBounds = CGRect(x: 0, y: 0, width: self.drawableWidth, height: self.drawableHeight)
                 let targetBounds = imageBoundsForContentMode(inputBounds, toRect: drawableBounds)
-                ciContext.drawImage(outputImage, inRect: targetBounds, fromRect: inputBounds)
+                ciContext.draw(outputImage, in: targetBounds, from: inputBounds)
             }
         }
     }
@@ -86,11 +86,11 @@ class ImageFilterView: GLKView {
         }
     }
     
-    func imageBoundsForContentMode(fromRect: CGRect, toRect: CGRect) -> CGRect {
+    func imageBoundsForContentMode(_ fromRect: CGRect, toRect: CGRect) -> CGRect {
         switch contentMode {
-        case .ScaleAspectFill:
+        case .scaleAspectFill:
             return aspectFill(fromRect, toRect: toRect)
-        case .ScaleAspectFit:
+        case .scaleAspectFit:
             return aspectFit(fromRect, toRect: toRect)
         default:
             return fromRect
@@ -111,10 +111,10 @@ class ImageFilterView: GLKView {
         backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
         glClearColor(GLfloat(r), GLfloat(g), GLfloat(b), GLfloat(a))
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
     }
     
-    func aspectFill(fromRect: CGRect, toRect: CGRect) -> CGRect {
+    func aspectFill(_ fromRect: CGRect, toRect: CGRect) -> CGRect {
         let fromAspectRatio = fromRect.size.width / fromRect.size.height;
         let toAspectRatio = toRect.size.width / toRect.size.height;
         
@@ -137,10 +137,10 @@ class ImageFilterView: GLKView {
         
         //NSLog(@"%@",NSStringFromCGRect( CGRectIntegral(CGRectMake(0, 15.6, 16.1, 20.2))));
         //{0,15}，{17,21}
-        return CGRectIntegral(fitRect)
+        return fitRect.integral
     }
     
-    func aspectFit(fromRect: CGRect, toRect: CGRect) -> CGRect {
+    func aspectFit(_ fromRect: CGRect, toRect: CGRect) -> CGRect {
         let fromAspectRatio = fromRect.size.width / fromRect.size.height;
         let toAspectRatio = toRect.size.width / toRect.size.height;
         
@@ -154,7 +154,7 @@ class ImageFilterView: GLKView {
             fitRect.origin.x += (toRect.size.width - fitRect.size.width) * 0.5;
         }
         
-        return CGRectIntegral(fitRect)
+        return fitRect.integral
     }
 
 

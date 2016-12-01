@@ -25,29 +25,49 @@ let kTumblrAccessTokenUrl = "https://www.tumblr.com/oauth/access_token"
 class TumblrAPI: NSObject {
     
     
-    class func obtainFullBusinessURL(businussUrl: String) -> String {
+    class func obtainFullBusinessURL(_ businussUrl: String) -> String {
         return kTumblrAPIUrl + businussUrl
     }
     
     class func registerApp() {
         
-        TMAPIClient.sharedInstance().OAuthConsumerKey = kTumblrConsumerKey
-        TMAPIClient.sharedInstance().OAuthConsumerSecret = kTumblrConsumerSecretKey
+        TMAPIClient.sharedInstance().oAuthConsumerKey = kTumblrConsumerKey
+        TMAPIClient.sharedInstance().oAuthConsumerSecret = kTumblrConsumerSecretKey
     }
     
     
-    class func authorize(success: (credential: OAuthSwiftCredential, response: NSURLResponse?, parameters: Dictionary<String, String>) -> Void, failure: ((error: NSError) -> Void)?) {
+    class func authorize(success: OAuth1Swift.TokenSuccessHandler, failure: OAuth1Swift.FailureHandler) {
      
      
-     let oauthswift = OAuth1Swift(
-        consumerKey: kTumblrConsumerKey,
-        consumerSecret: kTumblrConsumerSecretKey,
-        requestTokenUrl: kTumblrRequestTokenUrl,
-        authorizeUrl: kTumblrAuthorizeUrl,
-        accessTokenUrl: kTumblrAccessTokenUrl
-     )
+        let oauthswift = OAuth1Swift(
+            consumerKey: kTumblrConsumerKey,
+            consumerSecret: kTumblrConsumerSecretKey,
+            requestTokenUrl: kTumblrRequestTokenUrl,
+            authorizeUrl: kTumblrAuthorizeUrl,
+            accessTokenUrl: kTumblrAccessTokenUrl
+        )
+        
+        let url: URL = URL(string: "oauth-swift://oauth-swift/tumblr")!
+        //oauthswift.authorize(withCallbackURL: url, success: OAuthSwift.TokenSuccessHandler, failure: <#T##OAuthSwift.FailureHandler?##OAuthSwift.FailureHandler?##(OAuthSwiftError) -> Void#>)
      
-     oauthswift.authorizeWithCallbackURL(NSURL(string: "oauth-swift://oauth-swift/tumblr")!, success: success, failure: failure)
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

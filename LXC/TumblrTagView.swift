@@ -14,33 +14,33 @@ let kCustomDetectionTagPattern = "\\#{1}[^\\#]+\\#{1}"
 
 class TumblrTagView: UITextView, UITextViewDelegate {
     
-    var tapTagAction:((tagText: String) -> Void)?
+    var tapTagAction:((_ tagText: String) -> Void)?
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         self.delegate = self
     }
     
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
-        guard let detectionType = self.attributedText.attribute(kCustomDetectionTypeName, atIndex: characterRange.location, effectiveRange: nil) as? String where detectionType == kCustomDetectionTypeTag else {
+        guard let detectionType = self.attributedText.attribute(kCustomDetectionTypeName, at: characterRange.location, effectiveRange: nil) as? String, detectionType == kCustomDetectionTypeTag else {
             return true
         }
         
-        let text = (self.text as NSString).substringWithRange(characterRange)
+        let text = (self.text as NSString).substring(with: characterRange)
         guard text.characters.count > 2 else {
             return false
         }
         
-        let startIndex = text.startIndex.advancedBy(1)
-        let endIndex = text.endIndex.advancedBy(-1)
+        let startIndex = text.characters.index(text.startIndex, offsetBy: 1)
+        let endIndex = text.characters.index(text.endIndex, offsetBy: -1)
         
         let range = startIndex..<endIndex
         
-        let tagText = text.substringWithRange(range)
+        let tagText = text.substring(with: range)
         
         if !tagText.isEmpty {
-            tapTagAction?(tagText: tagText)
+            tapTagAction?(tagText)
         }
         return false
     }

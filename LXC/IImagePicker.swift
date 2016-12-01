@@ -15,27 +15,27 @@ import Foundation
 @objc
 protocol IImagePickerDelegate {
     
-    optional func iImagePickerDidCancel(imagePicker : IImagePicker)
+    @objc optional func iImagePickerDidCancel(_ imagePicker : IImagePicker)
 
-    optional func iImagePicker(imagePicker : IImagePicker, didFinishPickingAssets : [PHAsset]);
-    optional func iImagePicker(imagePicker : IImagePicker, shouldeSelectAsset : PHAsset) -> Bool
+    @objc optional func iImagePicker(_ imagePicker : IImagePicker, didFinishPickingAssets : [PHAsset]);
+    @objc optional func iImagePicker(_ imagePicker : IImagePicker, shouldeSelectAsset : PHAsset) -> Bool
     
-    optional func iImagePicker(imagePicker : IImagePicker, didSelectAsset : PHAsset)
-    optional func iImagePicker(imagePicker : IImagePicker, didDeSelectAsset : PHAsset)
+    @objc optional func iImagePicker(_ imagePicker : IImagePicker, didSelectAsset : PHAsset)
+    @objc optional func iImagePicker(_ imagePicker : IImagePicker, didDeSelectAsset : PHAsset)
 
 }
 
 public enum IImagePickerMediaType : Int {
-    case Any
-    case Image
-    case Video
+    case any
+    case image
+    case video
 }
 
 // MARK: - IImagePicker
 class IImagePicker: UIViewController {
     
     var delegate : IImagePickerDelegate?
-    var mediaType : IImagePickerMediaType = IImagePickerMediaType.Any
+    var mediaType : IImagePickerMediaType = IImagePickerMediaType.any
     
     var assetCollectionSubType : [PHAssetCollectionSubtype]?
     
@@ -48,7 +48,7 @@ class IImagePicker: UIViewController {
     
     var selectedAssets : NSMutableOrderedSet?
     
-    private var albumNavigationController : UINavigationController?
+    fileprivate var albumNavigationController : UINavigationController?
     
     
     override func viewDidLoad() {
@@ -56,9 +56,9 @@ class IImagePicker: UIViewController {
         // Panorama 全景图，全景照片
         // custom
         assetCollectionSubType = [
-            PHAssetCollectionSubtype.AlbumMyPhotoStream,
-            .SmartAlbumPanoramas,
-            .SmartAlbumUserLibrary
+            PHAssetCollectionSubtype.albumMyPhotoStream,
+            .smartAlbumPanoramas,
+            .smartAlbumUserLibrary
             //.SmartAlbumVideos,
             //.SmartAlbumBursts
         ]
@@ -73,13 +73,13 @@ class IImagePicker: UIViewController {
                 
         selectedAssets = NSMutableOrderedSet()
         
-        let navigationController = UIStoryboard(name: "imagepicker", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
+        let navigationController = UIStoryboard(name: "imagepicker", bundle: Bundle.main).instantiateInitialViewController()
             as! UINavigationController
         
         addChildViewController(navigationController)
         navigationController.view.frame = self.view.frame
         self.view.addSubview(navigationController.view)
-        navigationController.didMoveToParentViewController(self)
+        navigationController.didMove(toParentViewController: self)
         
         albumNavigationController = navigationController
         

@@ -43,7 +43,7 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
         
         //let screenWidth = UIScreen.mainScreen().bounds.size.width
         
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveQRCode")
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(QRCodeGenerator.saveQRCode))
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
@@ -51,11 +51,11 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
         
         let authorizedStatus = PHPhotoLibrary.authorizationStatus()
         switch authorizedStatus {
-        case .Authorized:
+        case .authorized:
             saveQRImgToPHotos()
-        case .NotDetermined:
+        case .notDetermined:
             NSLog("Not determined")
-        case .Restricted:
+        case .restricted:
             NSLog("Restricted")
         default:
             return
@@ -72,8 +72,8 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
 
         var assetPlaceHolder : PHObjectPlaceholder?
         
-        PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
-            assetPlaceHolder = PHAssetCreationRequest.creationRequestForAssetFromImage(imageToSave!).placeholderForCreatedAsset
+        PHPhotoLibrary.shared().performChanges({ () -> Void in
+            assetPlaceHolder = PHAssetCreationRequest.creationRequestForAsset(from: imageToSave!).placeholderForCreatedAsset
             }) { (success, error) -> Void in
                 
                 if success == false {
@@ -84,14 +84,15 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
         }
     }
     
-    func saveImgToCustomAlbum(assetPlaceHolder : PHObjectPlaceholder) {
+    func saveImgToCustomAlbum(_ assetPlaceHolder : PHObjectPlaceholder) {
         
         AppDelegate.getAppDelegate().obtainSystemAssetCollection { (assetCollection) -> Void in
             
-            PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
+            PHPhotoLibrary.shared().performChanges({ () -> Void in
                 
-                let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: assetCollection)
-                albumChangeRequest!.addAssets([assetPlaceHolder])
+                let albumChangeRequest = PHAssetCollectionChangeRequest(for: assetCollection)
+                let assets: NSFastEnumeration = NSArray(array: [assetPlaceHolder])
+                albumChangeRequest?.addAssets(assets)
                 
                 }, completionHandler: { (success, error) -> Void in
                     
@@ -106,7 +107,7 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
     
     
     // MARK: -UITextViewDelegate
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     
         if text == "\n" {
             sourceInputField.resignFirstResponder()
@@ -115,19 +116,19 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
         return true
     }
     
-    @IBAction func generalBtnClicked(sender: AnyObject) {
+    @IBAction func generalBtnClicked(_ sender: AnyObject) {
         sourceInputField.resignFirstResponder()
         let inputString = sourceInputField.text
-        formQRImage(inputString)
+        formQRImage(inputString!)
     }
     
     
-    func formQRImage(sourceStr : String) {
+    func formQRImage(_ sourceStr : String) {
         if sourceStr.isEmpty {
             qrImageView.image = nil
             return
         }
-        let data = sourceStr.dataUsingEncoding(NSISOLatin1StringEncoding, allowLossyConversion: false)
+        let data = sourceStr.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         
         let filter = CIFilter(name: "CIQRCodeGenerator")!
         filter.setValue(data, forKey: "inputMessage")
@@ -139,12 +140,12 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
         let scaleY = qrImageView.frame.size.height / qrCodeImage.extent.size.height
         
         
-        let transformedImage = qrCodeImage.imageByApplyingTransform(CGAffineTransformMakeScale(scaleX, scaleY))
+        let transformedImage = qrCodeImage.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
         
         let softwareContext = CIContext(options: [kCIContextUseSoftwareRenderer:true])
-        let finalImage = softwareContext.createCGImage(transformedImage, fromRect: transformedImage.extent)
+        let finalImage = softwareContext.createCGImage(transformedImage, from: transformedImage.extent)
         
-        qrImageView.image = UIImage(CGImage: finalImage)
+        qrImageView.image = UIImage(cgImage: finalImage!)
     }
     
     /*

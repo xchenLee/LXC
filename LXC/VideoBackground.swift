@@ -23,16 +23,16 @@ class VideoBackground: UIViewController {
         self.avPlayerbackView!.setVideoFillMode(AVLayerVideoGravityResizeAspectFill)
         self.view.addSubview(self.avPlayerbackView!)
         
-        let filePath : String = NSBundle.mainBundle().pathForResource("welcome_video", ofType: "mp4")!
-        let fileUrl = NSURL(fileURLWithPath: filePath)
+        let filePath : String = Bundle.main.path(forResource: "welcome_video", ofType: "mp4")!
+        let fileUrl = URL(fileURLWithPath: filePath)
         
-        self.avPlayerItem = AVPlayerItem(URL: fileUrl)
+        self.avPlayerItem = AVPlayerItem(url: fileUrl)
         
         self.avPlayer = AVPlayer(playerItem: self.avPlayerItem!)
         self.avPlayer?.volume = 0.0
         self.avPlayerbackView?.setPlayer(self.avPlayer!)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object:self.avPlayerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(VideoBackground.playerItemDidReachEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:self.avPlayerItem)
         
         //self.avPlayerItem?.addObserver(self, forKeyPath: "status", options: .Initial, context:nil)
         
@@ -40,13 +40,13 @@ class VideoBackground: UIViewController {
         fireNotification(0);
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.avPlayer?.play()
         NSLog("view will appear");
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.avPlayer?.pause()
         NSLog("view will disappear");
@@ -56,15 +56,15 @@ class VideoBackground: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func playerItemDidReachEnd(notification: NSNotification) {
+    func playerItemDidReachEnd(_ notification: Notification) {
         let playeritem = notification.object
-        playeritem?.seekToTime(kCMTimeZero)
+        (playeritem as AnyObject).seek(to: kCMTimeZero)
         self.avPlayer?.play()
     }
     
     deinit {
         self.avPlayer?.pause()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func pausePlayer() {
@@ -82,7 +82,7 @@ class VideoBackground: UIViewController {
         
     }
     
-    func fireNotification(hour : NSInteger) {
+    func fireNotification(_ hour : NSInteger) {
         
                 
         /*let calendar = NSCalendar.autoupdatingCurrentCalendar()
@@ -91,16 +91,16 @@ class VideoBackground: UIViewController {
         calendarComponents.minute = 5;
         let date = calendar.dateFromComponents(calendarComponents)*/
         
-        let nextDate = NSDate(timeIntervalSinceNow: 60);
+        let nextDate = Date(timeIntervalSinceNow: 60);
         
         let localNotification = UILocalNotification()
         localNotification.fireDate = nextDate;
         localNotification.category = "categoryOne"
-        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.timeZone = TimeZone.current
         localNotification.alertAction = "See"
         localNotification.alertBody = "hahahah \n  hahaha"
         localNotification.soundName = UILocalNotificationDefaultSoundName
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        UIApplication.shared.scheduleLocalNotification(localNotification)
         //UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
     }
     

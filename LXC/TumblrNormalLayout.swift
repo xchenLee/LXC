@@ -69,10 +69,10 @@ class TumblrNormalLayout: NSObject {
     
     var deleted: Bool = false
         
-    func fitPostData(tumblrPost: TumblrPost) {
+    func fitPostData(_ tumblrPost: TumblrPost) {
         
-        if post != tumblrPost{
-            post = tumblrPost
+        if self.post != tumblrPost {
+            self.post = tumblrPost
             self.layout()
         }
     }
@@ -110,18 +110,18 @@ class TumblrNormalLayout: NSObject {
         height += kTMCellToolBarHeight
     }
     
-    func readVideoEntry(tumblrPost: TumblrPost) {
+    func readVideoEntry(_ tumblrPost: TumblrPost) {
     
         videoTop = nameHeight
         
-        if tumblrPost.type.lowercaseString == "video" {
+        if tumblrPost.type.lowercased() == "video" {
             
             var originalWidth = CGFloat(tumblrPost.thumbnailWidth)
             var originalHeight = CGFloat(tumblrPost.thumbnailHeight)
             
             if originalWidth > 0 && originalHeight > 0 {
                 
-                let originalSize = CGSizeMake(originalWidth, originalHeight)
+                let originalSize = CGSize(width: originalWidth, height: originalHeight)
                 let scale = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
                 originalWidth = scale.width
                 originalHeight = scale.height
@@ -137,7 +137,7 @@ class TumblrNormalLayout: NSObject {
             
             if !tumblrPost.videoType.isEmpty && tumblrPost.videoType != "tumblr" {
                 
-                switch tumblrPost.videoType.lowercaseString {
+                switch tumblrPost.videoType.lowercased() {
                 case VideoSource.Youtube.rawValue:
                     sourceIconName = "icon_video_youtube"
                     break
@@ -158,7 +158,7 @@ class TumblrNormalLayout: NSObject {
         
     }
     
-    func readImageEntry(tumblrPost: TumblrPost) {
+    func readImageEntry(_ tumblrPost: TumblrPost) {
         
         //图片高度
         imagesTop = nameHeight
@@ -169,11 +169,11 @@ class TumblrNormalLayout: NSObject {
         height += imagesHeight
     }
     
-    func readTypeTextEntry(tumblrPost: TumblrPost) {
+    func readTypeTextEntry(_ tumblrPost: TumblrPost) {
         
         titleTop = nameHeight
         
-        let typeString = tumblrPost.type.lowercaseString
+        let typeString = tumblrPost.type.lowercased()
         
         // quote 类型
         if typeString == "quote" && !tumblrPost.text.isEmpty {
@@ -190,7 +190,7 @@ class TumblrNormalLayout: NSObject {
         // text 类型
         if typeString == "text" && !tumblrPost.body.isEmpty {
             
-            if tumblrPost.body.containsString("<img") && !tumblrPost.body.containsString("width=") {
+            if tumblrPost.body.contains("<img") && !tumblrPost.body.contains("width=") {
                 self.height = 0
                 self.deleted = true
             }
@@ -214,7 +214,7 @@ class TumblrNormalLayout: NSObject {
         self.height += textHeight
     }
     
-    func readTagsLayout(tumblrPost: TumblrPost) {
+    func readTagsLayout(_ tumblrPost: TumblrPost) {
         
         tagsTop += nameHeight
         tagsTop += titleHeight
@@ -238,7 +238,7 @@ class TumblrNormalLayout: NSObject {
         height += tagsHeight
     }
     
-    func readReblogEntry(tumblrPost: TumblrPost) {
+    func readReblogEntry(_ tumblrPost: TumblrPost) {
         
         reblogTop = 0
         reblogTop += nameHeight
@@ -248,7 +248,7 @@ class TumblrNormalLayout: NSObject {
         reblogTop += imagesHeight
         reblogTop += tagsHeight
         
-        let typeString = tumblrPost.type.lowercaseString
+        let typeString = tumblrPost.type.lowercased()
         
         //text类型,treeHtml和内容一致,不再显示
         if typeString == "text" && !tumblrPost.body.isEmpty {
@@ -256,7 +256,7 @@ class TumblrNormalLayout: NSObject {
             return
         }
         
-        if let safeReblog = tumblrPost.reblog, let comment = safeReblog.comment where !comment.isEmpty {
+        if let safeReblog = tumblrPost.reblog, let comment = safeReblog.comment, !comment.isEmpty {
             
             let attributes = LayoutManager.getReblogEntryTextAttributedString(comment)
             reblogAttributes = attributes
@@ -266,7 +266,7 @@ class TumblrNormalLayout: NSObject {
             reblogHeight = 0
             
             //如果comment ＝ 0，看一下treeHtml
-            if let safeReblog = tumblrPost.reblog, let treeHtml = safeReblog.treeHtml where !treeHtml.isEmpty {
+            if let safeReblog = tumblrPost.reblog, let treeHtml = safeReblog.treeHtml, !treeHtml.isEmpty {
                 let attributes = LayoutManager.getReblogEntryTextAttributedString(treeHtml)
                 reblogAttributes = attributes
                 reblogHeight = LayoutManager.computeRelogHeight(attributes)

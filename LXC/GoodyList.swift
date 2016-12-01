@@ -17,7 +17,7 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
         super.viewDidLoad()
 
         self.clearsSelectionOnViewWillAppear = false
-        self.tableView.registerNib(UINib(nibName: "GoodyListCell", bundle:NSBundle.mainBundle()), forCellReuseIdentifier: "goodyCell")
+        self.tableView.register(UINib(nibName: "GoodyListCell", bundle:Bundle.main), forCellReuseIdentifier: "goodyCell")
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -25,54 +25,54 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
         generalGoodyArray()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
     func generalGoodyArray () {
         
         let quartz = GoodyItem(name: "Quartz", storyboardName: "quartz")
-        goodiesArray.addObject(quartz)
+        goodiesArray.add(quartz)
         
         let compress = GoodyItem(name: "Compress", goodyClassName: NSStringFromClass(CompressImage))
-        goodiesArray.addObject(compress)
+        goodiesArray.add(compress)
         
         let ca = GoodyItem(name: "Core Animation", storyboardName: "coreAnimation")
-        goodiesArray.addObject(ca)
+        goodiesArray.add(ca)
         
         let splashItem = GoodyItem(name: "Splash Video", goodyClassName: NSStringFromClass(VideoBackground))
-        goodiesArray .addObject(splashItem)
+        goodiesArray .add(splashItem)
         
         let digitalScale = GoodyItem(name: "Digital Scale", goodyClassName: NSStringFromClass(DigitalScale))
-        goodiesArray .addObject(digitalScale)
+        goodiesArray .add(digitalScale)
         
         let contactList = GoodyItem(name: "Contact List", goodyClassName: NSStringFromClass(PhoneContactsList))
-        goodiesArray .addObject(contactList)
+        goodiesArray .add(contactList)
         
         let qrGenerator = GoodyItem(name: "General QR Code", goodyClassName: NSStringFromClass(QRCodeGenerator))
-        goodiesArray .addObject(qrGenerator)
+        goodiesArray .add(qrGenerator)
         
         let qrReader = GoodyItem(name: "Read QR Code", storyboardName: "qrStoryboard")
-        goodiesArray .addObject(qrReader)
+        goodiesArray .add(qrReader)
         
         let filters = GoodyItem(name: "CIFilters", storyboardName: "filters")
-        goodiesArray .addObject(filters)
+        goodiesArray .add(filters)
         
         let webview = GoodyItem(name: "WKWebView", storyboardName: "webexplorer")
-        goodiesArray.addObject(webview)
+        goodiesArray.add(webview)
         
         let touchId = GoodyItem(name: "Touch ID", goodyClassName: NSStringFromClass(TouchIdTest))
-        goodiesArray.addObject(touchId)
+        goodiesArray.add(touchId)
         
         let picker = GoodyItem(name: "Picker", goodyClassName: NSStringFromClass(IImagePicker))
-        picker.presetnType = PresentType.Present
-        goodiesArray.addObject(picker)
+        picker.presetnType = PresentType.present
+        goodiesArray.add(picker)
         
         let location = GoodyItem(name: "Location", goodyClassName: NSStringFromClass(PinLocation))
-        goodiesArray.addObject(location)
+        goodiesArray.add(location)
         
         let navi = GoodyItem(name: "Navibar", goodyClassName: NSStringFromClass(NavBarAndTable))
-        goodiesArray.addObject(navi)
+        goodiesArray.add(navi)
         
     }
 
@@ -83,38 +83,38 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return goodiesArray.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("goodyCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "goodyCell", for: indexPath)
         
-        let goodyItem = goodiesArray.objectAtIndex(indexPath.row) as? GoodyItem
+        let goodyItem = goodiesArray.object(at: indexPath.row) as? GoodyItem
         if let goodyCell = cell as? GoodyListCell {
             goodyCell.titleLabel.text = goodyItem?.goodyName
         }
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let goodyItem = goodiesArray .objectAtIndex(indexPath.row) as! GoodyItem
+        let goodyItem = goodiesArray .object(at: indexPath.row) as! GoodyItem
         
         if  goodyItem.goodyClassName.isEmpty {
             
             let sbName : String = goodyItem.storyboardName
-            let goodyController = UIStoryboard(name: sbName, bundle: NSBundle.mainBundle()).instantiateInitialViewController()! as UIViewController
-            if goodyItem.presetnType == PresentType.Push {
+            let goodyController = UIStoryboard(name: sbName, bundle: Bundle.main).instantiateInitialViewController()! as UIViewController
+            if goodyItem.presetnType == PresentType.push {
                 self.navigationController!.pushViewController(goodyController, animated: true)
             }
             else {
-                self.navigationController!.presentViewController(goodyController, animated: true, completion: nil)
+                self.navigationController!.present(goodyController, animated: true, completion: nil)
             }
             return
         }
@@ -122,11 +122,11 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
         if let anyClass = NSClassFromString(goodyItem.goodyClassName) {
             let goodyClass = anyClass as! UIViewController.Type
             let goodyController = goodyClass.init()
-            if goodyItem.presetnType == PresentType.Push {
+            if goodyItem.presetnType == PresentType.push {
                 self.navigationController!.pushViewController(goodyController, animated: true)
             }
             else {
-                self.navigationController!.presentViewController(goodyController, animated: true, completion: nil)
+                self.navigationController!.present(goodyController, animated: true, completion: nil)
             }
         }
     }
@@ -178,9 +178,9 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
     */
     
     // MARK: - IImagePickerDelegate
-    func iImagePickerDidCancel(imagePicker: IImagePicker) {
+    func iImagePickerDidCancel(_ imagePicker: IImagePicker) {
     }
     
-    func iImagePicker(imagePicker: IImagePicker, didFinishPickingAssets: [PHAsset]) {
+    func iImagePicker(_ imagePicker: IImagePicker, didFinishPickingAssets: [PHAsset]) {
     }
 }

@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 class RxDashboard: UIViewController {
     
-    var tableView: UITableView!
+   /* var tableView: UITableView!
     
     var disposeBag = DisposeBag()
     
@@ -30,7 +28,7 @@ class RxDashboard: UIViewController {
         self.tableView = RxUI.buildTableView()
         self.tableView.frame = self.view.bounds
         self.view.addSubview(self.tableView)
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.items
             .bindTo(tableView.rx_itemsWithCellIdentifier("cell", cellType: UITableViewCell.self)){
@@ -53,6 +51,6 @@ class RxDashboard: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
+    }*/
 
 }

@@ -29,7 +29,7 @@ class NavBarAndTable: UIViewController, UITableViewDelegate, UITableViewDataSour
         buildSelfViews()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         ToolBox.makeNavigationBarAlphaNo(self.navigationController!)
     }
@@ -42,7 +42,7 @@ class NavBarAndTable: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - Custom Methods
     func buildSelfViews() {
         
-        if self .respondsToSelector("automaticallyAdjustsScrollViewInsets") {
+        if self .responds(to: #selector(getter: UIViewController.automaticallyAdjustsScrollViewInsets)) {
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
@@ -51,9 +51,9 @@ class NavBarAndTable: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView!.dataSource = self
         tableView!.rowHeight = 90
         tableView!.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
-        tableView!.backgroundColor = UIColor.redColor()
-        tableView!.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-        tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: kNavBarAndTableCellID)
+        tableView!.backgroundColor = UIColor.red
+        tableView!.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        tableView!.register(UITableViewCell.self, forCellReuseIdentifier: kNavBarAndTableCellID)
         self.view.addSubview(tableView!)
         
         ToolBox.makeNavigationBarAlpha(self.navigationController!)
@@ -72,18 +72,18 @@ class NavBarAndTable: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     // MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kNavBarAndTableCellID)!
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kNavBarAndTableCellID)!
         
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
     
     // MARK: - UITableViewDataSource
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     

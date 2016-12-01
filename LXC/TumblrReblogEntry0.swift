@@ -15,20 +15,20 @@ class TumblrReblogEntry0: UIView {
 
 
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         self.reblogTextLabel = UITextView()
-        self.reblogTextLabel.scrollEnabled = false
-        self.reblogTextLabel.backgroundColor = UIColor.whiteColor()
+        self.reblogTextLabel.isScrollEnabled = false
+        self.reblogTextLabel.backgroundColor = UIColor.white
         self.reblogTextLabel.font = kTMCellReblogFont
         self.reblogTextLabel.textColor = kTMCellReblogTextColor
         self.reblogTextLabel.top = kTMCellPadding
         self.reblogTextLabel.left = kTMCellPadding
-        self.reblogTextLabel.editable = false
-        self.reblogTextLabel.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, 0)
+        self.reblogTextLabel.isEditable = false
+        self.reblogTextLabel.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: 0)
         
         super.init(coder: aDecoder)
         customInit()
@@ -37,14 +37,14 @@ class TumblrReblogEntry0: UIView {
     override init(frame: CGRect) {
         
         self.reblogTextLabel = UITextView()
-        self.reblogTextLabel.scrollEnabled = false
-        self.reblogTextLabel.backgroundColor = UIColor.whiteColor()
+        self.reblogTextLabel.isScrollEnabled = false
+        self.reblogTextLabel.backgroundColor = UIColor.white
         self.reblogTextLabel.font = kTMCellReblogFont
         self.reblogTextLabel.textColor = kTMCellReblogTextColor
         self.reblogTextLabel.top = kTMCellPadding
         self.reblogTextLabel.left = kTMCellPadding
-        self.reblogTextLabel.editable = false
-        self.reblogTextLabel.size = CGSizeMake(kScreenWidth - 2 * kTMCellPadding, 0)
+        self.reblogTextLabel.isEditable = false
+        self.reblogTextLabel.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: 0)
 
         
         super.init(frame: frame)
@@ -54,24 +54,24 @@ class TumblrReblogEntry0: UIView {
     func customInit() {
         
         self.clipsToBounds = true
-        self.userInteractionEnabled = true
-        self.exclusiveTouch = true
+        self.isUserInteractionEnabled = true
+        self.isExclusiveTouch = true
         self.addSubview(self.reblogTextLabel)
         
     }
     
-    func setWithLayout(tumblrLayout: TumblrNormalLayout) {
+    func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
         
         if tumblrLayout.reblogHeight == 0 {
             self.reblogTextLabel.attributedText = nil
-            self.reblogTextLabel.hidden = true
+            self.reblogTextLabel.isHidden = true
             return
         }
-        self.reblogTextLabel.hidden = false
+        self.reblogTextLabel.isHidden = false
         NSUnderlineStyleAttributeName
         self.reblogTextLabel.attributedText = tumblrLayout.reblogAttributes
         self.reblogTextLabel.linkTextAttributes = [NSForegroundColorAttributeName : kTMCellReblogTextColor]
-        self.reblogTextLabel.frame = CGRectMake(kTMCellPadding, 0, kScreenWidth - 2 * kTMCellPadding, tumblrLayout.reblogHeight)
+        self.reblogTextLabel.frame = CGRect(x: kTMCellPadding, y: 0, width: kScreenWidth - 2 * kTMCellPadding, height: tumblrLayout.reblogHeight)
         
     }
 

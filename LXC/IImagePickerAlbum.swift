@@ -13,7 +13,7 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
     
     var imagePicker : IImagePicker?
     
-    var fetchResults = [PHFetchResult]()
+    var fetchResults = [PHFetchResult<AnyObject>]()
     var assetCollection = [PHAssetCollection]()
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
@@ -23,22 +23,16 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let smartAlbums = PHAssetCollection.fetchAssetCollectionsWithType(PHAssetCollectionType.SmartAlbum, subtype: PHAssetCollectionSubtype.Any, options: nil)
+        let smartAlbums = PHAssetCollection.fetchAssetCollections(with: PHAssetCollectionType.smartAlbum, subtype: PHAssetCollectionSubtype.any, options: nil)
         
-        let usersAlbums = PHAssetCollection.fetchAssetCollectionsWithType(PHAssetCollectionType.Album, subtype: PHAssetCollectionSubtype.Any, options: nil)
+        let usersAlbums = PHAssetCollection.fetchAssetCollections(with: PHAssetCollectionType.album, subtype: PHAssetCollectionSubtype.any, options: nil)
         
-        self.fetchResults = [smartAlbums, usersAlbums]
+        self.fetchResults = [smartAlbums as! PHFetchResult<AnyObject>, usersAlbums as! PHFetchResult<AnyObject>]
         
         self.fetchAlbums()
         
-        PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
+        PHPhotoLibrary.shared().register(self)
         
-        var array = [0,1,2,3,4]
-        
-        let range = Range(start: 2, end: 1)
-        
-        
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -46,13 +40,13 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Image Picker"
         if ((self.imagePicker?.allowMultipleSelection) != nil) {
-            self.navigationItem.setRightBarButtonItem(self.doneBarButton, animated: false)
+            self.navigationItem.setRightBarButton(self.doneBarButton, animated: false)
         } else {
-            self.navigationItem.setRightBarButtonItem(nil, animated: false)
+            self.navigationItem.setRightBarButton(nil, animated: false)
         }
     }
 
@@ -62,7 +56,7 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
     }
     
     deinit {
-        PHPhotoLibrary.sharedPhotoLibrary().unregisterChangeObserver(self)
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
     
@@ -78,56 +72,59 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
         
         for fetchResult in self.fetchResults {
             
-            fetchResult.enumerateObjectsUsingBlock({ (assetCollection, index, stop) -> Void in
+            fetchResult.enumerateObjects({ (assetCollection, index, stop) -> Void in
                 
                 let collection = assetCollection as! PHAssetCollection
                 let subType = collection.assetCollectionSubtype
-                if subType == PHAssetCollectionSubtype.AlbumRegular {
-                    usersAlbums.addObject(assetCollection)
+                if subType == PHAssetCollectionSubtype.albumRegular {
+                    usersAlbums.add(assetCollection)
                     allAlbums.append(collection)
                 }
                 else if subTypes!.contains(subType) {
                     let key = "\(subType)"
-                    if (smartAlbums.objectForKey(key) == nil) {
+                    if (smartAlbums.object(forKey: key) == nil) {
                         smartAlbums[key] = NSMutableArray()
                     } else {
-                        smartAlbums[key]?.addObject(assetCollection)
+                        //TODO
+                        //TODO
+                        //TODO
+                        //(smartAlbums[key]).add(assetCollection)
                         allAlbums.append(collection)
                     }
                 }
             })
         }
         self.assetCollection.removeAll()
-        self.assetCollection.appendContentsOf(allAlbums)
+        self.assetCollection.append(contentsOf: allAlbums)
         
         
     }
     
-    @IBAction func cancel(sender: AnyObject) {
+    @IBAction func cancel(_ sender: AnyObject) {
         self.imagePicker?.delegate?.iImagePickerDidCancel!(self.imagePicker!)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
 
     }
     
-    @IBAction func done(sender: AnyObject) {
+    @IBAction func done(_ sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.assetCollection.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("albumCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "albumCell", for: indexPath)
         as! IImageAlbumCell
         cell.tag = indexPath.row
         
@@ -142,37 +139,37 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
             fetchOptions.predicate = NSPredicate(format: "mediaType = \(PHAssetMediaType.Video)")
         }*/
         
-        let fetchResult = PHAsset.fetchAssetsInAssetCollection(assetCollection, options: nil)
-        let imageManager = PHImageManager.defaultManager()
+        let fetchResult = PHAsset.fetchAssets(in: assetCollection, options: nil)
+        let imageManager = PHImageManager.default()
         
         if fetchResult.count >= 3 {
-            cell.imageViewThr.hidden = false
-            imageManager.requestImageForAsset(fetchResult[fetchResult.count - 3] as! PHAsset, targetSize: cell.imageViewThr.bounds.size, contentMode: PHImageContentMode.AspectFit, options: nil, resultHandler: { (image, info) -> Void in
+            cell.imageViewThr.isHidden = false
+            imageManager.requestImage(for: fetchResult[fetchResult.count - 3] , targetSize: cell.imageViewThr.bounds.size, contentMode: PHImageContentMode.aspectFit, options: nil, resultHandler: { (image, info) -> Void in
                 if cell.tag == indexPath.row {
                     cell.imageViewThr.image = image
                 }
             })
         }
         else {
-            cell.imageViewThr.hidden = true
+            cell.imageViewThr.isHidden = true
         }
         
         if fetchResult.count >= 2 {
-            cell.imageViewTwo.hidden = false
-            imageManager.requestImageForAsset(fetchResult[fetchResult.count - 2] as! PHAsset, targetSize: cell.imageViewTwo.bounds.size, contentMode: PHImageContentMode.AspectFit, options: nil, resultHandler: { (image, info) -> Void in
+            cell.imageViewTwo.isHidden = false
+            imageManager.requestImage(for: fetchResult[fetchResult.count - 2] , targetSize: cell.imageViewTwo.bounds.size, contentMode: PHImageContentMode.aspectFit, options: nil, resultHandler: { (image, info) -> Void in
                 if cell.tag == indexPath.row {
                     cell.imageViewTwo.image = image
                 }
             })
         }
         else {
-            cell.imageViewTwo.hidden = true
+            cell.imageViewTwo.isHidden = true
         }
         
         
         if fetchResult.count >= 1 {
-            cell.imageViewOne.hidden = false
-            imageManager.requestImageForAsset(fetchResult[fetchResult.count - 1] as! PHAsset, targetSize: cell.imageViewOne.bounds.size, contentMode: PHImageContentMode.AspectFit, options: nil, resultHandler: { (image, info) -> Void in
+            cell.imageViewOne.isHidden = false
+            imageManager.requestImage(for: fetchResult[fetchResult.count - 1] , targetSize: cell.imageViewOne.bounds.size, contentMode: PHImageContentMode.aspectFit, options: nil, resultHandler: { (image, info) -> Void in
                 if cell.tag == indexPath.row {
                     cell.imageViewOne.image = image
                 }
@@ -180,8 +177,8 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
         }
         
         if fetchResult.count == 0 {
-            cell.imageViewTwo.hidden = false
-            cell.imageViewThr.hidden = false
+            cell.imageViewTwo.isHidden = false
+            cell.imageViewThr.isHidden = false
             //TODO place Holder
         }
         cell.photosCount.text = "\(fetchResult.count)"
@@ -189,11 +186,11 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
@@ -236,9 +233,9 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let assetController = segue.destinationViewController as! IImagePickerAlbumAssets
+        let assetController = segue.destination as! IImagePickerAlbumAssets
         assetController.imagePicker = self.imagePicker
         
         let indexPathRow = self.tableView.indexPathForSelectedRow?.row;
@@ -248,17 +245,17 @@ class IImagePickerAlbum: UITableViewController, PHPhotoLibraryChangeObserver {
     
     
     //MARK: - PHPhotoLibraryChangeObserver
-    func photoLibraryDidChange(changeInstance: PHChange) {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
         
         var index : Int = 0
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             
             self.fetchResults.forEach({ (fetchResult) -> () in
                 
-                let detail = changeInstance.changeDetailsForFetchResult(fetchResult)
+                let detail = changeInstance.changeDetails(for: fetchResult as! PHFetchResult<PHObject>)
                 if detail != nil {
-                    let range = Range(start: index, end: 1)
-                    self.fetchResults.replaceRange(range, with: [detail!.fetchResultAfterChanges])
+                    let range = (index ..< 1)
+                    //self.fetchResults.replaceSubrange(range, with: [detail!.fetchResultAfterChanges])
                 }
                 index += 1
             })

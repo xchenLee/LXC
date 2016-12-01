@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 import TMTumblrSDK
 import OAuthSwift
 import SwiftyJSON
@@ -21,12 +19,12 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tumblrBtn: UIButton!
     
-    
+    var oauthswift: OAuth1Swift?
     
     
     
     // MARK: - UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.inputField.resignFirstResponder()
         return true
     }
@@ -35,25 +33,14 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.subscribe()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - Subscribe events
-    func subscribe() {
-        let text = inputField.rx_text
-        text.subscribeNext { (text) in
-            
-        }
-    }
-    
-    
-    
     // MARK: - Auth btn click actions
-    @IBAction func authBtnClicked(sender: AnyObject) {
+    @IBAction func authBtnClicked(_ sender: AnyObject) {
         
         /*guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
             return
@@ -67,50 +54,55 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
 
     }
 
-    @IBAction func tumblrClicked(sender: AnyObject) {
+    @IBAction func tumblrClicked(_ sender: AnyObject) {
         
         
-        TumblrAPI.authorize({ (credential, response, parameters) in
-            
-            let token = credential.oauth_token
-            let tokenSecret = credential.oauth_token_secret
-            
-            TMAPIClient.sharedInstance().OAuthToken = token
-            TMAPIClient.sharedInstance().OAuthTokenSecret = tokenSecret
-            
-            TMAPIClient.sharedInstance().userInfo({ (result, error) in
+        oauthswift = OAuth1Swift(
+            consumerKey: kTumblrConsumerKey,
+            consumerSecret: kTumblrConsumerSecretKey,
+            requestTokenUrl: kTumblrRequestTokenUrl,
+            authorizeUrl: kTumblrAuthorizeUrl,
+            accessTokenUrl: kTumblrAccessTokenUrl
+        )
+        
+        let handle = oauthswift!.authorize(
+            withCallbackURL: URL(string: "oauth-swift://oauth-callback/tumblr")!,
+            success: { credential, response, parameters in
                 
-                if error == nil {
+                let token = credential.oauthToken
+                let tokenSecret = credential.oauthTokenSecret
+                
+                TMAPIClient.sharedInstance().oAuthToken = token
+                TMAPIClient.sharedInstance().oAuthTokenSecret = tokenSecret
+                
+                //begin
+                TMAPIClient.sharedInstance().userInfo({ (result, error) in
                     
-                    var response = JSON(result)
-                    //let manThred = NSThread.currentThread() == NSThread.mainThread()
-                                        
-                    let user = TumblrUser()
-                    user.token = token
-                    user.tokenSecret = tokenSecret
-                    user.name = response["user"]["name"].stringValue
-                    user.likes = response["user"]["likes"].intValue
-                    user.following = response["user"]["following"].intValue
-                    
-                    do {
-                        let realm = TumblrContext.sharedInstance.obtainUIRealm()
-                        try realm.write({
-                            realm.add(user)
-                        })
-                        ControllerJumper.login(nil)
-                    } catch {
+                    if error == nil {
                         
+                        var response = JSON(result)
+                        //let manThred = NSThread.currentThread() == NSThread.mainThread()
+                        
+                        let user = TumblrUser()
+                        user.token = token
+                        user.tokenSecret = tokenSecret
+                        user.name = response["user"]["name"].stringValue
+                        user.likes = response["user"]["likes"].intValue
+                        user.following = response["user"]["following"].intValue
+                        
+                        TumblrContext.sharedInstance.writeTumblrUser(user)
+                        ControllerJumper.login(nil)
                     }
-                } else {
                     
-                }
+                })
+                //end
                 
-            })
-            
-            }) { (error) in
-                print("tumblr signin error")
-        }
-        
+            },
+            failure: { error in
+                print(error.localizedDescription)
+            }
+        )
+
     }
 
 }

@@ -16,12 +16,12 @@ class CALayerTree: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
     
-    @IBAction func addLayer(sender: UIButton) {
+    @IBAction func addLayer(_ sender: UIButton) {
         
-        sender.enabled = false
+        sender.isEnabled = false
         
         let newLayer = CALayer()
-        newLayer.backgroundColor = fatherView.backgroundColor?.CGColor
+        newLayer.backgroundColor = fatherView.backgroundColor?.cgColor
         newLayer.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         newLayer.position = sonView.center
         
@@ -40,9 +40,9 @@ class CALayerTree: UIViewController {
         // 需要在storyboard 里边设置
         // visual effects
         sonView.layer.shadowOpacity = 1
-        sonView.layer.shadowColor = UIColor.blackColor().CGColor
+        sonView.layer.shadowColor = UIColor.black.cgColor
         sonView.layer.shadowRadius = 2
-        sonView.layer.shadowOffset = CGSizeMake(0, 3)
+        sonView.layer.shadowOffset = CGSize(width: 0, height: 3)
         
         
 //        let newView = UIView()
@@ -71,15 +71,15 @@ class CALayerTree: UIViewController {
         
         var subLayers = fatherView.layer.sublayers
         
-        var subLayer = subLayers![0]
-        var sonLayer = sonView.layer
+        let subLayer = subLayers![0]
+        let sonLayer = sonView.layer
         
         if subLayer == sonLayer {
-            resultLabel.text?.appendContentsOf("\n")
-            resultLabel.text?.appendContentsOf("RedView's layer's subLayer is\n \(subLayer)\n")
-            resultLabel.text?.appendContentsOf("WhiteView's layer is\n \(sonLayer)\n")
+            resultLabel.text?.append("\n")
+            resultLabel.text?.append("RedView's layer's subLayer is\n \(subLayer)\n")
+            resultLabel.text?.append("WhiteView's layer is\n \(sonLayer)\n")
 
-            resultLabel.text?.appendContentsOf("They are the same\n")
+            resultLabel.text?.append("They are the same\n")
         }
         
     }
