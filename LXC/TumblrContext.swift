@@ -26,15 +26,16 @@ class TumblrContext: NSObject {
     }
     
     func obtainTumblrUser() -> TumblrUser? {
-        guard let user = UserDefaults.standard.object(forKey: kTumblrUserArchiveKey) as? TumblrUser else {
-            return nil
+        if let data = UserDefaults.standard.object(forKey: kTumblrUserArchiveKey) as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: data) as? TumblrUser
         }
-        return user
+        return nil
     }
     
     func writeTumblrUser(_ user: TumblrUser) {
         let data = NSKeyedArchiver.archivedData(withRootObject: user)
         UserDefaults.standard.set(data, forKey: kTumblrUserArchiveKey)
+        UserDefaults.standard.synchronize()
     }
     
 }

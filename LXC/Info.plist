@@ -26,7 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>oauth-swift</string>
-                <string>lee.goody</string>
+				<string>lee.goody</string>
 			</array>
 		</dict>
 		<dict>
@@ -58,6 +58,8 @@
 	<string>always usage</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>when in use usage</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access your Photo Library</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

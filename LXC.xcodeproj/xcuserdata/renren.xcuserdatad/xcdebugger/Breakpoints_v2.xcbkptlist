@@ -42,12 +42,12 @@
                   moduleName = "LXC"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/renren/Desktop/LXC/LXC/LXC/IImagePickerAlbumAssets.swift"
-                  timestampString = "502278956.348492"
+                  timestampString = "502551389.510389"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "182"
                   endingLineNumber = "182"
-                  offsetFromSymbolStart = "732">
+                  offsetFromSymbolStart = "782">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -57,12 +57,12 @@
                   moduleName = "LXC"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/renren/Desktop/LXC/LXC/LXC/IImagePickerAlbumAssets.swift"
-                  timestampString = "502278956.350509"
+                  timestampString = "502551389.512283"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "182"
                   endingLineNumber = "182"
-                  offsetFromSymbolStart = "84">
+                  offsetFromSymbolStart = "80">
                </Location>
             </Locations>
          </BreakpointContent>

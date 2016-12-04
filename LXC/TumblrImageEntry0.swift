@@ -127,7 +127,7 @@ class TumblrImageEntry0: UIView {
             }
             
             let url: URL = URL(string: photoUrlString)!
-            imageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(1))], progressBlock: nil, completionHandler: nil)
+            imageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
         }
         
     }

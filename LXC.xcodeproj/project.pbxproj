@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		541DBD26D2E15C0E2D95FD43 /* Pods_LXC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370504443BCF00828D276FC6 /* Pods_LXC.framework */; };
-		77007AE41D6B414700225F9B /* RxDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77007AE31D6B414700225F9B /* RxDashboard.swift */; };
-		77007AE61D6B450900225F9B /* RxUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77007AE51D6B450900225F9B /* RxUI.swift */; };
 		770089991C9BB4ED00E6BCB9 /* GoodyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770089981C9BB4ED00E6BCB9 /* GoodyList.swift */; };
 		7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */; };
 		7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */; };
@@ -111,8 +109,6 @@
 
 /* Begin PBXFileReference section */
 		370504443BCF00828D276FC6 /* Pods_LXC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		77007AE31D6B414700225F9B /* RxDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxDashboard.swift; sourceTree = "<group>"; };
-		77007AE51D6B450900225F9B /* RxUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxUI.swift; sourceTree = "<group>"; };
 		770089981C9BB4ED00E6BCB9 /* GoodyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyList.swift; sourceTree = "<group>"; };
 		7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyListCell.swift; sourceTree = "<group>"; };
 		7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodyListCell.xib; sourceTree = "<group>"; };
@@ -240,15 +236,6 @@
 				370504443BCF00828D276FC6 /* Pods_LXC.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		77007ADC1D6AD49B00225F9B /* rx */ = {
-			isa = PBXGroup;
-			children = (
-				77007AE31D6B414700225F9B /* RxDashboard.swift */,
-				77007AE51D6B450900225F9B /* RxUI.swift */,
-			);
-			name = rx;
 			sourceTree = "<group>";
 		};
 		770089971C9BB4AB00E6BCB9 /* Main */ = {
@@ -475,7 +462,6 @@
 		777D58101D485A87007274BB /* tumblr */ = {
 			isa = PBXGroup;
 			children = (
-				77007ADC1D6AD49B00225F9B /* rx */,
 				77D832381D598CB800D0A6A5 /* manager */,
 				77D8322E1D58B07400D0A6A5 /* pages */,
 				77D8322D1D58B05800D0A6A5 /* photoviewer */,
@@ -735,11 +721,9 @@
 				772773C01C9FD3B000A6ED72 /* ImageFilters.swift in Sources */,
 				7761FEB11D7EC2B9001EE55F /* TumblrDashboard.swift in Sources */,
 				771F25AC1CC731C700E88260 /* NavBarAndTable.swift in Sources */,
-				77007AE41D6B414700225F9B /* RxDashboard.swift in Sources */,
 				772103A51D4F2AB600F18546 /* TumblrNormalCell.swift in Sources */,
 				772103851D4C9FE200F18546 /* LayoutManager.swift in Sources */,
 				7724095C1CCDF61D00CAD6C1 /* CoreAnimationLearning.swift in Sources */,
-				77007AE61D6B450900225F9B /* RxUI.swift in Sources */,
 				772773B51C9D452800A6ED72 /* QRCodeGenerator.swift in Sources */,
 				77A9E8821D64A66C00D2E492 /* VideoPlayerController.swift in Sources */,
 				777D58121D485AA8007274BB /* TumblrAPI.swift in Sources */,

@@ -101,7 +101,7 @@ class TumblrNameEntry0: UIView {
         let urlString = tumblrPost.avatarUrl
         let url = URL(string: urlString)
         
-        self.avatarView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(1))], progressBlock: nil, completionHandler: nil)
+        self.avatarView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
         
         //blog
         self.blogNameView.width = tumblrLayout.blogNameWidth
