@@ -135,7 +135,6 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
             previewItems.append(item)
         }
         
-        
         let photoView = TumblrPhotoView(photos: previewItems, currentIndex: index)
         photoView.preset(clickedImageView, index: index, container: (self.navigationController?.view!)!)
     }

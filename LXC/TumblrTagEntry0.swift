@@ -52,6 +52,7 @@ class TumblrTagEntry0: UIView {
         self.textView.canCancelContentTouches = true
         self.addSubview(self.textView)
         
+        
         self.textView.tapTagAction = { tagName in
         
             guard let safeCell = self.cell ,let delegate = safeCell.delegate else {

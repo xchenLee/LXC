@@ -82,6 +82,7 @@ class LayoutManager: NSObject {
                 
         let textRange = NSMakeRange(0, attributedString.length)
         
+        
         attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
         attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)
         
@@ -111,6 +112,7 @@ class LayoutManager: NSObject {
 
         return attributedString
     }
+    
     
     
     /**

@@ -33,6 +33,8 @@ class TumblrNameEntry0: UIView {
         self.avatarView = UIImageView()
         self.avatarView.clipsToBounds = true
         self.avatarView.layer.cornerRadius = kTMCellCornerRadius
+        self.avatarView.layer.contentsScale = UIScreen.main.scale
+        self.avatarView.layer.shouldRasterize = true
         self.avatarView.layer.borderWidth = ToolBox.obtainFloatPixel(1)
         self.avatarView.layer.borderColor = UIColor.black.cgColor
         self.avatarView.top = kTMCellPadding
@@ -68,6 +70,7 @@ class TumblrNameEntry0: UIView {
         self.avatarView.layer.borderColor = UIColor.fromARGB(0xF5F5F5, alpha: 1.0).cgColor
         self.avatarView.top = kTMCellPadding
         self.avatarView.left = kTMCellPadding
+        self.avatarView.backgroundColor = UIColor.white
         self.avatarView.size = CGSize(width: kTMCellAvatarSize, height: kTMCellAvatarSize)
         
         self.blogNameView = UILabel()
@@ -101,7 +104,9 @@ class TumblrNameEntry0: UIView {
         let urlString = tumblrPost.avatarUrl
         let url = URL(string: urlString)
         
-        self.avatarView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
+        let defaultAvatar = UIImage(named: "default_avatar")
+        
+        self.avatarView.kf.setImage(with: url, placeholder: defaultAvatar, options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
         
         //blog
         self.blogNameView.width = tumblrLayout.blogNameWidth

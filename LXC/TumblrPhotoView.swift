@@ -52,7 +52,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         
         self.clipsToBounds = true
         self.isUserInteractionEnabled = true
-        self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
+        self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.8)
         self.frame = UIScreen.main.bounds
         
         self.background.frame = self.bounds
@@ -100,7 +100,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     }
     
     func singleTapAction(_ gesture: UITapGestureRecognizer) {
-        self.dimiss()
+        self.dismiss()
     }
     
     func doubleTapAction(_ gesture: UITapGestureRecognizer) {
@@ -124,11 +124,9 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         self.fromView = fromView
         self.fromViewIndex = index
         //let snapshot = container.snapshotImageAfterScreenUpdates(false)
-        //fromView.hidden = true
-        //fromView.hidden = false
         //self.background.image = snapshot
         
-        
+        //隐藏原来点击的控件
         container.addSubview(self)
         
         let count = self.photoDatas.count
@@ -144,9 +142,11 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         imageCell.containerView.clipsToBounds = false
         imageCell.imageView.frame = fromRect
         imageCell.contentMode = .scaleAspectFill
+        imageCell.imageView.image = fromView.image
         
         self.scrollView.isUserInteractionEnabled = false
-        
+        self.fromView.isHidden = true;
+
         UIView.animate(withDuration: kTumblrPhotoViewAnimationDuration, delay: 0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
             imageCell.imageView.frame = imageCell.containerView.bounds
             }) { (finished) in
@@ -155,13 +155,14 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
                     imageCell.containerView.clipsToBounds = true
                     self.scrollViewDidScroll(self.scrollView)
                     self.scrollView.isUserInteractionEnabled = true
+                    
                     }, completion: { (finish) in
                 })
                 
         }
     }
     
-    func dimiss() {
+    func dismiss() {
         
         let photoCell = self.cellForPage(self.currentIndex)
         let photoData = self.photoDatas[self.currentIndex]
@@ -179,6 +180,7 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
             photoCell?.imageView.frame = fromRect!
             
         }) { (finished) in
+            fromView?.isHidden = false
             UIView.animate(withDuration: 0.15, delay: 0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
                 self.alpha = 0
                 }, completion: { (finish) in
@@ -204,9 +206,17 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         for index in indexes {
             let photoData = photoDatas[index]
             let photoCell = photoCells[index]
+            photoCell.imageView.image = photoData.thumView.image
             photoCell.fitPhotoData(photoData)
         }
         self.currentIndex = page
+        //如果滑动了
+        if self.currentIndex != self.fromViewIndex {
+            self.fromView.isHidden = false
+            let photoData = self.photoDatas[self.currentIndex]
+            photoData.thumView.isHidden = true
+            self.fromView = photoData.thumView
+        }
         
     }
     

@@ -29,32 +29,19 @@ let kWeiboRedirectURL = "https://api.weibo.com/oauth2/default.html"
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {//,WeiboSDKDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    
-    
     lazy var contactStore = CNContactStore()
-    
-    /*lazy var screenWidth : CGFloat = {
-        return UIScreen.mainScreen().bounds.size.width
-    }()
-    
-    lazy var screenHeight : CGFloat = {
-       return UIScreen.mainScreen().bounds.size.height
-    }()*/
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
         //注册本地通知
         registerLocationNotification()
         
-        //WeiboSDK.registerApp(kWeiboAppKey)
         TumblrAPI.registerApp()
         
-        var isLaunchedFromQuickAction = false
+        //var isLaunchedFromQuickAction = false
         
         //根据数据库里的存储数据跳转
         ControllerJumper.afterLaunch(nil)
@@ -72,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {//,WeiboSDKDelegate
             return true
         }
         
-        isLaunchedFromQuickAction = true
+        //isLaunchedFromQuickAction = true
 
         return true
     }
@@ -173,47 +160,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {//,WeiboSDKDelegate
         return true
     }
     
-    
-    // MARK: - Custom Methods
-    
-    // MARK: - WeiboSDKDelegate
-    /*func didReceiveWeiboResponse(response: WBBaseResponse!) {
-        
-        if let authResponse  = response as? WBAuthorizeResponse {
-            
-            let sinaUser = SinaUser.constructFromResponse(authResponse)
-            
-            SinaAPI.requestUserData(sinaUser.accessToken ,userId:sinaUser.userId, completionHandler:{ response in
-                
-                
-                var responseJSON : JSON
-                
-                if response.result.isFailure {
-                    responseJSON = JSON.null
-                } else {
-                    responseJSON = JSON(response.result.value!)
-                }
-                
-                sinaUser.parseFromUserJSON(responseJSON)
-                
-                do {
-                    try uiRealm.write({
-                        uiRealm.add(sinaUser)
-                    })
-                }
-                catch let error as NSError{
-                    print("store login sina user error : \(error)")
-                }
-                //跳往首页面
-                ControllerJumper.login(nil)
-            })
-        }
-        
-    }
-    
-    func didReceiveWeiboRequest(request: WBBaseRequest!) {
-        
-    }*/
     
     // MARK: - 决定加载主页面
 
