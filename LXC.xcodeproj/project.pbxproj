@@ -12,6 +12,7 @@
 		7700899C1C9BB56400E6BCB9 /* GoodyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */; };
 		7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */; };
 		7700899F1C9BDA4900E6BCB9 /* GoodyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700899E1C9BDA4900E6BCB9 /* GoodyItem.swift */; };
+		77027DF11E1669E80073DD9B /* TumblrPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77027DF01E1669E80073DD9B /* TumblrPublisher.swift */; };
 		7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7710CFA31CF5A86400DD2440 /* ScratchViewOne.swift */; };
 		771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771A53851C9BF68D00598BEE /* PhoneContactsList.swift */; };
 		771A53881C9BF68D00598BEE /* PhoneContactsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771A53861C9BF68D00598BEE /* PhoneContactsList.xib */; };
@@ -113,6 +114,7 @@
 		7700899A1C9BB56400E6BCB9 /* GoodyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyListCell.swift; sourceTree = "<group>"; };
 		7700899B1C9BB56400E6BCB9 /* GoodyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodyListCell.xib; sourceTree = "<group>"; };
 		7700899E1C9BDA4900E6BCB9 /* GoodyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodyItem.swift; sourceTree = "<group>"; };
+		77027DF01E1669E80073DD9B /* TumblrPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPublisher.swift; sourceTree = "<group>"; };
 		7710CFA31CF5A86400DD2440 /* ScratchViewOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchViewOne.swift; sourceTree = "<group>"; };
 		771A53851C9BF68D00598BEE /* PhoneContactsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneContactsList.swift; sourceTree = "<group>"; };
 		771A53861C9BF68D00598BEE /* PhoneContactsList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneContactsList.xib; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				77D8322D1D58B05800D0A6A5 /* photoviewer */,
 				7721039C1D4EE99100F18546 /* normalcell */,
 				7721036E1D4A092700F18546 /* models */,
+				77027DF01E1669E80073DD9B /* TumblrPublisher.swift */,
 			);
 			name = tumblr;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				7777FB551D48A75D00D58607 /* TumblrUser.swift in Sources */,
 				77D277771CA2EF8600899043 /* TouchIdTest.swift in Sources */,
 				77FB24911CBBC5E80035DE3F /* PinLocation.swift in Sources */,
+				77027DF11E1669E80073DD9B /* TumblrPublisher.swift in Sources */,
 				772103C31D50F7EC00F18546 /* TumblrTextEntry0.swift in Sources */,
 				772773CC1CA03A7A00A6ED72 /* ImageFilterCell.swift in Sources */,
 				7721038D1D4CABAE00F18546 /* Extensions+UIView.swift in Sources */,

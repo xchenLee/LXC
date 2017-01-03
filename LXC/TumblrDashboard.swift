@@ -64,7 +64,8 @@ class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
     // MARK: - Custom Method
     
     func postBtnClick(_ btn: UIButton) {
-        
+        let publisher = TumblrPublisher()
+        self.navigationController?.pushViewController(publisher, animated: true)
     }
     
     func addDataHandler() {

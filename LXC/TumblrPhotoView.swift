@@ -238,21 +238,3 @@ class TumblrPhotoPreviewItem: NSObject {
     var thumView: UIImageView!
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
