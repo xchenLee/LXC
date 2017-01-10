@@ -16,7 +16,6 @@ class TumblrImageEntry0: UIView {
     var tumblrCell: TumblrNormalCell?
     var cell: TumblrNormalCell?
     
-    
     // MARK: - constructors
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -110,7 +109,7 @@ class TumblrImageEntry0: UIView {
             
             if index >= photoCount {
                 imageView.isHidden = true
-//                imageView.cancelCurrentImageRequest()
+                //imageView.cancelCurrentImageRequest()
                 imageView.image = nil
                 continue
             }
@@ -122,7 +121,7 @@ class TumblrImageEntry0: UIView {
             //0:原图，1:稍微小点
             let properSizePhoto = sizes[1]
             guard let photoUrlString = properSizePhoto.url,
-                let photoUrl = URL(string: photoUrlString)  else {
+                let _ = URL(string: photoUrlString)  else {
                     continue
             }
             
@@ -150,25 +149,4 @@ class TumblrImageEntry0: UIView {
     
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

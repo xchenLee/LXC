@@ -12,32 +12,6 @@ import SwiftyJSON
 import ObjectMapper
 
 class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
-
-    var writeCenter: CGPoint = CGPoint.zero
-    
-    lazy var postBtn: UIButton = {
-        
-        var btn = UIButton(type: UIButtonType.custom)
-        
-        let left = kScreenWidth - kTMWriteIconSize * 1.4
-        let top = kScreenHeight - kTMWriteIconSize * 1.4
-        
-        btn.setImage(UIImage(named: "icon_write"), for: UIControlState())
-        btn.frame = CGRect(x: left, y: top, width: kTMWriteIconSize, height: kTMWriteIconSize)
-        btn.addTarget(self, action: #selector(postBtnClick), for: UIControlEvents.touchUpInside)
-        return btn
-    }()
-    
-    
-    lazy var postBg: UIVisualEffectView = {
-        
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = kTMWriteIconSize / 2
-        blurEffectView.clipsToBounds = true
-        return blurEffectView
-    }()
-    
     
     // MARK: - methods
     override func viewDidLoad() {
@@ -46,26 +20,25 @@ class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
         addDataHandler()
         self.tableView.mj_header.beginRefreshing()
         
-        self.navigationController?.view.addSubview(self.postBg)
-        self.postBg.frame = self.postBtn.frame
-        
-        
-        self.navigationController?.view.addSubview(self.postBtn)
-        self.writeCenter = self.postBtn.center
-        
+        let navRightImg = UIImage(named: "icon_write")
+        let navRightBtn = UIBarButtonItem(image: navRightImg, style: .plain, target: self, action: #selector(postBtnClick))
+        self.navigationItem.rightBarButtonItem = navRightBtn
         
         self.navigationController?.delegate = self
         
         let fpsLabel = FPSLabel()
         fpsLabel.frame = CGRect(x: 10, y: kScreenHeight - 20, width: 65, height: 25)
         self.navigationController?.view.addSubview(fpsLabel)
+        
     }
     
     // MARK: - Custom Method
     
     func postBtnClick(_ btn: UIButton) {
-        let publisher = TumblrPublisher()
-        self.navigationController?.pushViewController(publisher, animated: true)
+        
+        let board = PostBoard(frame: UIScreen.main.bounds)
+        self.navigationController?.view.addSubview(board)
+    
     }
     
     func addDataHandler() {
@@ -87,26 +60,11 @@ class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
     }
     
     // MARK: - UINavigationControllerDelegate
-    
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         
+        //TODO 做一些操作
         if viewController == self {
-            
-            UIView.animate(withDuration: 0.2, delay: 0.2, options: [.curveLinear], animations: {
-                
-                self.postBg.center = self.writeCenter
-                self.postBtn.center = self.writeCenter
-                
-                }, completion: nil)
         } else {
-            
-            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
-                
-                self.postBg.center = CGPoint(x: self.writeCenter.x, y: kScreenHeight + self.postBtn.size.width)
-                self.postBtn.center = CGPoint(x: self.writeCenter.x, y: kScreenHeight + self.postBtn.size.width)
-                
-                }, completion: nil)
-            
         }
     }
     
@@ -135,7 +93,7 @@ extension TumblrDashboard {
             }
             
             //Success
-            let responseJSON = JSON(result)
+            let responseJSON = JSON(result!)
             let responsePosts = Mapper<ResponsePosts>().map(JSON: responseJSON.dictionaryObject!)
             
             

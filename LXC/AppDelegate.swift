@@ -22,12 +22,6 @@ let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 
 
-
-let kWeiboAppKey = "2721785301"
-let kWeiboAppSecret = "8b70ac89dfaa01cf68a9654639cf6750"
-let kWeiboRedirectURL = "https://api.weibo.com/oauth2/default.html"
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

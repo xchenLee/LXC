@@ -8,21 +8,23 @@
 
 import UIKit
 
-let kCustomDetectionTypeName = "CustomDetectionType"
-let kCustomDetectionTypeTag = "Tag"
+let kCustomDetectionTypeName = "CustomDetectionType.detectionTypeName"
+let kCustomDetectionTypeTag = "TumblrTag"
 let kCustomDetectionTagPattern = "\\#{1}[^\\#]+\\#{1}"
+
+
+typealias TapTagBlock = (_ tagText: String) -> Void
 
 class TumblrTagView: UITextView, UITextViewDelegate {
     
-    var tapTagAction:((_ tagText: String) -> Void)?
+    var tapTagAction: TapTagBlock?
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         self.delegate = self
     }
     
-    @available(iOS 10.0, *)
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
         guard let detectionType = self.attributedText.attribute(kCustomDetectionTypeName, at: characterRange.location, effectiveRange: nil) as? String, detectionType == kCustomDetectionTypeTag else {
             return true
@@ -32,33 +34,12 @@ class TumblrTagView: UITextView, UITextViewDelegate {
         guard text.characters.count > 2 else {
             return false
         }
+        
+        if !text.isEmpty {
+            tapTagAction?(text)
+        }
         return false
     }
-    
-//    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-//        
-//        guard let detectionType = self.attributedText.attribute(kCustomDetectionTypeName, at: characterRange.location, effectiveRange: nil) as? String, detectionType == kCustomDetectionTypeTag else {
-//            return true
-//        }
-//        
-//        let text = (self.text as NSString).substring(with: characterRange)
-//        guard text.characters.count > 2 else {
-//            return false
-//        }
-//        
-
-//        let startIndex = text.characters.index(text.startIndex, offsetBy: 1)
-//        let endIndex = text.characters.index(text.endIndex, offsetBy: -1)
-//        
-//        let range = startIndex..<endIndex
-//        
-//        let tagText = text.substring(from: <#T##String.Index#>)
-//        
-//        if !tagText.isEmpty {
-//            tapTagAction?(tagText)
-//        }
-//        return false
-//    }
 
 
 }

@@ -44,14 +44,11 @@ class TumblrTagEntry0: UIView {
         self.textView.backgroundColor = UIColor.white
         self.textView.dataDetectorTypes = .link
         self.textView.isUserInteractionEnabled = true
-        self.textView.delaysContentTouches = true
-//        self.textView.selectable = false 写上会有问题
         self.textView.isEditable = false
         self.textView.isScrollEnabled = false
-        self.textView.isMultipleTouchEnabled = true
-        self.textView.canCancelContentTouches = true
+        //self.textView.isMultipleTouchEnabled = true
+        //self.textView.canCancelContentTouches = true
         self.addSubview(self.textView)
-        
         
         self.textView.tapTagAction = { tagName in
         

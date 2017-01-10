@@ -70,7 +70,7 @@ let kTMCellPhotoMaxWidth = kScreenWidth
 let kTMCellPhotoMaxSize = CGSize(width: kTMCellPhotoMaxWidth, height: kTMCellPhotoMaxHeight)
 
 
-let kDebugMaxAllowedPhotoCount = 4
+let kDebugMaxAllowedPhotoCount = 10
 
 class LayoutManager: NSObject {
     
@@ -78,7 +78,7 @@ class LayoutManager: NSObject {
     class func getTagsAttributedString(_ text: String) -> NSAttributedString {
         
         
-        let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
+        /*let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
                 
         let textRange = NSMakeRange(0, attributedString.length)
         
@@ -86,6 +86,12 @@ class LayoutManager: NSObject {
         attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
         attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)
         
+        */
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        let textRange = NSMakeRange(0, (text as NSString).length)
+
         
         let expression = try! NSRegularExpression(pattern: kCustomDetectionTagPattern, options: [])
         
@@ -99,13 +105,12 @@ class LayoutManager: NSObject {
             let lastIndex = text.characters.index(text.startIndex, offsetBy: matchingResult.range.location + matchingResult.range.length)
             let range = startIndex..<lastIndex
             
-            let matchedString = text.substring(with: range)
+            let matchedString = text.substring(with: range) as NSString
             
-            let attributes = [
+            let attributes: [String : Any] = [
                 NSLinkAttributeName : matchedString,
                 kCustomDetectionTypeName : kCustomDetectionTypeTag
             ]
-            
 
             attributedString.addAttributes(attributes, range: matchingResult.range)
         }
@@ -322,7 +327,7 @@ class LayoutManager: NSObject {
             return(rectTop, resultRects)
         }
         
-        if photoCount == 4 {
+        if photoCount >= 4 && photoCount % 2 == 0{
             
             var resultRects = Array<CGRect>(repeating: CGRect.zero, count: photoCount)
             
@@ -352,7 +357,7 @@ class LayoutManager: NSObject {
                     let rect = CGRect(x: column * maxWidth, y: preferedHeight * row, width: maxWidth, height: preferedHeight)
                     resultRects[index] = rect
                 }
-                return(2 * preferedHeight, resultRects)
+                return(CGFloat(photoCount / 2) * preferedHeight, resultRects)
             }
             
             for index in 0..<photoCount {
@@ -372,7 +377,28 @@ class LayoutManager: NSObject {
             return(rectTop, resultRects)
         }
 
-
+        if photoCount > 4 && photoCount % 2 == 1 {
+            
+            var resultRects = Array<CGRect>(repeating: CGRect.zero, count: photoCount)
+            //TODO
+            var rectTop: CGFloat = 0
+            
+            for index in 0..<photoCount {
+                
+                guard let photoSize = photoData[index].originalSize else {
+                    continue
+                }
+                let originalSize = CGSize(width: CGFloat(photoSize.width), height: CGFloat(photoSize.height))
+                var scaledSize = ToolBox.getScaleSize(originalSize, max: kTMCellPhotoMaxSize)
+                if originalSize.width == 0 || originalSize.height == 0 {
+                    scaledSize = CGSize(width: kScreenWidth, height: kScreenWidth * 9 / 16)
+                }
+                let rect = CGRect(x: 0, y: rectTop, width: kScreenWidth, height: scaledSize.height)
+                rectTop += scaledSize.height
+                resultRects[index] = rect
+            }
+            return(rectTop, resultRects)
+        }
 
         return (0, [CGRect.zero])
     }
