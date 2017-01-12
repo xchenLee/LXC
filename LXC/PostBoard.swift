@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import pop
 
 
 let kPostIconWidth: CGFloat = 80
@@ -50,9 +51,15 @@ class PostBoard: UIControl {
     var blurEffectView: UIVisualEffectView!
     
     var postIcons: [PostIcon]!
-    var postIconsRect: [CGRect]!
+    var postIconsFinalRect: [CGRect]!
+    
+    var postIconsDelays: [TimeInterval] = [
+        0.1, 0.15, 0.2,
+        0.15, 0.2, 0.25
+    ]
     
     
+    // MARK: life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.fromARGB(0x000000, alpha: 0.7)
@@ -67,12 +74,12 @@ class PostBoard: UIControl {
         
         let spacing: CGFloat = 30
         let iconTop = kScreenHeight / 2 - kPostIconHeight - spacing / 2
-        let originX = (kScreenWidth - 2 * spacing + 3 * kPostIconWidth) / 2
+        let originX = (kScreenWidth - 2 * spacing - 3 * kPostIconWidth) / 2
         
         let postTitles:[String] = ["text", "video", "gif", "link", "image", "quote"]
-        self.postIconsRect = []
+        self.postIconsFinalRect = []
         self.postIcons = []
-        for index in 0..<5 {
+        for index in 0...5 {
             
             let postIcon = PostIcon(icon: "", tip: postTitles[index])
             postIcons.append(postIcon)
@@ -85,23 +92,56 @@ class PostBoard: UIControl {
             let top = iconTop + row * (kPostIconHeight + spacing)
             
             let rect = CGRect(x: left, y: top, width: kPostIconWidth, height: kPostIconHeight)
-            postIconsRect.append(rect)
-        }
-        
-        
-    }
-    
-    override func layoutSubviews() {
-        for index in 0..<5 {
+            postIconsFinalRect.append(rect)
             
-            let postIcon = self.postIcons[index]
-            let rect = self.postIconsRect[index]
+            
             postIcon.frame = rect
+            postIcon.top = postIcon.top + (kScreenHeight - iconTop)
         }
+        iconsAppearing()
     }
     
     internal required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        /*for index in 0...5 {
+         
+         let postIcon = self.postIcons[index]
+         let rect = self.postIconsFinalRect[index]
+         postIcon.frame = rect
+         }*/
+    }
+    
+    func iconsAppearing() {
+        
+        for index in 0...5 {
+            let icon = postIcons[index]
+            let animation = appearAnimation(index)
+            
+            icon.pop_add(animation, forKey: kPOPViewFrame)
+        }
+    }
+    
+    // MARK: animations
+    func appearAnimation(_ index: Int) -> POPSpringAnimation{
+        
+        let finalFrame = postIconsFinalRect[index]
+        let delay = postIconsDelays[index]
+        
+        let springAnimation = POPSpringAnimation()
+        springAnimation.property = POPAnimatableProperty.property(withName: kPOPViewFrame) as! POPAnimatableProperty!
+        springAnimation.springBounciness = 8
+        springAnimation.springSpeed = 14
+        springAnimation.beginTime = CACurrentMediaTime() + delay
+        springAnimation.toValue = NSValue(cgRect: finalFrame)
+        
+        return springAnimation
+    }
+    
+    func doDisappearAnimation() {
+        
     }
     
     func touchSelf() {
