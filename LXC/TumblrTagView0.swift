@@ -1,21 +1,20 @@
 //
-//  TumblrTagView.swift
+//  TumblrTagView0.swift
 //  LXC
 //
-//  Created by renren on 16/8/8.
-//  Copyright © 2016年 com.demo.lxc. All rights reserved.
+//  Created by danlan on 2017/5/22.
+//  Copyright © 2017年 com.demo.lxc. All rights reserved.
 //
 
 import UIKit
 
-let kCustomDetectionTypeName = "CustomDetectionType.detectionTypeName"
-let kCustomDetectionTypeTag = "TumblrTag"
+let kCustomDetectionTypeName = "customLinkScheme"
+let kCustomDetectionTypeTag = "customTagScheme"
 let kCustomDetectionTagPattern = "\\#{1}[^\\#]+\\#{1}"
-
 
 typealias TapTagBlock = (_ tagText: String) -> Void
 
-class TumblrTagView: UITextView, UITextViewDelegate {
+class TumblrTagView0: UITextView, UITextViewDelegate {
     
     var tapTagAction: TapTagBlock?
     
@@ -23,24 +22,23 @@ class TumblrTagView: UITextView, UITextViewDelegate {
         super.didMoveToSuperview()
         self.delegate = self
     }
-    
+
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
         guard let detectionType = self.attributedText.attribute(kCustomDetectionTypeName, at: characterRange.location, effectiveRange: nil) as? String, detectionType == kCustomDetectionTypeTag else {
             return true
         }
         
-        let text = (self.text as NSString).substring(with: characterRange)
+        let text = self.text .subString(characterRange.location, length: characterRange.length)!
+        
         guard text.characters.count > 2 else {
             return false
         }
         
-        if !text.isEmpty {
-            tapTagAction?(text)
+        if !text.isEmpty && tapTagAction != nil {
+            tapTagAction!(text)
         }
         return false
     }
 
-
 }
-

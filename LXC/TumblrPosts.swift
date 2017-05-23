@@ -145,9 +145,9 @@ extension TumblrPosts {
                 
                 guard let posts = responsePosts?.posts else {
                     self.tableView.endRefreshing()
-                    DispatchQueue.main.async(execute: {
-                        self.showTextHUD("no posts get")
-                    })
+//                    DispatchQueue.main.async(execute: {
+//                        self.showTextHUD("no posts get")
+//                    })
                     return
                 }
                 

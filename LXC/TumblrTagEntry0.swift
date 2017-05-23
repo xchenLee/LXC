@@ -8,9 +8,10 @@
 
 import UIKit
 
+
 class TumblrTagEntry0: UIView {
     
-    var textView: TumblrTagView
+    var textView: TumblrTagView0
     var cell: TumblrNormalCell?
 
     
@@ -20,7 +21,7 @@ class TumblrTagEntry0: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         
-        textView = TumblrTagView()
+        textView = TumblrTagView0()
         
         super.init(coder: aDecoder)
         customInit()
@@ -28,7 +29,7 @@ class TumblrTagEntry0: UIView {
     
     override init(frame: CGRect) {
         
-        textView = TumblrTagView()
+        textView = TumblrTagView0()
         
         super.init(frame: frame)
         customInit()
@@ -40,6 +41,10 @@ class TumblrTagEntry0: UIView {
         self.isUserInteractionEnabled = true
         self.backgroundColor = UIColor.white
         self.isExclusiveTouch = true
+        
+        
+        self.textView.backgroundColor = UIColor.white
+        self.addSubview(self.textView)
         
         self.textView.backgroundColor = UIColor.white
         self.textView.dataDetectorTypes = .link
@@ -67,6 +72,7 @@ class TumblrTagEntry0: UIView {
             self.textView.attributedText = nil
             return
         }
+        
         self.textView.frame = CGRect(x: kTMCellPadding, y: 0, width: kScreenWidth - 2 * kTMCellPadding, height: tumblrLayout.tagsHeight)
         self.textView.attributedText = tumblrLayout.tagsAttributedString
 
@@ -74,3 +80,4 @@ class TumblrTagEntry0: UIView {
 
 
 }
+

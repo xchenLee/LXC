@@ -14,6 +14,8 @@ target 'LXC' do
     pod 'ObjectMapper', '~> 2.1.0'
     pod 'MBProgressHUD'
     pod 'pop'
+    pod 'SnapKit', '~> 3.2.0'
+    #pod 'YYText'
     
     #pod 'RxCocoa', '~> 2.5.0'
     #pod 'RxSwift', '~> 2.5.0'

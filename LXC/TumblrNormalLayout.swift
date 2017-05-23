@@ -55,6 +55,7 @@ class TumblrNormalLayout: NSObject {
     var tagsHeight: CGFloat = 0
     var tagsTop: CGFloat = 0
     var tagsAttributedString: NSAttributedString?
+    //var tagsRanges: [NSRange] = []
     
 
     //转发评论区域高度
@@ -226,15 +227,17 @@ class TumblrNormalLayout: NSObject {
         if tags.count == 0 {
             return
         }
-        var tagsString = "tags: "
+        var tagsString: String = "tags: "
         for tag in tags {
             tagsString += "#\(tag.value!)# "
         }
         
         let attributedString = LayoutManager.getTagsAttributedString(tagsString)
+        //let attributedString = NSMutableAttributedString(string: tagsString)
+        //let ranges = LayoutManager.getTagRanges(tagsString)
+        //tagsRanges = ranges
         tagsAttributedString = attributedString
         tagsHeight = LayoutManager.computeTagsHeight(attributedString)
-        
         height += tagsHeight
     }
     

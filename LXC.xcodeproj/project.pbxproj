@@ -84,7 +84,6 @@
 		77D8321A1D576C4000D0A6A5 /* TumblrPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D832191D576C4000D0A6A5 /* TumblrPhotoView.swift */; };
 		77D8321C1D57713100D0A6A5 /* TumblrPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8321B1D57713100D0A6A5 /* TumblrPhotoCell.swift */; };
 		77D8322C1D58AD6A00D0A6A5 /* TumblrTagEntry0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8322B1D58AD6A00D0A6A5 /* TumblrTagEntry0.swift */; };
-		77D832301D58B0B800D0A6A5 /* TumblrTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8322F1D58B0B800D0A6A5 /* TumblrTagView.swift */; };
 		77D8323D1D59B23E00D0A6A5 /* TumblrPostsByTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8323C1D59B23E00D0A6A5 /* TumblrPostsByTag.swift */; };
 		77D8323F1D5AF1E900D0A6A5 /* TumblrSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D8323E1D5AF1E900D0A6A5 /* TumblrSearch.swift */; };
 		77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E312E81CA683FA00867373 /* IImageAlbumCell.swift */; };
@@ -100,9 +99,9 @@
 		77FB24A41CBCDC7B0035DE3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB24A31CBCDC7B0035DE3F /* Extensions.swift */; };
 		77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4D1CF2A697009660C3 /* CanvasView.swift */; };
 		77FB2C501CF2DC49009660C3 /* ScratchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */; };
-		77FBFFF81D5388D70082E65A /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */; };
 		77FCBB751D6365BF00F9A224 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */; };
 		77FCBB771D6365C700F9A224 /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB761D6365C700F9A224 /* MediaToolbox.framework */; };
+		93431D921ED300AE00EBE58D /* TumblrTagView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D911ED300AE00EBE58D /* TumblrTagView0.swift */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
@@ -190,7 +189,6 @@
 		77D832191D576C4000D0A6A5 /* TumblrPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPhotoView.swift; sourceTree = "<group>"; };
 		77D8321B1D57713100D0A6A5 /* TumblrPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPhotoCell.swift; sourceTree = "<group>"; };
 		77D8322B1D58AD6A00D0A6A5 /* TumblrTagEntry0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagEntry0.swift; sourceTree = "<group>"; };
-		77D8322F1D58B0B800D0A6A5 /* TumblrTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagView.swift; sourceTree = "<group>"; };
 		77D8323C1D59B23E00D0A6A5 /* TumblrPostsByTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPostsByTag.swift; sourceTree = "<group>"; };
 		77D8323E1D5AF1E900D0A6A5 /* TumblrSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrSearch.swift; sourceTree = "<group>"; };
 		77E312E81CA683FA00867373 /* IImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageAlbumCell.swift; sourceTree = "<group>"; };
@@ -206,10 +204,10 @@
 		77FB24A31CBCDC7B0035DE3F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		77FB2C4D1CF2A697009660C3 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		77FB2C4F1CF2DC49009660C3 /* ScratchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchView.swift; sourceTree = "<group>"; };
-		77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
 		77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		77FCBB761D6365C700F9A224 /* MediaToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaToolbox.framework; path = System/Library/Frameworks/MediaToolbox.framework; sourceTree = SDKROOT; };
 		83131F9B34C0A1826B1C5DB5 /* Pods-LXC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.debug.xcconfig"; sourceTree = "<group>"; };
+		93431D911ED300AE00EBE58D /* TumblrTagView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagView0.swift; sourceTree = "<group>"; };
 		9B49F7E62C3AE6203F4A87ED /* Pods-LXC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.release.xcconfig"; sourceTree = "<group>"; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 			children = (
 				77FB24A31CBCDC7B0035DE3F /* Extensions.swift */,
 				7721038C1D4CABAE00F18546 /* Extensions+UIView.swift */,
-				77FBFFF71D5388D70082E65A /* Extensions+UIViewController.swift */,
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
 				7721036C1D4A059A00F18546 /* StringObject.swift */,
@@ -307,9 +304,9 @@
 				772103A61D4F2B4400F18546 /* TumblrImageEntry0.swift */,
 				772103C01D509C7900F18546 /* TumblrReblogEntry0.swift */,
 				77D8322B1D58AD6A00D0A6A5 /* TumblrTagEntry0.swift */,
-				77D8322F1D58B0B800D0A6A5 /* TumblrTagView.swift */,
 				772103D51D52514700F18546 /* TumblrToolBarEntry0.swift */,
 				772103A81D4F411D00F18546 /* TumblrNormalLayout.swift */,
+				93431D911ED300AE00EBE58D /* TumblrTagView0.swift */,
 			);
 			name = normalcell;
 			sourceTree = "<group>";
@@ -610,7 +607,7 @@
 				TargetAttributes = {
 					772592111C7DEEF300000FBA = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QH3Z86LQRZ;
+						DevelopmentTeam = 24UV6VXUR4;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -695,7 +692,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AB29BC2C539B8A55030752B5 /* [CP] Copy Pods Resources */ = {
@@ -740,6 +737,7 @@
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
 				7761FEAF1D7EC1A5001EE55F /* TumblrPostsList.swift in Sources */,
 				771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */,
+				93431D921ED300AE00EBE58D /* TumblrTagView0.swift in Sources */,
 				773E16981CEC1B7900D11762 /* QuartzLearning.swift in Sources */,
 				77D8322C1D58AD6A00D0A6A5 /* TumblrTagEntry0.swift in Sources */,
 				776054A81CA4EF4C00EF3618 /* IImagePicker.swift in Sources */,
@@ -755,7 +753,6 @@
 				77FB0EE21CB50B81003DD7B6 /* IImagePickerAssetPop.swift in Sources */,
 				A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */,
 				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
-				77FBFFF81D5388D70082E65A /* Extensions+UIViewController.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
 				772103C11D509C7A00F18546 /* TumblrReblogEntry0.swift in Sources */,
 				772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */,
@@ -794,7 +791,6 @@
 				7761FEA41D7E98A7001EE55F /* FPSLabel.swift in Sources */,
 				7777FB7C1D49E4D300D58607 /* TumblrPost.swift in Sources */,
 				7729DB1F1D77CB1D0034C139 /* TumblrStaticIMGAnimator.swift in Sources */,
-				77D832301D58B0B800D0A6A5 /* TumblrTagView.swift in Sources */,
 				77E312E91CA683FA00867373 /* IImageAlbumCell.swift in Sources */,
 				77D8321C1D57713100D0A6A5 /* TumblrPhotoCell.swift in Sources */,
 			);
@@ -911,9 +907,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 24UV6VXUR4;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = LXC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lee.goody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -932,9 +929,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 24UV6VXUR4;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = LXC/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lee.goody;
 				PRODUCT_NAME = "$(TARGET_NAME)";

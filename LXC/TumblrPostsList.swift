@@ -100,7 +100,7 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
             
             ToolBox.copytoPasteBoard(post.videoUrl)
             print(UIPasteboard.general.string)
-            self.showTextHUD("video url copyed to pasteboard")
+            //self.showTextHUD("video url copyed to pasteboard")
             return
         }
         
@@ -112,7 +112,7 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
                 return
             }
             ToolBox.saveImgToSystemAlbum(tmpImageOne)
-            self.showTextHUD("image saved to photos")
+            //self.showTextHUD("image saved to photos")
         }
         
     }

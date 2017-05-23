@@ -74,19 +74,34 @@ let kDebugMaxAllowedPhotoCount = 10
 
 class LayoutManager: NSObject {
     
+    class func getTagRanges(_ text: String) -> [NSRange] {
+        
+        var ranges: [NSRange] = []
+        let textRange = NSMakeRange(0, (text as NSString).length)
+        
+        let expression = try! NSRegularExpression(pattern: kCustomDetectionTagPattern, options: [])
+        expression.enumerateMatches(in: text, options: [], range: textRange) { (result, flags, stop) in
+            
+            guard let _ = result else {
+                return
+            }
+            ranges.append(textRange)
+        }
+        return ranges
+    }
     
     class func getTagsAttributedString(_ text: String) -> NSAttributedString {
         
         
-        /*let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
-                
-        let textRange = NSMakeRange(0, attributedString.length)
-        
-        
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
-        attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)
-        
-        */
+//        let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
+//                
+//        let textRange = NSMakeRange(0, attributedString.length)
+//        
+//        
+//        attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
+//        attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)
+//        
+//        
         
         let attributedString = NSMutableAttributedString(string: text)
         
@@ -101,17 +116,13 @@ class LayoutManager: NSObject {
                return
             }
             
-            let startIndex = text.characters.index(text.startIndex, offsetBy: matchingResult.range.location)
-            let lastIndex = text.characters.index(text.startIndex, offsetBy: matchingResult.range.location + matchingResult.range.length)
-            let range = startIndex..<lastIndex
-            
-            let matchedString = text.substring(with: range) as NSString
+            let matchedString = text.subString(matchingResult.range.location, length: matchingResult.range.length)!
             
             let attributes: [String : Any] = [
                 NSLinkAttributeName : matchedString,
                 kCustomDetectionTypeName : kCustomDetectionTypeTag
             ]
-
+            
             attributedString.addAttributes(attributes, range: matchingResult.range)
         }
 

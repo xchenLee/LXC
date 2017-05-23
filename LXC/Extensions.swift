@@ -17,6 +17,22 @@ import ObjectMapper
 extension String {
     
     
+    //通过location length 构建 String的range
+    func range(_ location: Int, length: Int) -> Range<String.Index> {
+        
+        let sIndex = self.index(self.startIndex, offsetBy: location)
+        let eIndex = self.index(sIndex, offsetBy: length)
+        let rRange = sIndex..<eIndex
+        return rRange
+    }
+    
+    //通过location length 获取 String的 subString
+    func subString(_ location: Int, length: Int) -> String? {
+        
+        let rRange = self.range(location, length: length)
+        return substring(with: rRange)
+    }
+    
     
     func convertToAttributedString(_ font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
         

@@ -13,6 +13,7 @@ import SwiftyJSON
 import Alamofire
 import TMTumblrSDK
 import OAuthSwift
+import UserNotifications
 
 
 let kNavigationBarTintColor = UIColor.fromARGB(0x1A1B1C,alpha: 1.0)
@@ -23,7 +24,7 @@ let kScreenHeight = UIScreen.main.bounds.size.height
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     lazy var contactStore = CNContactStore()
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         //注册本地通知
-        registerLocationNotification()
+        //registerLocationNotification()
         
         TumblrAPI.registerApp()
         
@@ -125,12 +126,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        //
-        NSLog("receive location notification")
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        NSLog("userNotificationCenter # didReceive ")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        NSLog("userNotificationCenter # willPresent ")
     }
 
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
+    
+    /*func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
         
         if identifier == "actionOne" {
             NSLog("one")
@@ -138,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("two")
         }
         completionHandler()
-    }
+    }*/
     
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         return true
@@ -162,6 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
     
+    /*
     func registerLocationNotification() {
         
         //如果有，不再重复设置
@@ -203,7 +209,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //var notificationTypes : UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
         let settings = UIUserNotificationSettings(types:[.alert, .badge, .sound], categories: categoryForSetting)
         UIApplication.shared.registerUserNotificationSettings(settings)
-    }
+    }*/
     
     //请求通讯录数据
     func requestContactsAccess(_ completionHandler : @escaping (_ accessGranted : Bool) -> Void) {
