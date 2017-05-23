@@ -116,6 +116,7 @@ class TumblrNormalCell: UITableViewCell {
         self.reblogEntry.frame = CGRect(x: 0, y: safeLayout.reblogTop, width: kScreenWidth, height: safeLayout.reblogHeight)
         self.reblogEntry.setWithLayout(safeLayout)
         
+        //tag
         self.tagEntry.frame = CGRect(x: 0, y: safeLayout.tagsTop, width: kScreenWidth, height: safeLayout.tagsHeight)
         self.tagEntry.setWithLayout(safeLayout)
         

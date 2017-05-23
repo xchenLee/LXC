@@ -227,17 +227,22 @@ class TumblrNormalLayout: NSObject {
         if tags.count == 0 {
             return
         }
-        var tagsString: String = "tags: "
-        for tag in tags {
-            tagsString += "#\(tag.value!)# "
-        }
         
-        let attributedString = LayoutManager.getTagsAttributedString(tagsString)
+        // orginal version
+
+        //var tagsString: String = "tags: "
+        //for tag in tags {
+        //    tagsString += "#\(tag.value!)# "
+        //}
+        
+        //let attributedString = LayoutManager.getTagsAttributedString(tagsString)
         //let attributedString = NSMutableAttributedString(string: tagsString)
         //let ranges = LayoutManager.getTagRanges(tagsString)
         //tagsRanges = ranges
-        tagsAttributedString = attributedString
-        tagsHeight = LayoutManager.computeTagsHeight(attributedString)
+        //tagsAttributedString = attributedString
+        //tagsHeight = LayoutManager.computeTagsHeight(attributedString)
+        
+        tagsHeight = LayoutManager.computeTagPangelHeight(tags)
         height += tagsHeight
     }
     

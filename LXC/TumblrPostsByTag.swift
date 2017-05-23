@@ -93,23 +93,26 @@ extension TumblrPostsByTag {
              */
             //TODO  Google 
             //Success
-            //let resultJSON = JSON(result)
-            var taggedPosts: [TumblrPost]?
-                //Mapper<TumblrPost>().map(JSONString: result)
             
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
-                
-                guard let posts = taggedPosts else {
+            let resultJSON = JSON(result!)
+            var taggedPosts: [TumblrPost] = []
+            if resultJSON.type == .array {
+                for postObj in resultJSON.arrayValue {
+                    let tumblrPost = TumblrPost()
+                    tumblrPost.sjMap(postObj)
+                    taggedPosts.append(tumblrPost)
+                }
+            }
+            
+            DispatchQueue.global().async {
+                if taggedPosts.count == 0 {
                     self.tableView.endRefreshing()
-//                    DispatchQueue.main.async(execute: {
-//                        self.showTextHUD("no posts get")
-//                    })
                     return
                 }
                 
                 var tmpLayouts: [TumblrNormalLayout] = []
                 var i = 0
-                for tumblrPost in posts {
+                for tumblrPost in taggedPosts {
                     let id = tumblrPost.postId
                     if !self.tmpIDString.contains("\(id),") {
                         let layout = TumblrNormalLayout()
@@ -133,10 +136,8 @@ extension TumblrPostsByTag {
                     }
                     
                 })
-            })
-            
+            }
         }
-        
         
     }
 }

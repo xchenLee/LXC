@@ -9,9 +9,9 @@
 import UIKit
 
 
-class TumblrTagEntry0: UIView {
+class TumblrTagEntry0: UIView, TumblrTagPanelProtocol {
     
-    var textView: TumblrTagView0
+    var textView: TumblrTagPanel
     var cell: TumblrNormalCell?
 
     
@@ -21,7 +21,7 @@ class TumblrTagEntry0: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         
-        textView = TumblrTagView0()
+        textView = TumblrTagPanel()
         
         super.init(coder: aDecoder)
         customInit()
@@ -29,7 +29,7 @@ class TumblrTagEntry0: UIView {
     
     override init(frame: CGRect) {
         
-        textView = TumblrTagView0()
+        textView = TumblrTagPanel()
         
         super.init(frame: frame)
         customInit()
@@ -44,15 +44,14 @@ class TumblrTagEntry0: UIView {
         
         
         self.textView.backgroundColor = UIColor.white
+        self.textView.tapPanelDelegate = self
         self.addSubview(self.textView)
         
-        self.textView.backgroundColor = UIColor.white
+        /*self.textView.backgroundColor = UIColor.white
         self.textView.dataDetectorTypes = .link
         self.textView.isUserInteractionEnabled = true
         self.textView.isEditable = false
         self.textView.isScrollEnabled = false
-        //self.textView.isMultipleTouchEnabled = true
-        //self.textView.canCancelContentTouches = true
         self.addSubview(self.textView)
         
         self.textView.tapTagAction = { tagName in
@@ -62,22 +61,29 @@ class TumblrTagEntry0: UIView {
             }
 
             delegate.didClickTag(safeCell, tag: tagName)
-        }
+        }*/
     }
     
     func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
         
-        guard let _ = tumblrLayout.post else {
+        guard let post = tumblrLayout.post else {
             self.textView.frame = CGRect.zero
-            self.textView.attributedText = nil
             return
         }
         
         self.textView.frame = CGRect(x: kTMCellPadding, y: 0, width: kScreenWidth - 2 * kTMCellPadding, height: tumblrLayout.tagsHeight)
-        self.textView.attributedText = tumblrLayout.tagsAttributedString
+        //self.textView.attributedText = tumblrLayout.tagsAttributedString
+        self.textView.fitTags(post.tags)
 
     }
 
+    // MARK: - TumblrTagPanelProtocol
+    func tagTapped(tagName: String) {
+        guard let safeCell = self.cell ,let delegate = safeCell.delegate else {
+            return
+        }
+        delegate.didClickTag(safeCell, tag: tagName)
+    }
 
 }
 

@@ -32,13 +32,24 @@ let kTMCellVideoIndicatorSize : CGFloat = 40
 let kTMCellVideoFlagSize : CGFloat = 24
 let kTMCellVideoSourceFlagSize : CGFloat = 40
 
+/// 标签间隔
+let kTMCellTagPadding : CGFloat = 15
+let kTMCellTagHSpacing : CGFloat = 6
+let kTMCellTagVSpacing : CGFloat = 4
+
+let kTMCellTagInsets : CGFloat = 6
+
+
+let kTMCellTagMaxW : CGFloat = kScreenWidth - 2 * kTMCellPadding
+let kTMCellTagMaxH : CGFloat = 30
+
 
 /// 文字
 let kTMCellTitleFontSize : CGFloat = 20
 let kTMCellTitleFontColor = UIColor.fromARGB(0x646464, alpha: 1.0)
 let kTMCellTitleFont = UIFont.systemFont(ofSize: kTMCellTitleFontSize, weight: UIFontWeightRegular)
 
-let kTMCellTextFontSize: CGFloat = 14
+let kTMCellTextFontSize : CGFloat = 14
 let kTMCellTextFontColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
 let kTMCellTextFont = UIFont.systemFont(ofSize: kTMCellTextFontSize, weight: UIFontWeightLight)
 
@@ -54,7 +65,7 @@ let kTMCellReblogFontSize : CGFloat = 14
 let kTMCellReblogTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
 let kTMCellReblogFont = UIFont.systemFont(ofSize: kTMCellReblogFontSize, weight: UIFontWeightLight)
 
-let kTMCellTagFontSize : CGFloat = 14
+let kTMCellTagFontSize : CGFloat = 13
 let kTMCellTagTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
 let kTMCellTagFont = UIFont.systemFont(ofSize: kTMCellTagFontSize, weight: UIFontWeightLight)
 
@@ -74,6 +85,8 @@ let kDebugMaxAllowedPhotoCount = 10
 
 class LayoutManager: NSObject {
     
+    
+    //获取一个字符串里所有匹配的 #xxx# 类似这种的 range
     class func getTagRanges(_ text: String) -> [NSRange] {
         
         var ranges: [NSRange] = []
@@ -90,24 +103,11 @@ class LayoutManager: NSObject {
         return ranges
     }
     
+    //获取装配好的tag attributedString
     class func getTagsAttributedString(_ text: String) -> NSAttributedString {
         
-        
-//        let attributedString = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
-//                
-//        let textRange = NSMakeRange(0, attributedString.length)
-//        
-//        
-//        attributedString.addAttribute(NSForegroundColorAttributeName, value: kTMCellTagTextColor, range: textRange)
-//        attributedString.addAttribute(NSFontAttributeName, value: kTMCellTagFont, range: textRange)
-//        
-//        
-        
         let attributedString = NSMutableAttributedString(string: text)
-        
         let textRange = NSMakeRange(0, (text as NSString).length)
-
-        
         let expression = try! NSRegularExpression(pattern: kCustomDetectionTagPattern, options: [])
         
         expression.enumerateMatches(in: text, options: [], range: textRange) { (result, flags, stop) in
@@ -129,6 +129,33 @@ class LayoutManager: NSObject {
         return attributedString
     }
     
+    
+    class func computeTagPangelHeight(_ tagDatas: [String]) -> CGFloat {
+        
+        var height: CGFloat = 0.0
+        if tagDatas.count == 0 {
+            return height
+        }
+        
+        let widgetH = kScreenWidth - kTMCellPadding * 2
+        let lineH = kTMCellTagMaxH + kTMCellTagVSpacing
+        height = lineH
+        
+        var widthSum: CGFloat = 0
+        for tagName in tagDatas {
+            
+            let width = tagName.widthWithConstrainedHeight(kTMCellTagMaxH, font: kTMCellTagFont) + 2 * kTMCellTagInsets
+            
+            //超过宽度，高度加一行，widthSum重置
+            if width + widthSum > widgetH {
+                height += lineH
+                widthSum = 0
+            } else {
+                widthSum += width
+            }
+        }
+        return height + kTMCellTagVSpacing
+    }
     
     
     /**

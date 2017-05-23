@@ -84,30 +84,28 @@ extension TumblrDashboard {
             parameters["offset"] = String(offset)
         }
         //offset > 0 ? ["offset" : String(offset)] : nil
-        TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
+        //TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
             
             
-            //        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
+        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }
             
             //Success
             let responseJSON = JSON(result!)
-            let responsePosts = Mapper<ResponsePosts>().map(JSON: responseJSON.dictionaryObject!)
+            //注释的这行是 使用ObjectMapper方法
+            //let responsePosts = Mapper<ResponsePosts>().map(JSON: responseJSON.dictionaryObject!)
+            //下边几行是使用SwiftyJSON
             
+            let postsArray: JSON = responseJSON["posts"]
             
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
-                
-                guard let posts = responsePosts?.posts else {
-                    self.tableView.endRefreshing()
-//                    DispatchQueue.main.async(execute: {
-//                    })
-                    return
-                }
-                
-                var tmpLayouts: [TumblrNormalLayout] = []
-                for tumblrPost in posts {
+            var tmpLayouts: [TumblrNormalLayout] = []
+            if postsArray.type == .array {
+                for postObj in postsArray.arrayValue {
+                    let tumblrPost = TumblrPost()
+                    tumblrPost.sjMap(postObj)
+                    
                     let id = tumblrPost.postId
                     if !self.tmpIDString.contains("\(id),") {
                         let layout = TumblrNormalLayout()
@@ -120,6 +118,14 @@ extension TumblrDashboard {
                         self.tmpIDString += "\(id),"
                     }
                 }
+            }
+            
+            DispatchQueue.global().async {
+                if tmpLayouts.count == 0 {
+                    self.tableView.endRefreshing()
+                    return
+                }
+                
                 
                 DispatchQueue.main.async(execute: {
                     if offset > 0 {
@@ -133,9 +139,7 @@ extension TumblrDashboard {
                     }
                     self.postsCount += 20
                 })
-                
-                
-            })
+            }
             
         }
     }

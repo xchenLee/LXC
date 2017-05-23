@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import SwiftyJSON
 
 
 /// All property types except for List and RealmOptional must be declared as var. List and RealmOptional properties must be declared as non-let properties.
@@ -24,6 +25,15 @@ struct Relog : Mappable {
         
     }
     
+    init(json: JSON) {
+        sjMap(json)
+    }
+    
+    mutating func sjMap(_ json: JSON) {
+        comment = json["comment"].stringValue
+        treeHtml = json["treeHtml"].stringValue
+    }
+    
     mutating func mapping(map: Map) {
         comment     <- map["comment"]
         treeHtml  <- map["tree_html"]
@@ -37,6 +47,16 @@ struct PhotoSize : Mappable {
     var height : Int = 0
     
     init?(map: Map) {
+    }
+    
+    init(json: JSON) {
+        sjMap(json)
+    }
+    
+    mutating func sjMap(_ json: JSON) {
+        url = json["url"].stringValue
+        width = json["width"].intValue
+        height = json["height"].intValue
     }
     
     mutating func mapping(map: Map) {
@@ -56,6 +76,24 @@ struct Photo : Mappable {
     
     init?(map: Map) {
         
+    }
+    
+    init(_ json: JSON) {
+        sjMap(json)
+    }
+    
+    mutating func sjMap(_ json: JSON) {
+        caption = json["caption"].stringValue
+        originalSize = PhotoSize(json: json["original_size"])
+        
+        let altJSON = json["alt_sizes"]
+        altSizes = []
+        if altJSON.type == .array {
+            for objJSON in altJSON.arrayValue {
+                let size = PhotoSize(json: objJSON)
+                altSizes!.append(size)
+            }
+        }
     }
     
     mutating func mapping(map: Map) {
@@ -90,7 +128,7 @@ class TumblrPost: NSObject, Mappable {
     var sourceTitle : String = ""
     var totalPosts : Int32   = 0
 
-    var tags          = [StringObject]()
+    var tags          = [String]()
     
     var title: String = ""
     var body : String = ""
@@ -123,8 +161,74 @@ class TumblrPost: NSObject, Mappable {
     required convenience init?(map: Map) {
         self.init()
     }
+    
+    
+    //SwiftyJSON 转化成对象的方法
+    func sjMap(_ json: JSON) {
+        slug = json["slug"].stringValue
+        blogName = json["blog_name"].stringValue
+        avatarUrl = kTumblrAPIUrl + "blog/" + blogName + ".tumblr.com/avatar/64"
+        postId = json["id"].intValue
+        
+        type = json["type"].stringValue
+        timestamp = json["timestamp"].intValue
+        date = json["date"].stringValue
+        format = json["format"].stringValue
+        
+        state = json["state"].stringValue
+        followed = json["followed"].boolValue
+        reblogKey = json["reblog_key"].stringValue
+        
+        sourceUrl = json["source_url"].stringValue
+        sourceTitle = json["source_title"].stringValue
+        
+        title = json["title"].stringValue
+        body = json["body"].stringValue
+        text = json["text"].stringValue
+        
+        
+        tags = []
+        
+        let tagsJSON = json["tags"]
+        if tagsJSON.type == .array {
+            for objJSON in tagsJSON.arrayValue {
+                tags.append(objJSON.stringValue)
+            }
+        }
+        
+        let reblogJSON = json["reblog"]
+        reblog = Relog(json: reblogJSON)
+        
+        likedStamp = json["liked_timestamp"].int64Value
+        
+        photos = []
+        let photosJSON = json["photos"]
+        if photosJSON.type == .array {
+            for objJSON in photosJSON.arrayValue {
+                let photo = Photo(objJSON)
+                photos?.append(photo)
+            }
+        }
+        
+        liked = json["liked"].boolValue
+        
+        summary = json["summary"].stringValue
+        shortUrl = json["short_url"].stringValue
+        noteCount = json["note_count"].intValue
+        imagePermalink = json["image_permalink"].stringValue
+        
+        permalinkUrl = json["permalink_url"].stringValue
+        
+        videoUrl = json["video_url"].stringValue
+        videoType = json["video_type"].stringValue
+        thumbnailUrl = json["thumbnail_url"].stringValue
+        thumbnailWidth = json["thumbnail_width"].intValue
+        thumbnailHeight = json["thumbnail_height"].intValue
+
+    }
 
 
+    //ObjectMapper 转换的方法，实现mappable，
     func mapping(map: Map) {
 
         slug <- map["slug"]
@@ -149,15 +253,15 @@ class TumblrPost: NSObject, Mappable {
         body <- map["body"]
         text <- map["text"]
         
-
-        var tmpTags: [String]? = nil
-        tmpTags <- map["tags"]
-        tmpTags?.forEach({ (tagString) in
-            
-            let stringObject = StringObject()
-            stringObject.value = tagString
-            tags.append(stringObject)
-        })
+        // ObjectMapper 的方法，注释掉
+//        var tmpTags: [String]? = nil
+//        tmpTags <- map["tags"]
+//        tmpTags?.forEach({ (tagString) in
+//            
+//            let stringObject = StringObject()
+//            stringObject.value = tagString
+//            tags.append(stringObject)
+//        })
         
         reblog <- map["reblog"]
         likedStamp <- map["liked_timestamp"]

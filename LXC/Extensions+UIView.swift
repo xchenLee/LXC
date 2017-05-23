@@ -123,7 +123,12 @@ extension UIView {
         return snap!
     }
     
-    
+    // MARK: - remove subviews
+    func removeAllSubViews() {
+        for subView in self.subviews {
+            subView.removeFromSuperview()
+        }
+    }
     
 }
 
