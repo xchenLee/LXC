@@ -72,6 +72,7 @@ class TumblrTagPanel: UIView {
                     left += kTMCellTagHSpacing
                 }
             } else {
+                widthSum = 0
                 top += kTMCellTagVSpacing + kTMCellTagMaxH
                 left = 0
             }
