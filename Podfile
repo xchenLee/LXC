@@ -11,11 +11,14 @@ target 'LXC' do
     pod 'TMTumblrSDK', '~> 4.0.4'
     pod 'OAuthSwift', '~> 1.0.0'
     pod 'MJRefresh'
-    pod 'ObjectMapper', '~> 2.1.0'
-    pod 'MBProgressHUD'
+    #准备假期仿写swift version
+    #pod 'MBProgressHUD'
     pod 'pop'
     pod 'SnapKit', '~> 3.2.0'
     #pod 'YYText'
+    
+    #曾经用过 ObjectMapper
+    #pod 'ObjectMapper', '~> 2.1.0'
     
     #pod 'RxCocoa', '~> 2.5.0'
     #pod 'RxSwift', '~> 2.5.0'

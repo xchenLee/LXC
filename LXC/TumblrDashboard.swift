@@ -9,7 +9,6 @@
 import UIKit
 import TMTumblrSDK
 import SwiftyJSON
-import ObjectMapper
 
 class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
     
@@ -94,10 +93,6 @@ extension TumblrDashboard {
             
             //Success
             let responseJSON = JSON(result!)
-            //注释的这行是 使用ObjectMapper方法
-            //let responsePosts = Mapper<ResponsePosts>().map(JSON: responseJSON.dictionaryObject!)
-            //下边几行是使用SwiftyJSON
-            
             let postsArray: JSON = responseJSON["posts"]
             
             var tmpLayouts: [TumblrNormalLayout] = []

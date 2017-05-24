@@ -10,7 +10,6 @@ import UIKit
 import TMTumblrSDK
 import OAuthSwift
 import SwiftyJSON
-import ObjectMapper
 
 class SignInNormal: UIViewController, UITextFieldDelegate {
 
@@ -80,7 +79,7 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
                     
                     if error == nil {
                         
-                        var response = JSON(result)
+                        var response = JSON(result!)
                         //let manThred = NSThread.currentThread() == NSThread.mainThread()
                         
                         let user = TumblrUser()

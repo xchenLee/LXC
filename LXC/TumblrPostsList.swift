@@ -99,11 +99,9 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         if typeString == "video" {
             
             ToolBox.copytoPasteBoard(post.videoUrl)
-            print(UIPasteboard.general.string)
             //self.showTextHUD("video url copyed to pasteboard")
             return
         }
-        
         
         if typeString == "photo" {
             

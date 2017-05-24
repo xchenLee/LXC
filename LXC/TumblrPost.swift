@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 import SwiftyJSON
 
 
@@ -16,14 +15,10 @@ import SwiftyJSON
 
 /// https://realm.io/docs/swift/latest/api/Classes/Object.html
 
-struct Relog : Mappable {
+struct Relog {
     
     var comment : String?
     var treeHtml : String?
-    
-    init?(map: Map) {
-        
-    }
     
     init(json: JSON) {
         sjMap(json)
@@ -33,21 +28,13 @@ struct Relog : Mappable {
         comment = json["comment"].stringValue
         treeHtml = json["treeHtml"].stringValue
     }
-    
-    mutating func mapping(map: Map) {
-        comment     <- map["comment"]
-        treeHtml  <- map["tree_html"]
-    }
 }
 
-struct PhotoSize : Mappable {
+struct PhotoSize {
     
     var url : String?
     var width : Int = 0
     var height : Int = 0
-    
-    init?(map: Map) {
-    }
     
     init(json: JSON) {
         sjMap(json)
@@ -58,25 +45,13 @@ struct PhotoSize : Mappable {
         width = json["width"].intValue
         height = json["height"].intValue
     }
-    
-    mutating func mapping(map: Map) {
-        
-        url <- map["url"]
-        width     <- map["width"]
-        height  <- map["height"]
-    }
 }
 
-struct Photo : Mappable {
+struct Photo {
     
     var caption : String?
     var originalSize : PhotoSize?
     var altSizes : [PhotoSize]?
-    
-    
-    init?(map: Map) {
-        
-    }
     
     init(_ json: JSON) {
         sjMap(json)
@@ -95,16 +70,10 @@ struct Photo : Mappable {
             }
         }
     }
-    
-    mutating func mapping(map: Map) {
-        caption <- map["caption"]
-        originalSize  <- map["original_size"]
-        altSizes <- map["alt_sizes"]
-    }
 
 }
 
-class TumblrPost: NSObject, Mappable {
+class TumblrPost: NSObject {
 
 
     var blogName : String    = ""
@@ -156,12 +125,6 @@ class TumblrPost: NSObject, Mappable {
     var thumbnailWidth : Int = 0
     
     var permalinkUrl : String = ""
-
-
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
     
     //SwiftyJSON 转化成对象的方法
     func sjMap(_ json: JSON) {
@@ -226,61 +189,5 @@ class TumblrPost: NSObject, Mappable {
         thumbnailHeight = json["thumbnail_height"].intValue
 
     }
-
-
-    //ObjectMapper 转换的方法，实现mappable，
-    func mapping(map: Map) {
-
-        slug <- map["slug"]
-        blogName <- map["blog_name"]
-        avatarUrl = kTumblrAPIUrl + "blog/" + blogName + ".tumblr.com/avatar/64"
-        postId <- map["id"]
-        url <- map["post_url"]
-
-        type <- map["type"]
-        timestamp <- map["timestamp"]
-        date <- map["date"]
-        format <- map["format"]
-        
-        state <- map["state"]
-        followed <- map["followed"]
-        reblogKey <- map["reblog_key"]
-        
-        sourceUrl <- map["source_url"]
-        sourceTitle <- map["source_title"]
-        
-        title <- map["title"]
-        body <- map["body"]
-        text <- map["text"]
-        
-        // ObjectMapper 的方法，注释掉
-//        var tmpTags: [String]? = nil
-//        tmpTags <- map["tags"]
-//        tmpTags?.forEach({ (tagString) in
-//            
-//            let stringObject = StringObject()
-//            stringObject.value = tagString
-//            tags.append(stringObject)
-//        })
-        
-        reblog <- map["reblog"]
-        likedStamp <- map["liked_timestamp"]
-        photos <- map["photos"]
-        liked <- map["liked"]
-        
-        summary <- map["summary"]
-        shortUrl <- map["short_url"]
-        noteCount <- map["note_count"]
-        imagePermalink <- map["image_permalink"]
-        
-        permalinkUrl <- map["permalink_url"]
-        
-        videoUrl <- map["video_url"]
-        videoType <- map["video_type"]
-        thumbnailUrl <- map["thumbnail_url"]
-        thumbnailWidth <- map["thumbnail_width"]
-        thumbnailHeight <- map["thumbnail_height"]
-    }
-
 
 }

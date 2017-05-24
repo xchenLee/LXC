@@ -47,8 +47,15 @@ class TumblrTagPanel: UIView {
     func fitTags(_ tags: [String]) {
         self.removeAllSubViews()
         
+        var blackFlag = true
         for tagName in tags {
             let tagLabel = self.tagFactory(tagName)
+            let textColor = blackFlag ? UIColor.white : UIColor.black
+            let backColor = blackFlag ? UIColor.black : UIColor.white
+            tagLabel.textColor = textColor
+            tagLabel.backgroundColor = backColor
+            
+            blackFlag = !blackFlag
             self.addSubview(tagLabel)
         }
         self.addSubview(self.seperateLine)
@@ -61,7 +68,7 @@ class TumblrTagPanel: UIView {
         
         var widthSum : CGFloat = 0
         var left : CGFloat = 0
-        var top = kTMCellTagVSpacing
+        var top = kTMCellTagTSpacing
         
         // layout tagviews
         for tagView in self.subviews {

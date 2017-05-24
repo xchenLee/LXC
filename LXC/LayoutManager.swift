@@ -34,14 +34,16 @@ let kTMCellVideoSourceFlagSize : CGFloat = 40
 
 /// 标签间隔
 let kTMCellTagPadding : CGFloat = 15
-let kTMCellTagHSpacing : CGFloat = 6
-let kTMCellTagVSpacing : CGFloat = 4
+let kTMCellTagHSpacing : CGFloat = 8
+let kTMCellTagVSpacing : CGFloat = 6
+let kTMCellTagTSpacing : CGFloat = 10
+
 
 let kTMCellTagInsets : CGFloat = 6
 
 
 let kTMCellTagMaxW : CGFloat = kScreenWidth - 2 * kTMCellPadding
-let kTMCellTagMaxH : CGFloat = 30
+let kTMCellTagMaxH : CGFloat = 28
 
 
 /// 文字
@@ -65,9 +67,9 @@ let kTMCellReblogFontSize : CGFloat = 14
 let kTMCellReblogTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
 let kTMCellReblogFont = UIFont.systemFont(ofSize: kTMCellReblogFontSize, weight: UIFontWeightLight)
 
-let kTMCellTagFontSize : CGFloat = 13
+let kTMCellTagFontSize : CGFloat = 12
 let kTMCellTagTextColor = UIColor.fromARGB(0x292f33, alpha: 1.0)
-let kTMCellTagFont = UIFont.systemFont(ofSize: kTMCellTagFontSize, weight: UIFontWeightLight)
+let kTMCellTagFont = UIFont.systemFont(ofSize: kTMCellTagFontSize, weight: UIFontWeightSemibold)
 
 
 
@@ -154,7 +156,7 @@ class LayoutManager: NSObject {
                 widthSum += width
             }
         }
-        return height + kTMCellTagVSpacing
+        return height + kTMCellTagTSpacing
     }
     
     
@@ -171,12 +173,12 @@ class LayoutManager: NSObject {
         let mutableAS = text.convertToAttributedString(kTMCellTextFont, textColor: kTMCellTextFontColor)
         
         //开始添加自定义属性，段落，
-        let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        paragraphStyle.minimumLineHeight = kTMCellTextFontSize * 1.2
+        //let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        //paragraphStyle.minimumLineHeight = kTMCellTextFontSize * 1.2
         
-        let range = NSMakeRange(0, mutableAS.length)
-        mutableAS.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
-        mutableAS.addAttribute(NSFontAttributeName, value: kTMCellTextFont, range: range)
+        //let range = NSMakeRange(0, mutableAS.length)
+        //mutableAS.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
+        //mutableAS.addAttribute(NSFontAttributeName, value: kTMCellTextFont, range: range)
         return mutableAS
     }
     
@@ -441,6 +443,8 @@ class LayoutManager: NSObject {
         return (0, [CGRect.zero])
     }
     
+    
+    // MARK: - like 动画
     class func doLikeAnimation(_ cell : TumblrNormalCell, liked: Bool) {
         //找到相对于Window的frame，开始做动画
         
@@ -459,7 +463,7 @@ class LayoutManager: NSObject {
             animatedHeart.image = UIImage(named: "icon_animated_like")
             animatedHeart.frame = frameInWindow
             animatedHeart.alpha = 0.6
-            animatedHeart.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI / 9))
+            animatedHeart.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 9))
             animatedHeart.transform = animatedHeart.transform.scaledBy(x: 0.75, y: 0.75)
             window?.addSubview(animatedHeart)
             
@@ -474,7 +478,7 @@ class LayoutManager: NSObject {
                 })
                 
                 UIView .addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.5, animations: {
-                    animatedHeart.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI / 8))
+                    animatedHeart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 8))
                     animatedHeart.center = CGPoint(x: center.x, y: center.y - size * 1.8)
                 })
                 
@@ -524,10 +528,10 @@ class LayoutManager: NSObject {
             
             UIView .addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.3, animations: {
                 
-                animatedLeft.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI / 16))
+                animatedLeft.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 16))
                 animatedLeft.center = CGPoint(x: centerLeft.x - 12, y: centerLeft.y)
                 
-                animatedRight.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI / 16))
+                animatedRight.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 16))
                 animatedRight.center = CGPoint(x: centerRight.x + 12, y: centerRight.y)
                 
             })

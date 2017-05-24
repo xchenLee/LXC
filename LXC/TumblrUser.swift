@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import ObjectMapper
 
-class TumblrUser: NSObject, Mappable, NSCoding {
+class TumblrUser: NSObject, NSCoding {
     
     dynamic var name = ""
     dynamic var token = ""
@@ -18,18 +17,9 @@ class TumblrUser: NSObject, Mappable, NSCoding {
     dynamic var following = 0
     dynamic var likes = 0
     
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
     override init() {
         
     }
-    
-    func mapping(map: Map) {
-        
-    }
-    
     
     // MARK: - NSCoding
     public func encode(with aCoder: NSCoder) {

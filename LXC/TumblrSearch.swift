@@ -9,7 +9,6 @@
 import UIKit
 import TMTumblrSDK
 import SwiftyJSON
-import ObjectMapper
 
 
 class TumblrSearch: UITableViewController {

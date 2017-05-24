@@ -9,7 +9,6 @@
 import UIKit
 import TMTumblrSDK
 import SwiftyJSON
-import ObjectMapper
 import MediaPlayer
 import AVKit
 
@@ -131,30 +130,21 @@ extension TumblrPosts {
         //offset > 0 ? ["offset" : String(offset)] : nil
         TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
 
-        
-//        TMAPIClient.sharedInstance().dashboard(offset > 0 ? ["offset" : String(offset)] : nil) { (result, error) in
             if error != nil {
                 return
             }
             
             //Success
-            let responseJSON = JSON(result)
-            let responsePosts = Mapper<ResponsePosts>().map(JSON: responseJSON.dictionaryObject!)
+            let responseJSON = JSON(result!)
+            let postsArray: JSON = responseJSON["liked_posts"]
             
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { 
-                
-                guard let posts = responsePosts?.posts else {
-                    self.tableView.endRefreshing()
-//                    DispatchQueue.main.async(execute: {
-//                        self.showTextHUD("no posts get")
-//                    })
-                    return
-                }
-                
-                var tmpLayouts: [TumblrNormalLayout] = []
-                for tumblrPost in posts {
-                    let id = tumblrPost.postId
+            var tmpLayouts: [TumblrNormalLayout] = []
+            if postsArray.type == .array {
+                for postObj in postsArray.arrayValue {
+                    let tumblrPost = TumblrPost()
+                    tumblrPost.sjMap(postObj)
                     
+                    let id = tumblrPost.postId
                     if !self.tmpIDString.contains("\(id),") {
                         let layout = TumblrNormalLayout()
                         layout.fitPostData(tumblrPost)
@@ -166,6 +156,10 @@ extension TumblrPosts {
                         self.tmpIDString += "\(id),"
                     }
                 }
+            }
+
+            DispatchQueue.global().async {
+
                 
                 DispatchQueue.main.async(execute: {
                     if offset > 0 {
@@ -181,7 +175,7 @@ extension TumblrPosts {
                 })
                 
                 
-            })
+            }
             
         }
     }

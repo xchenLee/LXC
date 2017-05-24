@@ -7,20 +7,9 @@
 //
 
 import Foundation
-import ObjectMapper
 
-class ResponsePosts: Mappable {
+class ResponsePosts {
     
     var posts: [TumblrPost]?
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        //liked_posts
-        //posts
-        posts <- map["posts"]
-    }
 
 }

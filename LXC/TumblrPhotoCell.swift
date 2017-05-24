@@ -69,9 +69,9 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
     // MARK: - setDatas and resize
     func fitPhotoData(_ photoData: TumblrPhotoPreviewItem) {
         //如果图片数据一样，因为不是 NSObject，无法比较，只能比较JSON
-        if self.photo != nil && self.photo!.photo.toJSONString() == photoData.photo.toJSONString() {
+        /*if self.photo != nil && self.photo!.photo.toJSONString() == photoData.photo.toJSONString() {
             return
-        }
+        }*/
         
         self.photo = photoData
         self.setZoomScale(1.0, animated: false)

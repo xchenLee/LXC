@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import ObjectMapper
 import TMTumblrSDK
 
 let kTumblrPostsTagCell = "postTagCell"

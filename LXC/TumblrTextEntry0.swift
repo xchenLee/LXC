@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TumblrTextEntry0: UIView {
+class TumblrTextEntry0: UIView, UITextViewDelegate {
 
     var titleView: UILabel
     var textView: UITextView
@@ -57,9 +57,10 @@ class TumblrTextEntry0: UIView {
         self.textView.textColor = kTMCellReblogTextColor
         self.textView.top = 0
         self.textView.left = kTMCellPadding
+        self.textView.isSelectable = true
         self.textView.isEditable = false
+        self.textView.isUserInteractionEnabled = true
         self.textView.size = CGSize(width: kScreenWidth - 2 * kTMCellPadding, height: 0)
-        
         
         super.init(frame: frame)
         customInit()
@@ -72,6 +73,7 @@ class TumblrTextEntry0: UIView {
         self.isExclusiveTouch = true
         self.backgroundColor = UIColor.white
         
+        self.textView.delegate = self
         self.addSubview(self.titleView)
         self.addSubview(self.textView)
     }
@@ -103,6 +105,18 @@ class TumblrTextEntry0: UIView {
             self.textView.frame = CGRect(x: kTMCellPadding, y: tumblrLayout.titleHeight, width: kTMCellTextContentWidth, height: tumblrLayout.textHeight)
         }
         
+    }
+    
+    
+    // MARK: - UITextViewDelegate
+    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        return true
     }
 
 
