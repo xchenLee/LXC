@@ -73,7 +73,7 @@ class WebExplorer: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if (navigationAction.navigationType == WKNavigationType.linkActivated && !(navigationAction.request as NSURLRequest).url!.host!.lowercased().hasPrefix("www.appcoda.com")) {
-            UIApplication.shared.openURL(navigationAction.request.url!)
+            UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)
             decisionHandler(WKNavigationActionPolicy.cancel)
         } else {
             decisionHandler(WKNavigationActionPolicy.allow)

@@ -68,7 +68,6 @@ class TumblrReblogEntry0: UIView {
             return
         }
         self.reblogTextLabel.isHidden = false
-        NSUnderlineStyleAttributeName
         self.reblogTextLabel.attributedText = tumblrLayout.reblogAttributes
         self.reblogTextLabel.linkTextAttributes = [NSForegroundColorAttributeName : kTMCellReblogTextColor]
         self.reblogTextLabel.frame = CGRect(x: kTMCellPadding, y: 0, width: kScreenWidth - 2 * kTMCellPadding, height: tumblrLayout.reblogHeight)

@@ -67,7 +67,7 @@ class CALayerTree: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        var subViews = fatherView.subviews
+        //var subViews = fatherView.subviews
         
         var subLayers = fatherView.layer.sublayers
         

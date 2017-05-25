@@ -91,9 +91,9 @@ class CAEffect: UIViewController {
         
         //事实上，重绘图片大小也没有一个统一的通用算法。这取决于需要拉伸的内容，放大或是缩小的需求等这些因素。CALayer为此提供了三种拉伸过滤方法，他们是：
         
-        kCAFilterLinear
-        kCAFilterNearest
-        kCAFilterTrilinear
+        //kCAFilterLinear
+        //kCAFilterNearest
+        //kCAFilterTrilinear
         
         //minification（缩小图片）和magnification（放大图片）默认的过滤器都是kCAFilterLinear，这个过滤器采用双线性滤波算法，它在大多数情况下都表现良好。双线性滤波算法通过对多个像素取样最终生成新的值，得到一个平滑的表现不错的拉伸。但是当放大倍数比较大的时候图片就模糊不清了。
         

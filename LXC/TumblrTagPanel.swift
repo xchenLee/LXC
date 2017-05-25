@@ -14,13 +14,6 @@ protocol TumblrTagPanelProtocol {
     func tagTapped(tagName: String) -> Void
 }
 
-//class TagLabel: UILabel {
-//    override func drawText(in rect: CGRect) {
-//        let insets = UIEdgeInsetsMake(0, 6, 0, 6)
-//        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
-//    }
-//}
-
 class TumblrTagPanel: UIView {
     
     var tapPanelDelegate: TumblrTagPanelProtocol?
@@ -84,10 +77,10 @@ class TumblrTagPanel: UIView {
                 left = 0
             }
             tagView.snp.makeConstraints({ (make) in
-                make.left.equalTo(self).offset(left)
-                make.top.equalTo(self).offset(top)
                 make.height.equalTo(kTMCellTagMaxH)
                 make.width.equalTo(tagW)
+                make.left.equalTo(self).offset(left)
+                make.top.equalTo(self).offset(top)
             })
             left += tagW
             widthSum += kTMCellTagHSpacing + tagW
@@ -95,9 +88,9 @@ class TumblrTagPanel: UIView {
         
         // layout line view
         self.seperateLine.snp.makeConstraints { (make) in
+            make.height.equalTo(ToolBox.obtainFloatPixel(1))
             make.left.equalTo(kTMCellPadding)
             make.top.equalTo(self.height - 1)
-            make.height.equalTo(ToolBox.obtainFloatPixel(1))
         }
     }
     

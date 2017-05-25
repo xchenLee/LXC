@@ -6,7 +6,7 @@ target 'LXC' do
     use_frameworks!
     
     pod 'Alamofire', '~> 4.0'
-    pod 'Kingfisher', '~> 3.1.3'
+    pod 'Kingfisher', '~> 3.9.1'
     pod 'SwiftyJSON'
     pod 'TMTumblrSDK', '~> 4.0.4'
     pod 'OAuthSwift', '~> 1.0.0'

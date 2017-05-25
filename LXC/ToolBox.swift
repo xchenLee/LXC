@@ -56,11 +56,11 @@ class ToolBox: NSObject {
     }
     
     class func radiansToDegrees(_ degree : UInt) -> CGFloat {
-        return CGFloat(Double(degree) / M_PI * 180.0)
+        return CGFloat(Double(degree) / Double.pi * 180.0)
     }
     
     class func degreesToRadians(_ radian : UInt) -> CGFloat {
-        return CGFloat( Double(radian) / 180.0 * M_PI)
+        return CGFloat( Double(radian) / 180.0 * Double.pi)
     }
     
     class func randomBool() -> Bool {
@@ -102,7 +102,7 @@ class ToolBox: NSObject {
     
     class func imageCompressResolution(_ input : UIImage, max : CGFloat) -> UIImage {
         
-        let scale = input.scale
+        //let scale = input.scale
         let originalW = input.size.width
         let originalH = input.size.height
         

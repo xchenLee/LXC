@@ -142,7 +142,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
         return self.containerView
     }
     
-    func scrollViewDidZoom(_ scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         
         let containerView = self.containerView
         

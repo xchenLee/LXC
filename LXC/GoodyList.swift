@@ -34,22 +34,22 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
         let quartz = GoodyItem(name: "Quartz", storyboardName: "quartz")
         goodiesArray.add(quartz)
         
-        let compress = GoodyItem(name: "Compress", goodyClassName: NSStringFromClass(CompressImage))
+        let compress = GoodyItem(name: "Compress", goodyClassName: NSStringFromClass(CompressImage.self))
         goodiesArray.add(compress)
         
         let ca = GoodyItem(name: "Core Animation", storyboardName: "coreAnimation")
         goodiesArray.add(ca)
         
-        let splashItem = GoodyItem(name: "Splash Video", goodyClassName: NSStringFromClass(VideoBackground))
+        let splashItem = GoodyItem(name: "Splash Video", goodyClassName: NSStringFromClass(VideoBackground.self))
         goodiesArray .add(splashItem)
         
-        let digitalScale = GoodyItem(name: "Digital Scale", goodyClassName: NSStringFromClass(DigitalScale))
+        let digitalScale = GoodyItem(name: "Digital Scale", goodyClassName: NSStringFromClass(DigitalScale.self))
         goodiesArray .add(digitalScale)
         
-        let contactList = GoodyItem(name: "Contact List", goodyClassName: NSStringFromClass(PhoneContactsList))
+        let contactList = GoodyItem(name: "Contact List", goodyClassName: NSStringFromClass(PhoneContactsList.self))
         goodiesArray .add(contactList)
         
-        let qrGenerator = GoodyItem(name: "General QR Code", goodyClassName: NSStringFromClass(QRCodeGenerator))
+        let qrGenerator = GoodyItem(name: "General QR Code", goodyClassName: NSStringFromClass(QRCodeGenerator.self))
         goodiesArray .add(qrGenerator)
         
         let qrReader = GoodyItem(name: "Read QR Code", storyboardName: "qrStoryboard")
@@ -61,17 +61,17 @@ class GoodyList: UITableViewController, IImagePickerDelegate {
         let webview = GoodyItem(name: "WKWebView", storyboardName: "webexplorer")
         goodiesArray.add(webview)
         
-        let touchId = GoodyItem(name: "Touch ID", goodyClassName: NSStringFromClass(TouchIdTest))
+        let touchId = GoodyItem(name: "Touch ID", goodyClassName: NSStringFromClass(TouchIdTest.self))
         goodiesArray.add(touchId)
         
-        let picker = GoodyItem(name: "Picker", goodyClassName: NSStringFromClass(IImagePicker))
+        let picker = GoodyItem(name: "Picker", goodyClassName: NSStringFromClass(IImagePicker.self))
         picker.presetnType = PresentType.present
         goodiesArray.add(picker)
         
-        let location = GoodyItem(name: "Location", goodyClassName: NSStringFromClass(PinLocation))
+        let location = GoodyItem(name: "Location", goodyClassName: NSStringFromClass(PinLocation.self))
         goodiesArray.add(location)
         
-        let navi = GoodyItem(name: "Navibar", goodyClassName: NSStringFromClass(NavBarAndTable))
+        let navi = GoodyItem(name: "Navibar", goodyClassName: NSStringFromClass(NavBarAndTable.self))
         goodiesArray.add(navi)
         
     }

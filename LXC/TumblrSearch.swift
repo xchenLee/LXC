@@ -16,7 +16,7 @@ class TumblrSearch: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let parameters = [
+        let _ = [
             "filter" : "clean",
             "mode" : "recent",
             "post_limit" : "20",

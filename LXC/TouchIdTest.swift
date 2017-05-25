@@ -74,7 +74,7 @@ class TouchIdTest: UIViewController, UIAlertViewDelegate {
             }
             
             // Optionally the error description can be displayed on the console.
-            print(error?.localizedDescription)
+            //print(error?.localizedDescription)
             
             // Show the custom alert view to allow users to enter the password.
             self.showOtherAlert()

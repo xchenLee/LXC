@@ -61,7 +61,7 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         let gradient = CIFilter(name: "CIVignetteEffect")
         let properties = gradient?.inputKeys
-        print(properties)
+        //print(properties)
     }
 
     override func didReceiveMemoryWarning() {

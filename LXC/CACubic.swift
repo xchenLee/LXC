@@ -45,8 +45,8 @@ class CACubic: UIViewController {
         var transform : CATransform3D = CATransform3DIdentity
 
         transform.m34 = -1 / 500.0
-        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 4), 1, 0, 0);
-        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 4), 0, 1, 0);
+        transform = CATransform3DRotate(transform, CGFloat(-Double.pi / 4), 1, 0, 0);
+        transform = CATransform3DRotate(transform, CGFloat(-Double.pi / 4), 0, 1, 0);
         container.layer.sublayerTransform = transform
         
         let translation = containerSize / 2
@@ -57,22 +57,22 @@ class CACubic: UIViewController {
         
         let two = faceArray[1]
         transform = CATransform3DMakeTranslation(translation, 0, 0)
-        transform = CATransform3DRotate(transform, CGFloat(M_PI / 2), 0, 1, 0)
+        transform = CATransform3DRotate(transform, CGFloat(Double.pi / 2), 0, 1, 0)
         addFace(two, transform: transform)
         
         let three = faceArray[2]
         transform = CATransform3DMakeTranslation(0, -translation, 0)
-        transform = CATransform3DRotate(transform, CGFloat(M_PI / 2), 1, 0, 0)
+        transform = CATransform3DRotate(transform, CGFloat(Double.pi / 2), 1, 0, 0)
         addFace(three, transform: transform)
         
         let four = faceArray[3]
         transform = CATransform3DMakeTranslation(0, translation, 0)
-        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 2), 1, 0, 0)
+        transform = CATransform3DRotate(transform, CGFloat(-Double.pi / 2), 1, 0, 0)
         addFace(four, transform: transform)
         
         let five = faceArray[4];
         transform = CATransform3DMakeTranslation(-translation, 0, 0)
-        transform = CATransform3DRotate(transform, CGFloat(-M_PI / 2), 0, 1, 0);
+        transform = CATransform3DRotate(transform, CGFloat(-Double.pi / 2), 0, 1, 0);
         addFace(five, transform: transform)
         
         let six = faceArray[5]
