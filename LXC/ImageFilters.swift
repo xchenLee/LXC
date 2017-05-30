@@ -59,8 +59,8 @@ class ImageFilters: UIViewController, UICollectionViewDataSource, UICollectionVi
         navigationItem.rightBarButtonItem = rightBarButtonItem
         
         
-        let gradient = CIFilter(name: "CIVignetteEffect")
-        let properties = gradient?.inputKeys
+        //let gradient = CIFilter(name: "CIVignetteEffect")
+        //let properties = gradient?.inputKeys
         //print(properties)
     }
 

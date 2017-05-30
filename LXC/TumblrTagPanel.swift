@@ -88,9 +88,9 @@ class TumblrTagPanel: UIView {
         
         // layout line view
         self.seperateLine.snp.makeConstraints { (make) in
-            make.height.equalTo(ToolBox.obtainFloatPixel(1))
-            make.left.equalTo(kTMCellPadding)
             make.top.equalTo(self.height - 1)
+            make.left.equalTo(kTMCellPadding)
+            make.height.equalTo(ToolBox.obtainFloatPixel(1))
         }
     }
     
@@ -106,7 +106,6 @@ class TumblrTagPanel: UIView {
         let lable = UILabel()
         lable.font = kTMCellTagFont
         lable.textColor = UIColor.black
-//        lable.backgroundColor = UIColor.fromARGB(0xf3f3f3, alpha: 1)
         lable.backgroundColor = UIColor.white
         lable.layer.borderColor = UIColor.black.cgColor
         lable.layer.borderWidth = ToolBox.obtainFloatPixel(2)

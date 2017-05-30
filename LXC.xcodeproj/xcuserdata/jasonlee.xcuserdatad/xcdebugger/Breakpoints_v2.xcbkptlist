@@ -17,6 +17,98 @@
             endingLineNumber = "89"
             landmarkName = "fuck(_:radius:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.ScratchViewOne.(touchPoints in _9A9432A0AE6323CAABB5E84484BA4AD2).getter : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonlee/Desktop/Development/LXC/LXC/ScratchViewOne.swift"
+                  timestampString = "517852209.630834"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "35">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.ScratchViewOne.(touchPoints in _9A9432A0AE6323CAABB5E84484BA4AD2).setter : Swift.Optional&lt;Swift.Array&lt;__C.CGPoint&gt;&gt;"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonlee/Desktop/Development/LXC/LXC/ScratchViewOne.swift"
+                  timestampString = "517852209.633129"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "61">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.ScratchViewOne.init (image : Swift.Optional&lt;__ObjC.UIImage&gt;) -&gt; LXC.ScratchViewOne"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonlee/Desktop/Development/LXC/LXC/ScratchViewOne.swift"
+                  timestampString = "517852209.635895"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "141">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.ScratchViewOne.init (image : Swift.Optional&lt;__ObjC.UIImage&gt;, highlightedImage : Swift.Optional&lt;__ObjC.UIImage&gt;) -&gt; LXC.ScratchViewOne"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonlee/Desktop/Development/LXC/LXC/ScratchViewOne.swift"
+                  timestampString = "517852209.638109"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "145">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.ScratchViewOne.init (frame : __C.CGRect) -&gt; LXC.ScratchViewOne"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonlee/Desktop/Development/LXC/LXC/ScratchViewOne.swift"
+                  timestampString = "517852209.640596"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "179">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LXC.ScratchViewOne.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;LXC.ScratchViewOne&gt;"
+                  moduleName = "LXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jasonlee/Desktop/Development/LXC/LXC/ScratchViewOne.swift"
+                  timestampString = "517852209.642758"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "141">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

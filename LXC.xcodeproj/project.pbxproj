@@ -108,6 +108,12 @@
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
 		A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835021CFEEBF8007F75EC /* paint01-01blur.png */; };
+		A1E0949E1EDD1FA000F516F0 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */; };
+		A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */; };
+		A1F7FE691EDC825C00EB82E7 /* LJParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */; };
+		A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */; };
+		A1F7FE6D1EDC876E00EB82E7 /* LJSegControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */; };
+		A1F7FE6F1EDC900900EB82E7 /* LJHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -217,6 +223,12 @@
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
 		A18835011CFEEBF8007F75EC /* paint01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01.png"; sourceTree = "<group>"; };
 		A18835021CFEEBF8007F75EC /* paint01-01blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01blur.png"; sourceTree = "<group>"; };
+		A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPager.swift; sourceTree = "<group>"; };
+		A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJParallaxHeader.swift; sourceTree = "<group>"; };
+		A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPagerDataSource.swift; sourceTree = "<group>"; };
+		A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegControl.swift; sourceTree = "<group>"; };
+		A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJHScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,7 +290,9 @@
 		771F25AD1CC738B100E88260 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				A1F7FE631EDC805900EB82E7 /* segtool */,
 				77FB24A31CBCDC7B0035DE3F /* Extensions.swift */,
+				A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */,
 				7721038C1D4CABAE00F18546 /* Extensions+UIView.swift */,
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
@@ -586,6 +600,18 @@
 			name = swiftyjson;
 			sourceTree = "<group>";
 		};
+		A1F7FE631EDC805900EB82E7 /* segtool */ = {
+			isa = PBXGroup;
+			children = (
+				A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */,
+				A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */,
+				A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */,
+				A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */,
+				A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */,
+			);
+			name = segtool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -744,6 +770,7 @@
 				772773B51C9D452800A6ED72 /* QRCodeGenerator.swift in Sources */,
 				77A9E8821D64A66C00D2E492 /* VideoPlayerController.swift in Sources */,
 				777D58121D485AA8007274BB /* TumblrAPI.swift in Sources */,
+				A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */,
 				772592181C7DEEF300000FBA /* ViewController.swift in Sources */,
 				77F8B10F1CDCA8FB0094ADA3 /* CACubic.swift in Sources */,
 				7721036D1D4A059A00F18546 /* StringObject.swift in Sources */,
@@ -759,6 +786,7 @@
 				772103A91D4F411D00F18546 /* TumblrNormalLayout.swift in Sources */,
 				77F723931CA18EF300ABDADA /* WebExplorer.swift in Sources */,
 				77F7238C1CA1217200ABDADA /* ImageFilterView.swift in Sources */,
+				A1E0949E1EDD1FA000F516F0 /* CollectionExtension.swift in Sources */,
 				772409681CCE36AC00CAD6C1 /* CABackingImage.swift in Sources */,
 				772773B91C9EACDA00A6ED72 /* QRCodeReader.swift in Sources */,
 				77E312EF1CA988E800867373 /* IImageAlbumAssetCell.swift in Sources */,
@@ -766,8 +794,10 @@
 				7777FB601D48AC1900D58607 /* TumblrPosts.swift in Sources */,
 				77FB0EE21CB50B81003DD7B6 /* IImagePickerAssetPop.swift in Sources */,
 				A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */,
+				A1F7FE6F1EDC900900EB82E7 /* LJHScrollView.swift in Sources */,
 				7710CFA41CF5A86400DD2440 /* ScratchViewOne.swift in Sources */,
 				772592371C7EFE3000000FBA /* VideoBackground.swift in Sources */,
+				A1F7FE691EDC825C00EB82E7 /* LJParallaxHeader.swift in Sources */,
 				772103C11D509C7A00F18546 /* TumblrReblogEntry0.swift in Sources */,
 				772316121D3CD24B004D06F1 /* SignInNormal.swift in Sources */,
 				77E312EB1CA6891000867373 /* IImagePickerAlbum.swift in Sources */,
@@ -780,6 +810,7 @@
 				77027DF11E1669E80073DD9B /* TumblrPublisher.swift in Sources */,
 				772103C31D50F7EC00F18546 /* TumblrTextEntry0.swift in Sources */,
 				772773CC1CA03A7A00A6ED72 /* ImageFilterCell.swift in Sources */,
+				A1F7FE6D1EDC876E00EB82E7 /* LJSegControl.swift in Sources */,
 				7721038D1D4CABAE00F18546 /* Extensions+UIView.swift in Sources */,
 				A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */,
 				771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */,
@@ -799,6 +830,7 @@
 				771AE0F21C8048AE00AAF16F /* VideoPlaybackView.swift in Sources */,
 				772103AB1D4F461000F18546 /* TumblrNameEntry0.swift in Sources */,
 				93431D941ED3DF4200EBE58D /* TumblrTagPanel.swift in Sources */,
+				A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */,
 				772103A71D4F2B4400F18546 /* TumblrImageEntry0.swift in Sources */,
 				7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */,
 				772103D61D52514700F18546 /* TumblrToolBarEntry0.swift in Sources */,

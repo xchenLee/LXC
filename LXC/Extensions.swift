@@ -31,6 +31,13 @@ extension String {
         return substring(with: rRange)
     }
     
+    //通过属性计算字符串大小
+    func size(withAttri attributes: [String: Any]) -> CGSize {
+        let nsString = self as NSString
+        let size = nsString.size(attributes: attributes)
+        return size
+    }
+    
     
     func convertToAttributedString(_ font: UIFont, textColor: UIColor) -> NSMutableAttributedString {
         

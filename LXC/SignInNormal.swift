@@ -64,38 +64,10 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
             accessTokenUrl: kTumblrAccessTokenUrl
         )
         
-        let handle = oauthswift!.authorize(
-            withCallbackURL: URL(string: "oauth-swift://oauth-callback/tumblr")!,
+        oauthswift!.authorize(
+            withCallbackURL: URL(string: kTumblrCallbackUrl)!,
             success: { credential, response, parameters in
-                
-                let token = credential.oauthToken
-                let tokenSecret = credential.oauthTokenSecret
-                
-                TMAPIClient.sharedInstance().oAuthToken = token
-                TMAPIClient.sharedInstance().oAuthTokenSecret = tokenSecret
-                
-                //begin
-                TMAPIClient.sharedInstance().userInfo({ (result, error) in
-                    
-                    if error == nil {
-                        
-                        var response = JSON(result!)
-                        //let manThred = NSThread.currentThread() == NSThread.mainThread()
-                        
-                        let user = TumblrUser()
-                        user.token = token
-                        user.tokenSecret = tokenSecret
-                        user.name = response["user"]["name"].stringValue
-                        user.likes = response["user"]["likes"].intValue
-                        user.following = response["user"]["following"].intValue
-                        
-                        TumblrContext.sharedInstance.writeTumblrUser(user)
-                        ControllerJumper.login(nil)
-                    }
-                    
-                })
-                //end
-                
+                TumblrAPI.handleSuccess(credential, response, parameters)
             },
             failure: { error in
                 print(error.localizedDescription)

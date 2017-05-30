@@ -89,7 +89,7 @@ class VideoBackground: UIViewController {
         let calendarComponents = NSDateComponents()
         calendarComponents.hour = 12;
         calendarComponents.minute = 5;
-        let date = calendar.dateFromComponents(calendarComponents)*/
+        let date = calendar.dateFromComponents(calendarComponents)
         
         let nextDate = Date(timeIntervalSinceNow: 60);
         
@@ -101,7 +101,7 @@ class VideoBackground: UIViewController {
         localNotification.alertBody = "hahahah \n  hahaha"
         localNotification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.shared.scheduleLocalNotification(localNotification)
-        //UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
+        //UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)*/
     }
     
     //修复时间，时间归为0秒开始

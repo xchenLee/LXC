@@ -62,6 +62,7 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
         let fpsLabel = FPSLabel()
         fpsLabel.frame = CGRect(x: 10, y: kScreenHeight - 20, width: 65, height: 25)
         self.navigationController?.view.addSubview(fpsLabel)
+        
     }
     
     // MARK: - Custom Method

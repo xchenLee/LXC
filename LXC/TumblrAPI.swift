@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Alamofire
 import TMTumblrSDK
 import OAuthSwift
+import SwiftyJSON
 
 let kTumblrAPIUrl = "https://api.tumblr.com/v2/"
 let kTumblrThirdScheme = "iTumblr"
@@ -20,6 +20,8 @@ let kTumblrConsumerSecretKey = "wiNo4z5MsZ18YnRIMzzXSMrpCIQTaAeiv6GWqGxBxLDsC3Xf
 let kTumblrAuthorizeUrl = "https://www.tumblr.com/oauth/authorize"
 let kTumblrRequestTokenUrl = "https://www.tumblr.com/oauth/request_token"
 let kTumblrAccessTokenUrl = "https://www.tumblr.com/oauth/access_token"
+
+let kTumblrCallbackUrl = "oauth-swift://oauth-callback/tumblr"
 
 
 class TumblrAPI: NSObject {
@@ -36,38 +38,33 @@ class TumblrAPI: NSObject {
     }
     
     
-    class func authorize(success: OAuth1Swift.TokenSuccessHandler, failure: OAuth1Swift.FailureHandler) {
+    class func handleSuccess(_ credential: OAuthSwiftCredential, _ response: URLResponse?, _ parameters: [String: Any]) {
      
-     
-        let oauthswift = OAuth1Swift(
-            consumerKey: kTumblrConsumerKey,
-            consumerSecret: kTumblrConsumerSecretKey,
-            requestTokenUrl: kTumblrRequestTokenUrl,
-            authorizeUrl: kTumblrAuthorizeUrl,
-            accessTokenUrl: kTumblrAccessTokenUrl
-        )
+        let token = credential.oauthToken
+        let tokenSecret = credential.oauthTokenSecret
         
-        let url: URL = URL(string: "oauth-swift://oauth-swift/tumblr")!
-        //oauthswift.authorize(withCallbackURL: url, success: OAuthSwift.TokenSuccessHandler, failure: <#T##OAuthSwift.FailureHandler?##OAuthSwift.FailureHandler?##(OAuthSwiftError) -> Void#>)
-     
+        TMAPIClient.sharedInstance().oAuthToken = token
+        TMAPIClient.sharedInstance().oAuthTokenSecret = tokenSecret
+        
+        //begin
+        TMAPIClient.sharedInstance().userInfo({ (result, error) in
+            
+            if error == nil {
+                
+                var response = JSON(result!)
+                
+                let user = TumblrUser()
+                user.token = token
+                user.tokenSecret = tokenSecret
+                user.name = response["user"]["name"].stringValue
+                user.likes = response["user"]["likes"].intValue
+                user.following = response["user"]["following"].intValue
+                
+                TumblrContext.sharedInstance.writeTumblrUser(user)
+                ControllerJumper.login(nil)
+            }
+        })
+        //end
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
