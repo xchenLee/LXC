@@ -157,9 +157,8 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         let youtubeUrl = post.permalinkUrl
         let url = URL(string: youtubeUrl)
         
-        UIApplication.shared.openURL(url!)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
-    
     
     func didLongPressVideo(_ cell: TumblrNormalCell) {
         

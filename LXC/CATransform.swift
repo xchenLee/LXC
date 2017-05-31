@@ -69,7 +69,11 @@ class CATransform: UIViewController {
         //周长 2 Pi r = 360度 = 2 Pi 弧度
         //1 弧度 ＝ 180 ／ Pi
         //180 度 ＝ Pi 弧度
+<<<<<<< HEAD
         //let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+=======
+        //let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))
+>>>>>>> optimize api
         
         //imageView.transform = rotateTransform
         
@@ -165,11 +169,11 @@ class CATransform: UIViewController {
         self.view .addSubview(imageViewLast)
         
         //http://www.cnblogs.com/xiaobaizhu/p/3994356.html
-        let tdRotate : CATransform3D = CATransform3DIdentity
+        //var tdRotate : CATransform3D = CATransform3DIdentity
         //m34（透视效果，要操作的这个对象要有旋转的角度，否则没有效果。当然,z方向上得有变化才会有透视效果
         //tdRotate.m34 = -1.0 / 500
 //        tdRotate = CATransform3DRotate(tdRotate, CGFloat(M_PI), 0, 1, 0)
-        imageViewLast.layer.transform = tdRotate
+        //imageViewLast.layer.transform = tdRotate
         
 
         
