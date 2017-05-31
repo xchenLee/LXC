@@ -69,11 +69,7 @@ class CATransform: UIViewController {
         //周长 2 Pi r = 360度 = 2 Pi 弧度
         //1 弧度 ＝ 180 ／ Pi
         //180 度 ＝ Pi 弧度
-<<<<<<< HEAD
-        //let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
-=======
         //let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))
->>>>>>> optimize api
         
         //imageView.transform = rotateTransform
         
