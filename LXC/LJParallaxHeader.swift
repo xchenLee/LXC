@@ -45,13 +45,23 @@ class LJParallaxHeader: NSObject {
         
         didSet {
             if scrollView != oldValue {
-                self.scrollViewReset()
+                self.scrollViewSet()
             }
         }
     }
     
     // 头部大小，默认200
-    public var defaultHeight: CGFloat = 200.0
+    public var defaultHeight: CGFloat = 200.0 {
+        didSet {
+            
+            if oldValue != defaultHeight {
+                self.adjustScrollView(topInset: self.scrollView!.contentInset.top - oldValue + defaultHeight)
+                
+                self.updateConstraints()
+                self.layoutContentView()
+            }
+        }
+    }
     
     // 头部最小大小，navi+status 高度 64
     public var minimumHeight: CGFloat = 64.0 {
@@ -61,7 +71,11 @@ class LJParallaxHeader: NSObject {
     }
     
     // 头部控件配置view
-    public var header: UIView?
+    public var header: UIView? {
+        didSet {
+            self.updateConstraints()
+        }
+    }
     
     // 头部滚动百分比
     public private(set) var progress: CGFloat = 0.0 {
@@ -84,23 +98,57 @@ class LJParallaxHeader: NSObject {
         view.clipsToBounds = true
         return view
     }()
-    private var observing: Bool = false
+    private var isObserving: Bool = false
     
     // MARK: - 构造器
     override init() {
         super.init()
     }
     
-    // MARK: - 私有方法
-    
     // MARK: - 重新布局
     func layoutContentView() {
+        let minimumH = min(self.minimumHeight, self.defaultHeight)
+        let relativeYOffset = self.scrollView!.contentOffset.y + self.scrollView!.contentInset.top - self.defaultHeight
+        
+        let relativeH = -relativeYOffset
         
     }
     
-    func scrollViewReset() {
+    func updateConstraints() {
         
+    }
+    
+    // MARK: - 当scrollView 被设置的时候会走这个方法
+    func scrollViewSet() {
         
+        //这里其实就是把scrollView的 contentInset给改了
+        
+        self.adjustScrollView(topInset: self.scrollView!.contentInset.top + self.defaultHeight)
+        self.scrollView!.addSubview(self.contentView)
+        self.layoutContentView()
+        self.isObserving = true
+    }
+    
+    func adjustScrollView(topInset: CGFloat) {
+        
+        var inset = self.scrollView!.contentInset
+        var offset = self.scrollView!.contentOffset
+        
+        offset.y += inset.top - topInset
+        self.scrollView!.contentOffset = offset
+        inset.top = topInset
+        
+        self.scrollView!.contentInset = inset
     }
     
 }
+
+
+
+
+
+
+
+
+
+
