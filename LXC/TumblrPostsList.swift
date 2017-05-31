@@ -67,6 +67,15 @@ class TumblrPostsList: UITableViewController {
 // MARK: - extension for cell delegate
 extension TumblrPostsList: TumblrNormalCellDelegate {
     
+    func didClickAvatar(_ cell: TumblrNormalCell) {
+        guard let layout = cell.layout, let post = layout.post else {
+            return
+        }
+        
+        let blog = TumblrPage()
+        self.navigationController?.pushViewController(blog, animated: true)
+    }
+    
     func didClickLikeBtn(_ cell: TumblrNormalCell) {
         
         guard let layout = cell.layout, let post = layout.post else {

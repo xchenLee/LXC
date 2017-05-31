@@ -95,7 +95,10 @@ class TumblrNameEntry0: UIView {
         self.addSubview(self.topLine)
         self.addSubview(self.avatarView)
         self.addSubview(self.blogNameView)
-
+        
+        let tapHeaderGesture = UITapGestureRecognizer(target: self, action: #selector(tapHeader))
+        self.avatarView.isUserInteractionEnabled = true
+        self.avatarView.addGestureRecognizer(tapHeaderGesture)
     }
     
     func setWithLayout(_ tumblrLayout: TumblrNormalLayout) {
@@ -112,7 +115,15 @@ class TumblrNameEntry0: UIView {
         self.blogNameView.width = tumblrLayout.blogNameWidth
         self.blogNameView.text = tumblrPost.blogName
         
-        
+    }
+    
+    func tapHeader(gesture: UITapGestureRecognizer) {
+        if gesture.state == .ended {
+            guard let safeCell = cell ,let delegate = safeCell.delegate else {
+                return
+            }
+            delegate.didClickAvatar(safeCell)
+        }
     }
 
     

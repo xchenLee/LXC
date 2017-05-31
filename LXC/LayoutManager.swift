@@ -217,6 +217,8 @@ class LayoutManager: NSObject {
         let maxWidth = kScreenWidth - kTMCellAvatarSize - 2 * kTMCellPadding - 120
         if width > maxWidth {
             width = maxWidth
+        } else {
+            width = CGFloat(ceilf(Float(width)))
         }
         return width
     }

@@ -327,6 +327,7 @@ class LJSegControl: UIControl {
     func select(index: Int, animated: Bool, notify: Bool) {
         
         self.selectedIndex = index
+        self.setNeedsDisplay()
         self.scrollToSelectedSeg(animated: animated)
         
         if animated {

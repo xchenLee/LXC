@@ -102,7 +102,6 @@
 		77FCBB751D6365BF00F9A224 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */; };
 		77FCBB771D6365C700F9A224 /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB761D6365C700F9A224 /* MediaToolbox.framework */; };
 		930F470B1ED7CFC0003CC632 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F470A1ED7CFC0003CC632 /* NotificationManager.swift */; };
-		930F470D1ED95D2F003CC632 /* TumblrBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F470C1ED95D2F003CC632 /* TumblrBlog.swift */; };
 		93431D921ED300AE00EBE58D /* TumblrTagView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D911ED300AE00EBE58D /* TumblrTagView0.swift */; };
 		93431D941ED3DF4200EBE58D /* TumblrTagPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D931ED3DF4200EBE58D /* TumblrTagPanel.swift */; };
 		93431D971ED4354200EBE58D /* SJMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D961ED4354200EBE58D /* SJMapper.swift */; };
@@ -111,6 +110,7 @@
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
 		A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835021CFEEBF8007F75EC /* paint01-01blur.png */; };
 		A1E0949E1EDD1FA000F516F0 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */; };
+		A1E094A21EDF07BA00F516F0 /* TumblrPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E094A11EDF07BA00F516F0 /* TumblrPage.swift */; };
 		A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */; };
 		A1F7FE691EDC825C00EB82E7 /* LJParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */; };
 		A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */; };
@@ -218,7 +218,6 @@
 		77FCBB761D6365C700F9A224 /* MediaToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaToolbox.framework; path = System/Library/Frameworks/MediaToolbox.framework; sourceTree = SDKROOT; };
 		83131F9B34C0A1826B1C5DB5 /* Pods-LXC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.debug.xcconfig"; sourceTree = "<group>"; };
 		930F470A1ED7CFC0003CC632 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		930F470C1ED95D2F003CC632 /* TumblrBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrBlog.swift; sourceTree = "<group>"; };
 		93431D911ED300AE00EBE58D /* TumblrTagView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagView0.swift; sourceTree = "<group>"; };
 		93431D931ED3DF4200EBE58D /* TumblrTagPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagPanel.swift; sourceTree = "<group>"; };
 		93431D961ED4354200EBE58D /* SJMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJMapper.swift; sourceTree = "<group>"; };
@@ -228,6 +227,7 @@
 		A18835011CFEEBF8007F75EC /* paint01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01.png"; sourceTree = "<group>"; };
 		A18835021CFEEBF8007F75EC /* paint01-01blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01blur.png"; sourceTree = "<group>"; };
 		A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		A1E094A11EDF07BA00F516F0 /* TumblrPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPage.swift; sourceTree = "<group>"; };
 		A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPager.swift; sourceTree = "<group>"; };
 		A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJParallaxHeader.swift; sourceTree = "<group>"; };
 		A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPagerDataSource.swift; sourceTree = "<group>"; };
@@ -536,7 +536,7 @@
 				7761FEAE1D7EC1A5001EE55F /* TumblrPostsList.swift */,
 				7761FEB01D7EC2B9001EE55F /* TumblrDashboard.swift */,
 				77027DF91E1CDDD70073DD9B /* PostBoard.swift */,
-				930F470C1ED95D2F003CC632 /* TumblrBlog.swift */,
+				A1E094A11EDF07BA00F516F0 /* TumblrPage.swift */,
 			);
 			name = pages;
 			sourceTree = "<group>";
@@ -783,6 +783,7 @@
 				77E312ED1CA9889300867373 /* IImagePickerAlbumAssets.swift in Sources */,
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
 				7761FEAF1D7EC1A5001EE55F /* TumblrPostsList.swift in Sources */,
+				A1E094A21EDF07BA00F516F0 /* TumblrPage.swift in Sources */,
 				771A538B1C9BFDCA00598BEE /* PhoneContactsCell.swift in Sources */,
 				93431D921ED300AE00EBE58D /* TumblrTagView0.swift in Sources */,
 				773E16981CEC1B7900D11762 /* QuartzLearning.swift in Sources */,
@@ -838,7 +839,6 @@
 				772103AB1D4F461000F18546 /* TumblrNameEntry0.swift in Sources */,
 				93431D941ED3DF4200EBE58D /* TumblrTagPanel.swift in Sources */,
 				A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */,
-				930F470D1ED95D2F003CC632 /* TumblrBlog.swift in Sources */,
 				772103A71D4F2B4400F18546 /* TumblrImageEntry0.swift in Sources */,
 				7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */,
 				772103D61D52514700F18546 /* TumblrToolBarEntry0.swift in Sources */,

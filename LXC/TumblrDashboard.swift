@@ -29,10 +29,6 @@ class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
         fpsLabel.frame = CGRect(x: 10, y: kScreenHeight - 20, width: 65, height: 25)
         self.navigationController?.view.addSubview(fpsLabel)
         
-        let control = LJSegControl(["a","b","ccccccccccc"])
-        control.frame = CGRect(x: 0, y: 100, width: kScreenWidth, height: 40)
-        self.view.addSubview(control)
-        
     }
     
     // MARK: - Custom Method
