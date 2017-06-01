@@ -18,6 +18,7 @@ class TumblrPage: UIViewController {
     }
     
     func customInit() {
+        
         self.title = "blog"
         self.view.backgroundColor = UIColor.white
         
@@ -26,6 +27,7 @@ class TumblrPage: UIViewController {
         control.indicatorHeight = 3.0
         control.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kSegTabHeight)
         self.view.addSubview(control)
+        
     }
     
     override func didReceiveMemoryWarning() {
