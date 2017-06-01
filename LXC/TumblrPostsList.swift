@@ -68,11 +68,13 @@ class TumblrPostsList: UITableViewController {
 extension TumblrPostsList: TumblrNormalCellDelegate {
     
     func didClickAvatar(_ cell: TumblrNormalCell) {
-        guard let layout = cell.layout, let post = layout.post else {
+        guard let layout = cell.layout, let _ = layout.post else {
             return
         }
         
         let blog = TumblrPage()
+        //let wrapper = NavigationWrapper()
+        //wrapper.contentController = blog
         self.navigationController?.pushViewController(blog, animated: true)
     }
     

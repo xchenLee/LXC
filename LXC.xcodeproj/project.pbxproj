@@ -23,7 +23,6 @@
 		771F259A1CC4D91200E88260 /* SnowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771F25991CC4D91200E88260 /* SnowView.swift */; };
 		771F25AC1CC731C700E88260 /* NavBarAndTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771F25AB1CC731C700E88260 /* NavBarAndTable.swift */; };
 		771F25AF1CC738D100E88260 /* ToolBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771F25AE1CC738D100E88260 /* ToolBox.swift */; };
-		7721036D1D4A059A00F18546 /* StringObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721036C1D4A059A00F18546 /* StringObject.swift */; };
 		772103721D4A09BD00F18546 /* ResponsePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772103711D4A09BD00F18546 /* ResponsePosts.swift */; };
 		772103851D4C9FE200F18546 /* LayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772103841D4C9FE200F18546 /* LayoutManager.swift */; };
 		7721038D1D4CABAE00F18546 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721038C1D4CABAE00F18546 /* Extensions+UIView.swift */; };
@@ -102,6 +101,8 @@
 		77FCBB751D6365BF00F9A224 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB741D6365BE00F9A224 /* MediaPlayer.framework */; };
 		77FCBB771D6365C700F9A224 /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FCBB761D6365C700F9A224 /* MediaToolbox.framework */; };
 		930F470B1ED7CFC0003CC632 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F470A1ED7CFC0003CC632 /* NotificationManager.swift */; };
+		930F47111EDFF15F003CC632 /* NavigationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F47101EDFF15F003CC632 /* NavigationWrapper.swift */; };
+		930F474F1EE02858003CC632 /* BarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F474E1EE02858003CC632 /* BarExtension.swift */; };
 		93431D921ED300AE00EBE58D /* TumblrTagView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D911ED300AE00EBE58D /* TumblrTagView0.swift */; };
 		93431D941ED3DF4200EBE58D /* TumblrTagPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D931ED3DF4200EBE58D /* TumblrTagPanel.swift */; };
 		93431D971ED4354200EBE58D /* SJMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D961ED4354200EBE58D /* SJMapper.swift */; };
@@ -135,7 +136,6 @@
 		771F25991CC4D91200E88260 /* SnowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowView.swift; sourceTree = "<group>"; };
 		771F25AB1CC731C700E88260 /* NavBarAndTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarAndTable.swift; sourceTree = "<group>"; };
 		771F25AE1CC738D100E88260 /* ToolBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBox.swift; sourceTree = "<group>"; };
-		7721036C1D4A059A00F18546 /* StringObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringObject.swift; sourceTree = "<group>"; };
 		772103711D4A09BD00F18546 /* ResponsePosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsePosts.swift; sourceTree = "<group>"; };
 		772103841D4C9FE200F18546 /* LayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutManager.swift; sourceTree = "<group>"; };
 		7721038C1D4CABAE00F18546 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
@@ -218,6 +218,8 @@
 		77FCBB761D6365C700F9A224 /* MediaToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaToolbox.framework; path = System/Library/Frameworks/MediaToolbox.framework; sourceTree = SDKROOT; };
 		83131F9B34C0A1826B1C5DB5 /* Pods-LXC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.debug.xcconfig"; sourceTree = "<group>"; };
 		930F470A1ED7CFC0003CC632 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		930F47101EDFF15F003CC632 /* NavigationWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationWrapper.swift; sourceTree = "<group>"; };
+		930F474E1EE02858003CC632 /* BarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarExtension.swift; sourceTree = "<group>"; };
 		93431D911ED300AE00EBE58D /* TumblrTagView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagView0.swift; sourceTree = "<group>"; };
 		93431D931ED3DF4200EBE58D /* TumblrTagPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagPanel.swift; sourceTree = "<group>"; };
 		93431D961ED4354200EBE58D /* SJMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJMapper.swift; sourceTree = "<group>"; };
@@ -300,8 +302,9 @@
 				7721038C1D4CABAE00F18546 /* Extensions+UIView.swift */,
 				771F25AE1CC738D100E88260 /* ToolBox.swift */,
 				772316131D3CD441004D06F1 /* ControllerJumper.swift */,
-				7721036C1D4A059A00F18546 /* StringObject.swift */,
 				7761FEA31D7E98A7001EE55F /* FPSLabel.swift */,
+				930F47101EDFF15F003CC632 /* NavigationWrapper.swift */,
+				930F474E1EE02858003CC632 /* BarExtension.swift */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				930F474F1EE02858003CC632 /* BarExtension.swift in Sources */,
 				771F259A1CC4D91200E88260 /* SnowView.swift in Sources */,
 				777048831C9AA22D00A15A5B /* DigitalScale.swift in Sources */,
 				77D8321A1D576C4000D0A6A5 /* TumblrPhotoView.swift in Sources */,
@@ -779,7 +783,6 @@
 				A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */,
 				772592181C7DEEF300000FBA /* ViewController.swift in Sources */,
 				77F8B10F1CDCA8FB0094ADA3 /* CACubic.swift in Sources */,
-				7721036D1D4A059A00F18546 /* StringObject.swift in Sources */,
 				77E312ED1CA9889300867373 /* IImagePickerAlbumAssets.swift in Sources */,
 				771A53871C9BF68D00598BEE /* PhoneContactsList.swift in Sources */,
 				7761FEAF1D7EC1A5001EE55F /* TumblrPostsList.swift in Sources */,
@@ -838,6 +841,7 @@
 				771AE0F21C8048AE00AAF16F /* VideoPlaybackView.swift in Sources */,
 				772103AB1D4F461000F18546 /* TumblrNameEntry0.swift in Sources */,
 				93431D941ED3DF4200EBE58D /* TumblrTagPanel.swift in Sources */,
+				930F47111EDFF15F003CC632 /* NavigationWrapper.swift in Sources */,
 				A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */,
 				772103A71D4F2B4400F18546 /* TumblrImageEntry0.swift in Sources */,
 				7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */,
