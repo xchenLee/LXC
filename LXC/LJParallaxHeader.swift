@@ -111,11 +111,30 @@ class LJParallaxHeader: NSObject {
         let relativeYOffset = self.scrollView!.contentOffset.y + self.scrollView!.contentInset.top - self.defaultHeight
         
         let relativeH = -relativeYOffset
+        let frame = CGRect(x: 0, y: relativeH, width: self.scrollView!.width, height: max(relativeH, minimumH))
         
+        self.contentView.frame = frame
+        
+        let div = self.defaultHeight - self.minimumHeight
+        self.progress = (self.contentView.height - self.minimumHeight) / (div > 0 ? div : self.defaultHeight)
     }
     
     func updateConstraints() {
+
+        guard let view = self.header else {
+            return
+        }
         
+        view.removeFromSuperview()
+        self.contentView.addSubview(view)
+        
+        //TODO 没看懂 回头查一下
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraintH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v]|", options: .alignAllLeft, metrics: nil, views: ["v":view])
+        let constraintV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|", options: .alignAllLeft, metrics: nil, views: ["v":view])
+        self.contentView.addConstraints(constraintH)
+        self.contentView.addConstraints(constraintV)
     }
     
     // MARK: - 当scrollView 被设置的时候会走这个方法
@@ -141,14 +160,14 @@ class LJParallaxHeader: NSObject {
         self.scrollView!.contentInset = inset
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == "contentOffset" {
+            self.layoutContentView()
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
 }
-
-
-
-
-
-
-
-
-
 

@@ -112,6 +112,7 @@
 		A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835021CFEEBF8007F75EC /* paint01-01blur.png */; };
 		A1E0949E1EDD1FA000F516F0 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */; };
 		A1E094A21EDF07BA00F516F0 /* TumblrPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E094A11EDF07BA00F516F0 /* TumblrPage.swift */; };
+		A1E094A61EE0690100F516F0 /* LJScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E094A51EE0690100F516F0 /* LJScrollView.swift */; };
 		A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */; };
 		A1F7FE691EDC825C00EB82E7 /* LJParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */; };
 		A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */; };
@@ -230,6 +231,7 @@
 		A18835021CFEEBF8007F75EC /* paint01-01blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01blur.png"; sourceTree = "<group>"; };
 		A1E0949D1EDD1FA000F516F0 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		A1E094A11EDF07BA00F516F0 /* TumblrPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrPage.swift; sourceTree = "<group>"; };
+		A1E094A51EE0690100F516F0 /* LJScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJScrollView.swift; sourceTree = "<group>"; };
 		A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPager.swift; sourceTree = "<group>"; };
 		A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJParallaxHeader.swift; sourceTree = "<group>"; };
 		A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPagerDataSource.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */,
 				A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */,
 				A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */,
+				A1E094A51EE0690100F516F0 /* LJScrollView.swift */,
 			);
 			name = segtool;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				77FB2C4E1CF2A697009660C3 /* CanvasView.swift in Sources */,
 				772103A91D4F411D00F18546 /* TumblrNormalLayout.swift in Sources */,
 				77F723931CA18EF300ABDADA /* WebExplorer.swift in Sources */,
+				A1E094A61EE0690100F516F0 /* LJScrollView.swift in Sources */,
 				77F7238C1CA1217200ABDADA /* ImageFilterView.swift in Sources */,
 				A1E0949E1EDD1FA000F516F0 /* CollectionExtension.swift in Sources */,
 				772409681CCE36AC00CAD6C1 /* CABackingImage.swift in Sources */,
