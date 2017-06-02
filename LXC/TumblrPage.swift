@@ -10,9 +10,12 @@ import UIKit
 
 let kSegTabHeight: CGFloat = 40.0
 
-class TumblrPage: UIViewController {
+class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, UITableViewDataSource {
     
     var testCover: UIImageView?
+    var scrollView: LJScrollView?
+    
+    var uitableView: UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,26 +26,79 @@ class TumblrPage: UIViewController {
         
         self.title = "blog"
         self.view.backgroundColor = UIColor.white
+        self.navBarBackgroundAlpha = 0.0
         
         self.extendedLayoutIncludesOpaqueBars = true
         
         self.testCover = UIImageView()
         self.testCover!.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 200)
         self.testCover!.image = UIImage(named: "stars")
+        self.testCover?.contentMode = .scaleAspectFill
         self.view.addSubview(self.testCover!)
+        self.testCover?.isUserInteractionEnabled = true
+        
+        let btn = UIButton(type: .system)
+        btn.setTitle("ssssss", for: .normal)
+        btn.frame = CGRect(x: 40, y: 80, width: 80, height: 40)
+        self.testCover?.addSubview(btn)
+        btn.addTarget(self, action: #selector(clickBtn), for: .touchUpInside)
         
         let segTitles = ["Posts", "Likes"]
         let control = LJSegControl(segTitles)
         control.indicatorHeight = 3.0
         control.frame = CGRect(x: 0, y: self.testCover!.bottom, width: kScreenWidth, height: kSegTabHeight)
-        self.view.addSubview(control)
+        //self.view.addSubview(control)
         
-        self.navBarBackgroundAlpha = 0.0
+        self.scrollView = LJScrollView()
+        self.scrollView?.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+        self.view.addSubview(self.scrollView!)
+        self.scrollView?.delegate = self
+        self.scrollView?.parallaxHeader.header = self.testCover
+        self.scrollView?.parallaxHeader.defaultHeight = 300
+        self.scrollView?.parallaxHeader.minimumHeight = 64
+        
+        self.uitableView = UITableView()
+        self.uitableView!.delegate = self
+        self.uitableView!.dataSource = self
+        self.scrollView?.addSubview(self.uitableView!)
+        
+    }
+    
+    func clickBtn() {
+        print("ssssssssssssssssss")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.scrollView?.frame = self.view.frame
+        self.scrollView?.contentSize = self.view.frame.size
+        
+        self.uitableView?.frame = self.view.frame
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+    func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 40
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let idd = "tttt"
+        var cell = tableView.dequeueReusableCell(withIdentifier: idd)
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: idd)
+        }
+        cell?.textLabel?.text = "sss"
+        return cell!
     }
     
     

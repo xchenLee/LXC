@@ -13,6 +13,7 @@ protocol LJParallaxProtocol {
     func didScroll(_ header: LJParallaxHeader)
 }
 
+private var kLJPContext = 0
 
 // MARK: - 类 LJPContentView
 class LJPContentView: UIView {
@@ -27,7 +28,7 @@ class LJPContentView: UIView {
     
     override func didMoveToSuperview() {
         if self.superview is UIScrollView {
-            self.superview?.addObserver(self.parent!, forKeyPath: "contentOffset", options: .new, context: nil)
+            self.superview?.addObserver(self.parent!, forKeyPath: "contentOffset", options: .new, context: &kLJPContext)
         }
     }
 }
@@ -51,7 +52,7 @@ class LJParallaxHeader: NSObject {
     }
     
     // 头部大小，默认200
-    public var defaultHeight: CGFloat = 200.0 {
+    public var defaultHeight: CGFloat = 0.0 {
         didSet {
             
             if oldValue != defaultHeight {
@@ -111,9 +112,13 @@ class LJParallaxHeader: NSObject {
         let relativeYOffset = self.scrollView!.contentOffset.y + self.scrollView!.contentInset.top - self.defaultHeight
         
         let relativeH = -relativeYOffset
-        let frame = CGRect(x: 0, y: relativeH, width: self.scrollView!.width, height: max(relativeH, minimumH))
+        
+        let frame = CGRect(x: 0, y: relativeYOffset, width: self.scrollView!.width, height: max(relativeH, minimumH))
         
         self.contentView.frame = frame
+        
+        let contentInsetTop = self.scrollView!.contentInset.top
+        let contentOffsetY = self.scrollView!.contentOffset.y
         
         let div = self.defaultHeight - self.minimumHeight
         self.progress = (self.contentView.height - self.minimumHeight) / (div > 0 ? div : self.defaultHeight)
@@ -162,7 +167,7 @@ class LJParallaxHeader: NSObject {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if keyPath == "contentOffset" {
+        if keyPath == "contentOffset" && context == &kLJPContext && (self.contentView.superview != nil) {
             self.layoutContentView()
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
