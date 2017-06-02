@@ -2,6 +2,7 @@ tignore contributors: remember to update Global/Xcode.gitignore, Objective-C.git
 
 .DS_Store
 .DS_Store?
+*/.DS_Store
 
 ## Build generated
 build/
