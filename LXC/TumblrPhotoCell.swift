@@ -90,7 +90,7 @@ class TumblrPhotoCell: UIScrollView, UIScrollViewDelegate {
                 
         }*/
         
-        imageView.kf.setImage(with: photoUrl, placeholder: nil, options: [], progressBlock: nil, completionHandler: nil)
+        imageView.kf.setImage(with: photoUrl, placeholder: photoData.thumView.image, options: [], progressBlock: nil, completionHandler: nil)
         
         self.resizeSubViews()
     }
