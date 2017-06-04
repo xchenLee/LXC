@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol LJSegPagerProtocol {
+protocol LJSegPagerProtocol: NSObjectProtocol {
     
     func pager(_ pager: LJSegPager, didSelectView: UIView)
     func pager(_ pager: LJSegPager, didSelectViewWithTitle: String)

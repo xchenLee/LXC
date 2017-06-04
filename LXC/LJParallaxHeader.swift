@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LJParallaxProtocol {
+protocol LJParallaxProtocol: NSObjectProtocol {
     
     func didScroll(_ header: LJParallaxHeader)
 }
@@ -39,10 +39,10 @@ class LJParallaxHeader: NSObject {
     // MARK: - 公开可配置属性
     
     // 代理
-    public var delegate: LJParallaxProtocol?
+    open weak var delegate: LJParallaxProtocol?
     
     // 避免循环引用
-    public weak var scrollView: UIScrollView? {
+    open weak var scrollView: UIScrollView? {
         
         didSet {
             if scrollView != oldValue {
@@ -52,7 +52,7 @@ class LJParallaxHeader: NSObject {
     }
     
     // 头部大小，默认200
-    public var defaultHeight: CGFloat = 0.0 {
+    open var defaultHeight: CGFloat = 0.0 {
         didSet {
             
             if oldValue != defaultHeight {
@@ -65,7 +65,7 @@ class LJParallaxHeader: NSObject {
     }
     
     // 头部最小大小，navi+status 高度 64
-    public var minimumHeight: CGFloat = 64.0 {
+    open var minimumHeight: CGFloat = 64.0 {
         didSet {
             self.layoutContentView()
         }
@@ -79,7 +79,7 @@ class LJParallaxHeader: NSObject {
     }
     
     // 头部滚动百分比
-    public private(set) var progress: CGFloat = 0.0 {
+    open private(set) var progress: CGFloat = 0.0 {
         //如果变化，才调用delegate
         didSet {
             if oldValue != progress {
@@ -92,14 +92,14 @@ class LJParallaxHeader: NSObject {
     
     // 内容承载view
     //    private lazy var contentView: UIView = UIView()
-    private lazy var contentView: LJPContentView = {
+    fileprivate lazy var contentView: LJPContentView = {
         
         let view = LJPContentView()
         view.parent = self
         view.clipsToBounds = true
         return view
     }()
-    private var isObserving: Bool = false
+    fileprivate var isObserving: Bool = false
     
     // MARK: - 构造器
     override init() {
@@ -117,8 +117,8 @@ class LJParallaxHeader: NSObject {
         
         self.contentView.frame = frame
         
-        let contentInsetTop = self.scrollView!.contentInset.top
-        let contentOffsetY = self.scrollView!.contentOffset.y
+        //let contentInsetTop = self.scrollView!.contentInset.top
+        //let contentOffsetY = self.scrollView!.contentOffset.y
         
         let div = self.defaultHeight - self.minimumHeight
         self.progress = (self.contentView.height - self.minimumHeight) / (div > 0 ? div : self.defaultHeight)

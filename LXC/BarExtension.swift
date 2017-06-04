@@ -2,11 +2,19 @@
 //  BarExtension.swift
 //  LXC
 //
-//  Created by danlan on 2017/6/1.
+//  Created by lxc on 2017/6/1.
 //  Copyright © 2017年 com.demo.lxc. All rights reserved.
 //
 
 import UIKit
+
+
+/**
+ 
+ iOS 10  :_UIBarBackground
+ iOS 10 before: _UINavigationBarBackground
+ 
+ */
 
 extension UINavigationBar {
     
