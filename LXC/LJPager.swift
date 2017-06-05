@@ -64,12 +64,37 @@ fileprivate class LJPagerProtocolForwarder: NSObject, UIScrollViewDelegate {
 class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
     //好像不能重名
-    weak open var pagerDelegate: LJPagerProtocol?
+    weak open var pagerDelegate: LJPagerProtocol? {
+        
+        get {
+            return self._forwarder?.delegate
+        }
+        
+        set {
+            super.delegate = nil
+            self._forwarder?.delegate = newValue
+            super.delegate = self._forwarder
+        }
+    }
     weak open var pagerDataSource: LJPagerDataSource?
     
-    open var loadedPages: [UIView] = []
-    open var currentPage: UIView?
-    open var currentPageIndex: Int = 0
+    open var loadedPages: [UIView]? {
+        get {
+            return self.pages.values
+        }
+    }
+    open var currentPage: UIView? {
+        
+        get {
+            return self.pages[self._index]
+        }
+    }
+    open var currentPageIndex: Int {
+        
+        get {
+            return self._index
+        }
+    }
     
     
     fileprivate var pages: [Int: UIView] = [:]
@@ -128,6 +153,24 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
                 page.frame = frame
             }
         }
+    }
+    
+    override func setContentOffset(_ contentOffset: CGPoint, animated: Bool) {
+        
+        if fmod(contentOffset.x, self.width) == 0 {
+            let index = Int(contentOffset.x / self.width)
+            self.willMoveTo(index: index)
+            super.setContentOffset(contentOffset, animated: animated)
+            
+            _index = index
+            
+            if !animated {
+                self.didMoveTo(index: index)
+            }
+        } else {
+            super.setContentOffset(contentOffset, animated: animated)
+        }
+        
     }
     
     // MARK: - 数据变化，刷新页面
@@ -193,6 +236,9 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         _index = Int( offsetX / width)
         self.didMoveTo(index: _index)
         
+        if self.pagerDelegate != nil && self.pagerDelegate!.responds(to: #selector(scrollViewDidEndDecelerating(_:))) {
+            self.pagerDelegate!.scrollViewDidEndDecelerating!(scrollView)
+        }
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -202,11 +248,18 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         
         _index = Int( offsetX / width)
         self.willMoveTo(index: _index)
+        
+        if self.pagerDelegate != nil && self.pagerDelegate!.responds(to: #selector(scrollViewWillEndDragging(_:withVelocity:targetContentOffset:))) {
+            self.pagerDelegate!.scrollViewWillEndDragging!(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+        }
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         self.didMoveTo(index: _index)
         
+        if self.pagerDelegate != nil && self.pagerDelegate!.responds(to: #selector(scrollViewDidEndScrollingAnimation(_:))) {
+            self.pagerDelegate!.scrollViewDidEndScrollingAnimation!(scrollView)
+        }
     }
     
     // MARK: - UIGestureRecognizerDelegate
@@ -222,13 +275,4 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     }
 
 }
-
-
-
-
-
-
-
-
-
 
