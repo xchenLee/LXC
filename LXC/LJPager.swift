@@ -80,7 +80,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     open var loadedPages: [UIView]? {
         get {
-            return self.pages.values
+            return self.pages.values ? Array() : nil
         }
     }
     open var currentPage: UIView? {
@@ -225,6 +225,26 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     private func loadPage(index: Int) {
         
+        if index >= 0 && index < _count && self.pages[index] == nil {
+            
+            let view = self.pagerDataSource?.viewForPager(pager: self, atIndex: index)
+            var frame = CGRectZero
+            frame.origin = CGPoint(x: self.width * CGFloat(index), y: 0)
+            frame.size = self.size
+            view?.frame = frame
+            
+            /*if self.pagerDelegate!.responds(to: #selector(LJPagerProtocol.pagerWillDisplay(_: page:index:))) {
+                self.pagerDelegate!.pagerDidDisplay(self, page: view!, index: index)
+            }*/
+            if self.pagerDelegate != nil {
+                self.pagerDelegate!.pagerWillDisplay(self, page: view!, index: index)
+            }
+            self.addSubview(view!)
+            self.setNeedsLayout()
+            self.pages[index] = view!
+        }
+        loadPage(index: index - 1)
+        loadPage(index: index + 1)
     }
     
     // MARK: - UIScrollViewDelegate
