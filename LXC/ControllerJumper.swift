@@ -19,13 +19,12 @@ class ControllerJumper: NSObject {
      */
     class func afterLaunch(_ params :Dictionary<String, AnyObject>?) {
         
-        let user = TumblrContext.sharedInstance.obtainTumblrUser()
+        let user = TumblrContext.shared.read()
         guard let _ = user else {
             //传递过来的User为空
             loadController(kStoryboardNameLogin, initWindow: true)
             return
         }
-        
         loadController(kStoryboardNameMain, initWindow: true)
     }
     
@@ -58,11 +57,10 @@ class ControllerJumper: NSObject {
         if initWindow {
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.backgroundColor = UIColor.white
-            AppDelegate.getAppDelegate().window = window
+            AppDelegate.shared().window = window
         }
         
-        
-        guard let window = AppDelegate.getAppDelegate().window, let rootController = storyboard.instantiateInitialViewController() else {
+        guard let window = AppDelegate.shared().window, let rootController = storyboard.instantiateInitialViewController() else {
             return
         }
         

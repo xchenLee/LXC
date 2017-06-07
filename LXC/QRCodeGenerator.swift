@@ -86,7 +86,7 @@ class QRCodeGenerator: UIViewController, UITextViewDelegate {
     
     func saveImgToCustomAlbum(_ assetPlaceHolder : PHObjectPlaceholder) {
         
-        AppDelegate.getAppDelegate().obtainSystemAssetCollection { (assetCollection) -> Void in
+        AppDelegate.shared().obtainSystemAssetCollection { (assetCollection) -> Void in
             
             PHPhotoLibrary.shared().performChanges({ () -> Void in
                 

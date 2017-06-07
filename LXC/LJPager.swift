@@ -80,7 +80,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     open var loadedPages: [UIView]? {
         get {
-            return self.pages.values ? Array() : nil
+            return nil//return self.pages.values ? Array() : nil
         }
     }
     open var currentPage: UIView? {
@@ -205,7 +205,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     }
     
     open func registerClass(_ class: Any, reuseIdentifier: String) {
-        self.registeration[reuseIdentifier] = Any
+        //self.registeration[reuseIdentifier] = Any
     }
     
     open func dequeueResuablePage(withIdentifier: String) -> UIView? {

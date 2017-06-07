@@ -14,6 +14,7 @@ import Alamofire
 import TMTumblrSDK
 import OAuthSwift
 import UserNotifications
+//import FBMemoryProfiler
 
 
 let kNavigationBarTintColor = UIColor.fromARGB(0x1A1B1C,alpha: 1.0)
@@ -27,42 +28,38 @@ let kScreenHeight = UIScreen.main.bounds.size.height
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
+    //var memProfiler: FBMemoryProfiler?
+    
     lazy var contactStore = CNContactStore()
 
+    // MARK: - 主要方法 didFinishLaunchingWithOptions
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         //注册本地通知
         //registerLocationNotification()
         
+        //注册TumblrSDK
         TumblrAPI.registerApp()
-        
         //var isLaunchedFromQuickAction = false
+        
+        //因为token, tokenSecret是没次取完之后自己维护的，客户端登录后需要从缓存拿出来
+        TumblrContext.shared.cache()
         
         //根据数据库里的存储数据跳转
         ControllerJumper.afterLaunch(nil)
         
-        //因为token, tokenSecret是没次取完之后自己维护的，客户端登录后需要从缓存拿出来
-        if let user = TumblrContext.sharedInstance.obtainTumblrUser() {
-            TMAPIClient.sharedInstance().oAuthToken = user.token
-            TMAPIClient.sharedInstance().oAuthTokenSecret = user.tokenSecret
-        }
-        
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
+        //开始profile监控
+        //self.memProfiler = FBMemoryProfiler()
+        //self.memProfiler?.enable()
         guard let options = launchOptions, let _ = options[UIApplicationLaunchOptionsKey.shortcutItem] as?
             UIApplicationShortcutItem  else {
             return true
         }
-        
-        //isLaunchedFromQuickAction = true
-
         return true
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        
         completionHandler(handleQuickAction(shortcutItem))
-        
     }
     
     func handleQuickAction(_ shortcutItem : UIApplicationShortcutItem) -> Bool{
@@ -158,16 +155,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         return true
     }
-    
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-//        return true
-//    }
-    
-    
-    // MARK: - 决定加载主页面
 
-    // MARK: -
-    class func getAppDelegate() -> AppDelegate {
+    // MARK: - 获取Appdelege instance
+    class func shared() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
     
@@ -215,7 +205,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UIApplication.shared.registerUserNotificationSettings(settings)
     }*/
     
-    //请求通讯录数据
+    // MARK: - 请求通讯录数据
     func requestContactsAccess(_ completionHandler : @escaping (_ accessGranted : Bool) -> Void) {
         
         let authorizationStatus = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
@@ -243,10 +233,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
     }
     
-    // MARK: -获取自定义相册
+    // MARK: - 获取自定义相册
     func obtainSystemAssetCollection(_ completionHandler: @escaping (_ assetCollection:PHAssetCollection) -> Void){
         
-        let albumTitle = "LXC"
+        let albumTitle = "Tumblr"
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", albumTitle)
         

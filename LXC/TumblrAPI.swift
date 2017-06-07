@@ -26,19 +26,19 @@ let kTumblrCallbackUrl = "oauth-swift://oauth-callback/tumblr"
 
 class TumblrAPI: NSObject {
     
-    
-    class func obtainFullBusinessURL(_ businussUrl: String) -> String {
-        return kTumblrAPIUrl + businussUrl
-    }
-    
-    class func registerApp() {
+    /**
+     * 向SDK注册，使用自己的consumerKey, secretKey
+     */
+    open class func registerApp() {
         
         TMAPIClient.sharedInstance().oAuthConsumerKey = kTumblrConsumerKey
         TMAPIClient.sharedInstance().oAuthConsumerSecret = kTumblrConsumerSecretKey
     }
     
-    
-    class func handleSuccess(_ credential: OAuthSwiftCredential, _ response: URLResponse?, _ parameters: [String: Any]) {
+    /*
+     * 处理Tumblr app授权成功的结果
+     */
+    open class func handleSuccess(_ credential: OAuthSwiftCredential, _ response: URLResponse?, _ parameters: [String: Any]) {
      
         let token = credential.oauthToken
         let tokenSecret = credential.oauthTokenSecret
@@ -60,7 +60,7 @@ class TumblrAPI: NSObject {
                 user.likes = response["user"]["likes"].intValue
                 user.following = response["user"]["following"].intValue
                 
-                TumblrContext.sharedInstance.writeTumblrUser(user)
+                TumblrContext.shared.store(user)
                 ControllerJumper.login(nil)
             }
         })

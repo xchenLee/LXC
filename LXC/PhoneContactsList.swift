@@ -46,7 +46,7 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func requestContactsData() {
-        AppDelegate.getAppDelegate().requestContactsAccess { (accessGranted) -> Void in
+        AppDelegate.shared().requestContactsAccess { (accessGranted) -> Void in
             
             if !accessGranted {
                 //do nonthing
@@ -62,7 +62,7 @@ class PhoneContactsList: UIViewController, UITableViewDataSource, UITableViewDel
             var contacts = [CNContact]()
             
             let fetchRequest = CNContactFetchRequest(keysToFetch: fetchKeys as! [CNKeyDescriptor])
-            let contactStore = AppDelegate.getAppDelegate().contactStore
+            let contactStore = AppDelegate.shared().contactStore
             do {
                 try contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
                     contacts .append(contact)

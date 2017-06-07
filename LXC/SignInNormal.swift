@@ -12,21 +12,11 @@ import OAuthSwift
 import SwiftyJSON
 
 class SignInNormal: UIViewController, UITextFieldDelegate {
-
-        
-    @IBOutlet weak var inputField: UITextField!
+    
     
     @IBOutlet weak var tumblrBtn: UIButton!
     
     var oauthswift: OAuth1Swift?
-    
-    
-    
-    // MARK: - UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.inputField.resignFirstResponder()
-        return true
-    }
     
     
     // MARK: - Life cycle
@@ -36,21 +26,6 @@ class SignInNormal: UIViewController, UITextFieldDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    // MARK: - Auth btn click actions
-    @IBAction func authBtnClicked(_ sender: AnyObject) {
-        
-        /*guard let authRequest : WBAuthorizeRequest = WBAuthorizeRequest.request() as? WBAuthorizeRequest else {
-            return
-        }
-        
-        authRequest.redirectURI = kWeiboRedirectURL
-        authRequest.scope = "all"
-        
-        //        SinalTool.requestUserData("", userId: "")
-        WeiboSDK.sendRequest(authRequest)*/
-
     }
 
     @IBAction func tumblrClicked(_ sender: AnyObject) {

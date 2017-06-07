@@ -15,6 +15,9 @@ target 'LXC' do
     #pod 'MBProgressHUD'
     pod 'pop'
     pod 'SnapKit', '~> 3.2.0'
+    #https://github.com/facebook/FBMemoryProfiler/issues/2
+    #not support swift
+    #pod 'FBMemoryProfiler'
     #pod 'YYText'
     
     #曾经用过 ObjectMapper
