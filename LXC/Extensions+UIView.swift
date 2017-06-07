@@ -141,7 +141,7 @@ extension UIView {
         static var reusableIdentifier = "resuableIdentifier"
     }
     
-    fileprivate var resuableIdentifier: String? {
+    open var resuableIdentifier: String? {
         
         get {
             guard let identifier = objc_getAssociatedObject(self, &AssociatedKeys.reusableIdentifier) as? String else {

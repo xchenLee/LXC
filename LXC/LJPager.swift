@@ -80,7 +80,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     open var loadedPages: [UIView]? {
         get {
-            return nil//return self.pages.values ? Array() : nil
+            return self.pages.values.toArray()
         }
     }
     open var currentPage: UIView? {
@@ -98,7 +98,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     
     fileprivate var pages: [Int: UIView] = [:]
-    fileprivate var registeration: [String: UIView] = [:]
+    fileprivate var registeration: [String: String] = [:]
     fileprivate var reuseQueue = [UIView]()
 
     open var gutterWidth: CGFloat = 0.0
@@ -204,13 +204,27 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         }
     }
     
-    open func registerClass(_ class: Any, reuseIdentifier: String) {
-        //self.registeration[reuseIdentifier] = Any
+    open func registerClass(_ obj: NSObject, reuseIdentifier: String) {
+        self.registeration[reuseIdentifier] = obj.className
     }
     
     open func dequeueResuablePage(withIdentifier: String) -> UIView? {
         
-        return nil
+        var view: UIView?
+        
+        for reuseView in self.reuseQueue {
+            if reuseView.resuableIdentifier == withIdentifier {
+                view = reuseView
+                break
+            }
+        }
+        
+        if view == nil {
+            let className = self.registeration[withIdentifier]
+            //view =
+        }
+        
+        return view
     }
     
     // MARK: - 私有方法

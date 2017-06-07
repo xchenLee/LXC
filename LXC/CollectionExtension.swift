@@ -15,8 +15,13 @@ extension Dictionary {
             updateValue(value, forKey: key)
         }
     }
+}
+
+extension LazyMapCollection {
     
-    
+    func toArray() -> [Element] {
+        return Array(self)
+    }
 }
 
 extension Array {

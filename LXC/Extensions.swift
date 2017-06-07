@@ -12,6 +12,14 @@ import MJRefresh
 import Alamofire
 
 
+extension NSObject {
+    
+    var className: String {
+        return String(describing: type(of: self))
+    }
+}
+
+
 extension String {
     
     
