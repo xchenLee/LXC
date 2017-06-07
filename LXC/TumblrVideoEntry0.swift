@@ -122,7 +122,6 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         }
         
         if layout.outerVideo {
-            
             /*guard let delegate = safeCell.delegate else {
                 return
             }*/
