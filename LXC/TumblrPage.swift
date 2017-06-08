@@ -17,6 +17,8 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
     
     var uitableView: UITableView?
     
+    var pagerView: LJPager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customInit()
@@ -49,19 +51,27 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
         control.frame = CGRect(x: 0, y: self.testCover!.bottom, width: kScreenWidth, height: kSegTabHeight)
         //self.view.addSubview(control)
         
-        self.scrollView = LJScrollView()
-        self.scrollView?.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-        self.view.addSubview(self.scrollView!)
-        self.scrollView?.delegate = self
-        self.scrollView?.parallaxHeader.header = self.testCover
-        self.scrollView?.parallaxHeader.defaultHeight = 300
-        self.scrollView?.parallaxHeader.minimumHeight = 64
+//        self.scrollView = LJScrollView()
+//        self.scrollView?.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+//        self.view.addSubview(self.scrollView!)
+//        self.scrollView?.delegate = self
+//        self.scrollView?.parallaxHeader.header = self.testCover
+//        self.scrollView?.parallaxHeader.defaultHeight = 300
+//        self.scrollView?.parallaxHeader.minimumHeight = 64
         
-        self.uitableView = UITableView()
-        self.uitableView!.delegate = self
-        self.uitableView!.dataSource = self
-        self.scrollView?.addSubview(self.uitableView!)
-        
+//        self.uitableView = UITableView()
+//        self.uitableView!.delegate = self
+//        self.uitableView!.dataSource = self
+//        self.scrollView?.addSubview(self.uitableView!)
+        self.testPager()
+    }
+    
+    func testPager() {
+        self.pagerView = LJPager()
+        self.pagerView?.delegate = self
+        self.pagerView?.pagerDataSource = self
+        self.pagerView?.frame = self.view.bounds
+        self.view.addSubview(self.pagerView!)
     }
     
     func clickBtn() {
@@ -71,10 +81,10 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.scrollView?.frame = self.view.frame
-        self.scrollView?.contentSize = self.view.frame.size
+        //self.scrollView?.frame = self.view.frame
+        //self.scrollView?.contentSize = self.view.frame.size
         
-        self.uitableView?.frame = self.view.frame
+        //self.uitableView?.frame = self.view.frame
         
     }
     
@@ -111,5 +121,32 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+
+extension TumblrPage: LJPagerProtocol, LJPagerDataSource {
+    
+    func pagerWillMove(_ pager: LJPager, toPage: UIView, index: Int) {
+        
+    }
+    func pagerDidMove(_ pager: LJPager,toPage: UIView, index: Int) {
+        
+    }
+    func pagerWillDisplay(_ pager: LJPager, page: UIView, index: Int) {
+        
+    }
+    func pagerEndDisplay(_ pager: LJPager, page: UIView, index: Int) {
+        
+    }
+    
+    func numberOfPages(inPager: LJPager) -> Int {
+        return 3
+    }
+    func viewForPager(pager: LJPager, atIndex: Int) -> UIView {
+        let view = UIView()
+        view.frame = self.view.bounds
+        view.backgroundColor = (atIndex == 1 ? UIColor.red: UIColor.blue)
+        return view
+    }
     
 }

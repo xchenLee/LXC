@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Foundation
 
 protocol LJPagerProtocol: UIScrollViewDelegate {
     
     func pagerWillMove(_ pager: LJPager, toPage: UIView, index: Int)
     func pagerDidMove(_ pager: LJPager,toPage: UIView, index: Int)
     func pagerWillDisplay(_ pager: LJPager, page: UIView, index: Int)
-    func pagerDidDisplay(_ pager: LJPager, page: UIView, index: Int)
+    func pagerEndDisplay(_ pager: LJPager, page: UIView, index: Int)
 }
 
 protocol LJPagerDataSource: NSObjectProtocol {
@@ -98,7 +99,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     
     fileprivate var pages: [Int: UIView] = [:]
-    fileprivate var registeration: [String: String] = [:]
+    fileprivate var registeration: [String: AnyClass] = [:]
     fileprivate var reuseQueue = [UIView]()
 
     open var gutterWidth: CGFloat = 0.0
@@ -204,8 +205,8 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         }
     }
     
-    open func registerClass(_ obj: NSObject, reuseIdentifier: String) {
-        self.registeration[reuseIdentifier] = obj.className
+    open func registerClass(_ obj: AnyClass, reuseIdentifier: String) {
+        self.registeration[reuseIdentifier] = obj
     }
     
     open func dequeueResuablePage(withIdentifier: String) -> UIView? {
@@ -220,45 +221,80 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         }
         
         if view == nil {
-            let className = self.registeration[withIdentifier]
-            //view =
+            let classObj: AnyClass = self.registeration[withIdentifier]!
+            let viewType = classObj as! UIView.Type
+            let instance = viewType.init()
+            instance.resuableIdentifier = withIdentifier
+        } else {
+            self.reuseQueue.remove(obj: view!)
         }
-        
         return view
     }
     
     // MARK: - 私有方法
     private func willMoveTo(index: Int) {
         self.loadPage(index: index)
-        
+        if self.pagerDelegate != nil {
+            let view = self.pages[index]!
+            self.pagerDelegate!.pagerWillMove(self, toPage: view, index: index)
+        }
     }
     
     private func didMoveTo(index: Int) {
+        
+        if self.pagerDelegate != nil {
+            let view = self.pages[index]!
+            self.pagerDelegate!.pagerDidMove(self, toPage: view, index: index)
+        }
+        self.unLoadHiddenPages()
+    }
+    
+    private func unLoadHiddenPages() {
+        
+        for (index, page) in self.pages {
+            
+            if index != (_index - 1) && index != (_index + 1)  {
+                page.removeFromSuperview()
+                
+                if page.resuableIdentifier != nil {
+                    self.reuseQueue.append(page)
+                }
+                
+                if self.pagerDelegate != nil {
+                    self.pagerDelegate?.pagerEndDisplay(self, page: page, index: index)
+                }
+                
+                self.pages.removeValue(forKey: index)
+            }
+        }
         
     }
     
     private func loadPage(index: Int) {
         
-        if index >= 0 && index < _count && self.pages[index] == nil {
-            
-            let view = self.pagerDataSource?.viewForPager(pager: self, atIndex: index)
-            var frame = CGRectZero
-            frame.origin = CGPoint(x: self.width * CGFloat(index), y: 0)
-            frame.size = self.size
-            view?.frame = frame
-            
-            /*if self.pagerDelegate!.responds(to: #selector(LJPagerProtocol.pagerWillDisplay(_: page:index:))) {
-                self.pagerDelegate!.pagerDidDisplay(self, page: view!, index: index)
-            }*/
-            if self.pagerDelegate != nil {
-                self.pagerDelegate!.pagerWillDisplay(self, page: view!, index: index)
+        func load(_ num: Int) {
+            if num >= 0 && num < _count && self.pages[num] == nil {
+                
+                let view = self.pagerDataSource?.viewForPager(pager: self, atIndex: num)
+                var frame = CGRectZero
+                frame.origin = CGPoint(x: self.width * CGFloat(num), y: 0)
+                frame.size = self.size
+                view?.frame = frame
+                
+                /*if self.pagerDelegate!.responds(to: #selector(LJPagerProtocol.pagerWillDisplay(_: page:index:))) {
+                 self.pagerDelegate!.pagerDidDisplay(self, page: view!, index: index)
+                 }*/
+                if self.pagerDelegate != nil {
+                    self.pagerDelegate!.pagerWillDisplay(self, page: view!, index: num)
+                }
+                self.addSubview(view!)
+                self.setNeedsLayout()
+                self.pages[num] = view!
             }
-            self.addSubview(view!)
-            self.setNeedsLayout()
-            self.pages[index] = view!
         }
-        loadPage(index: index - 1)
-        loadPage(index: index + 1)
+        load(index)
+        load(index - 1)
+        load(index + 1)
     }
     
     // MARK: - UIScrollViewDelegate

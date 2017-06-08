@@ -30,4 +30,33 @@ extension Array {
         let subArray = Array(self[0 ..< position])
         return subArray
     }
+    
+    mutating func remove<T>(obj: T) where T : Equatable {
+        self = self.filter({$0 as? T != obj})
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
