@@ -117,7 +117,6 @@
 		A1E094AA1EE1B65000F516F0 /* LJPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E094A91EE1B65000F516F0 /* LJPager.swift */; };
 		A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */; };
 		A1F7FE691EDC825C00EB82E7 /* LJParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */; };
-		A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */; };
 		A1F7FE6D1EDC876E00EB82E7 /* LJSegControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */; };
 		A1F7FE6F1EDC900900EB82E7 /* LJHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */; };
 /* End PBXBuildFile section */
@@ -238,7 +237,6 @@
 		A1E094A91EE1B65000F516F0 /* LJPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJPager.swift; sourceTree = "<group>"; };
 		A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPager.swift; sourceTree = "<group>"; };
 		A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJParallaxHeader.swift; sourceTree = "<group>"; };
-		A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegPagerDataSource.swift; sourceTree = "<group>"; };
 		A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJSegControl.swift; sourceTree = "<group>"; };
 		A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LJHScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -621,7 +619,6 @@
 			children = (
 				A1F7FE611EDC803400EB82E7 /* LJSegPager.swift */,
 				A1F7FE681EDC825C00EB82E7 /* LJParallaxHeader.swift */,
-				A1F7FE6A1EDC853A00EB82E7 /* LJSegPagerDataSource.swift */,
 				A1F7FE6C1EDC876E00EB82E7 /* LJSegControl.swift */,
 				A1F7FE6E1EDC900900EB82E7 /* LJHScrollView.swift */,
 				A1E094A51EE0690100F516F0 /* LJScrollView.swift */,
@@ -789,7 +786,6 @@
 				772773B51C9D452800A6ED72 /* QRCodeGenerator.swift in Sources */,
 				77A9E8821D64A66C00D2E492 /* VideoPlayerController.swift in Sources */,
 				777D58121D485AA8007274BB /* TumblrAPI.swift in Sources */,
-				A1F7FE6B1EDC853A00EB82E7 /* LJSegPagerDataSource.swift in Sources */,
 				A1E094AA1EE1B65000F516F0 /* LJPager.swift in Sources */,
 				772592181C7DEEF300000FBA /* ViewController.swift in Sources */,
 				77F8B10F1CDCA8FB0094ADA3 /* CACubic.swift in Sources */,
