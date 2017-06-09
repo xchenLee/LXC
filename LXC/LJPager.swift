@@ -121,10 +121,10 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     }
     
     private func customInit() {
-        _forwarder = LJPagerProtocolForwarder()
-        _forwarder!.pager = self
+        self._forwarder = LJPagerProtocolForwarder()
+        self._forwarder!.pager = self
         
-        super.delegate = _forwarder
+        super.delegate = self._forwarder
         self.isPagingEnabled = true
         self.scrollsToTop = false
         
@@ -150,8 +150,8 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
             var frame: CGRect = CGRectZero
             frame.size = self.size
             for (index, page) in self.pages {
-                page.left = self.width * CGFloat(index)
                 page.frame = frame
+                page.left = self.width * CGFloat(index)
             }
         }
     }
@@ -233,6 +233,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - 私有方法
     private func willMoveTo(index: Int) {
+        
         self.loadPage(index: index)
         if self.pagerDelegate != nil {
             let view = self.pages[index]!
@@ -253,7 +254,7 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         
         for (index, page) in self.pages {
             
-            if index != (_index - 1) && index != (_index + 1)  {
+            if index != _index && index != (_index - 1) && index != (_index + 1)  {
                 page.removeFromSuperview()
                 
                 if page.resuableIdentifier != nil {
@@ -277,19 +278,18 @@ class LJPager: UIScrollView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
                 
                 let view = self.pagerDataSource?.viewForPager(pager: self, atIndex: num)
                 var frame = CGRectZero
-                frame.origin = CGPoint(x: self.width * CGFloat(num), y: 0)
+                let x = self.width * CGFloat(num)
+                frame.origin = CGPoint(x: x, y: 0)
                 frame.size = self.size
                 view?.frame = frame
+
                 
-                /*if self.pagerDelegate!.responds(to: #selector(LJPagerProtocol.pagerWillDisplay(_: page:index:))) {
-                 self.pagerDelegate!.pagerDidDisplay(self, page: view!, index: index)
-                 }*/
                 if self.pagerDelegate != nil {
                     self.pagerDelegate!.pagerWillDisplay(self, page: view!, index: num)
                 }
                 self.addSubview(view!)
-                self.setNeedsLayout()
                 self.pages[num] = view!
+                self.setNeedsLayout()
             }
         }
         load(index)

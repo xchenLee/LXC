@@ -68,7 +68,7 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
     
     func testPager() {
         self.pagerView = LJPager()
-        self.pagerView?.delegate = self
+        self.pagerView?.pagerDelegate = self
         self.pagerView?.pagerDataSource = self
         self.pagerView?.frame = self.view.bounds
         self.view.addSubview(self.pagerView!)
