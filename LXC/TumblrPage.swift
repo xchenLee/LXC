@@ -10,14 +10,17 @@ import UIKit
 
 let kSegTabHeight: CGFloat = 40.0
 
-class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, UITableViewDataSource {
+class TumblrPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var testCover: UIImageView?
-    var scrollView: LJScrollView?
+    //
+    fileprivate var segPager: LJSegPager?
+    fileprivate var coverView: UIImageView?
     
     var uitableView: UITableView?
+    var uiView: UIView?
     
-    var pagerView: LJPager?
+    lazy var titles: [String] = ["Posts", "Likes"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,63 +32,53 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
         self.title = "blog"
         self.view.backgroundColor = UIColor.white
         self.navBarBackgroundAlpha = 0.0
-        
         self.extendedLayoutIncludesOpaqueBars = true
         
-        self.testCover = UIImageView()
-        self.testCover!.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 200)
-        self.testCover!.image = UIImage(named: "stars")
-        self.testCover?.contentMode = .scaleAspectFill
-        self.view.addSubview(self.testCover!)
-        self.testCover?.isUserInteractionEnabled = true
+        self.initViews()
+    }
+    
+    // MARK: - 初始化控件
+    private func initViews() {
+        self.coverView = UIImageView()
+        self.coverView!.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 200)
+        self.coverView!.image = UIImage(named: "stars")
+        self.coverView?.contentMode = .scaleAspectFill
+        self.view.addSubview(self.coverView!)
+        self.coverView?.isUserInteractionEnabled = true
         
         let btn = UIButton(type: .system)
         btn.setTitle("ssssss", for: .normal)
         btn.frame = CGRect(x: 40, y: 80, width: 80, height: 40)
-        self.testCover?.addSubview(btn)
+        self.coverView?.addSubview(btn)
         btn.addTarget(self, action: #selector(clickBtn), for: .touchUpInside)
         
-        let segTitles = ["Posts", "Likes"]
-        let control = LJSegControl(segTitles)
-        control.indicatorHeight = 3.0
-        control.frame = CGRect(x: 0, y: self.testCover!.bottom, width: kScreenWidth, height: kSegTabHeight)
-        //self.view.addSubview(control)
+        self.uitableView = UITableView()
+        self.uitableView!.delegate = self
+        self.uitableView!.dataSource = self
         
-//        self.scrollView = LJScrollView()
-//        self.scrollView?.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-//        self.view.addSubview(self.scrollView!)
-//        self.scrollView?.delegate = self
-//        self.scrollView?.parallaxHeader.header = self.testCover
-//        self.scrollView?.parallaxHeader.defaultHeight = 300
-//        self.scrollView?.parallaxHeader.minimumHeight = 64
+        self.uiView = UIView()
+        self.uiView?.frame = self.view.bounds
         
-//        self.uitableView = UITableView()
-//        self.uitableView!.delegate = self
-//        self.uitableView!.dataSource = self
-//        self.scrollView?.addSubview(self.uitableView!)
-        self.testPager()
+        self.segPager = LJSegPager()
+        self.segPager!.delegate = self
+        self.segPager!.dataSource = self
+        
+        self.segPager!.paralaxHeader?.header = self.coverView
+        self.segPager!.paralaxHeader?.minimumHeight = 64.0
+        self.segPager!.paralaxHeader?.defaultHeight = 180.0
+        
+        self.segPager?.segControl.indicatorColor = UIColor.orange
+        self.view.addSubview(self.segPager!)
+        
     }
-    
-    func testPager() {
-        self.pagerView = LJPager()
-        self.pagerView?.pagerDelegate = self
-        self.pagerView?.pagerDataSource = self
-        self.pagerView?.frame = self.view.bounds
-        self.view.addSubview(self.pagerView!)
-    }
-    
+
     func clickBtn() {
         print("ssssssssssssssssss")
     }
     
     override func viewDidLayoutSubviews() {
+        self.segPager?.frame = self.view.frame
         super.viewDidLayoutSubviews()
-        
-        //self.scrollView?.frame = self.view.frame
-        //self.scrollView?.contentSize = self.view.frame.size
-        
-        //self.uitableView?.frame = self.view.frame
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,7 +87,7 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
     
     
     func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
-        return true
+        return false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,16 +104,46 @@ class TumblrPage: UIViewController, LJScrollViewProtocol, UITableViewDelegate, U
         return cell!
     }
     
+}
+
+extension TumblrPage: LJSegPagerProtocol, LJSegPagerDataSource {
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    // MARK: - LJSegPagerProtocol
+    func segPager(_ pager: LJSegPager, didSelectView: UIView) {}
+    func segPager(_ pager: LJSegPager, didSelectViewWithTitle: String) {}
+    func segPager(_ pager: LJSegPager, didSelectIndex: NSInteger) {}
+    
+    func segPager(_ pager: LJSegPager, willDisplayView: UIView, atIndex: NSInteger) {}
+    func segPager(_ pager: LJSegPager, endDisplayView: UIView, atIndex: NSInteger) {}
+    
+    func segPagerControlHeight(_ pager: LJSegPager) -> CGFloat {
+        return 44.0
+    }
+    
+    func segPager(_ pager: LJSegPager, didScrollWithHeader: LJParallaxHeader) {}
+    func segPager(_ pager: LJSegPager, didEndDragWithHeader: LJParallaxHeader) {}
+    
+    func pagerShouldScrollToTop(_ pager: LJSegPager) -> Bool {
+        return true
+    }
+    
+    // MARK: - LJSegPagerDataSource
+    func numberOfPages(_ inSegPager: LJSegPager) -> Int {
+        return titles.count
+    }
+    
+    func title(_ pager: LJSegPager, atIndex: Int) -> String {
+        return self.titles[atIndex]
+    }
+    
+    func viewForPageAtIndex(_ segPager: LJSegPager, index: Int) -> UIView {
+        if index == 0 {
+            return self.uitableView!
+        } else {
+            return self.uiView!
+        }
+    }
     
 }
 

@@ -21,13 +21,13 @@ class LJPContentView: UIView {
     weak var parent: LJParallaxHeader?
     
     override func willMove(toSuperview newSuperview: UIView?) {
-        if self.superview is UIScrollView {
+        if self.superview is UIScrollView && self.parent != nil {
             self.superview?.removeObserver(self.parent!, forKeyPath: "contentOffset")
         }
     }
     
     override func didMoveToSuperview() {
-        if self.superview is UIScrollView {
+        if self.superview is UIScrollView && self.parent != nil {
             self.superview?.addObserver(self.parent!, forKeyPath: "contentOffset", options: .new, context: &kLJPContext)
         }
     }

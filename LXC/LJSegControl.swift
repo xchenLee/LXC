@@ -54,6 +54,10 @@ class LJSegControl: UIControl {
     private var segWidth: CGFloat = 0.0
     private var segWidthArray: [CGFloat] = []
     
+//    init() {
+//        super.init()
+//        self.commonInit()
+//    }
     
     // MARK: - 初始化方法
     required init?(coder aDecoder: NSCoder) {
@@ -84,6 +88,7 @@ class LJSegControl: UIControl {
     func commonInit() {
         
         self.scrollView = LJHScrollView()
+        self.scrollView?.bounces = false
         self.scrollView?.scrollsToTop = false
         self.scrollView?.showsVerticalScrollIndicator = false
         self.scrollView?.showsHorizontalScrollIndicator = false

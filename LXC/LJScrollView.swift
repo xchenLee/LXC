@@ -12,8 +12,6 @@ protocol LJScrollViewProtocol: UIScrollViewDelegate {
     
     //默认是true，看是否需要子view一起滑动
     func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool
-    
-    
 }
 
 private var kMContext = 0
@@ -23,7 +21,7 @@ class LJScrollViewProtocolForward: NSObject, LJScrollViewProtocol {
     weak var delegate: LJScrollViewProtocol?
     
     func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
-        return true
+        return false
     }
     
     override func responds(to aSelector: Selector!) -> Bool {
@@ -46,19 +44,23 @@ class LJScrollViewProtocolForward: NSObject, LJScrollViewProtocol {
     // MARK: - UIScrollViewDelegate
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        let view = scrollView as! LJScrollView
+        guard let view = scrollView as? LJScrollView, let delegate = self.delegate else {
+            return
+        }
         view.scrollViewDidEndDecelerating(view)
-        
-        if self.delegate!.responds(to: #selector(scrollViewDidEndDecelerating(_:))) {
-            self.delegate!.scrollViewDidEndDecelerating!(view)
+        if delegate.responds(to: #selector(scrollViewDidEndDecelerating(_:))) {
+            delegate.scrollViewDidEndDecelerating!(view)
         }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let view = scrollView as! LJScrollView
+        
+        guard let view = scrollView as? LJScrollView, let delegate = self.delegate else {
+            return
+        }
         view.scrollViewDidEndDragging(view, willDecelerate: decelerate)
-        if self.delegate!.responds(to: #selector(scrollViewDidEndDragging(_:willDecelerate:))) {
-            self.delegate!.scrollViewDidEndDragging!(view, willDecelerate: decelerate)
+        if delegate.responds(to: #selector(scrollViewDidEndDragging(_:willDecelerate:))) {
+            delegate.scrollViewDidEndDragging!(view, willDecelerate: decelerate)
         }
     }
     
@@ -123,6 +125,7 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
         for scrollView in self.observedViews {
             self.removeObserverFromView(scrollView)
         }
+        self.observedViews.removeAll()
     }
     
     // MARK: - KVO
@@ -183,7 +186,10 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
     }
     
     func removeObserverFromView(_ scrollView: UIScrollView) {
-        scrollView .removeObserver(self, forKeyPath: "contentOffset")
+        do {
+            try scrollView .removeObserver(self, forKeyPath: "contentOffset")
+ 
+        } catch {}
     }
     
     func scrollView(_ scrollView: UIScrollView, setContentOffset contentOffset: CGPoint) {
@@ -257,16 +263,3 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
