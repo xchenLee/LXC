@@ -15,6 +15,7 @@ target 'LXC' do
     #pod 'MBProgressHUD'
     pod 'pop'
     pod 'SnapKit', '~> 3.2.0'
+    pod 'MXSegmentedPager', '~> 3.3.0'
     #https://github.com/facebook/FBMemoryProfiler/issues/2
     #not support swift
     #pod 'FBMemoryProfiler'

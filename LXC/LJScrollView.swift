@@ -81,7 +81,7 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
         }
     }
     
-    public private(set) var parallaxHeader = LJParallaxHeader()
+    public private(set) var pHeader = LJParallaxHeader()
     
     fileprivate var forwarder: LJScrollViewProtocolForward?
     fileprivate var observedViews: [UIScrollView] = []
@@ -111,7 +111,7 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
         self.addObserver(self, forKeyPath: "contentOffset", options: [.new, .old], context: &kMContext)
         self.isObserving = true
         
-        self.parallaxHeader.scrollView = self
+        self.pHeader.scrollView = self
     }
     
     func addObservedView(_ scrollView: UIScrollView) {
@@ -134,7 +134,7 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
         if keyPath == "contentOffset" && context == &kMContext {
             
             let newV = change?[NSKeyValueChangeKey.newKey] as! CGPoint
-            let oldV = change?[NSKeyValueChangeKey.oldKey] as! CGPoint
+            var oldV = change?[NSKeyValueChangeKey.oldKey] as! CGPoint
             
             let diff = oldV.y - newV.y
             if diff == 0.0 || !self.isObserving {
@@ -145,15 +145,22 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
                 
                 //Adjust self scroll offset when scroll down
                 if (diff > 0 && self.lock) {
+                    if oldV.y >= -64 {
+                        oldV.y = -64
+                    }
                     self.scrollView(self, setContentOffset: oldV)
                     
                 } else if (self.contentOffset.y < -self.contentInset.top && !self.bounces) {
                     
-                    self.scrollView(self, setContentOffset: CGPoint(x: self.contentOffset.x, y: -self.contentInset.top))
+                    var y = -self.contentInset.top
+                    if y >= -(self.pHeader.minimumHeight) {
+                        y = -self.pHeader.minimumHeight
+                    }
+                    self.scrollView(self, setContentOffset: CGPoint(x: self.contentOffset.x, y: y))
                     
-                } else if (self.contentOffset.y > -self.parallaxHeader.minimumHeight) {
+                } else if (self.contentOffset.y > -self.pHeader.minimumHeight) {
                     
-                    self.scrollView(self, setContentOffset: CGPoint(x: self.contentOffset.x, y: -self.parallaxHeader.minimumHeight))
+                    self.scrollView(self, setContentOffset: CGPoint(x: self.contentOffset.x, y: -self.pHeader.minimumHeight))
                 }
 
             } else {
@@ -163,7 +170,7 @@ class LJScrollView: UIScrollView, UIGestureRecognizerDelegate {
                 self.lock = (scrollView.contentOffset.y > -scrollView.contentInset.top);
                 
                 //Manage scroll up
-                if (self.contentOffset.y < -self.parallaxHeader.minimumHeight && self.lock && diff < 0) {
+                if (self.contentOffset.y < -self.pHeader.minimumHeight && self.lock && diff < 0) {
                     self.scrollView(scrollView, setContentOffset: oldV)
                 }
                 //Disable bouncing when scroll down

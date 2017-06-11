@@ -173,9 +173,7 @@ class LJSegControl: UIControl {
     
     // MARK: - 选中到某个tab
     func select(index: Int, animated: Bool) {
-        
-        
-        
+        self.select(index: index, animated: animated, notify: false)
     }
     
     // MARK: - 工具方法
@@ -348,7 +346,7 @@ class LJSegControl: UIControl {
             
             self.indicatorLayer?.actions = nil
             CATransaction.begin()
-            CATransaction.setAnimationDuration(0.15)
+            CATransaction.setAnimationDuration(0.2)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
             self.indicatorLayer?.frame = self.indicatorFrame()
             CATransaction.commit()

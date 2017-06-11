@@ -1,8 +1,15 @@
 PODS:
   - Alamofire (4.4.0)
+  - HMSegmentedControl (1.5.3)
   - JXHTTP (3.0.2)
   - Kingfisher (3.9.1)
   - MJRefresh (3.1.12)
+  - MXPagerView (0.2.1)
+  - MXParallaxHeader (0.6.1)
+  - MXSegmentedPager (3.3.0):
+    - HMSegmentedControl (= 1.5.3)
+    - MXPagerView (= 0.2.1)
+    - MXParallaxHeader (= 0.6.1)
   - OAuthSwift (1.0.0)
   - pop (1.0.9)
   - SnapKit (3.2.0)
@@ -29,6 +36,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Kingfisher (~> 3.9.1)
   - MJRefresh
+  - MXSegmentedPager (~> 3.3.0)
   - OAuthSwift (~> 1.0.0)
   - pop
   - SnapKit (~> 3.2.0)
@@ -37,9 +45,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   JXHTTP: c37120f210cd2dfcb3470d70239f5253335e2f1a
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MXPagerView: ede184b5191b2ed689ccf05a750a9978cce42414
+  MXParallaxHeader: 858c403532ed933b381556a81ce333d7065ad182
+  MXSegmentedPager: a35ebaf939e1629f24db3bb26653c1c557362f59
   OAuthSwift: dd4f502ffd4f6e122b861b5e4529bf6454a30fe6
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
@@ -47,6 +59,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TMTumblrSDK: 7b253e968a31f515aee0ee5f7e5faa8b7b0d0470
 
-PODFILE CHECKSUM: f758b924fd8022c9648a9e38d486edcc08d80cb5
+PODFILE CHECKSUM: 9e7d015e44c39da3e5d36654d7d2f0463387df70
 
 COCOAPODS: 1.2.1

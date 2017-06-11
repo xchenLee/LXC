@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import MXSegmentedPager
 
 let kSegTabHeight: CGFloat = 40.0
 
 class TumblrPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
-    fileprivate var segPager: LJSegPager?
+    fileprivate var segPager: MXSegmentedPager?
     fileprivate var coverView: UIImageView?
     
     var uitableView: UITableView?
@@ -59,15 +60,16 @@ class TumblrPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.uiView = UIView()
         self.uiView?.frame = self.view.bounds
         
-        self.segPager = LJSegPager()
+        self.segPager = MXSegmentedPager()
         self.segPager!.delegate = self
         self.segPager!.dataSource = self
         
-        self.segPager!.paralaxHeader?.header = self.coverView
-        self.segPager!.paralaxHeader?.minimumHeight = 64.0
-        self.segPager!.paralaxHeader?.defaultHeight = 180.0
-        
-        self.segPager?.segControl.indicatorColor = UIColor.orange
+        self.segPager!.parallaxHeader.view = self.coverView
+        self.segPager!.parallaxHeader.minimumHeight = 64.0
+        self.segPager!.parallaxHeader.height = 180.0
+        self.segPager!.segmentedControl.segmentWidthStyle = .fixed
+        self.segPager!.segmentedControl.selectionIndicatorLocation = .down
+        self.segPager!.segmentedControl.selectionIndicatorColor = UIColor.orange
         self.view.addSubview(self.segPager!)
         
     }
@@ -100,76 +102,33 @@ class TumblrPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: idd)
         }
-        cell?.textLabel?.text = "sss"
+        cell?.textLabel?.text = "sssxcscsdsdsdsdwfwefwefwefewfwff"
         return cell!
     }
     
 }
 
-extension TumblrPage: LJSegPagerProtocol, LJSegPagerDataSource {
+
+extension TumblrPage: MXSegmentedPagerDelegate, MXSegmentedPagerDataSource {
     
+    func numberOfPages(in segmentedPager: MXSegmentedPager) -> Int {
+        return self.titles.count
+    }
     
-    // MARK: - LJSegPagerProtocol
-    func segPager(_ pager: LJSegPager, didSelectView: UIView) {}
-    func segPager(_ pager: LJSegPager, didSelectViewWithTitle: String) {}
-    func segPager(_ pager: LJSegPager, didSelectIndex: NSInteger) {}
-    
-    func segPager(_ pager: LJSegPager, willDisplayView: UIView, atIndex: NSInteger) {}
-    func segPager(_ pager: LJSegPager, endDisplayView: UIView, atIndex: NSInteger) {}
-    
-    func segPagerControlHeight(_ pager: LJSegPager) -> CGFloat {
+    func heightForSegmentedControl(in segmentedPager: MXSegmentedPager) -> CGFloat {
         return 44.0
     }
     
-    func segPager(_ pager: LJSegPager, didScrollWithHeader: LJParallaxHeader) {}
-    func segPager(_ pager: LJSegPager, didEndDragWithHeader: LJParallaxHeader) {}
-    
-    func pagerShouldScrollToTop(_ pager: LJSegPager) -> Bool {
-        return true
+    func segmentedPager(_ segmentedPager: MXSegmentedPager, titleForSectionAt index: Int) -> String {
+        return self.titles[index]
     }
     
-    // MARK: - LJSegPagerDataSource
-    func numberOfPages(_ inSegPager: LJSegPager) -> Int {
-        return titles.count
-    }
-    
-    func title(_ pager: LJSegPager, atIndex: Int) -> String {
-        return self.titles[atIndex]
-    }
-    
-    func viewForPageAtIndex(_ segPager: LJSegPager, index: Int) -> UIView {
+    func segmentedPager(_ segmentedPager: MXSegmentedPager, viewForPageAt index: Int) -> UIView {
         if index == 0 {
             return self.uitableView!
         } else {
             return self.uiView!
         }
-    }
-    
-}
-
-extension TumblrPage: LJPagerProtocol, LJPagerDataSource {
-    
-    func pagerWillMove(_ pager: LJPager, toPage: UIView, index: Int) {
-        
-    }
-    func pagerDidMove(_ pager: LJPager,toPage: UIView, index: Int) {
-        
-    }
-    func pagerWillDisplay(_ pager: LJPager, page: UIView, index: Int) {
-        
-    }
-    func pagerEndDisplay(_ pager: LJPager, page: UIView, index: Int) {
-        
-    }
-    
-    func numberOfPages(inPager: LJPager) -> Int {
-        return 3
-    }
-    func viewForPager(pager: LJPager, atIndex: Int) -> UIView {
-        let view = UIView()
-        view.frame = self.view.bounds
-        view.backgroundColor = (atIndex == 1 ? UIColor.red: UIColor.blue)
-        return view
     }
     
 }

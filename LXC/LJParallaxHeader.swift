@@ -16,7 +16,7 @@ protocol LJParallaxProtocol: NSObjectProtocol {
 private var kLJPContext = 0
 
 // MARK: - 类 LJPContentView
-class LJPContentView: UIView {
+class LJParallaxView: UIView {
     
     weak var parent: LJParallaxHeader?
     
@@ -92,9 +92,9 @@ class LJParallaxHeader: NSObject {
     
     // 内容承载view
     //    private lazy var contentView: UIView = UIView()
-    fileprivate lazy var contentView: LJPContentView = {
+    fileprivate lazy var contentView: LJParallaxView = {
         
-        let view = LJPContentView()
+        let view = LJParallaxView()
         view.parent = self
         view.clipsToBounds = true
         return view
@@ -166,8 +166,8 @@ class LJParallaxHeader: NSObject {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if keyPath == "contentOffset" && context == &kLJPContext && (self.contentView.superview != nil) {
+        //&& (self.contentView.superview != nil)
+        if keyPath == "contentOffset" && context == &kLJPContext {
             self.layoutContentView()
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)

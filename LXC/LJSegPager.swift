@@ -46,7 +46,7 @@ protocol LJPageProtocol: NSObjectProtocol {
     func shouldScrollWithSubView(_ pager: LJSegPager, subView: UIView) -> Bool
 }
 
-class LJSegPager: UIView {
+class LJSegPager: UIView, LJPagerProtocol, LJScrollViewProtocol {
 
     
     open weak var delegate: LJSegPagerProtocol?
@@ -58,7 +58,7 @@ class LJSegPager: UIView {
     fileprivate lazy var contentView: LJScrollView = {
         
         let temp = LJScrollView()
-        //temp.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+        temp.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
         temp.scrollDelegate = self
         self.addSubview(temp)
         
@@ -70,12 +70,12 @@ class LJSegPager: UIView {
         let titles = ["Posts", "Likes"]
         let control = LJSegControl(titles)
         control.addTarget(self, action: #selector(pageControlValueChanged(_:)), for: .valueChanged)
-        self.contentView.addSubview(control)
+        //self.contentView.addSubview(control)
         return control
     }()
     
-    open lazy fileprivate(set) var paralaxHeader: LJParallaxHeader? = {
-        return self.contentView.parallaxHeader
+    open lazy fileprivate(set) var pHeader: LJParallaxHeader? = {
+        return self.contentView.pHeader
     }()
     
     open lazy fileprivate(set) var pagerView: LJPager = {
@@ -128,7 +128,7 @@ class LJSegPager: UIView {
     }
     
     open func scrollToTop(animated: Bool) {
-        self.contentView.setContentOffset(CGPoint(x: 0, y:  -self.contentView.parallaxHeader.defaultHeight), animated: animated)
+        self.contentView.setContentOffset(CGPoint(x: 0, y:  -self.contentView.pHeader.defaultHeight), animated: animated)
     }
     
     open func pageControlValueChanged(_ control: LJSegControl) {
@@ -142,7 +142,7 @@ class LJSegPager: UIView {
         }
         
         self.layoutContentView()
-        self.layoutSegControl()
+        //self.layoutSegControl()
         self.layoutPager()
     }
     
@@ -150,7 +150,7 @@ class LJSegPager: UIView {
         self.contentView.frame = self.bounds
         self.contentView.contentSize = self.contentView.size
         self.contentView.isScrollEnabled = true
-        self.contentView.contentInset = UIEdgeInsetsMake(self.contentView.parallaxHeader.defaultHeight, 0, 0, 0)
+        self.contentView.contentInset = UIEdgeInsetsMake(self.contentView.pHeader.defaultHeight, 0, 0, 0)
     }
     
     func layoutSegControl() {
@@ -164,59 +164,18 @@ class LJSegPager: UIView {
     func layoutPager() {
         
         var frame = self.bounds
-        frame.origin.y = self.controlHeight
-        frame.size.height -= self.contentView.parallaxHeader.minimumHeight
+        frame.origin.y = 0//self.controlHeight
+        frame.size.height -= self.contentView.pHeader.minimumHeight
         self.pagerView.frame = frame
     }
-
-}
-
-
-extension LJSegPager: LJScrollViewProtocol {
     
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        
-        if self.delegate != nil {
-            return self.delegate!.pagerShouldScrollToTop(self)
-        }
-        return true
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == self.contentView {
-            self.delegate?.segPager(self, didScrollWithHeader: self.paralaxHeader!)
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView == self.contentView {
-            self.delegate?.segPager(self, didEndDragWithHeader: self.paralaxHeader!)
-        }
-    }
-    
-    
-    func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
-        if  scrollWithSubView == self.pagerView {
-            return false
-        }
-        
-        guard let selectPage = self.pagerView.currentPage as? LJPageProtocol else {
-            return true
-        }
-        
-        return selectPage.shouldScrollWithSubView(self, subView: scrollWithSubView)
-    }
-
-}
-
-extension LJSegPager: LJPagerProtocol {
     
     func pagerWillMove(_ pager: LJPager, toPage: UIView, index: Int) {
         self.segControl.select(index: index, animated: true)
     }
     
     func pagerDidMove(_ pager: LJPager,toPage: UIView, index: Int) {
-        self.segControl.select(index: index, animated: false)
+        self.segControl.select(index: index, animated: true)
         self.changeToIndex(index)
     }
     
@@ -239,7 +198,111 @@ extension LJSegPager: LJPagerProtocol {
         self.delegate?.segPager(self, didSelectView: view!)
     }
 
+
+    // MARK: - LJScrollViewPrtocol
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        
+        if self.delegate != nil {
+            return self.delegate!.pagerShouldScrollToTop(self)
+        }
+        return true
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.contentView {
+            self.delegate?.segPager(self, didScrollWithHeader: self.pHeader!)
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView == self.contentView {
+            self.delegate?.segPager(self, didEndDragWithHeader: self.pHeader!)
+        }
+    }
+    
+    
+    func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
+        if  scrollWithSubView == self.pagerView {
+            return false
+        }
+        
+        guard let selectPage = self.pagerView.currentPage as? LJPageProtocol else {
+            return true
+        }
+        
+        return selectPage.shouldScrollWithSubView(self, subView: scrollWithSubView)
+    }
 }
+
+
+//extension LJSegPager: LJScrollViewProtocol {
+//    
+//    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+//        
+//        if self.delegate != nil {
+//            return self.delegate!.pagerShouldScrollToTop(self)
+//        }
+//        return true
+//    }
+//    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView == self.contentView {
+//            self.delegate?.segPager(self, didScrollWithHeader: self.paralaxHeader!)
+//        }
+//    }
+//    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        if scrollView == self.contentView {
+//            self.delegate?.segPager(self, didEndDragWithHeader: self.paralaxHeader!)
+//        }
+//    }
+//    
+//    
+//    func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
+//        if  scrollWithSubView == self.pagerView {
+//            return false
+//        }
+//        
+//        guard let selectPage = self.pagerView.currentPage as? LJPageProtocol else {
+//            return true
+//        }
+//        
+//        return selectPage.shouldScrollWithSubView(self, subView: scrollWithSubView)
+//    }
+//
+//}
+
+//extension LJSegPager: LJPagerProtocol {
+//    
+//    func pagerWillMove(_ pager: LJPager, toPage: UIView, index: Int) {
+//        self.segControl.select(index: index, animated: true)
+//    }
+//    
+//    func pagerDidMove(_ pager: LJPager,toPage: UIView, index: Int) {
+//        self.segControl.select(index: index, animated: false)
+//        self.changeToIndex(index)
+//    }
+//    
+//    func pagerWillDisplay(_ pager: LJPager, page: UIView, index: Int) {
+//        self.delegate?.segPager(self, willDisplayView: page, atIndex: index)
+//    }
+//    
+//    func pagerEndDisplay(_ pager: LJPager, page: UIView, index: Int) {
+//        self.delegate?.segPager(self, endDisplayView: page, atIndex: index)
+//    }
+//    
+//    func changeToIndex(_ index: Int) {
+//        
+//        self.delegate?.segPager(self, didSelectIndex: index)
+//        
+//        let title = self.segControl.titles?[index]
+//        self.delegate?.segPager(self, didSelectViewWithTitle: title!)
+//        
+//        let view = self.pagerView.currentPage
+//        self.delegate?.segPager(self, didSelectView: view!)
+//    }
+//
+//}
 
 extension LJSegPager: LJPagerDataSource {
     
