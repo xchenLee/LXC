@@ -76,6 +76,12 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         let blog = TumblrBlog()
         blog.blogHeader = post.headerImage
         blog.blogName = blogName
+        if self.parent != nil && self.parent! is TumblrBlog {
+            let fatherBlog = self.parent as! TumblrBlog
+            if fatherBlog.blogName == blogName {
+                return
+            }
+        }
         self.navigationController?.pushViewController(blog, animated: true)
     }
     

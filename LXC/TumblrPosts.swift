@@ -15,31 +15,11 @@ import AVKit
 
 class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
     
+    //
+    open var blogName: String = ""
+    open var needAlphaBar: Bool = false
     
-    var writeCenter: CGPoint = CGPoint.zero
-    
-    lazy var postBtn: UIButton = {
-        
-        var btn = UIButton(type: UIButtonType.custom)
-        
-        let left = kScreenWidth - kTMWriteIconSize * 1.4
-        let top = kScreenHeight - kTMWriteIconSize * 1.4
-        
-        btn.setImage(UIImage(named: "icon_write"), for: UIControlState())
-        btn.frame = CGRect(x: left, y: top, width: kTMWriteIconSize, height: kTMWriteIconSize)
-        btn.addTarget(self, action: #selector(postBtnClick), for: UIControlEvents.touchUpInside)
-        return btn
-    }()
-    
-    
-    lazy var postBg: UIVisualEffectView = {
-    
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = kTMWriteIconSize / 2
-        blurEffectView.clipsToBounds = true
-        return blurEffectView
-    }()
+    fileprivate var writeCenter: CGPoint = CGPoint.zero
     
     
     // MARK: - methods
@@ -48,27 +28,15 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
         
         addDataHandler()
         self.tableView.mj_header.beginRefreshing()
-        
-        self.navigationController?.view.addSubview(self.postBg)
-        self.postBg.frame = self.postBtn.frame
-        
-        
-        self.navigationController?.view.addSubview(self.postBtn)
-        self.writeCenter = self.postBtn.center
-
-
         self.navigationController?.delegate = self
         
         let fpsLabel = FPSLabel()
-        fpsLabel.frame = CGRect(x: 10, y: kScreenHeight - 20, width: 65, height: 25)
+        fpsLabel.frame = CGRect(x: 10, y: self.view.height - 20, width: 65, height: 25)
         self.navigationController?.view.addSubview(fpsLabel)
         
-    }
-    
-    // MARK: - Custom Method
-    
-    func postBtnClick(_ btn: UIButton) {
-        
+        if self.needAlphaBar {
+            self.navBarBackgroundAlpha = 0.0
+        }
     }
     
     func addDataHandler() {
@@ -92,25 +60,6 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
     // MARK: - UINavigationControllerDelegate
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
-        if viewController == self {
-            
-            UIView.animate(withDuration: 0.2, delay: 0.2, options: [.curveLinear], animations: {
-                
-                self.postBg.center = self.writeCenter
-                self.postBtn.center = self.writeCenter
-                
-                }, completion: nil)
-        } else {
-            
-            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
-                
-                self.postBg.center = CGPoint(x: self.writeCenter.x, y: kScreenHeight + self.postBtn.size.width)
-                self.postBtn.center = CGPoint(x: self.writeCenter.x, y: kScreenHeight + self.postBtn.size.width)
-                
-                }, completion: nil)
-            
-        }
     }
 
 }
@@ -129,7 +78,10 @@ extension TumblrPosts {
             parameters["offset"] = String(offset)
         }
         //offset > 0 ? ["offset" : String(offset)] : nil
-        TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
+        TMAPIClient.sharedInstance().posts(self.blogName, type: "", parameters: parameters) { (result, error) in
+
+        //liked_posts
+        //TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
 
             if error != nil {
                 return
@@ -137,7 +89,7 @@ extension TumblrPosts {
             
             //Success
             let responseJSON = JSON(result!)
-            let postsArray: JSON = responseJSON["liked_posts"]
+            let postsArray: JSON = responseJSON["posts"]
             
             var tmpLayouts: [TumblrNormalLayout] = []
             if postsArray.type == .array {
@@ -159,9 +111,8 @@ extension TumblrPosts {
                 }
             }
 
+            //begin
             DispatchQueue.global().async {
-
-                
                 DispatchQueue.main.async(execute: {
                     if offset > 0 {
                         self.layouts.append(contentsOf: tmpLayouts)
@@ -174,10 +125,8 @@ extension TumblrPosts {
                     }
                     self.postsCount += 20
                 })
-                
-                
             }
-            
+            //end
         }
     }
 }

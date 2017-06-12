@@ -14,7 +14,7 @@ import Kingfisher
 
 let kSegTabHeight: CGFloat = 40.0
 
-class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TumblrBlog: UIViewController {
     
     open var blogName: String?
     open var blogHeader: String?
@@ -23,8 +23,7 @@ class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
     fileprivate var segPager: MXSegmentedPager?
     fileprivate var coverView: UIImageView?
     
-    var uitableView: UITableView?
-    var uiView: UIView?
+    fileprivate var controllers: [UIViewController] = []
     
     fileprivate var blogInfo: TumblrBlogInfo?
     lazy var titles: [String] = ["Posts", "Likes"]
@@ -33,7 +32,7 @@ class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customInit()
-        
+        self.constructControllers()
         self.requestUserInfo()
     }
     
@@ -49,6 +48,8 @@ class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - 初始化控件
     private func initViews() {
+        
+        // Cover view
         self.coverView = UIImageView()
         self.coverView!.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 200)
         self.coverView!.image = UIImage(named: "stars")
@@ -56,11 +57,10 @@ class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.view.addSubview(self.coverView!)
         self.coverView?.isUserInteractionEnabled = true
         
-        if self.blogHeader != nil {
+        if self.blogHeader != nil && self.blogHeader != "" {
             let url: URL = URL(string: self.blogHeader!)!
             self.coverView!.kf.setImage(with: url, placeholder: UIImage(named: "stars"), options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
         }
-
         
         let btn = UIButton(type: .system)
         btn.setTitle("ssssss", for: .normal)
@@ -68,13 +68,7 @@ class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.coverView?.addSubview(btn)
         btn.addTarget(self, action: #selector(clickBtn), for: .touchUpInside)
         
-        self.uitableView = UITableView()
-        self.uitableView!.delegate = self
-        self.uitableView!.dataSource = self
-        
-        self.uiView = UIView()
-        self.uiView?.frame = self.view.bounds
-        
+        // Pager View
         self.segPager = MXSegmentedPager()
         self.segPager!.delegate = self
         self.segPager!.dataSource = self
@@ -102,25 +96,6 @@ class TumblrBlog: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.didReceiveMemoryWarning()
     }
     
-    
-    func scrollView(_ scrollView: LJScrollView, scrollWithSubView: UIScrollView) -> Bool {
-        return false
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 40
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let idd = "tttt"
-        var cell = tableView.dequeueReusableCell(withIdentifier: idd)
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: idd)
-        }
-        cell?.textLabel?.text = "sssxcscsdsdsdsdwfwefwefwefewfwff"
-        return cell!
-    }
-    
 }
 
 // MARK: - 发请求extension
@@ -134,13 +109,32 @@ extension TumblrBlog {
                 return
             }
             
-            let result = JSON(response)
+            let result = JSON(response!)
             var blogInfo = TumblrBlogInfo()
             blogInfo.sjMap(result)
             self.blogInfo = blogInfo
         }
     }
 }
+
+// MARK: - 构建controller 和 view
+extension TumblrBlog {
+    
+    fileprivate func constructControllers() {
+        
+        let posts = TumblrPosts()
+        posts.needAlphaBar = true
+        posts.blogName = self.blogName!
+        self.controllers.append(posts)
+        
+        let posts2 = TumblrPosts()
+        posts2.needAlphaBar = true
+        posts2.blogName = self.blogName!
+        self.controllers.append(posts2)
+    }
+    
+}
+
 
 // MARK: - 分Tab接口和数据源
 extension TumblrBlog: MXSegmentedPagerDelegate, MXSegmentedPagerDataSource {
@@ -158,11 +152,18 @@ extension TumblrBlog: MXSegmentedPagerDelegate, MXSegmentedPagerDataSource {
     }
     
     func segmentedPager(_ segmentedPager: MXSegmentedPager, viewForPageAt index: Int) -> UIView {
-        if index == 0 {
-            return self.uitableView!
-        } else {
-            return self.uiView!
-        }
+        
+        let controller = self.controllers[index]
+        let view = controller.view
+        controller.willMove(toParentViewController: self)
+        self.addChildViewController(controller)
+        return view!
+    }
+    
+    func segmentedPager(_ segmentedPager: MXSegmentedPager, willDisplayPage page: UIView, at index: Int) {
+        let controller = self.controllers[index]
+        controller.didMove(toParentViewController: self)
+
     }
     
 }
