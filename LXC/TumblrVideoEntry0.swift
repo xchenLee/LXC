@@ -134,8 +134,8 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         switch playerState {
             
         case PlaybackState.stopped.rawValue:
-            self.videoThumbnail.isHidden = true
-            self.videoFlag.isHidden = true
+            self.indicator.isHidden = false
+            self.indicator.startAnimating()
             self.videoPlayer.playFromBeginning()
             break
             
@@ -167,7 +167,6 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
         if layout.outerVideo {
             return
         }
-        
         
         let playerState = self.videoPlayer.playbackState.rawValue
         
@@ -255,6 +254,10 @@ class TumblrVideoEntry0: UIView, PlayerDelegate {
     
     // MARK: - PlayerDelegate methods
     func playerReady(_ player: Player) {
+        self.videoThumbnail.isHidden = true
+        self.videoFlag.isHidden = true
+        self.indicator.isHidden = true
+        self.indicator.stopAnimating()
         print("player ready")
     }
     
