@@ -126,6 +126,8 @@ class TumblrPost: NSObject {
     
     var permalinkUrl : String = ""
     
+    var headerImage: String = ""
+    
     //SwiftyJSON 转化成对象的方法
     func sjMap(_ json: JSON) {
         slug = json["slug"].stringValue
@@ -187,6 +189,11 @@ class TumblrPost: NSObject {
         thumbnailUrl = json["thumbnail_url"].stringValue
         thumbnailWidth = json["thumbnail_width"].intValue
         thumbnailHeight = json["thumbnail_height"].intValue
+        
+        
+        if json["trail"] != JSON.null && json["trail"].arrayValue.count > 0 {
+            headerImage = json["trail"].arrayValue[0]["blog"]["theme"]["header_image"].stringValue
+       }
 
     }
 
