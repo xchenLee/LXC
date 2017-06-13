@@ -230,8 +230,6 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         
     }
     
-    // MARK: - UIGestureRecognizerDelegate
-
 }
 
 class TumblrPhotoPreviewItem: NSObject {

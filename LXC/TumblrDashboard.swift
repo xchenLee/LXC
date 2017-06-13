@@ -34,10 +34,8 @@ class TumblrDashboard: TumblrPostsList, UINavigationControllerDelegate {
     // MARK: - Custom Method
     
     func postBtnClick(_ btn: UIButton) {
-        
         let board = PostBoard(frame: UIScreen.main.bounds)
         self.navigationController?.view.addSubview(board)
-    
     }
     
     func addDataHandler() {

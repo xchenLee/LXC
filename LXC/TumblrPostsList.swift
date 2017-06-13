@@ -78,6 +78,7 @@ extension TumblrPostsList: TumblrNormalCellDelegate {
         if self.parent != nil && self.parent! is TumblrBlog {
             let fatherBlog = self.parent as! TumblrBlog
             if fatherBlog.blogName == blogName {
+                self.parent!.shake(3)
                 return
             }
         }

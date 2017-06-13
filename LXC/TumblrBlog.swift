@@ -14,28 +14,42 @@ import Kingfisher
 import Lottie
 
 let kSegTabHeight: CGFloat = 40.0
+let kSegCovHeight: CGFloat = 200.0
 
-class TumblrBlog: UIViewController {
+class TumblrBlog: UIViewController, MXParallaxHeaderDelegate {
     
     open var blogName: String?
     open var blogHeader: String?
     
     // MARK: - 控件UI属性
     fileprivate var segPager: MXSegmentedPager?
-    fileprivate var coverView: UIImageView?
+    fileprivate var coverBox: UIView?
+    fileprivate var coverImg: UIImageView?
+    fileprivate var coverTopGra: CAGradientLayer?
+    fileprivate var coverBomGra: CAGradientLayer?
+
     
+    // MARK: - 数据
     fileprivate var controllers: [UIViewController] = []
-    
-    fileprivate var lotAnimatedView: LOTAnimationView?
+    fileprivate lazy var titles: [String] = ["Posts", "Likes"]
     
     fileprivate var blogInfo: TumblrBlogInfo?
-    lazy var titles: [String] = ["Posts", "Likes"]
+
     
-    
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customInit()
         self.requestUserInfo()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.segPager?.frame = self.view.frame
+        super.viewDidLayoutSubviews()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     func customInit() {
@@ -45,8 +59,8 @@ class TumblrBlog: UIViewController {
         self.navBarBackgroundAlpha = 0.0
         self.extendedLayoutIncludesOpaqueBars = true
         
-        self.initViews()
-        
+        self.initCovers()
+        self.initPager()
         self.constructControllers()
     }
     
@@ -58,33 +72,51 @@ class TumblrBlog: UIViewController {
         self.controllers.append(posts)
     }
     
-    // MARK: - 初始化控件
-    private func initViews() {
-        
+    // MARK: - 初始化cover
+    private func initCovers() {
         // Cover view
-        self.coverView = UIImageView()
-        self.coverView!.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 200)
-        self.coverView!.image = UIImage(named: "stars")
-        self.coverView?.contentMode = .scaleAspectFill
-        self.view.addSubview(self.coverView!)
-        self.coverView?.isUserInteractionEnabled = true
+        self.coverBox = UIView()
+        self.coverBox!.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kSegCovHeight)
         
-        self.lotAnimatedView = LOTAnimationView(name: "favorite_black")
-        self.lotAnimatedView?.frame =  CGRect(x: 50, y: 100, width: 100, height: 100)
-        self.lotAnimatedView?.contentMode = .scaleAspectFill
-        self.coverView!.addSubview(self.lotAnimatedView!)
+        self.coverImg = UIImageView()
+        self.coverImg!.frame = self.coverBox!.bounds
+        self.coverImg!.image = UIImage(named: "stars")
+        self.coverImg!.contentMode = .scaleAspectFill
+        self.coverBox!.addSubview(self.coverImg!)
+        self.coverImg!.isUserInteractionEnabled = true
+        
+        self.coverTopGra = CAGradientLayer()
+        self.coverTopGra?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 44)
+        self.coverTopGra?.colors = [UIColor.fromARGB(0xff0000, alpha: 0.3).cgColor, UIColor.clear.cgColor]
+        self.coverTopGra?.locations = [NSNumber(value:0)]
+        self.coverTopGra?.startPoint = CGPoint(x: 0, y: 0)
+        self.coverTopGra?.endPoint = CGPoint(x: 0, y: 1)
+        self.coverImg?.layer.addSublayer(self.coverTopGra!)
+        
+        /*self.coverBomGra = CAGradientLayer()
+        self.coverBomGra?.frame = CGRect(x: 0, y: kSegCovHeight - 44, width: kScreenWidth, height: 44)
+        self.coverBomGra?.colors = [UIColor.clear.cgColor, UIColor.fromARGB(0xff0000, alpha: 0.3).cgColor]
+        self.coverBomGra?.locations = [NSNumber(value:0)]
+        self.coverBomGra?.startPoint = CGPoint(x: 0, y: 0)
+        self.coverBomGra?.endPoint = CGPoint(x: 0, y: 1)
+        self.coverImg?.layer.addSublayer(self.coverBomGra!)*/
         
         if self.blogHeader != nil && self.blogHeader != "" {
             let url: URL = URL(string: self.blogHeader!)!
-            self.coverView!.kf.setImage(with: url, placeholder: UIImage(named: "stars"), options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
+            self.coverImg!.kf.setImage(with: url, placeholder: UIImage(named: "stars"), options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
         }
+    }
+    
+    // MARK: - 初始化控件方法
+    private func initPager() {
         
         // Pager View
         self.segPager = MXSegmentedPager()
         self.segPager!.delegate = self
         self.segPager!.dataSource = self
         
-        self.segPager!.parallaxHeader.view = self.coverView
+        self.segPager!.parallaxHeader.view = self.coverBox
+        self.segPager!.parallaxHeader.delegate = self
         self.segPager!.parallaxHeader.minimumHeight = 64.0
         self.segPager!.parallaxHeader.height = 200.0
         self.segPager!.segmentedControl.segmentWidthStyle = .fixed
@@ -94,23 +126,9 @@ class TumblrBlog: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.lotAnimatedView?.play()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.lotAnimatedView?.pause()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.segPager?.frame = self.view.frame
-        super.viewDidLayoutSubviews()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    // MARK: - 主要处理头部放大逻辑处理
+    func parallaxHeaderDidScroll(_ parallaxHeader: MXParallaxHeader) {
+        self.coverImg!.frame = self.coverBox!.bounds
     }
     
 }
