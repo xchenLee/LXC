@@ -22,7 +22,6 @@ class TumblrPostsList: UITableViewController {
     var tmpIDString: String = ""
     var postsCount: Int = 0
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

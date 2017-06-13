@@ -160,6 +160,7 @@ extension UITableView {
     func addPullUp2LoadMore(_ handler:@escaping ()->Void) {
         
         let footer = MJRefreshAutoNormalFooter.init(refreshingBlock: handler)
+        footer?.isAutomaticallyHidden = true
         self.mj_footer = footer
     }
     

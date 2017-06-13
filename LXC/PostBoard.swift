@@ -148,7 +148,7 @@ class PostBoard: UIControl {
         
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0.2
-        }, completion:{(finish) in
+        }, completion:{[unowned self](finish) in
             self.removeFromSuperview()
         })
     }

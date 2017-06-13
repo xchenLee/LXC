@@ -100,7 +100,9 @@ class TumblrPhotoView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     }
     
     func singleTapAction(_ gesture: UITapGestureRecognizer) {
-        self.dismiss()
+        if gesture.state == .ended {
+            self.dismiss()
+        }
     }
     
     func doubleTapAction(_ gesture: UITapGestureRecognizer) {

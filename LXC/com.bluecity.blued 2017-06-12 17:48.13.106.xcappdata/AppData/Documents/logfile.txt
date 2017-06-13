@@ -1,0 +1,276 @@
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dd50c 61b45544 53b073c3 8ccb35d1 7ad735a7 48d9df6b 7c3d153e 545374ad 77a407e4 cccbc78f 1116bc9a 2656ecb7 8388c04f 61a1dd55 5e9c0dd6 f064fac1 d749>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dd50c 61b45544 53b073c3 8ccb35d1 7ad735a7 48d9df6b 7c3d153e 545374ad 77a407e4 cccbc78f 1116bc9a 2656ecb7 8388c04f 61a1dd55 5e9c0dd6 f064fac1 d749>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine socket reconnect]
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dd50c 61b45544 53b073c3 8ccb35d1 7ad735a7 48d9df6b 7c3d153e 545374ad 77a407e4 cccbc78f 1116bc9a 2656ecb7 8388c04f 61a1dd55 5e9c0dd6 f064fac1 d749>
+[GJIMEngine] success connect
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket connect is broken Error Domain=GCDAsyncSocketErrorDomain Code=7 "Socket closed by remote peer" UserInfo={NSLocalizedDescription=Socket closed by remote peer}
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket connect is broken Error Domain=NSPOSIXErrorDomain Code=61 "Connection refused" UserInfo={NSLocalizedDescription=Connection refused, NSLocalizedFailureReason=Error in connect() function}
+[GJIMEngine socket reconnect]
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dd50c 61b45544 53b073c3 8ccb35d1 7ad735a7 48d9df6b 7c3d153e 545374ad 77a407e4 cccbc78f 1116bc9a 2656ecb7 8388c04f 61a1dd55 5e9c0dd6 f064fac1 d749>
+[GJIMEngine] success connect
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket connect is broken Error Domain=NSPOSIXErrorDomain Code=61 "Connection refused" UserInfo={NSLocalizedDescription=Connection refused, NSLocalizedFailureReason=Error in connect() function}
+[GJIMEngine socket reconnect]
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dd50c 61b45544 53b073c3 8ccb35d1 7ad735a7 48d9df6b 7c3d153e 545374ad 77a407e4 cccbc78f 1116bc9a 2656ecb7 8388c04f 61a1dd55 5e9c0dd6 f064fac1 d749>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] will enter foreground
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dd50c 61b45544 53b073c3 8ccb35d1 7ad735a7 48d9df6b 7c3d153e 545374ad 77a407e4 cccbc78f 1116bc9a 2656ecb7 8388c04f 61a1dd55 5e9c0dd6 f064fac1 d749>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d624c 569d0a64 046c8f4b 5952414d d001ef75 cb278ec0 205eb37a f21c8f89 5a4cc853 3f7d1ad5 6bc8238a 0a35133b 30950a79 de2a8bd6 29553d78 f269c965 6ca3>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d624c 569d0a64 046c8f4b 5952414d d001ef75 cb278ec0 205eb37a f21c8f89 5a4cc853 3f7d1ad5 6bc8238a 0a35133b 30950a79 de2a8bd6 29553d78 f269c965 6ca3>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket connect is broken Error Domain=GCDAsyncSocketErrorDomain Code=7 "Socket closed by remote peer" UserInfo={NSLocalizedDescription=Socket closed by remote peer}
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d9c35 ef5d5032 222f61e0 461beaec 76bd407f 8c71c2bf fa0f294b b3c1aeb4 61937e36 4f1490e8 af99ca4c 6bd63457 21369742 db9e9848 cce5b751 a385d64c 561a>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d9c35 ef5d5032 222f61e0 461beaec 76bd407f 8c71c2bf fa0f294b b3c1aeb4 61937e36 4f1490e8 af99ca4c 6bd63457 21369742 db9e9848 cce5b751 a385d64c 561a>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dfe44 f1408e5d ba29daeb 69e74443 af9661ab 39d54265 bc168699 a022b12a e85a6dee e7634429 4822d773 1d9a5d78 3dae0f50 ace1b85b 56901f61 1294daa3 f324>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dfe44 f1408e5d ba29daeb 69e74443 af9661ab 39d54265 bc168699 a022b12a e85a6dee e7634429 4822d773 1d9a5d78 3dae0f50 ace1b85b 56901f61 1294daa3 f324>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d698f 4fe56f04 5a455459 a9e5ff6f b1afbf4a cbb05d1a 622d4c8a a4496dd0 3a4beef6 6d298976 853bbdaa 792173d6 24562a82 0de5097d 5f80c6f3 5271a530 0d61>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d698f 4fe56f04 5a455459 a9e5ff6f b1afbf4a cbb05d1a 622d4c8a a4496dd0 3a4beef6 6d298976 853bbdaa 792173d6 24562a82 0de5097d 5f80c6f3 5271a530 0d61>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d2406 9aee30dc 53c97614 725297a1 bc91f74d 93784aa7 0d5b8916 aaee5e59 2084117c 954b0b57 037bf5f8 d49b1223 7f626190 3da95446 784b9d86 89cfd122 7b83>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d2406 9aee30dc 53c97614 725297a1 bc91f74d 93784aa7 0d5b8916 aaee5e59 2084117c 954b0b57 037bf5f8 d49b1223 7f626190 3da95446 784b9d86 89cfd122 7b83>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] will enter foreground
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d2406 9aee30dc 53c97614 725297a1 bc91f74d 93784aa7 0d5b8916 aaee5e59 2084117c 954b0b57 037bf5f8 d49b1223 7f626190 3da95446 784b9d86 89cfd122 7b83>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] will enter foreground
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d2406 9aee30dc 53c97614 725297a1 bc91f74d 93784aa7 0d5b8916 aaee5e59 2084117c 954b0b57 037bf5f8 d49b1223 7f626190 3da95446 784b9d86 89cfd122 7b83>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] will enter foreground
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d2406 9aee30dc 53c97614 725297a1 bc91f74d 93784aa7 0d5b8916 aaee5e59 2084117c 954b0b57 037bf5f8 d49b1223 7f626190 3da95446 784b9d86 89cfd122 7b83>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d629e 899d2495 21e4fe5e 6d75e485 44b464e4 49f4415f a593d124 7d7a2f80 4275b229 0e807280 e8af3344 88490b95 16caa0a8 acae9558 c577bc06 13065522 ff70>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d629e 899d2495 21e4fe5e 6d75e485 44b464e4 49f4415f a593d124 7d7a2f80 4275b229 0e807280 e8af3344 88490b95 16caa0a8 acae9558 c577bc06 13065522 ff70>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d8cdc f474b596 fc3a2442 60bd2a24 b9e55d4b 503d3d90 414228f0 0d8ea8eb 9375ebab 6040f79c 814669d7 23332488 0363585e 438ec590 3c2817f2 be244324 c91f>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d8cdc f474b596 fc3a2442 60bd2a24 b9e55d4b 503d3d90 414228f0 0d8ea8eb 9375ebab 6040f79c 814669d7 23332488 0363585e 438ec590 3c2817f2 be244324 c91f>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dbfe2 ecf79196 ad449337 4a955b01 f0ebd5bd 60b08ef6 35fbb6dc 1c333204 5f2f5ed5 25a5395c b6f5d4ea 9bf94bdb f2725583 ee102c8d 731f980d 7efb5b66 02a6>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dbfe2 ecf79196 ad449337 4a955b01 f0ebd5bd 60b08ef6 35fbb6dc 1c333204 5f2f5ed5 25a5395c b6f5d4ea 9bf94bdb f2725583 ee102c8d 731f980d 7efb5b66 02a6>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7db2d0 35a35445 7bc91daf 503d4dde 606662bd fe565bfc 7879e41d 3d7ae9f6 b441be86 913708d8 29cb8358 684cf3e0 63a1997d 85bccb6e e399a88c aeb6c872 2058>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7db2d0 35a35445 7bc91daf 503d4dde 606662bd fe565bfc 7879e41d 3d7ae9f6 b441be86 913708d8 29cb8358 684cf3e0 63a1997d 85bccb6e e399a88c aeb6c872 2058>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7db2fa 8003bd40 a7458085 998cfd39 b5740336 aad019cc d440c149 3545e0ed 2f58dd75 82aff6d3 e8f18466 b6cb8a30 d390eb62 dac0ab4e b5007625 ac19dfb5 38d7>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7db2fa 8003bd40 a7458085 998cfd39 b5740336 aad019cc d440c149 3545e0ed 2f58dd75 82aff6d3 e8f18466 b6cb8a30 d390eb62 dac0ab4e b5007625 ac19dfb5 38d7>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d3791 b0584988 cc1d0799 643112ec 63a4ea07 cc77f551 731b893a c3b46ea7 caf3a985 725865b0 5a1bfcad 3c405075 46b1e57a 96ff90bd 225ebbe8 847a5fe0 3e4f>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d3791 b0584988 cc1d0799 643112ec 63a4ea07 cc77f551 731b893a c3b46ea7 caf3a985 725865b0 5a1bfcad 3c405075 46b1e57a 96ff90bd 225ebbe8 847a5fe0 3e4f>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dcfa2 e03e571c 344593f5 a8ac7974 ffe7534b 4266377d fb90b658 8b0000c9 a0321322 a89f9f1c 2f301190 08c949f7 f1748f63 9fec0ca5 90b9ddef 22fa975a 7e4f>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7dcfa2 e03e571c 344593f5 a8ac7974 ffe7534b 4266377d fb90b658 8b0000c9 a0321322 a89f9f1c 2f301190 08c949f7 f1748f63 9fec0ca5 90b9ddef 22fa975a 7e4f>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7de75e 8176d579 3583e2be c6a6c3a5 029821aa 61e0b8e7 acecde4a 022c1412 7a69389c bcb3416d 4a888884 407f5edb c198c892 79e561b4 805b38f8 ecba8384 1aea>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7de75e 8176d579 3583e2be c6a6c3a5 029821aa 61e0b8e7 acecde4a 022c1412 7a69389c bcb3416d 4a888884 407f5edb c198c892 79e561b4 805b38f8 ecba8384 1aea>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d9c81 c3140bc4 fef4ec77 a3721650 6ad945ee 6351f374 f821ecad 8f26e88e 9faeaccf 9be99cc6 df9a50b0 0e91dfca dbd79126 9923c82c 9e33af61 330889c7 2380>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d9c81 c3140bc4 fef4ec77 a3721650 6ad945ee 6351f374 f821ecad 8f26e88e 9faeaccf 9be99cc6 df9a50b0 0e91dfca dbd79126 9923c82c 9e33af61 330889c7 2380>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d7572 4a442997 8ad9a9e3 4780b77a 160903a9 748fb942 6710156d 32157ad0 45e279e7 cb882fd4 b5dabec4 3f00b7b2 ee01415b d2691d2f ed2dc6da fbb252ea 9cac>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d7572 4a442997 8ad9a9e3 4780b77a 160903a9 748fb942 6710156d 32157ad0 45e279e7 cb882fd4 b5dabec4 3f00b7b2 ee01415b d2691d2f ed2dc6da fbb252ea 9cac>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] will enter foreground
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d7572 4a442997 8ad9a9e3 4780b77a 160903a9 748fb942 6710156d 32157ad0 45e279e7 cb882fd4 b5dabec4 3f00b7b2 ee01415b d2691d2f ed2dc6da fbb252ea 9cac>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] socket init connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d618b 02503a04 507fa339 63e22a5e 53727cd3 463a5f16 3080554c 6aebd6c3 6df55516 ed72c009 56e82586 8195f65b b9a002e1 da6e3e4e d814921f 01ae8bfa a830>
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d618b 02503a04 507fa339 63e22a5e 53727cd3 463a5f16 3080554c 6aebd6c3 6df55516 ed72c009 56e82586 8195f65b b9a002e1 da6e3e4e d814921f 01ae8bfa a830>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink
+[GJIMEngine] will enter foreground
+[GJIMEngine] new socket
+[GJIMEngine] socket start connect to host: 106.75.109.100, port: 8080, uid: 9340933, password: <ac7d618b 02503a04 507fa339 63e22a5e 53727cd3 463a5f16 3080554c 6aebd6c3 6df55516 ed72c009 56e82586 8195f65b b9a002e1 da6e3e4e d814921f 01ae8bfa a830>
+[GJIMEngine] success connect
+[GJIMEngine] socket connect success
+[GJIMEngine] socket state --> linked
+[GJIMEngine] socket start auth
+[GJIMEngine] socket auth success
+[GJIMEngine] socket state --> authed
+[GJIMEngine] did enter background
+[GJIMEngine] socket start disconnect and dealloc
+[GJIMEngine] socket state --> unlink

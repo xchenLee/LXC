@@ -107,6 +107,8 @@
 		93431D941ED3DF4200EBE58D /* TumblrTagPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D931ED3DF4200EBE58D /* TumblrTagPanel.swift */; };
 		93431D971ED4354200EBE58D /* SJMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93431D961ED4354200EBE58D /* SJMapper.swift */; };
 		93E7B5ED1EEE3BCA000FBA64 /* TumblrBlogInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7B5EC1EEE3BCA000FBA64 /* TumblrBlogInfo.swift */; };
+		93ED4B2C1EEFAD2F00C058A9 /* TumblrLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ED4B2B1EEFAD2F00C058A9 /* TumblrLikes.swift */; };
+		93ED4B2E1EEFDC8500C058A9 /* favorite_black.json in Resources */ = {isa = PBXBuildFile; fileRef = 93ED4B2D1EEFDC8500C058A9 /* favorite_black.json */; };
 		A135BFE01CCFB30100680D1F /* CAEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFDF1CCFB30100680D1F /* CAEffect.swift */; };
 		A135BFE21CD0FD8B00680D1F /* CATransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A135BFE11CD0FD8B00680D1F /* CATransform.swift */; };
 		A18835031CFEEBF8007F75EC /* paint01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A18835011CFEEBF8007F75EC /* paint01-01.png */; };
@@ -226,6 +228,8 @@
 		93431D931ED3DF4200EBE58D /* TumblrTagPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrTagPanel.swift; sourceTree = "<group>"; };
 		93431D961ED4354200EBE58D /* SJMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJMapper.swift; sourceTree = "<group>"; };
 		93E7B5EC1EEE3BCA000FBA64 /* TumblrBlogInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrBlogInfo.swift; sourceTree = "<group>"; };
+		93ED4B2B1EEFAD2F00C058A9 /* TumblrLikes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrLikes.swift; sourceTree = "<group>"; };
+		93ED4B2D1EEFDC8500C058A9 /* favorite_black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favorite_black.json; sourceTree = "<group>"; };
 		9B49F7E62C3AE6203F4A87ED /* Pods-LXC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXC.release.xcconfig"; path = "Pods/Target Support Files/Pods-LXC/Pods-LXC.release.xcconfig"; sourceTree = "<group>"; };
 		A135BFDF1CCFB30100680D1F /* CAEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEffect.swift; sourceTree = "<group>"; };
 		A135BFE11CD0FD8B00680D1F /* CATransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CATransform.swift; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 		772592091C7DEEF300000FBA = {
 			isa = PBXGroup;
 			children = (
+				93ED4B2D1EEFDC8500C058A9 /* favorite_black.json */,
 				776054A51CA4EA6A00EF3618 /* framework */,
 				772592141C7DEEF300000FBA /* LXC */,
 				772592131C7DEEF300000FBA /* Products */,
@@ -391,7 +396,6 @@
 				774F03D11D3E273F005FA275 /* LXC-Bridging-Header.h */,
 				777D58101D485A87007274BB /* tumblr */,
 				77E11B691D34F7FE005F42F5 /* video */,
-				77DD74CF1CF4538C00A99565 /* Scratch */,
 				773E16961CEC1B3500D11762 /* quartz */,
 				7791CC3E1CE1C49100DE3132 /* Image */,
 				772409701CCF4D9500CAD6C1 /* Container */,
@@ -461,6 +465,7 @@
 		773E16961CEC1B3500D11762 /* quartz */ = {
 			isa = PBXGroup;
 			children = (
+				77DD74CF1CF4538C00A99565 /* Scratch */,
 				773E16971CEC1B7900D11762 /* QuartzLearning.swift */,
 				773E16991CEC1BAD00D11762 /* quartz.storyboard */,
 				773E16A21CEC499A00D11762 /* QuartzBase.swift */,
@@ -545,6 +550,7 @@
 				7761FEB01D7EC2B9001EE55F /* TumblrDashboard.swift */,
 				77027DF91E1CDDD70073DD9B /* PostBoard.swift */,
 				A1E094A71EE1B1E700F516F0 /* TumblrBlog.swift */,
+				93ED4B2B1EEFAD2F00C058A9 /* TumblrLikes.swift */,
 			);
 			name = pages;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 				7700899D1C9BB56400E6BCB9 /* GoodyListCell.xib in Resources */,
 				772773BE1C9FA3DE00A6ED72 /* beep.mp3 in Resources */,
 				776054AA1CA5237C00EF3618 /* imagepicker.storyboard in Resources */,
+				93ED4B2E1EEFDC8500C058A9 /* favorite_black.json in Resources */,
 				A18835041CFEEBF8007F75EC /* paint01-01blur.png in Resources */,
 				772773C41C9FE13600A6ED72 /* filters.storyboard in Resources */,
 				773E169A1CEC1BAD00D11762 /* quartz.storyboard in Resources */,
@@ -852,6 +859,7 @@
 				930F47111EDFF15F003CC632 /* NavigationWrapper.swift in Sources */,
 				A1F7FE621EDC803400EB82E7 /* LJSegPager.swift in Sources */,
 				772103A71D4F2B4400F18546 /* TumblrImageEntry0.swift in Sources */,
+				93ED4B2C1EEFAD2F00C058A9 /* TumblrLikes.swift in Sources */,
 				7791CC281CE0934300DE3132 /* CASpecialLayer.swift in Sources */,
 				772103D61D52514700F18546 /* TumblrToolBarEntry0.swift in Sources */,
 				772409721CCF4DAC00CAD6C1 /* ParentController.swift in Sources */,

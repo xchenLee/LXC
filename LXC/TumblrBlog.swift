@@ -11,6 +11,7 @@ import MXSegmentedPager
 import TMTumblrSDK
 import SwiftyJSON
 import Kingfisher
+import Lottie
 
 let kSegTabHeight: CGFloat = 40.0
 
@@ -25,6 +26,8 @@ class TumblrBlog: UIViewController {
     
     fileprivate var controllers: [UIViewController] = []
     
+    fileprivate var lotAnimatedView: LOTAnimationView?
+    
     fileprivate var blogInfo: TumblrBlogInfo?
     lazy var titles: [String] = ["Posts", "Likes"]
     
@@ -32,7 +35,6 @@ class TumblrBlog: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customInit()
-        self.constructControllers()
         self.requestUserInfo()
     }
     
@@ -44,6 +46,16 @@ class TumblrBlog: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = true
         
         self.initViews()
+        
+        self.constructControllers()
+    }
+    
+    fileprivate func constructControllers() {
+        
+        let posts = TumblrPosts()
+        posts.needAlphaBar = true
+        posts.blogName = self.blogName!
+        self.controllers.append(posts)
     }
     
     // MARK: - 初始化控件
@@ -57,16 +69,15 @@ class TumblrBlog: UIViewController {
         self.view.addSubview(self.coverView!)
         self.coverView?.isUserInteractionEnabled = true
         
+        self.lotAnimatedView = LOTAnimationView(name: "favorite_black")
+        self.lotAnimatedView?.frame =  CGRect(x: 50, y: 100, width: 100, height: 100)
+        self.lotAnimatedView?.contentMode = .scaleAspectFill
+        self.coverView!.addSubview(self.lotAnimatedView!)
+        
         if self.blogHeader != nil && self.blogHeader != "" {
             let url: URL = URL(string: self.blogHeader!)!
             self.coverView!.kf.setImage(with: url, placeholder: UIImage(named: "stars"), options: [.transition(.fade(0.6))], progressBlock: nil, completionHandler: nil)
         }
-        
-        let btn = UIButton(type: .system)
-        btn.setTitle("ssssss", for: .normal)
-        btn.frame = CGRect(x: 40, y: 80, width: 80, height: 40)
-        self.coverView?.addSubview(btn)
-        btn.addTarget(self, action: #selector(clickBtn), for: .touchUpInside)
         
         // Pager View
         self.segPager = MXSegmentedPager()
@@ -83,8 +94,14 @@ class TumblrBlog: UIViewController {
         
     }
     
-    func clickBtn() {
-        print("ssssssssssssssssss")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.lotAnimatedView?.play()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.lotAnimatedView?.pause()
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,8 +119,10 @@ class TumblrBlog: UIViewController {
 extension TumblrBlog {
     
     fileprivate func requestUserInfo() {
-        TMAPIClient.sharedInstance().blogInfo(self.blogName!) { (response, error) in
-            
+        
+        
+        TMAPIClient.sharedInstance().blogInfo(self.blogName!) { [weak self] (response, error) in
+
             if error != nil {
                 print(" load blog info error ")
                 return
@@ -112,35 +131,29 @@ extension TumblrBlog {
             let result = JSON(response!)
             var blogInfo = TumblrBlogInfo()
             blogInfo.sjMap(result)
-            self.blogInfo = blogInfo
+            
+            DispatchQueue.main.async {
+                self?.blogInfo = blogInfo
+                guard let sself = self , let info = sself.blogInfo else {
+                    return
+                }
+                if info.shareLikes {
+                    let likes = TumblrLikes()
+                    likes.needAlphaBar = true
+                    likes.blogName = sself.blogName ?? ""
+                    sself.controllers.append(likes)
+                    sself.segPager!.reloadData()
+                }
+            }
         }
     }
 }
-
-// MARK: - 构建controller 和 view
-extension TumblrBlog {
-    
-    fileprivate func constructControllers() {
-        
-        let posts = TumblrPosts()
-        posts.needAlphaBar = true
-        posts.blogName = self.blogName!
-        self.controllers.append(posts)
-        
-        let posts2 = TumblrPosts()
-        posts2.needAlphaBar = true
-        posts2.blogName = self.blogName!
-        self.controllers.append(posts2)
-    }
-    
-}
-
 
 // MARK: - 分Tab接口和数据源
 extension TumblrBlog: MXSegmentedPagerDelegate, MXSegmentedPagerDataSource {
     
     func numberOfPages(in segmentedPager: MXSegmentedPager) -> Int {
-        return self.titles.count
+        return self.controllers.count
     }
     
     func heightForSegmentedControl(in segmentedPager: MXSegmentedPager) -> CGFloat {

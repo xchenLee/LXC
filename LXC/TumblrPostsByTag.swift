@@ -11,7 +11,7 @@ import SwiftyJSON
 import TMTumblrSDK
 
 let kTumblrPostsTagCell = "postTagCell"
-
+let kTumblrPostsTagKey = "tagName"
 
 class TumblrPostsByTag: TumblrPostsList {
     
@@ -21,8 +21,7 @@ class TumblrPostsByTag: TumblrPostsList {
         super.viewDidLoad()
         self.addDataHandler()
         self.tableView.mj_header.beginRefreshing()
-        
-        self.addObserver(self, forKeyPath: "tagName", options: .new, context: nil)
+        self.addObserver(self, forKeyPath: kTumblrPostsTagKey, options: .new, context: nil)
     }
     
     
@@ -30,23 +29,25 @@ class TumblrPostsByTag: TumblrPostsList {
     func addDataHandler() {
         
         self.tableView.addPullDownRefresh {
-            self.tmpIDString = ""
-            self.requestTaggedPosts(0)
+            [weak self] in
+            self?.tmpIDString = ""
+            self?.requestTaggedPosts(0)
         }
         
         self.tableView.addPullUp2LoadMore {
-            guard let firstlayout = self.layouts.first, let firstPost = firstlayout.post else {
-                self.tableView.endLoadingMore()
+            [weak self] in
+            guard let firstlayout = self?.layouts.first, let firstPost = firstlayout.post else {
+                self?.tableView.endLoadingMore()
                 return
             }
             let timestamp = firstPost.timestamp
-            self.requestTaggedPosts(timestamp)
+            self?.requestTaggedPosts(timestamp)
         }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if keyPath == "tagName" {
+        if keyPath == kTumblrPostsTagKey {
             let newTagValue = change![NSKeyValueChangeKey.newKey] as! String
             self.title = newTagValue
             self.tableView.mj_header.beginRefreshing()
@@ -54,17 +55,17 @@ class TumblrPostsByTag: TumblrPostsList {
     }
     
     /**
-     重新方法，当在tag页面点击的时候，在本页面刷新数据
+     刷新方法，当在tag页面点击的时候，在本页面刷新数据
      
      - parameter cell: cell
      - parameter tag:  name of tag
      */
     override func didClickTag(_ cell: TumblrNormalCell, tag: String) {
-        self.setValue(tag, forKeyPath: "tagName")
+        self.setValue(tag, forKeyPath: kTumblrPostsTagKey)
     }
     
     deinit {
-        self.removeObserver(self, forKeyPath: "tagName")
+        self.removeObserver(self, forKeyPath: kTumblrPostsTagKey)
     }
 
 }
@@ -79,7 +80,7 @@ extension TumblrPostsByTag {
             parameters["before"] = String(before)
         }
         
-        TMAPIClient.sharedInstance().tagged(self.tagName, parameters:parameters) { (result, error) in
+        TMAPIClient.sharedInstance().tagged(self.tagName, parameters:parameters) { [weak self] (result, error) in
             
             if error != nil {
                 return
@@ -105,7 +106,7 @@ extension TumblrPostsByTag {
             
             DispatchQueue.global().async {
                 if taggedPosts.count == 0 {
-                    self.tableView.endRefreshing()
+                    self?.tableView.endRefreshing()
                     return
                 }
                 
@@ -113,11 +114,11 @@ extension TumblrPostsByTag {
                 var i = 0
                 for tumblrPost in taggedPosts {
                     let id = tumblrPost.postId
-                    if !self.tmpIDString.contains("\(id),") {
+                    if self != nil && !self!.tmpIDString.contains("\(id),") {
                         let layout = TumblrNormalLayout()
                         layout.fitPostData(tumblrPost)
                         tmpLayouts.append(layout)
-                        self.tmpIDString += "\(id),"
+                        self?.tmpIDString += "\(id),"
                     }
                     i += 1
                     print("layouts in \(i)")
@@ -125,13 +126,13 @@ extension TumblrPostsByTag {
                 
                 DispatchQueue.main.async(execute: {
                     if before > 0 {
-                        self.layouts.append(contentsOf: tmpLayouts)
-                        self.tableView.endLoadingMore()
-                        self.tableView.reloadData()
+                        self?.layouts.append(contentsOf: tmpLayouts)
+                        self?.tableView.endLoadingMore()
+                        self?.tableView.reloadData()
                     } else {
-                        self.layouts = tmpLayouts
-                        self.tableView.endRefreshing()
-                        self.tableView.reloadData()
+                        self?.layouts = tmpLayouts
+                        self?.tableView.endRefreshing()
+                        self?.tableView.reloadData()
                     }
                     
                 })

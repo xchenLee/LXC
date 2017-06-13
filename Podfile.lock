@@ -3,6 +3,7 @@ PODS:
   - HMSegmentedControl (1.5.3)
   - JXHTTP (3.0.2)
   - Kingfisher (3.9.1)
+  - lottie-ios (1.5.1)
   - MJRefresh (3.1.12)
   - MXPagerView (0.2.1)
   - MXParallaxHeader (0.6.1)
@@ -35,6 +36,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Kingfisher (~> 3.9.1)
+  - lottie-ios
   - MJRefresh
   - MXSegmentedPager (~> 3.3.0)
   - OAuthSwift (~> 1.0.0)
@@ -48,6 +50,7 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   JXHTTP: c37120f210cd2dfcb3470d70239f5253335e2f1a
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
+  lottie-ios: f680a7c4cb7a567ecf258fde0f967913aff111b8
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MXPagerView: ede184b5191b2ed689ccf05a750a9978cce42414
   MXParallaxHeader: 858c403532ed933b381556a81ce333d7065ad182
@@ -59,6 +62,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TMTumblrSDK: 7b253e968a31f515aee0ee5f7e5faa8b7b0d0470
 
-PODFILE CHECKSUM: 9e7d015e44c39da3e5d36654d7d2f0463387df70
+PODFILE CHECKSUM: 384d617c91864a66a53286aad0a252647c3769f2
 
 COCOAPODS: 1.2.1

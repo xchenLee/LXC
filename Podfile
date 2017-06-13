@@ -20,7 +20,7 @@ target 'LXC' do
     #not support swift
     #pod 'FBMemoryProfiler'
     #pod 'YYText'
-    
+    pod 'lottie-ios' 
     #曾经用过 ObjectMapper
     #pod 'ObjectMapper', '~> 2.1.0'
     

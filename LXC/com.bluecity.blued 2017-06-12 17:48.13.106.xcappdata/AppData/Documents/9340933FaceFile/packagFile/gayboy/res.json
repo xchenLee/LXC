@@ -1,0 +1,138 @@
+{
+    "code": "gayboy",
+    "icon": "shrink_gayboy.png",
+    "name_zh": "小小基",
+    "name": "Little Gay Boy",
+    "description": "小小基，贱兮兮！又萌又贱的小小基登录BLUED啦！快把他抓进你的手机里，陪你一起卖萌耍贱美美哒聊天！",
+    "name_zh_tw": "假文青",
+    "emotions": [
+        {
+            "code": "wru",
+            "original": "wru.gif",
+            "small": "wru.png",
+            "name": "wru?",
+            "name_zh_tw": "你在哪",
+            "name_zh": "你在哪"
+        },
+        {
+            "code": "ignoringme",
+            "original": "ignoringme.gif",
+            "small": "ignoringme.png",
+            "name": "Ignoring me?",
+            "name_zh_tw": "不理我",
+            "name_zh": "不理我"
+        },
+        {
+            "code": "panicking",
+            "original": "panicking.gif",
+            "small": "panicking.png",
+            "name": "Panicking",
+            "name_zh_tw": "我慌了",
+            "name_zh": "我慌了"
+        },
+        {
+            "code": "bored",
+            "original": "bored.gif",
+            "small": "bored.png",
+            "name": "Bored",
+            "name_zh_tw": "好無聊",
+            "name_zh": "好无聊"
+        },
+        {
+            "code": "screwyou",
+            "original": "screwyou.gif",
+            "small": "screwyou.png",
+            "name": "Screw you",
+            "name_zh_tw": "討厭啦",
+            "name_zh": "讨厌啦"
+        },
+        {
+            "code": "myheart",
+            "original": "myheart.gif",
+            "small": "myheart.png",
+            "name": "My heart",
+            "name_zh_tw": "真心",
+            "name_zh": "真心"
+        },
+        {
+            "code": "fart",
+            "original": "fart.gif",
+            "small": "fart.png",
+            "name": "Fart",
+            "name_zh_tw": "噗",
+            "name_zh": "噗"
+        },
+        {
+            "code": "hot",
+            "original": "hot.gif",
+            "small": "hot.png",
+            "name": "HOT!",
+            "name_zh_tw": "帥cry",
+            "name_zh": "帅cry"
+        },
+        {
+            "code": "innocent",
+            "original": "innocent.gif",
+            "small": "innocent.png",
+            "name": "Innocent",
+            "name_zh_tw": "純潔",
+            "name_zh": "纯洁"
+        },
+        {
+            "code": "sayloveme",
+            "original": "sayloveme.gif",
+            "small": "sayloveme.png",
+            "name": "Say love me",
+            "name_zh_tw": "說愛我",
+            "name_zh": "说爱我"
+        },
+        {
+            "code": "sleepy",
+            "original": "sleepy.gif",
+            "small": "sleepy.png",
+            "name": "Sleepy",
+            "name_zh_tw": "好睏",
+            "name_zh": "好困"
+        },
+        {
+            "code": "solonely",
+            "original": "solonely.gif",
+            "small": "solonely.png",
+            "name": "So lonely",
+            "name_zh_tw": "好寂寞",
+            "name_zh": "好寂寞"
+        },
+        {
+            "code": "imcoming",
+            "original": "imcoming.gif",
+            "small": "imcoming.png",
+            "name": "I'm coming",
+            "name_zh_tw": "我來啦",
+            "name_zh": "我来啦"
+        },
+        {
+            "code": "hugme",
+            "original": "hugme.gif",
+            "small": "hugme.png",
+            "name": "Hug me",
+            "name_zh_tw": "抱緊我",
+            "name_zh": "抱紧我"
+        },
+        {
+            "code": "nohookup",
+            "original": "nohookup.gif",
+            "small": "nohookup.png",
+            "name": "No hookup",
+            "name_zh_tw": "不約",
+            "name_zh": "不约"
+        },
+        {
+            "code": "biu",
+            "original": "biu.gif",
+            "small": "biu.png",
+            "name": "biu~",
+            "name_zh_tw": "biu~",
+            "name_zh": "biu~"
+        }
+    ]
+}

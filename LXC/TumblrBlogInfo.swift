@@ -18,7 +18,7 @@ struct TumblrBlogInfo {
     var description: String = ""
     
     var isAskAllowed: Bool = false
-    var likesForBlog: Int = 0
+    var shareLikes: Bool = false
     var isBlocked: Bool = false
     var canSubscribe: Bool = false
     var url: String = ""
@@ -36,7 +36,7 @@ struct TumblrBlogInfo {
         
         description = blog["description"].stringValue
         isAskAllowed = blog["ask"].boolValue
-        likesForBlog = blog["likesForBlog"].intValue
+        shareLikes = blog["share_likes"].boolValue
         
         canSubscribe = blog["can_subscribe"].boolValue
         url = blog["url"].stringValue

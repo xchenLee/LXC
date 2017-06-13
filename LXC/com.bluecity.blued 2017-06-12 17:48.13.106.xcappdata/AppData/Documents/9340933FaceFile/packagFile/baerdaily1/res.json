@@ -1,0 +1,138 @@
+{
+    "code": "baerdaily1",
+    "icon": "shrink_baerdaily.png",
+    "name_zh": "贝尔日常-1",
+    "name": "Baer daily -1",
+    "description": "贝尔熊的日常生活写照，贱贱的、喜欢恶搞。",
+    "name_zh_tw": "貝爾日常-1",
+    "emotions": [
+        {
+            "code": "excited",
+            "original": "excited.gif",
+            "small": "excited.png",
+            "name": "Excited",
+            "name_zh_tw": "雞動",
+            "name_zh": "鸡动"
+        },
+        {
+            "code": "loveme",
+            "original": "loveme.gif",
+            "small": "loveme.png",
+            "name": "Love me",
+            "name_zh_tw": "愛我嗎",
+            "name_zh": "爱我吗"
+        },
+        {
+            "code": "faint",
+            "original": "faint.gif",
+            "small": "faint.png",
+            "name": "Faint",
+            "name_zh_tw": "汗",
+            "name_zh": "汗"
+        },
+        {
+            "code": "dontbrag",
+            "original": "dontbrag.gif",
+            "small": "dontbrag.png",
+            "name": "Don't brag",
+            "name_zh_tw": "看你吹牛",
+            "name_zh": "看你吹牛"
+        },
+        {
+            "code": "eatfart",
+            "original": "eatfart.gif",
+            "small": "eatfart.png",
+            "name": "Eat fart",
+            "name_zh_tw": "來吃屁",
+            "name_zh": "来吃屁"
+        },
+        {
+            "code": "what",
+            "original": "what.gif",
+            "small": "what.png",
+            "name": "What",
+            "name_zh_tw": "你說啥",
+            "name_zh": "你说啥"
+        },
+        {
+            "code": "help",
+            "original": "help.gif",
+            "small": "help.png",
+            "name": "Help",
+            "name_zh_tw": "救救我",
+            "name_zh": "救救我"
+        },
+        {
+            "code": "tired",
+            "original": "tired.gif",
+            "small": "tired.png",
+            "name": "Tired",
+            "name_zh_tw": "心累",
+            "name_zh": "心累"
+        },
+        {
+            "code": "hookup",
+            "original": "hookup.gif",
+            "small": "hookup.png",
+            "name": "Hook up",
+            "name_zh_tw": "約嗎",
+            "name_zh": "约吗"
+        },
+        {
+            "code": "flowers",
+            "original": "flowers.gif",
+            "small": "flowers.png",
+            "name": "Flowers",
+            "name_zh_tw": "祖國花朵",
+            "name_zh": "祖国花朵"
+        },
+        {
+            "code": "hi",
+            "original": "hi.gif",
+            "small": "hi.png",
+            "name": "Hi",
+            "name_zh_tw": "Hi",
+            "name_zh": "Hi"
+        },
+        {
+            "code": "cold",
+            "original": "cold.gif",
+            "small": "cold.png",
+            "name": "Cold",
+            "name_zh_tw": "寶寶冷",
+            "name_zh": "宝宝冷"
+        },
+        {
+            "code": "reward",
+            "original": "reward.gif",
+            "small": "reward.png",
+            "name": "Reward",
+            "name_zh_tw": "求打賞",
+            "name_zh": "求打赏"
+        },
+        {
+            "code": "quietly",
+            "original": "quietly.gif",
+            "small": "quietly.png",
+            "name": "Quietly",
+            "name_zh_tw": "想靜靜",
+            "name_zh": "想静静"
+        },
+        {
+            "code": "wanttodie",
+            "original": "wanttodie.gif",
+            "small": "wanttodie.png",
+            "name": "Want to die",
+            "name_zh_tw": "想死嗎",
+            "name_zh": "想死吗"
+        },
+        {
+            "code": "thanku",
+            "original": "thanku.gif",
+            "small": "thanku.png",
+            "name": "Thank u",
+            "name_zh_tw": "謝謝你",
+            "name_zh": "谢谢你"
+        }
+    ]
+}

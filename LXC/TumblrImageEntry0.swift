@@ -73,13 +73,14 @@ class TumblrImageEntry0: UIView {
     
     func imageViewTapped(_ gesture: UITapGestureRecognizer) {
         
-        let imageViewIndex = (gesture.view?.tag)! - kTMCellImageTagPrefix
-        
-        guard let safeCell = cell ,let delegate = safeCell.delegate else {
-            return
+        if gesture.state == .ended {
+            let imageViewIndex = (gesture.view?.tag)! - kTMCellImageTagPrefix
+            
+            guard let safeCell = cell ,let delegate = safeCell.delegate else {
+                return
+            }
+            delegate.didClickImage(safeCell, index: imageViewIndex)
         }
-        delegate.didClickImage(safeCell, index: imageViewIndex)
-        
     }
     
     // MARK: - fill the component with datas
@@ -146,7 +147,7 @@ class TumblrImageEntry0: UIView {
         }
         
     }
-    
+
 
 }
 

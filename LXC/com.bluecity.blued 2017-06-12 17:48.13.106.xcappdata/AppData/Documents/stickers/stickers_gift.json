@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>stickers</key>
+	<array>
+		<dict>
+			<key>category</key>
+			<string>default</string>
+			<key>dir</key>
+			<string>liezui</string>
+			<key>downloaded</key>
+			<true/>
+			<key>name</key>
+			<string>liezui</string>
+			<key>thumb</key>
+			<string>liezui_icon.png</string>
+			<key>voiced</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>category</key>
+			<string>default</string>
+			<key>dir</key>
+			<string>lovegift</string>
+			<key>downloaded</key>
+			<true/>
+			<key>name</key>
+			<string>lovegift</string>
+			<key>thumb</key>
+			<string>lovegift_icon.png</string>
+			<key>voiced</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>category</key>
+			<string>default</string>
+			<key>dir</key>
+			<string>niangzi</string>
+			<key>downloaded</key>
+			<true/>
+			<key>name</key>
+			<string>niangzi</string>
+			<key>thumb</key>
+			<string>lovegift_icon.png</string>
+			<key>voiced</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>
