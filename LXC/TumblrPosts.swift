@@ -27,6 +27,8 @@ class TumblrPosts: TumblrPostsList, UINavigationControllerDelegate {
         super.viewDidLoad()
         
         addDataHandler()
+        self.tableView.separatorStyle = .none
+        
         self.tableView.mj_header.beginRefreshing()
         self.navigationController?.delegate = self
         

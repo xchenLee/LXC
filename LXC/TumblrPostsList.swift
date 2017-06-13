@@ -22,6 +22,11 @@ class TumblrPostsList: UITableViewController {
     var tmpIDString: String = ""
     var postsCount: Int = 0
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.separatorStyle = .none
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

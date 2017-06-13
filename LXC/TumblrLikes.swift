@@ -73,53 +73,64 @@ extension TumblrLikes {
             parameters["offset"] = String(offset)
         }
         //offset > 0 ? ["offset" : String(offset)] : nil
-        TMAPIClient.sharedInstance().likes(self.blogName, parameters: parameters) { (result, error) in
-            
-            if error != nil {
-                return
+        //如果是默认值，则请求自己的likes
+        if self.blogName == "" {
+            TMAPIClient.sharedInstance().likes(parameters) { (result, error) in
+                self.handleResult(result, error: error, offset: offset)
             }
-            
-            //Success
-            let responseJSON = JSON(result!)
-            let postsArray: JSON = responseJSON["liked_posts"]
-            
-            var tmpLayouts: [TumblrNormalLayout] = []
-            if postsArray.type == .array {
-                for postObj in postsArray.arrayValue {
-                    let tumblrPost = TumblrPost()
-                    tumblrPost.sjMap(postObj)
-                    
-                    let id = tumblrPost.postId
-                    if !self.tmpIDString.contains("\(id),") {
-                        let layout = TumblrNormalLayout()
-                        layout.fitPostData(tumblrPost)
-                        if layout.deleted {
-                            self.tmpIDString += "\(id),"
-                            continue
-                        }
-                        tmpLayouts.append(layout)
+            return
+        }
+        //别人的，可以请求
+        TMAPIClient.sharedInstance().likes(self.blogName, parameters: parameters) { (result, error) in
+            self.handleResult(result, error: error, offset: offset)
+        }
+    }
+    
+    func handleResult(_ result: Any?, error: Error?, offset: Int) {
+        if error != nil {
+            return
+        }
+        
+        //Success
+        let responseJSON = JSON(result!)
+        let postsArray: JSON = responseJSON["liked_posts"]
+        
+        var tmpLayouts: [TumblrNormalLayout] = []
+        if postsArray.type == .array {
+            for postObj in postsArray.arrayValue {
+                let tumblrPost = TumblrPost()
+                tumblrPost.sjMap(postObj)
+                
+                let id = tumblrPost.postId
+                if !self.tmpIDString.contains("\(id),") {
+                    let layout = TumblrNormalLayout()
+                    layout.fitPostData(tumblrPost)
+                    if layout.deleted {
                         self.tmpIDString += "\(id),"
+                        continue
                     }
+                    tmpLayouts.append(layout)
+                    self.tmpIDString += "\(id),"
                 }
             }
-            
-            //begin
-            DispatchQueue.global().async {
-                DispatchQueue.main.async(execute: {
-                    if offset > 0 {
-                        self.layouts.append(contentsOf: tmpLayouts)
-                        self.tableView.reloadData()
-                        self.tableView.endLoadingMore()
-                    } else {
-                        self.layouts = tmpLayouts
-                        self.tableView.reloadData()
-                        self.tableView.endRefreshing()
-                    }
-                    self.postsCount += 20
-                })
-            }
-            //end
         }
+        
+        //begin
+        DispatchQueue.global().async {
+            DispatchQueue.main.async(execute: {
+                if offset > 0 {
+                    self.layouts.append(contentsOf: tmpLayouts)
+                    self.tableView.reloadData()
+                    self.tableView.endLoadingMore()
+                } else {
+                    self.layouts = tmpLayouts
+                    self.tableView.reloadData()
+                    self.tableView.endRefreshing()
+                }
+                self.postsCount += 20
+            })
+        }
+        //end
     }
 }
 
