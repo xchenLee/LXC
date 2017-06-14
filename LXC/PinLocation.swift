@@ -139,7 +139,7 @@ class PinLocation: UIViewController, CLLocationManagerDelegate {
             let floor = location.floor?.level
             
             
-            NSLog("alt: \(altitude), lat: \(latitude), lon: \(longitude),\n course: \(course),\n speed: \(speed),\n floor: \(floor)")
+            NSLog("alt: \(altitude), lat: \(latitude), lon: \(longitude),\n course: \(course),\n speed: \(speed),\n floor: \(String(describing: floor))")
             
             //使用完后关闭更新
             //manager.stopUpdatingLocation()

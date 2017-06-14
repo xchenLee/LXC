@@ -94,17 +94,18 @@ extension TumblrPostsByTag {
             //TODO  Google 
             //Success
             
-            let resultJSON = JSON(result!)
-            var taggedPosts: [TumblrPost] = []
-            if resultJSON.type == .array {
-                for postObj in resultJSON.arrayValue {
-                    let tumblrPost = TumblrPost()
-                    tumblrPost.sjMap(postObj)
-                    taggedPosts.append(tumblrPost)
-                }
-            }
-            
             DispatchQueue.global().async {
+                
+                let resultJSON = JSON(result!)
+                var taggedPosts: [TumblrPost] = []
+                if resultJSON.type == .array {
+                    for postObj in resultJSON.arrayValue {
+                        let tumblrPost = TumblrPost()
+                        tumblrPost.sjMap(postObj)
+                        taggedPosts.append(tumblrPost)
+                    }
+                }
+                
                 if taggedPosts.count == 0 {
                     self?.tableView.endRefreshing()
                     return

@@ -92,36 +92,36 @@ extension TumblrDashboard {
                 return
             }
             
-            //Success
-            let responseJSON = JSON(result!)
-            let postsArray: JSON = responseJSON["posts"]
-            
-            var tmpLayouts: [TumblrNormalLayout] = []
-            if postsArray.type == .array {
-                for postObj in postsArray.arrayValue {
-                    let tumblrPost = TumblrPost()
-                    tumblrPost.sjMap(postObj)
-                    
-                    let id = tumblrPost.postId
-                    if !self.tmpIDString.contains("\(id),") {
-                        let layout = TumblrNormalLayout()
-                        layout.fitPostData(tumblrPost)
-                        if layout.deleted {
+            DispatchQueue.global().async {
+                
+                //Success
+                let responseJSON = JSON(result!)
+                let postsArray: JSON = responseJSON["posts"]
+                
+                var tmpLayouts: [TumblrNormalLayout] = []
+                if postsArray.type == .array {
+                    for postObj in postsArray.arrayValue {
+                        let tumblrPost = TumblrPost()
+                        tumblrPost.sjMap(postObj)
+                        
+                        let id = tumblrPost.postId
+                        if !self.tmpIDString.contains("\(id),") {
+                            let layout = TumblrNormalLayout()
+                            layout.fitPostData(tumblrPost)
+                            if layout.deleted {
+                                self.tmpIDString += "\(id),"
+                                continue
+                            }
+                            tmpLayouts.append(layout)
                             self.tmpIDString += "\(id),"
-                            continue
                         }
-                        tmpLayouts.append(layout)
-                        self.tmpIDString += "\(id),"
                     }
                 }
-            }
-            
-            DispatchQueue.global().async {
+                
                 if tmpLayouts.count == 0 {
                     self.tableView.endRefreshing()
                     return
                 }
-                
                 
                 DispatchQueue.main.async(execute: {
                     if offset > 0 {
